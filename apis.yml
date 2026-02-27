@@ -1,33 +1,46 @@
 aid: unity
 name: Unity
-description: >-
-  The EnvironmentsApi allows you to refresh the environments list, get all
-  environments, set the active environment, and validate that the active
-  environment ...
+description: Unity is a cross-platform game engine and development platform with comprehensive APIs for game development, real-time 3D content creation, and interactive experiences.
 type: Index
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://unity.com/logo.png
 tags:
-  - API
+- API
 created: '2025-01-08'
 modified: '2025-01-08'
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: unity:unity
-    name: Unity
-    description: >-
-      The EnvironmentsApi allows you to refresh the environments list, get all
-      environments, set the active environment, and validate that the active
-      environment ...
-    humanURL: https://docs.unity.com/ugs/manual/overview/manual/environments-api
-    tags:
-      - API
-    properties:
-      - type: Documentation
-        url: https://docs.unity.com/ugs/manual/overview/manual/environments-api
+- aid: unity:unity
+  name: Unity
+  description: The EnvironmentsApi allows you to refresh the environments list, get all environments, set the active environment, and validate that the active environment ...
+  humanURL: https://docs.unity.com/ugs/manual/overview/manual/environments-api
+  tags:
+  - API
+  properties:
+  - type: Documentation
+    url: https://docs.unity.com/ugs/manual/overview/manual/environments-api
 maintainers:
-  - FN: Kin Lane
-    email: info@apievangelist.com
+- FN: Kin Lane
+  email: info@apievangelist.com
+- name: Unity Technologies
+  email: support@unity.com
+  url: https://unity.com
+common:
+- url: https://cloud.unity.com
+  type: Portal
+- url: https://dashboard.unity3d.com
+  type: Dashboard
+- url: https://status.unity.com
+  type: Status
+- url: https://support.unity.com
+  type: Support
+- url: https://unity.com/legal/terms-of-service
+  type: Terms of Service
+- url: https://unity.com/legal/privacy-policy
+  type: Privacy Policy
+- url: https://blog.unity.com
+  type: Blog
+- url: https://github.com/Unity-Technologies
+  type: GitHub Organization
