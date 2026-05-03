@@ -1,0 +1,462 @@
+openapi: 3.0.1
+info:
+  title: Unity Build Automation API
+  description: The Unity Build Automation REST API enables automating and integrating continuous integration builds into custom workflows. It provides access to build history, build status, build artifacts, and supports webhook callbacks for build lifecycle events. Supports cloud builds for iOS, Android, WebGL, Windows, Mac, Linux, and console platforms.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Build Automation Documentation
+  url: https://docs.unity.com/ugs/manual/devops/manual/build-automation/build-automation-api
+servers:
+  - url: https://build-api.cloud.unity3d.com/api/v1
+    description: Unity Build Automation API Server
+tags:
+  - name: Builds
+    description: Manage and trigger builds
+  - name: Build Targets
+    description: Configure build targets and platforms
+  - name: Orgs
+    description: Organization management
+paths:
+  /orgs/{orgid}/projects/{projectid}/buildtargets:
+    get:
+      operationId: listBuildTargets
+      summary: List Build Targets
+      description: Returns all configured build targets for the specified project.
+      tags:
+        - Build Targets
+      parameters:
+        - name: orgid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: projectid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of build targets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BuildTarget'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createBuildTarget
+      summary: Create Build Target
+      description: Creates a new build target for a specific platform and configuration.
+      tags:
+        - Build Targets
+      parameters:
+        - name: orgid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: projectid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBuildTargetRequest'
+      responses:
+        '201':
+          description: Build target created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildTarget'
+  /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}:
+    get:
+      operationId: getBuildTarget
+      summary: Get Build Target
+      description: Returns the configuration for a specific build target.
+      tags:
+        - Build Targets
+      parameters:
+        - name: orgid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: projectid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildtargetid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Build target details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildTarget'
+    patch:
+      operationId: updateBuildTarget
+      summary: Update Build Target
+      description: Updates the configuration of an existing build target.
+      tags:
+        - Build Targets
+      parameters:
+        - name: orgid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: projectid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildtargetid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBuildTargetRequest'
+      responses:
+        '200':
+          description: Build target updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildTarget'
+    delete:
+      operationId: deleteBuildTarget
+      summary: Delete Build Target
+      description: Deletes a build target configuration.
+      tags:
+        - Build Targets
+      parameters:
+        - name: orgid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: projectid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildtargetid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Build target deleted
+  /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}/builds:
+    get:
+      operationId: getBuilds
+      summary: Get Builds
+      description: Returns the build history for a build target.
+      tags:
+        - Builds
+      parameters:
+        - name: orgid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: projectid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildtargetid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: per_page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 25
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Build history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Build'
+    post:
+      operationId: startBuild
+      summary: Start Build
+      description: Triggers a new build for the specified build target.
+      tags:
+        - Builds
+      parameters:
+        - name: orgid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: projectid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildtargetid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartBuildRequest'
+      responses:
+        '202':
+          description: Build started
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Build'
+  /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}/builds/{number}:
+    get:
+      operationId: getBuild
+      summary: Get Build
+      description: Returns details for a specific build including status, artifacts, and logs.
+      tags:
+        - Builds
+      parameters:
+        - name: orgid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: projectid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildtargetid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: number
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Build details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Build'
+    delete:
+      operationId: cancelBuild
+      summary: Cancel Build
+      description: Cancels an in-progress build.
+      tags:
+        - Builds
+      parameters:
+        - name: orgid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: projectid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildtargetid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: number
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Build cancelled
+components:
+  schemas:
+    Build:
+      type: object
+      properties:
+        build:
+          type: integer
+        buildtargetid:
+          type: string
+        buildTargetName:
+          type: string
+        platform:
+          type: string
+        status:
+          type: string
+          enum:
+            - queued
+            - sentToBuilder
+            - started
+            - restarted
+            - success
+            - failure
+            - canceled
+            - unknown
+        changeset:
+          type: array
+          items:
+            type: object
+            properties:
+              commitId:
+                type: string
+              message:
+                type: string
+              timestamp:
+                type: string
+                format: date-time
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildArtifact'
+        created:
+          type: string
+          format: date-time
+        finished:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+    BuildArtifact:
+      type: object
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        primary:
+          type: boolean
+        show_download:
+          type: boolean
+        links:
+          type: object
+          properties:
+            href:
+              type: string
+    BuildTarget:
+      type: object
+      properties:
+        buildtargetid:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+          enum:
+            - ios
+            - android
+            - webgl
+            - standaloneosxintel64
+            - standalonewindows64
+            - standalonelinux64
+        enabled:
+          type: boolean
+        settings:
+          type: object
+          properties:
+            unity:
+              type: object
+              properties:
+                version:
+                  type: string
+            scm:
+              type: object
+              properties:
+                type:
+                  type: string
+                branch:
+                  type: string
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    CreateBuildTargetRequest:
+      type: object
+      required:
+        - name
+        - platform
+      properties:
+        name:
+          type: string
+        platform:
+          type: string
+        enabled:
+          type: boolean
+        settings:
+          type: object
+    UpdateBuildTargetRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        settings:
+          type: object
+    StartBuildRequest:
+      type: object
+      properties:
+        clean:
+          type: boolean
+          description: Whether to start a clean build
+        delay:
+          type: integer
+          description: Seconds to delay before starting
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+security:
+  - basicAuth: []

@@ -1,0 +1,182 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Unity Cloud Save"
+  description: "Unity Cloud Save REST API for persisting player data and game state in the cloud. Supports default, protected, and public access classes with optional indexing for queries."
+  tags:
+    - Unity
+    - Cloud Save
+    - Player Data
+    - Game State
+    - Persistence
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      UNITY_CLOUD_SAVE_TOKEN: UNITY_CLOUD_SAVE_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: unity-cloud-save
+      baseUri: https://cloud-save.services.api.unity.com
+      description: "Unity Cloud Save API for player game state persistence"
+      authentication:
+        type: bearer
+        token: "{{UNITY_CLOUD_SAVE_TOKEN}}"
+      resources:
+        - name: player-data
+          path: /v1/data/projects/{projectId}/players/{playerId}
+          description: "Player data operations"
+          operations:
+            - name: get-player-data
+              method: GET
+              description: "Get all data items for a player"
+              inputParameters:
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity project identifier"
+                - name: playerId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity player identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: player-data-items
+          path: /v1/data/projects/{projectId}/players/{playerId}/items
+          description: "Set player data items"
+          operations:
+            - name: set-player-data
+              method: POST
+              description: "Create or update player data items"
+              inputParameters:
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity project identifier"
+                - name: playerId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity player identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  data: "{{tools.data}}"
+        - name: player-query
+          path: /v1/data/projects/{projectId}/players/{playerId}/query
+          description: "Query player data with filters"
+          operations:
+            - name: query-player-data
+              method: POST
+              description: "Query player data using field-based filters"
+              inputParameters:
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity project identifier"
+                - name: playerId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity player identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  returnKeys: "{{tools.return_keys}}"
+                  fields: "{{tools.fields}}"
+
+  exposes:
+    - type: rest
+      port: 8115
+      namespace: unity-cloud-save-api
+      resources:
+        - path: /v1/data/{playerId}
+          name: player-data
+          description: "Player data endpoints"
+          operations:
+            - method: GET
+              name: get-player-data
+              description: "Get player data"
+              call: "unity-cloud-save.get-player-data"
+              with:
+                projectId: "rest.projectId"
+                playerId: "rest.playerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: set-player-data
+              description: "Set player data items"
+              call: "unity-cloud-save.set-player-data"
+              with:
+                projectId: "rest.projectId"
+                playerId: "rest.playerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9115
+      namespace: unity-cloud-save-mcp
+      transport: http
+      tools:
+        - name: get-player-data
+          description: "Retrieve all saved data for a player"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "unity-cloud-save.get-player-data"
+          with:
+            projectId: "tools.projectId"
+            playerId: "tools.playerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: save-player-data
+          description: "Save or update player data items in the cloud"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "unity-cloud-save.set-player-data"
+          with:
+            projectId: "tools.projectId"
+            playerId: "tools.playerId"
+            data: "tools.data"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: query-player-data
+          description: "Query player data with field-based filters"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "unity-cloud-save.query-player-data"
+          with:
+            projectId: "tools.projectId"
+            playerId: "tools.playerId"
+            return_keys: "tools.return_keys"
+            fields: "tools.fields"
+          outputParameters:
+            - type: object
+              mapping: "$."

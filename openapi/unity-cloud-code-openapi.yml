@@ -1,0 +1,443 @@
+openapi: 3.0.1
+info:
+  title: Unity Cloud Code API
+  description: The Unity Cloud Code Admin API enables creating, deploying, and managing serverless scripts and modules in the cloud. Cloud Code scripts run game logic on Unity's infrastructure, supporting both JavaScript functions and C# modules. Scripts can interact with other Unity Gaming Services including Economy, Cloud Save, and Remote Config.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Cloud Code Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
+servers:
+  - url: https://cloud-code.services.api.unity.com
+    description: Unity Cloud Code Production Server
+tags:
+  - name: Scripts
+    description: Manage JavaScript cloud code scripts
+  - name: Modules
+    description: Manage C# cloud code modules
+  - name: Executions
+    description: Execute cloud code scripts
+paths:
+  /v1/projects/{projectId}/scripts:
+    get:
+      operationId: listScripts
+      summary: List Scripts
+      description: Returns all Cloud Code scripts for the project.
+      tags:
+        - Scripts
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: after
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of scripts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptList'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createScript
+      summary: Create Script
+      description: Creates a new Cloud Code JavaScript script.
+      tags:
+        - Scripts
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateScriptRequest'
+      responses:
+        '200':
+          description: Script created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Script'
+  /v1/projects/{projectId}/scripts/{scriptName}:
+    get:
+      operationId: getScript
+      summary: Get Script
+      description: Returns the details and latest code for a specific Cloud Code script.
+      tags:
+        - Scripts
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: scriptName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Script details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Script'
+        '404':
+          description: Script not found
+    put:
+      operationId: updateScript
+      summary: Update Script
+      description: Updates the code and configuration of an existing Cloud Code script.
+      tags:
+        - Scripts
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: scriptName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateScriptRequest'
+      responses:
+        '200':
+          description: Script updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Script'
+    delete:
+      operationId: deleteScript
+      summary: Delete Script
+      description: Deletes a Cloud Code script and all its versions.
+      tags:
+        - Scripts
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: scriptName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Script deleted
+  /v1/projects/{projectId}/scripts/{scriptName}/run:
+    post:
+      operationId: runScript
+      summary: Run Script
+      description: Executes a Cloud Code script with the provided parameters. The script runs asynchronously and returns the result.
+      tags:
+        - Executions
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: scriptName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunScriptRequest'
+      responses:
+        '200':
+          description: Script execution result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptRunResult'
+        '400':
+          description: Bad Request
+        '404':
+          description: Script not found
+  /v1/projects/{projectId}/modules:
+    get:
+      operationId: listModules
+      summary: List Modules
+      description: Returns all Cloud Code C# modules for the project.
+      tags:
+        - Modules
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of modules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleList'
+    post:
+      operationId: uploadModule
+      summary: Upload Module
+      description: Uploads a compiled C# Cloud Code module (.ccm file).
+      tags:
+        - Modules
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The compiled .ccm module file
+      responses:
+        '200':
+          description: Module uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+  /v1/projects/{projectId}/modules/{moduleName}:
+    get:
+      operationId: getModule
+      summary: Get Module
+      description: Returns details about a specific Cloud Code C# module.
+      tags:
+        - Modules
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: moduleName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Module details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+        '404':
+          description: Module not found
+    delete:
+      operationId: deleteModule
+      summary: Delete Module
+      description: Deletes a Cloud Code C# module.
+      tags:
+        - Modules
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: moduleName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Module deleted
+components:
+  schemas:
+    Script:
+      type: object
+      properties:
+        name:
+          type: string
+        language:
+          type: string
+          enum:
+            - JS
+        activeScript:
+          $ref: '#/components/schemas/ScriptVersion'
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptVersion'
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptParameter'
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    ScriptVersion:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The JavaScript code
+        datePublished:
+          type: string
+          format: date-time
+    ScriptParameter:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - STRING
+            - NUMERIC
+            - BOOLEAN
+            - JSON
+        required:
+          type: boolean
+    ScriptList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Script'
+        links:
+          type: object
+          properties:
+            next:
+              type: string
+    CreateScriptRequest:
+      type: object
+      required:
+        - name
+        - language
+        - code
+      properties:
+        name:
+          type: string
+          description: Unique script name within the project
+        language:
+          type: string
+          enum:
+            - JS
+        code:
+          type: string
+          description: JavaScript code for the script
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptParameter'
+    UpdateScriptRequest:
+      type: object
+      properties:
+        code:
+          type: string
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptParameter'
+    RunScriptRequest:
+      type: object
+      properties:
+        params:
+          type: object
+          description: Parameters to pass to the script
+    ScriptRunResult:
+      type: object
+      properties:
+        output:
+          description: The return value from the script
+    Module:
+      type: object
+      properties:
+        name:
+          type: string
+        signature:
+          type: string
+        size:
+          type: integer
+        endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              returnType:
+                type: string
+              params:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    type:
+                      type: string
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    ModuleList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Module'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

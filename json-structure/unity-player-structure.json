@@ -1,0 +1,58 @@
+{
+  "title": "Unity Player Structure",
+  "description": "Document structure for a Unity Gaming Services player account",
+  "type": "object",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Unique Unity player identifier",
+      "required": true,
+      "example": "player_abc123def456"
+    },
+    {
+      "name": "externalIds",
+      "type": "array",
+      "description": "Linked external identity provider accounts",
+      "required": false,
+      "items": {
+        "type": "object",
+        "fields": [
+          {
+            "name": "providerId",
+            "type": "string",
+            "description": "Identity provider name (google, apple, steam, facebook, custom)",
+            "required": true
+          },
+          {
+            "name": "externalId",
+            "type": "string",
+            "description": "Player's identifier at the external provider",
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Whether the player account has been disabled",
+      "required": false,
+      "default": false
+    },
+    {
+      "name": "lastLoginDate",
+      "type": "string",
+      "format": "date-time",
+      "description": "Last time the player authenticated",
+      "required": false
+    },
+    {
+      "name": "createdAt",
+      "type": "string",
+      "format": "date-time",
+      "description": "When the player account was created",
+      "required": false
+    }
+  ]
+}

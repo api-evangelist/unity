@@ -1,0 +1,55 @@
+{
+  "summary": "Make a virtual purchase using in-game currency",
+  "description": "Example showing a player purchasing a sword item using 500 gold coins from their balance.",
+  "request": {
+    "method": "POST",
+    "path": "/v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/purchases/virtual",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "SWORD_OF_FIRE"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "SWORD_OF_FIRE",
+      "purchased": {
+        "currencies": [],
+        "inventory": [
+          {
+            "playersItemId": "item_xyz789",
+            "inventoryItemId": "SWORD_OF_FIRE",
+            "quantity": 1,
+            "instanceData": {},
+            "writeLock": "abc123",
+            "created": {
+              "date": "2026-05-03T12:00:00Z"
+            },
+            "modified": {
+              "date": "2026-05-03T12:00:00Z"
+            }
+          }
+        ]
+      },
+      "costs": {
+        "currencies": [
+          {
+            "currencyId": "GOLD",
+            "balance": 2000,
+            "writeLock": "def456",
+            "created": {
+              "date": "2026-01-01T00:00:00Z"
+            },
+            "modified": {
+              "date": "2026-05-03T12:00:00Z"
+            }
+          }
+        ],
+        "inventory": []
+      }
+    }
+  }
+}

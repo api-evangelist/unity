@@ -1,0 +1,437 @@
+openapi: 3.0.1
+info:
+  title: Unity Economy API
+  description: The Unity Economy REST API allows you to manage in-game economies including virtual currencies, inventory items, purchases, and player balances. It provides both Admin endpoints for configuring economy resources and Player endpoints for runtime player interactions such as making purchases and checking balances.
+  version: v2.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Economy Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/economy/manual/write-configuration/rest-api
+servers:
+  - url: https://economy.services.api.unity.com
+    description: Unity Economy Production Server
+tags:
+  - name: Configuration
+    description: Admin endpoints for managing economy resources
+  - name: Currencies
+    description: Manage virtual currencies and player balances
+  - name: Inventory
+    description: Manage inventory items and player inventory
+  - name: Purchases
+    description: Process virtual and real-money purchases
+paths:
+  /v2/projects/{projectId}/environments/{environmentId}/configs/items:
+    get:
+      operationId: listEconomyConfigs
+      summary: List Economy Configurations
+      description: Returns a list of all economy resource configurations for the project.
+      tags:
+        - Configuration
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+        - name: after
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of economy configurations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EconomyConfigList'
+        '401':
+          description: Unauthorized
+  /v2/projects/{projectId}/environments/{environmentId}/configs/items/{resourceId}:
+    get:
+      operationId: getEconomyConfig
+      summary: Get Economy Configuration
+      description: Returns the configuration of a specific economy resource.
+      tags:
+        - Configuration
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: resourceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Economy resource configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EconomyConfig'
+        '404':
+          description: Not Found
+  /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/currencies:
+    get:
+      operationId: getPlayerCurrencyBalances
+      summary: Get Player Currency Balances
+      description: Returns all currency balances for the specified player.
+      tags:
+        - Currencies
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Player currency balances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerCurrencyBalances'
+  /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/currencies/{currencyId}/increment:
+    post:
+      operationId: incrementPlayerCurrencyBalance
+      summary: Increment Player Currency Balance
+      description: Increases a player's currency balance by the specified amount.
+      tags:
+        - Currencies
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: currencyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CurrencyBalanceUpdate'
+      responses:
+        '200':
+          description: Updated currency balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrencyBalance'
+  /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/currencies/{currencyId}/decrement:
+    post:
+      operationId: decrementPlayerCurrencyBalance
+      summary: Decrement Player Currency Balance
+      description: Decreases a player's currency balance by the specified amount.
+      tags:
+        - Currencies
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: currencyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CurrencyBalanceUpdate'
+      responses:
+        '200':
+          description: Updated currency balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrencyBalance'
+  /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/inventory:
+    get:
+      operationId: getPlayerInventory
+      summary: Get Player Inventory
+      description: Returns all inventory items currently held by the player.
+      tags:
+        - Inventory
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playersItemIds
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: itemIds
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Player inventory items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerInventory'
+  /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/purchases/virtual:
+    post:
+      operationId: makeVirtualPurchase
+      summary: Make Virtual Purchase
+      description: Processes a virtual purchase using the player's in-game currency or items.
+      tags:
+        - Purchases
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VirtualPurchaseRequest'
+      responses:
+        '200':
+          description: Purchase successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualPurchaseResult'
+        '402':
+          description: Insufficient funds
+components:
+  schemas:
+    EconomyConfig:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - CURRENCY
+            - INVENTORY_ITEM
+            - VIRTUAL_PURCHASE
+            - REAL_MONEY_PURCHASE
+        initial:
+          type: number
+          description: Initial balance (for currencies)
+        max:
+          type: number
+          description: Maximum balance (for currencies)
+        customData:
+          type: object
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    EconomyConfigList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EconomyConfig'
+        links:
+          type: object
+          properties:
+            next:
+              type: string
+    CurrencyBalance:
+      type: object
+      properties:
+        currencyId:
+          type: string
+        balance:
+          type: integer
+        writeLock:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestamp'
+        modified:
+          $ref: '#/components/schemas/Timestamp'
+    PlayerCurrencyBalances:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyBalance'
+    CurrencyBalanceUpdate:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: integer
+          minimum: 1
+        writeLock:
+          type: string
+          description: Optimistic lock token to prevent race conditions
+    InventoryItem:
+      type: object
+      properties:
+        playersItemId:
+          type: string
+        inventoryItemId:
+          type: string
+        quantity:
+          type: integer
+        instanceData:
+          type: object
+        writeLock:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestamp'
+        modified:
+          $ref: '#/components/schemas/Timestamp'
+    PlayerInventory:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
+    VirtualPurchaseRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The virtual purchase configuration ID
+    VirtualPurchaseResult:
+      type: object
+      properties:
+        id:
+          type: string
+        purchased:
+          type: object
+          properties:
+            currencies:
+              type: array
+              items:
+                $ref: '#/components/schemas/CurrencyBalance'
+            inventory:
+              type: array
+              items:
+                $ref: '#/components/schemas/InventoryItem'
+        costs:
+          type: object
+          properties:
+            currencies:
+              type: array
+              items:
+                $ref: '#/components/schemas/CurrencyBalance'
+            inventory:
+              type: array
+              items:
+                $ref: '#/components/schemas/InventoryItem'
+    Timestamp:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

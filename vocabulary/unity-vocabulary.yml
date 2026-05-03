@@ -1,0 +1,151 @@
+name: Unity Gaming Services Vocabulary
+description: Vocabulary and taxonomy for Unity Gaming Services APIs covering game development, live operations, multiplayer, and player management domains.
+version: '1.0.0'
+created: '2026-05-03'
+modified: '2026-05-03'
+
+domains:
+  - name: Authentication
+    description: Player identity and sign-in management
+    terms:
+      - name: Player
+        definition: A registered end-user account within a Unity gaming project
+        aliases:
+          - User
+          - Gamer
+      - name: Anonymous Authentication
+        definition: A sign-in method that creates a player account without requiring credentials, identified by session tokens
+      - name: External Identity Provider
+        definition: Third-party authentication service (Google, Apple, Steam, Facebook) that can be linked to Unity player accounts
+      - name: Session Token
+        definition: A persistent token used to resume an anonymous player session across app restarts
+      - name: ID Token
+        definition: A JWT (JSON Web Token) issued by Unity Authentication used to authorize API requests
+      - name: Refresh Token
+        definition: A long-lived token used to obtain new access tokens without re-authenticating
+      - name: SCIM
+        definition: System for Cross-domain Identity Management - protocol for automating user provisioning between Identity Providers and Unity Cloud
+
+  - name: Live Operations
+    description: Services for running live game features after launch
+    terms:
+      - name: Economy
+        definition: The system for managing in-game currencies, items, and purchase flows
+      - name: Virtual Currency
+        definition: In-game currency that exists only within the game economy (e.g., Gold, Gems, Coins)
+      - name: Inventory Item
+        definition: A virtual item that players can acquire, hold, and use in their game inventory
+      - name: Virtual Purchase
+        definition: An in-game transaction where players spend virtual currency to acquire items
+      - name: Real Money Purchase
+        definition: An in-app purchase where players spend real currency via a storefront
+      - name: Write Lock
+        definition: An optimistic concurrency control token that prevents conflicting simultaneous writes to player data
+      - name: Cloud Save
+        definition: Unity service for persisting player data and game state server-side
+      - name: Data Key
+        definition: A string identifier for a Cloud Save data item (up to 255 characters)
+      - name: Access Class
+        definition: Permission level for Cloud Save data (default, protected, public)
+      - name: Remote Config
+        definition: Service for delivering game configuration values at runtime without app updates
+      - name: Override Rule
+        definition: A Remote Config targeting rule that delivers different configuration values to specific player segments
+      - name: Feature Flag
+        definition: A Remote Config value used to enable or disable game features
+      - name: Rollout Percentage
+        definition: The percentage of players who receive an override rule's configuration
+
+  - name: Analytics
+    description: Player behavior and game performance tracking
+    terms:
+      - name: Custom Event
+        definition: A developer-defined analytics event capturing specific player actions or game occurrences
+      - name: Session
+        definition: A continuous period of gameplay for a single player instance
+      - name: Installation UUID
+        definition: A unique identifier for a specific game installation on a device
+      - name: Event Schema
+        definition: The defined structure and field types for a custom analytics event
+
+  - name: Multiplayer
+    description: Real-time multiplayer session and networking
+    terms:
+      - name: Lobby
+        definition: A virtual waiting room where players gather before starting a game session
+      - name: Lobby Code
+        definition: A short alphanumeric code shared by a lobby host for private lobby access
+      - name: Lobby Host
+        definition: The player who created a lobby and has administrative control over it
+      - name: Lobby Data
+        definition: Custom key-value data attached to a lobby, used to communicate game configuration to players
+      - name: Player Data (Lobby)
+        definition: Custom key-value data attached to a specific player within a lobby
+      - name: Matchmaking
+        definition: The automated process of grouping compatible players for a game session
+      - name: Matchmaking Ticket
+        definition: A request to enter the matchmaking queue, containing player attributes and target queue
+      - name: Match Pool
+        definition: A subset of players from a queue with shared matching constraints
+      - name: MMScript
+        definition: The scripting language used to define Unity Matchmaker match logic rules
+      - name: Relay
+        definition: Unity service that enables peer-to-peer connections through Unity's relay servers without exposing IP addresses
+      - name: Fleet
+        definition: A group of game server instances managed together with shared configuration and scaling settings
+      - name: Game Server Allocation
+        definition: The reservation of a game server instance for a specific game session
+      - name: QoS (Quality of Service)
+        definition: Service for measuring network latency to Unity relay regions to help players select optimal servers
+
+  - name: Cloud Code
+    description: Serverless game logic execution
+    terms:
+      - name: Cloud Code Script
+        definition: A JavaScript function deployed to Unity's cloud infrastructure for serverless execution
+      - name: Cloud Code Module
+        definition: A compiled C# assembly (.ccm file) deployed for higher-performance serverless execution
+      - name: Trigger
+        definition: An event-driven mechanism that automatically executes a Cloud Code script when a UGS event occurs
+      - name: Scheduler
+        definition: A cron-based mechanism for executing Cloud Code scripts on a time-based schedule
+
+  - name: Social
+    description: Player social features
+    terms:
+      - name: Friends List
+        definition: A player's collection of other players with whom they have an accepted friendship
+      - name: Friend Request
+        definition: An invitation sent from one player to another to establish a friendship
+      - name: Block
+        definition: An action that prevents a blocked player from interacting with the blocking player
+      - name: Presence
+        definition: A player's current online status (Online, Offline, Invisible, Busy) and activity
+
+  - name: DevOps
+    description: Build, deploy, and version control for game projects
+    terms:
+      - name: Build Target
+        definition: A configuration defining how to build a game for a specific platform (iOS, Android, PC, etc.)
+      - name: Build Automation
+        definition: Unity's cloud CI/CD service for automated game builds
+      - name: Version Control
+        definition: Unity's source control system (formerly Plastic SCM) for managing game project history
+      - name: Asset Manager
+        definition: Unity service for uploading, organizing, and sharing 3D assets across projects
+      - name: Cloud Content Delivery (CCD)
+        definition: CDN-backed service for delivering game updates, DLC, and streaming assets to players
+
+  - name: Platform
+    description: Cross-cutting platform concerns
+    terms:
+      - name: Project ID
+        definition: A UUID identifying a specific Unity game project; scopes all UGS service calls
+      - name: Environment
+        definition: An isolated namespace within a project (production, staging, development) for separate data and configs
+      - name: Environment ID
+        definition: A UUID identifying a specific project environment
+      - name: Service Account
+        definition: A non-human identity used for server-to-server API authentication
+      - name: Access Policy
+        definition: Rules defining which players or services can read or write specific resources

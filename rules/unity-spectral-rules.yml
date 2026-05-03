@@ -1,0 +1,174 @@
+extends: "spectral:oas"
+
+rules:
+  # Unity API path structure rules
+  unity-paths-start-with-version:
+    description: All Unity API paths must start with a version prefix (e.g., /v1/, /v2/, /v3/)
+    message: "Path '{{property}}' must start with a version prefix like /v1/"
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/v[0-9]+"
+
+  unity-paths-use-kebab-case:
+    description: Unity API path segments must use kebab-case (lowercase with hyphens)
+    message: "Path '{{property}}' must use kebab-case for all segments"
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "[A-Z_]"
+
+  unity-no-trailing-slash:
+    description: Paths must not have a trailing slash
+    message: "Path '{{property}}' must not have a trailing slash"
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "/$"
+
+  # Unity project and environment path parameters
+  unity-project-environment-paths:
+    description: Paths that contain projectId or environmentId must include both
+    message: "Paths with projectId should also include environmentId for proper scoping"
+    severity: hint
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "\\{projectId\\}(?!.*(?:\\{environmentId\\}|builds|buildtargets))"
+
+  # Unity operation ID conventions
+  unity-operation-id-format:
+    description: Operation IDs must use camelCase
+    message: "Operation ID '{{value}}' must be camelCase"
+    severity: error
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  unity-operation-id-required:
+    description: All Unity API operations must have an operationId
+    message: "Operation must have an operationId for SDK generation compatibility"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: truthy
+
+  # Unity response conventions
+  unity-success-response-required:
+    description: All operations must document at least one 2xx success response
+    message: "Operation must have at least one 2xx response code"
+    severity: error
+    given: "$.paths[*][*].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          minProperties: 1
+
+  unity-401-response-on-secured-endpoints:
+    description: Protected Unity endpoints should document 401 Unauthorized responses
+    message: "Secured endpoint should document 401 Unauthorized response"
+    severity: warn
+    given: "$.paths[*][post,put,patch,delete].responses"
+    then:
+      function: defined
+
+  # Unity authentication conventions
+  unity-bearer-auth-scheme:
+    description: Unity APIs use Bearer JWT tokens for authentication
+    message: "Security scheme should use HTTP Bearer authentication"
+    severity: info
+    given: "$.components.securitySchemes[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            type:
+              enum:
+                - http
+                - apiKey
+            scheme:
+              enum:
+                - bearer
+                - basic
+
+  # Unity info requirements
+  unity-info-description:
+    description: API info must include a description
+    message: "API info must have a description explaining the service purpose"
+    severity: error
+    given: "$.info"
+    then:
+      field: description
+      function: truthy
+
+  unity-info-version:
+    description: API must have a version in semver-like format
+    message: "API version '{{value}}' should follow vX.Y.Z or vX format"
+    severity: warn
+    given: "$.info.version"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^v[0-9]"
+
+  unity-external-docs:
+    description: Unity APIs should link to their documentation pages
+    message: "API should include externalDocs linking to Unity documentation"
+    severity: warn
+    given: "$"
+    then:
+      field: externalDocs
+      function: truthy
+
+  # Unity schema conventions
+  unity-response-schema-defined:
+    description: All 2xx responses should have defined schemas
+    message: "Response must include a content schema definition"
+    severity: warn
+    given: "$.paths[*][*].responses[?(@property.match(/^2/))].content.application/json"
+    then:
+      field: schema
+      function: defined
+
+  unity-parameters-have-description:
+    description: All path and query parameters should have descriptions
+    message: "Parameter '{{property}}' must have a description"
+    severity: warn
+    given: "$.paths[*][*].parameters[?(@.in == 'path' || @.in == 'query')]"
+    then:
+      field: description
+      function: truthy
+
+  # Unity tag conventions
+  unity-operations-have-tags:
+    description: All Unity operations must be tagged for grouping in documentation
+    message: "Operation must have at least one tag"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  unity-tags-title-case:
+    description: Unity API tags must use Title Case
+    message: "Tag '{{value}}' must use Title Case"
+    severity: warn
+    given: "$.paths[*][*].tags[*]"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 ]*$"

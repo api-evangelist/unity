@@ -1,0 +1,279 @@
+openapi: 3.0.1
+info:
+  title: Unity Friends API
+  description: The Unity Friends API helps players connect with others to add a social experience to games. It provides endpoints for managing friend lists, sending and receiving friend requests, blocking players, and managing player presence and activity status.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Friends Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/friends/manual/overview
+servers:
+  - url: https://social.services.api.unity.com
+    description: Unity Social Services Production Server
+tags:
+  - name: Friends
+    description: Manage player friend lists
+  - name: Friend Requests
+    description: Send and receive friend requests
+  - name: Blocks
+    description: Manage blocked players
+paths:
+  /v1/me/relationships/friends:
+    get:
+      operationId: listFriends
+      summary: List Friends
+      description: Returns the current player's friend list with presence information.
+      tags:
+        - Friends
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+        - name: after
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Friend list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendList'
+        '401':
+          description: Unauthorized
+  /v1/me/relationships/requests/incoming:
+    get:
+      operationId: listIncomingFriendRequests
+      summary: List Incoming Friend Requests
+      description: Returns all pending incoming friend requests for the current player.
+      tags:
+        - Friend Requests
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+        - name: after
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Incoming friend requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendRequestList'
+  /v1/me/relationships/requests/outgoing:
+    get:
+      operationId: listOutgoingFriendRequests
+      summary: List Outgoing Friend Requests
+      description: Returns all pending outgoing friend requests sent by the current player.
+      tags:
+        - Friend Requests
+      responses:
+        '200':
+          description: Outgoing friend requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendRequestList'
+  /v1/me/relationships/{memberId}/request:
+    post:
+      operationId: sendFriendRequest
+      summary: Send Friend Request
+      description: Sends a friend request to another player.
+      tags:
+        - Friend Requests
+      parameters:
+        - name: memberId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The Unity player ID to send a request to
+      responses:
+        '200':
+          description: Friend request sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relationship'
+        '409':
+          description: Already friends or request already sent
+  /v1/me/relationships/{memberId}/accept:
+    post:
+      operationId: acceptFriendRequest
+      summary: Accept Friend Request
+      description: Accepts a pending incoming friend request.
+      tags:
+        - Friend Requests
+      parameters:
+        - name: memberId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Friend request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relationship'
+  /v1/me/relationships/{memberId}:
+    delete:
+      operationId: removeFriendOrRequest
+      summary: Remove Friend or Request
+      description: Removes a friend from the friend list or cancels/rejects a pending friend request.
+      tags:
+        - Friends
+      parameters:
+        - name: memberId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Relationship removed
+        '404':
+          description: Relationship not found
+  /v1/me/relationships/blocks:
+    get:
+      operationId: listBlockedPlayers
+      summary: List Blocked Players
+      description: Returns all players that the current player has blocked.
+      tags:
+        - Blocks
+      responses:
+        '200':
+          description: Blocked players list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipList'
+  /v1/me/relationships/{memberId}/block:
+    post:
+      operationId: blockPlayer
+      summary: Block Player
+      description: Blocks a player, preventing them from sending friend requests or messages.
+      tags:
+        - Blocks
+      parameters:
+        - name: memberId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Player blocked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relationship'
+  /v1/me/relationships/{memberId}/unblock:
+    post:
+      operationId: unblockPlayer
+      summary: Unblock Player
+      description: Unblocks a previously blocked player.
+      tags:
+        - Blocks
+      parameters:
+        - name: memberId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Player unblocked
+components:
+  schemas:
+    Relationship:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - FRIEND
+            - FRIEND_REQUEST
+            - BLOCK
+        member:
+          $ref: '#/components/schemas/PlayerProfile'
+        created:
+          type: string
+          format: date-time
+    PlayerProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        presence:
+          $ref: '#/components/schemas/Presence'
+    Presence:
+      type: object
+      properties:
+        availability:
+          type: string
+          enum:
+            - ONLINE
+            - OFFLINE
+            - INVISIBLE
+            - BUSY
+        activity:
+          type: object
+          properties:
+            status:
+              type: string
+    FriendList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
+        next:
+          type: string
+    FriendRequestList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
+        next:
+          type: string
+    RelationshipList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

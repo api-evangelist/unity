@@ -1,0 +1,499 @@
+openapi: 3.0.1
+info:
+  title: Unity Multiplay Game Server Hosting API
+  description: The Unity Multiplay Game Server Hosting REST API provides Admin endpoints for configuring and managing dedicated game server infrastructure. Supports fleet management, server allocation, build configuration, and server lifecycle management in cloud, bare metal, and hybrid hosting environments.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Multiplay Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/game-server-hosting/manual/api/rest-api
+servers:
+  - url: https://multiplay.services.api.unity.com
+    description: Unity Multiplay Production Server
+tags:
+  - name: Fleets
+    description: Manage server fleets
+  - name: Builds
+    description: Manage game server builds
+  - name: Servers
+    description: Manage individual server instances
+  - name: Allocations
+    description: Allocate servers for game sessions
+paths:
+  /v1/projects/{projectId}/regions/{regionId}/fleets:
+    get:
+      operationId: listFleets
+      summary: List Fleets
+      description: Returns all configured server fleets for the specified project region.
+      tags:
+        - Fleets
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: regionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of fleets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetList'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createFleet
+      summary: Create Fleet
+      description: Creates a new server fleet with specified configuration and build version.
+      tags:
+        - Fleets
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: regionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFleetRequest'
+      responses:
+        '200':
+          description: Fleet created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fleet'
+  /v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}:
+    get:
+      operationId: getFleet
+      summary: Get Fleet
+      description: Returns the configuration and status of a specific fleet.
+      tags:
+        - Fleets
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: regionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fleetId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Fleet details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fleet'
+        '404':
+          description: Fleet not found
+    patch:
+      operationId: updateFleet
+      summary: Update Fleet
+      description: Updates fleet configuration including scaling settings and build version.
+      tags:
+        - Fleets
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: regionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fleetId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFleetRequest'
+      responses:
+        '200':
+          description: Fleet updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fleet'
+    delete:
+      operationId: deleteFleet
+      summary: Delete Fleet
+      description: Deletes a server fleet and terminates all associated servers.
+      tags:
+        - Fleets
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: regionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fleetId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Fleet deleted
+  /v1/projects/{projectId}/builds:
+    get:
+      operationId: listBuilds
+      summary: List Builds
+      description: Returns all game server builds for the project.
+      tags:
+        - Builds
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of builds
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildList'
+    post:
+      operationId: createBuild
+      summary: Create Build
+      description: Creates a new game server build configuration.
+      tags:
+        - Builds
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBuildRequest'
+      responses:
+        '200':
+          description: Build created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Build'
+  /v1/projects/{projectId}/builds/{buildId}:
+    get:
+      operationId: getBuild
+      summary: Get Build
+      description: Returns details of a specific game server build.
+      tags:
+        - Builds
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Build details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Build'
+  /v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}/servers:
+    get:
+      operationId: listServers
+      summary: List Servers
+      description: Returns all server instances in the specified fleet.
+      tags:
+        - Servers
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: regionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fleetId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of servers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerList'
+  /v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}/allocations:
+    post:
+      operationId: allocateServer
+      summary: Allocate Server
+      description: Allocates an available server from the fleet for a new game session.
+      tags:
+        - Allocations
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: regionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fleetId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllocateServerRequest'
+      responses:
+        '200':
+          description: Server allocated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allocation'
+        '404':
+          description: No servers available
+components:
+  schemas:
+    Fleet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - OFFLINE
+            - DELETED
+        serverCount:
+          type: integer
+        freeServerCount:
+          type: integer
+        allocationCount:
+          type: integer
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    FleetList:
+      type: object
+      properties:
+        fleets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fleet'
+    BuildConfiguration:
+      type: object
+      properties:
+        buildId:
+          type: integer
+        commandLine:
+          type: string
+        queryType:
+          type: string
+          enum:
+            - SQPQUERYTYPE
+            - A2SQUERYTYPE
+            - NONE
+        binaryPath:
+          type: string
+        cores:
+          type: integer
+        speedMhz:
+          type: integer
+        memory:
+          type: integer
+    ScalingSettings:
+      type: object
+      properties:
+        minFreeServers:
+          type: integer
+        maxFreeServers:
+          type: integer
+    CreateFleetRequest:
+      type: object
+      required:
+        - name
+        - buildConfiguration
+      properties:
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
+    UpdateFleetRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
+    Build:
+      type: object
+      properties:
+        id:
+          type: integer
+        buildID:
+          type: integer
+        buildName:
+          type: string
+        os:
+          type: string
+          enum:
+            - LINUX
+            - WINDOWS
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    BuildList:
+      type: object
+      properties:
+        builds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Build'
+    CreateBuildRequest:
+      type: object
+      required:
+        - buildName
+        - os
+      properties:
+        buildName:
+          type: string
+        os:
+          type: string
+          enum:
+            - LINUX
+            - WINDOWS
+    Server:
+      type: object
+      properties:
+        id:
+          type: integer
+        ip:
+          type: string
+        port:
+          type: integer
+        queryPort:
+          type: integer
+        status:
+          type: string
+          enum:
+            - ONLINE
+            - ALLOCATED
+            - OFFLINE
+        machineID:
+          type: integer
+        created:
+          type: string
+          format: date-time
+    ServerList:
+      type: object
+      properties:
+        servers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Server'
+    AllocateServerRequest:
+      type: object
+      properties:
+        allocationContext:
+          type: string
+          description: Custom context data for the allocation
+    Allocation:
+      type: object
+      properties:
+        allocationID:
+          type: string
+          format: uuid
+        serverID:
+          type: integer
+        ip:
+          type: string
+        port:
+          type: integer
+        queryPort:
+          type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

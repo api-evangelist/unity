@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unity/main/json-schema/unity-player-schema.json",
+  "title": "Unity Player",
+  "description": "Schema for a Unity Gaming Services player account with authentication, identity, and metadata.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Unity player identifier"
+    },
+    "externalIds": {
+      "type": "array",
+      "description": "Linked external identity providers",
+      "items": {
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "enum": ["google", "apple", "steam", "facebook", "custom"],
+            "description": "External identity provider name"
+          },
+          "externalId": {
+            "type": "string",
+            "description": "Player identifier at the external provider"
+          }
+        },
+        "required": ["providerId", "externalId"]
+      }
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether the player account is disabled"
+    },
+    "lastLoginDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the player's last login"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of account creation"
+    }
+  },
+  "required": ["id"]
+}

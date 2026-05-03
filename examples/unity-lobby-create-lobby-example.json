@@ -1,0 +1,78 @@
+{
+  "summary": "Create a public multiplayer lobby",
+  "description": "Example showing how to create a public lobby for up to 4 players with custom game mode data.",
+  "request": {
+    "method": "POST",
+    "path": "/v1/lobbies",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "Epic Battle Arena",
+      "maxPlayers": 4,
+      "isPrivate": false,
+      "player": {
+        "id": "player_abc123",
+        "data": {
+          "character": {
+            "value": "warrior",
+            "visibility": "Public"
+          }
+        }
+      },
+      "data": {
+        "gameMode": {
+          "value": "capture_the_flag",
+          "visibility": "Public",
+          "index": "S1"
+        },
+        "mapName": {
+          "value": "desert_canyon",
+          "visibility": "Public",
+          "index": "S2"
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "lobby_xyz789",
+      "name": "Epic Battle Arena",
+      "lobbyCode": "ABCD1234",
+      "isPrivate": false,
+      "isLocked": false,
+      "maxPlayers": 4,
+      "availableSlots": 3,
+      "hostId": "player_abc123",
+      "data": {
+        "gameMode": {
+          "value": "capture_the_flag",
+          "visibility": "Public",
+          "index": "S1"
+        },
+        "mapName": {
+          "value": "desert_canyon",
+          "visibility": "Public",
+          "index": "S2"
+        }
+      },
+      "players": [
+        {
+          "id": "player_abc123",
+          "data": {
+            "character": {
+              "value": "warrior",
+              "visibility": "Public"
+            }
+          },
+          "joined": "2026-05-03T12:00:00Z",
+          "lastUpdated": "2026-05-03T12:00:00Z"
+        }
+      ],
+      "created": "2026-05-03T12:00:00Z",
+      "lastUpdated": "2026-05-03T12:00:00Z"
+    }
+  }
+}

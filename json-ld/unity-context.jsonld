@@ -1,0 +1,126 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "unity": "https://api-evangelist.github.io/unity/vocabulary#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Player": "unity:Player",
+    "Leaderboard": "unity:Leaderboard",
+    "EconomyResource": "unity:EconomyResource",
+    "Lobby": "unity:Lobby",
+    "MatchmakingTicket": "unity:MatchmakingTicket",
+    "GameServerFleet": "unity:GameServerFleet",
+    "CloudSaveItem": "unity:CloudSaveItem",
+    "GameProject": "unity:GameProject",
+
+    "playerId": {
+      "@id": "unity:playerId",
+      "@type": "xsd:string"
+    },
+    "projectId": {
+      "@id": "unity:projectId",
+      "@type": "xsd:string"
+    },
+    "environmentId": {
+      "@id": "unity:environmentId",
+      "@type": "xsd:string"
+    },
+    "leaderboardId": {
+      "@id": "unity:leaderboardId",
+      "@type": "xsd:string"
+    },
+    "score": {
+      "@id": "unity:score",
+      "@type": "xsd:decimal"
+    },
+    "rank": {
+      "@id": "unity:rank",
+      "@type": "xsd:integer"
+    },
+    "tier": {
+      "@id": "unity:tier",
+      "@type": "xsd:string"
+    },
+    "sortOrder": {
+      "@id": "unity:sortOrder",
+      "@type": "xsd:string"
+    },
+    "currencyId": {
+      "@id": "unity:currencyId",
+      "@type": "xsd:string"
+    },
+    "balance": {
+      "@id": "unity:balance",
+      "@type": "xsd:integer"
+    },
+    "inventoryItemId": {
+      "@id": "unity:inventoryItemId",
+      "@type": "xsd:string"
+    },
+    "lobbyCode": {
+      "@id": "unity:lobbyCode",
+      "@type": "xsd:string"
+    },
+    "maxPlayers": {
+      "@id": "unity:maxPlayers",
+      "@type": "xsd:integer"
+    },
+    "hostId": {
+      "@id": "unity:hostId",
+      "@type": "xsd:string"
+    },
+    "isPrivate": {
+      "@id": "unity:isPrivate",
+      "@type": "xsd:boolean"
+    },
+    "ticketId": {
+      "@id": "unity:ticketId",
+      "@type": "xsd:string"
+    },
+    "queueName": {
+      "@id": "unity:queueName",
+      "@type": "xsd:string"
+    },
+    "matchStatus": {
+      "@id": "unity:matchStatus",
+      "@type": "xsd:string"
+    },
+    "idToken": {
+      "@id": "unity:idToken",
+      "@type": "xsd:string"
+    },
+    "idProvider": {
+      "@id": "unity:idProvider",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "created": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "modified": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "enabled": {
+      "@id": "unity:enabled",
+      "@type": "xsd:boolean"
+    },
+    "key": {
+      "@id": "unity:dataKey",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "unity:dataValue"
+    },
+    "metadata": {
+      "@id": "unity:metadata"
+    }
+  }
+}

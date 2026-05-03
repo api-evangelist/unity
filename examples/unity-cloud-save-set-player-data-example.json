@@ -1,0 +1,67 @@
+{
+  "summary": "Save player game progress to cloud",
+  "description": "Example showing how to persist multiple player data items to the cloud including game progress and equipment.",
+  "request": {
+    "method": "POST",
+    "path": "/v1/data/projects/{projectId}/players/{playerId}/items",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "data": [
+        {
+          "key": "player_level",
+          "value": 15
+        },
+        {
+          "key": "player_xp",
+          "value": 45200
+        },
+        {
+          "key": "equipped_weapon",
+          "value": "SWORD_OF_FIRE"
+        },
+        {
+          "key": "completed_quests",
+          "value": ["quest_001", "quest_002", "quest_007"]
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "results": [
+        {
+          "key": "player_level",
+          "value": 15,
+          "writeLock": "lock_abc",
+          "created": "2026-01-01T00:00:00Z",
+          "modified": "2026-05-03T12:00:00Z"
+        },
+        {
+          "key": "player_xp",
+          "value": 45200,
+          "writeLock": "lock_def",
+          "created": "2026-01-01T00:00:00Z",
+          "modified": "2026-05-03T12:00:00Z"
+        },
+        {
+          "key": "equipped_weapon",
+          "value": "SWORD_OF_FIRE",
+          "writeLock": "lock_ghi",
+          "created": "2026-05-03T12:00:00Z",
+          "modified": "2026-05-03T12:00:00Z"
+        },
+        {
+          "key": "completed_quests",
+          "value": ["quest_001", "quest_002", "quest_007"],
+          "writeLock": "lock_jkl",
+          "created": "2026-01-15T00:00:00Z",
+          "modified": "2026-05-03T12:00:00Z"
+        }
+      ]
+    }
+  }
+}

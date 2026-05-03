@@ -1,0 +1,28 @@
+{
+  "summary": "Submit a player score to a leaderboard",
+  "description": "Example showing how to submit a player's game score to a leaderboard. The score is compared against other players and assigned a rank.",
+  "request": {
+    "method": "POST",
+    "path": "/v1/projects/{projectId}/environments/{environmentId}/leaderboards/{leaderboardId}/scores/players/{playerId}",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "score": 15420,
+      "metadata": "level_5_hard_mode"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "playerId": "player_abc123",
+      "playerName": "GamerX",
+      "rank": 42,
+      "score": 15420,
+      "tier": "gold",
+      "updatedTime": "2026-05-03T12:00:00Z",
+      "metadata": "level_5_hard_mode"
+    }
+  }
+}

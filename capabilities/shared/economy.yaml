@@ -1,0 +1,318 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Unity Economy"
+  description: "Unity Economy REST API for managing in-game economies. Provides endpoints for virtual currencies, inventory management, virtual purchases, and player balance operations."
+  tags:
+    - Unity
+    - Economy
+    - Virtual Currency
+    - Inventory
+    - In-App Purchases
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      UNITY_ECONOMY_TOKEN: UNITY_ECONOMY_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: unity-economy
+      baseUri: https://economy.services.api.unity.com
+      description: "Unity Economy API for in-game currency and inventory management"
+      authentication:
+        type: bearer
+        token: "{{UNITY_ECONOMY_TOKEN}}"
+      resources:
+        - name: currency-balances
+          path: /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/currencies
+          description: "Player currency balance management"
+          operations:
+            - name: get-player-currency-balances
+              method: GET
+              description: "Get all currency balances for a player"
+              inputParameters:
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity project identifier"
+                - name: environmentId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Environment identifier"
+                - name: playerId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity player identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: currency-increment
+          path: /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/currencies/{currencyId}/increment
+          description: "Increment player currency balance"
+          operations:
+            - name: increment-currency-balance
+              method: POST
+              description: "Increase a player's currency balance"
+              inputParameters:
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity project identifier"
+                - name: environmentId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Environment identifier"
+                - name: playerId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity player identifier"
+                - name: currencyId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Currency identifier (e.g., GOLD, GEMS)"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  amount: "{{tools.amount}}"
+        - name: currency-decrement
+          path: /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/currencies/{currencyId}/decrement
+          description: "Decrement player currency balance"
+          operations:
+            - name: decrement-currency-balance
+              method: POST
+              description: "Decrease a player's currency balance"
+              inputParameters:
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity project identifier"
+                - name: environmentId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Environment identifier"
+                - name: playerId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity player identifier"
+                - name: currencyId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Currency identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  amount: "{{tools.amount}}"
+        - name: inventory
+          path: /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/inventory
+          description: "Player inventory management"
+          operations:
+            - name: get-player-inventory
+              method: GET
+              description: "Get all inventory items for a player"
+              inputParameters:
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity project identifier"
+                - name: environmentId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Environment identifier"
+                - name: playerId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity player identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: virtual-purchases
+          path: /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/purchases/virtual
+          description: "Virtual purchase processing"
+          operations:
+            - name: make-virtual-purchase
+              method: POST
+              description: "Process a virtual purchase for a player"
+              inputParameters:
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity project identifier"
+                - name: environmentId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Environment identifier"
+                - name: playerId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unity player identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  id: "{{tools.purchase_id}}"
+
+  exposes:
+    - type: rest
+      port: 8111
+      namespace: unity-economy-api
+      resources:
+        - path: /v1/currencies/{playerId}
+          name: player-currencies
+          description: "Player currency balance endpoints"
+          operations:
+            - method: GET
+              name: get-currency-balances
+              description: "Get player currency balances"
+              call: "unity-economy.get-player-currency-balances"
+              with:
+                projectId: "rest.projectId"
+                environmentId: "rest.environmentId"
+                playerId: "rest.playerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/inventory/{playerId}
+          name: player-inventory
+          description: "Player inventory endpoints"
+          operations:
+            - method: GET
+              name: get-inventory
+              description: "Get player inventory"
+              call: "unity-economy.get-player-inventory"
+              with:
+                projectId: "rest.projectId"
+                environmentId: "rest.environmentId"
+                playerId: "rest.playerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/purchases/{playerId}/virtual
+          name: virtual-purchases
+          description: "Virtual purchase endpoints"
+          operations:
+            - method: POST
+              name: make-purchase
+              description: "Process virtual purchase"
+              call: "unity-economy.make-virtual-purchase"
+              with:
+                projectId: "rest.projectId"
+                environmentId: "rest.environmentId"
+                playerId: "rest.playerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9111
+      namespace: unity-economy-mcp
+      transport: http
+      tools:
+        - name: get-player-balances
+          description: "Get all currency balances for a player"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "unity-economy.get-player-currency-balances"
+          with:
+            projectId: "tools.projectId"
+            environmentId: "tools.environmentId"
+            playerId: "tools.playerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: add-currency
+          description: "Add currency to a player's balance"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "unity-economy.increment-currency-balance"
+          with:
+            projectId: "tools.projectId"
+            environmentId: "tools.environmentId"
+            playerId: "tools.playerId"
+            currencyId: "tools.currencyId"
+            amount: "tools.amount"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: spend-currency
+          description: "Deduct currency from a player's balance"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "unity-economy.decrement-currency-balance"
+          with:
+            projectId: "tools.projectId"
+            environmentId: "tools.environmentId"
+            playerId: "tools.playerId"
+            currencyId: "tools.currencyId"
+            amount: "tools.amount"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-player-inventory
+          description: "Get all inventory items for a player"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "unity-economy.get-player-inventory"
+          with:
+            projectId: "tools.projectId"
+            environmentId: "tools.environmentId"
+            playerId: "tools.playerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: purchase-item
+          description: "Purchase an item using virtual currency"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "unity-economy.make-virtual-purchase"
+          with:
+            projectId: "tools.projectId"
+            environmentId: "tools.environmentId"
+            playerId: "tools.playerId"
+            purchase_id: "tools.purchase_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

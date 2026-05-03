@@ -1,0 +1,462 @@
+openapi: 3.0.1
+info:
+  title: Unity Lobby API
+  description: The Unity Lobby REST API provides endpoints for creating, managing, and querying multiplayer game lobbies. Lobbies allow players to group together before starting a game session. Supports public lobbies with search/filter, private lobbies with join codes, lobby data for game configuration, and player data for per-player attributes.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Lobby Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/lobby/manual/lobby-apis
+servers:
+  - url: https://lobby.services.api.unity.com
+    description: Unity Lobby Production Server
+tags:
+  - name: Lobbies
+    description: Create and manage game lobbies
+  - name: Players
+    description: Manage players within a lobby
+  - name: Search
+    description: Discover and join lobbies
+paths:
+  /v1/lobbies:
+    post:
+      operationId: createLobby
+      summary: Create Lobby
+      description: Creates a new lobby with the specified configuration. The requesting player becomes the lobby host.
+      tags:
+        - Lobbies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLobbyRequest'
+      responses:
+        '200':
+          description: Lobby created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+  /v1/lobbies/{lobbyId}:
+    get:
+      operationId: getLobby
+      summary: Get Lobby
+      description: Returns the current state and configuration of a lobby.
+      tags:
+        - Lobbies
+      parameters:
+        - name: lobbyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lobby details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+        '404':
+          description: Lobby not found
+    patch:
+      operationId: updateLobby
+      summary: Update Lobby
+      description: Updates lobby configuration and data. Only the lobby host can update the lobby.
+      tags:
+        - Lobbies
+      parameters:
+        - name: lobbyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLobbyRequest'
+      responses:
+        '200':
+          description: Lobby updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+    delete:
+      operationId: deleteLobby
+      summary: Delete Lobby
+      description: Deletes a lobby. Only the host can delete the lobby.
+      tags:
+        - Lobbies
+      parameters:
+        - name: lobbyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Lobby deleted
+  /v1/lobbies/{lobbyId}/join:
+    post:
+      operationId: joinLobbyById
+      summary: Join Lobby By ID
+      description: Joins an existing lobby by its unique identifier.
+      tags:
+        - Lobbies
+      parameters:
+        - name: lobbyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JoinLobbyRequest'
+      responses:
+        '200':
+          description: Joined lobby successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+        '404':
+          description: Lobby not found
+        '409':
+          description: Lobby is full or not joinable
+  /v1/lobbies/code/{lobbyCode}:
+    post:
+      operationId: joinLobbyByCode
+      summary: Join Lobby By Code
+      description: Joins a private lobby using a lobby join code shared by the host.
+      tags:
+        - Lobbies
+      parameters:
+        - name: lobbyCode
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JoinLobbyRequest'
+      responses:
+        '200':
+          description: Joined lobby successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+        '404':
+          description: Invalid lobby code
+  /v1/lobbies/query:
+    post:
+      operationId: queryLobbies
+      summary: Query Lobbies
+      description: Searches for available lobbies using filter and sort criteria. Only returns public lobbies.
+      tags:
+        - Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryLobbiesRequest'
+      responses:
+        '200':
+          description: List of matching lobbies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LobbyList'
+  /v1/lobbies/{lobbyId}/players/{playerId}:
+    delete:
+      operationId: removePlayer
+      summary: Remove Player From Lobby
+      description: Removes a player from the lobby. Host can remove any player; players can remove themselves.
+      tags:
+        - Players
+      parameters:
+        - name: lobbyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Player removed
+    patch:
+      operationId: updatePlayerData
+      summary: Update Player Data In Lobby
+      description: Updates a player's custom data within the lobby.
+      tags:
+        - Players
+      parameters:
+        - name: lobbyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlayerRequest'
+      responses:
+        '200':
+          description: Player data updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+  /v1/lobbies/{lobbyId}/heartbeat:
+    post:
+      operationId: heartbeatLobby
+      summary: Heartbeat Lobby
+      description: Sends a heartbeat to keep the lobby active. Lobbies without recent heartbeats are automatically deleted.
+      tags:
+        - Lobbies
+      parameters:
+        - name: lobbyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Heartbeat received
+components:
+  schemas:
+    Lobby:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        lobbyCode:
+          type: string
+          description: Join code for private lobbies
+        isPrivate:
+          type: boolean
+        isLocked:
+          type: boolean
+        maxPlayers:
+          type: integer
+        availableSlots:
+          type: integer
+        hostId:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/LobbyPlayer'
+        created:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    DataObject:
+      type: object
+      properties:
+        value:
+          type: string
+        visibility:
+          type: string
+          enum:
+            - Public
+            - Member
+            - Private
+        index:
+          type: string
+    LobbyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    CreateLobbyRequest:
+      type: object
+      required:
+        - name
+        - maxPlayers
+      properties:
+        name:
+          type: string
+        maxPlayers:
+          type: integer
+          minimum: 1
+        isPrivate:
+          type: boolean
+          default: false
+        player:
+          $ref: '#/components/schemas/CreatePlayerRequest'
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+    JoinLobbyRequest:
+      type: object
+      required:
+        - playerId
+      properties:
+        playerId:
+          type: string
+        player:
+          $ref: '#/components/schemas/CreatePlayerRequest'
+    UpdateLobbyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        maxPlayers:
+          type: integer
+        isPrivate:
+          type: boolean
+        isLocked:
+          type: boolean
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        hostId:
+          type: string
+          description: Transfer host to this player ID
+    UpdatePlayerRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+    CreatePlayerRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+    QueryLobbiesRequest:
+      type: object
+      properties:
+        count:
+          type: integer
+          default: 10
+        continuationToken:
+          type: string
+        filter:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryFilter'
+        order:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryOrder'
+    QueryFilter:
+      type: object
+      required:
+        - field
+        - value
+        - op
+      properties:
+        field:
+          type: string
+          enum:
+            - AvailableSlots
+            - MaxPlayers
+            - Created
+            - LastUpdated
+            - S1
+            - S2
+            - S3
+            - S4
+            - S5
+            - N1
+            - N2
+            - N3
+            - N4
+            - N5
+        value:
+          type: string
+        op:
+          type: string
+          enum:
+            - EQ
+            - NE
+            - LT
+            - LE
+            - GT
+            - GE
+            - CONTAINS
+            - NOT_CONTAINS
+    QueryOrder:
+      type: object
+      properties:
+        field:
+          type: string
+        asc:
+          type: boolean
+    LobbyList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lobby'
+        continuationToken:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

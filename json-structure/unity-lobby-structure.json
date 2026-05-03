@@ -1,0 +1,123 @@
+{
+  "title": "Unity Lobby Structure",
+  "description": "Document structure for a Unity multiplayer lobby session",
+  "type": "object",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Unique lobby identifier",
+      "required": true
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Display name for the lobby",
+      "required": true
+    },
+    {
+      "name": "lobbyCode",
+      "type": "string",
+      "description": "Short code for private lobby join",
+      "required": false,
+      "example": "ABCD1234"
+    },
+    {
+      "name": "isPrivate",
+      "type": "boolean",
+      "description": "Whether the lobby is hidden from search results",
+      "required": true,
+      "default": false
+    },
+    {
+      "name": "isLocked",
+      "type": "boolean",
+      "description": "Whether new players can join",
+      "required": false,
+      "default": false
+    },
+    {
+      "name": "maxPlayers",
+      "type": "integer",
+      "description": "Maximum number of players allowed",
+      "required": true
+    },
+    {
+      "name": "availableSlots",
+      "type": "integer",
+      "description": "Number of open player slots",
+      "required": false
+    },
+    {
+      "name": "hostId",
+      "type": "string",
+      "description": "Player ID of the lobby host",
+      "required": true
+    },
+    {
+      "name": "data",
+      "type": "object",
+      "description": "Custom lobby data (game mode, map, etc.)",
+      "required": false,
+      "additionalProperties": {
+        "type": "object",
+        "fields": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "Data value"
+          },
+          {
+            "name": "visibility",
+            "type": "string",
+            "enum": ["Public", "Member", "Private"],
+            "description": "Who can see this data"
+          },
+          {
+            "name": "index",
+            "type": "string",
+            "description": "Index key for lobby search filtering"
+          }
+        ]
+      }
+    },
+    {
+      "name": "players",
+      "type": "array",
+      "description": "Players currently in the lobby",
+      "required": false,
+      "items": {
+        "type": "object",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "description": "Player ID"
+          },
+          {
+            "name": "data",
+            "type": "object",
+            "description": "Player-specific lobby data"
+          },
+          {
+            "name": "joined",
+            "type": "string",
+            "format": "date-time"
+          }
+        ]
+      }
+    },
+    {
+      "name": "created",
+      "type": "string",
+      "format": "date-time",
+      "description": "Lobby creation time"
+    },
+    {
+      "name": "lastUpdated",
+      "type": "string",
+      "format": "date-time",
+      "description": "Last modification time"
+    }
+  ]
+}

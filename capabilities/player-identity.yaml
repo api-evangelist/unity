@@ -1,0 +1,171 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Unity Player Identity"
+  description: "Unified capability combining Unity Player Authentication, Friends, and Cloud Save APIs for complete player identity and social management. Enables player authentication, account management, social connections, and game state persistence."
+  tags:
+    - Unity
+    - Authentication
+    - Identity
+    - Friends
+    - Social
+    - Player Management
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      UNITY_AUTH_TOKEN: UNITY_AUTH_TOKEN
+      UNITY_CLOUD_SAVE_TOKEN: UNITY_CLOUD_SAVE_TOKEN
+
+capability:
+  consumes:
+    - import: unity-auth
+      location: ./shared/authentication.yaml
+    - import: unity-cloud-save
+      location: ./shared/cloud-save.yaml
+
+  exposes:
+    - type: rest
+      port: 8082
+      namespace: unity-player-identity-api
+      description: "Unified REST API for Unity player identity, authentication, and data management."
+      resources:
+        - path: /v1/players
+          name: players
+          description: "Player account management"
+          operations:
+            - method: GET
+              name: list-players
+              description: "List All Players"
+              call: "unity-auth.list-players"
+              with: {}
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/players/{playerId}
+          name: player
+          description: "Individual player operations"
+          operations:
+            - method: GET
+              name: get-player
+              description: "Get Player Details"
+              call: "unity-auth.get-player"
+              with:
+                playerId: "rest.playerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-player
+              description: "Delete Player Account"
+              call: "unity-auth.delete-player"
+              with:
+                playerId: "rest.playerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/players/{playerId}/data
+          name: player-data
+          description: "Player game data"
+          operations:
+            - method: GET
+              name: get-player-data
+              description: "Get Player Game Data"
+              call: "unity-cloud-save.get-player-data"
+              with:
+                projectId: "rest.projectId"
+                playerId: "rest.playerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: save-player-data
+              description: "Save Player Game Data"
+              call: "unity-cloud-save.set-player-data"
+              with:
+                projectId: "rest.projectId"
+                playerId: "rest.playerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9082
+      namespace: unity-player-identity-mcp
+      transport: http
+      description: "MCP server for AI-assisted Unity player identity management."
+      tools:
+        - name: list-players
+          description: "List all player accounts in the project"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "unity-auth.list-players"
+          with: {}
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-player-account
+          description: "Get details for a specific player account"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "unity-auth.get-player"
+          with:
+            playerId: "tools.playerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-player-account
+          description: "Permanently delete a player account"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "unity-auth.delete-player"
+          with:
+            playerId: "tools.playerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-player-game-data
+          description: "Get a player's saved game data from the cloud"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "unity-cloud-save.get-player-data"
+          with:
+            projectId: "tools.projectId"
+            playerId: "tools.playerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-player-game-data
+          description: "Update a player's saved game data in the cloud"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "unity-cloud-save.set-player-data"
+          with:
+            projectId: "tools.projectId"
+            playerId: "tools.playerId"
+            data: "tools.data"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: query-player-data
+          description: "Query player data with field-based filters"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "unity-cloud-save.query-player-data"
+          with:
+            projectId: "tools.projectId"
+            playerId: "tools.playerId"
+            return_keys: "tools.return_keys"
+            fields: "tools.fields"
+          outputParameters:
+            - type: object
+              mapping: "$."

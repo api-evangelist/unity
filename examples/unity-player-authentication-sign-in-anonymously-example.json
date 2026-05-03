@@ -1,0 +1,25 @@
+{
+  "summary": "Anonymous player sign-in",
+  "description": "Example showing an anonymous sign-in for a player who has not yet created an account. Returns a JWT access token and session token.",
+  "request": {
+    "method": "POST",
+    "path": "/v1/authentication/anonymous",
+    "headers": {
+      "Content-Type": "application/json",
+      "x-client-id": "{project_id}"
+    },
+    "body": {
+      "sessionTokens": ["session_token_abc123def456"]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "idToken": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJwbGF5ZXJfYWJjMTIzIiwiaXNzIjoidW5pdHkuY29tIiwiZXhwIjoxNzE2NzI2ODAwfQ.signature",
+      "sessionToken": "session_new_token_xyz789",
+      "expiresIn": 3600,
+      "userId": "player_abc123",
+      "isNew": true
+    }
+  }
+}

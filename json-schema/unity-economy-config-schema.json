@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unity/main/json-schema/unity-economy-config-schema.json",
+  "title": "Unity Economy Configuration",
+  "description": "Schema for Unity Economy resource configurations including currencies, inventory items, and purchases.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique economy resource identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the economy resource"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["CURRENCY", "INVENTORY_ITEM", "VIRTUAL_PURCHASE", "REAL_MONEY_PURCHASE"],
+      "description": "Type of economy resource"
+    },
+    "initial": {
+      "type": "number",
+      "description": "Initial balance for currency resources"
+    },
+    "max": {
+      "type": "number",
+      "description": "Maximum balance cap for currency resources"
+    },
+    "customData": {
+      "type": "object",
+      "description": "Custom metadata stored with the resource configuration"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["id", "type"]
+}
