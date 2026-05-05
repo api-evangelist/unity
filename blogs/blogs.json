@@ -1,0 +1,13 @@
+{
+  "repo": "unity",
+  "feeds": [
+    {
+      "source": "https://blog.unity.com",
+      "feed_url": "https://unity.com/blog/rss",
+      "saved": 10,
+      "title": "Unity Blog RSS Feed"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:37:57Z"
+}
