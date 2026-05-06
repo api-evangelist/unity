@@ -1,371 +1,92 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Unity
+providerId: unity
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - Game Development
+  - Cloud Gaming
+  - FinOps
+  - FOCUS
+description: FOCUS-aligned FinOps for Unity. Two distinct cost surfaces - revenue-tier-gated Unity
+  Engine seat subscriptions and pay-as-you-go Unity Gaming Services with per-service free tiers and
+  paid overage. Numeric pricing and MAU thresholds were not reconcilable from primary unity.com
+  sources during this pass; meters and FOCUS columns are scoped to known service shape only.
+sources:
+  - https://unity.com
+  - https://docs.unity.com/ugs/manual/overview
+notes: unity.com/pricing, store.unity.com, and the UGS pricing-and-billing page returned 403 during
+  reconciliation. Treat dollar values as pending; meter shape (per seat for Engine, per MAU / call
+  for UGS) is reconciled.
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: Unity
-providerId: unity
-publisherName: Unity
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - Game Development
-  - Real-Time 3D
-  - Multiplayer
-  - Game Services
-  - Cloud Gaming
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Unity API surface. Provides a FOCUS-aligned mapping for
-  cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: Unity Technologies
+serviceCategory: Game Development Platform
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Subscription + Pay-As-You-Go
+  billingFrequency: Annual (Engine) + Monthly (UGS)
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
+    - Usage
 focusColumns:
   ServiceName: Unity
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Game Development Platform
   ProviderName: Unity
-  PublisherName: Unity
-  InvoiceIssuerName: Unity
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Unity Technologies
+  InvoiceIssuerName: Unity Technologies
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
+  - name: engine_seats
+    description: Unity Engine seats by tier (Personal / Pro / Industry / Enterprise); seat eligibility
+      is gated by company revenue thresholds.
+    unit: seat
+    aggregation: max
     dimensions:
-      - api
-      - endpoint
       - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - billing_term
+  - name: ugs_monthly_active_users
+    description: Monthly active users counted by Unity Gaming Services for relevant services (e.g.
+      Cloud Save, Authentication, Lobby).
+    unit: mau
+    aggregation: max
+    dimensions:
+      - service
+      - project
+  - name: multiplay_compute
+    description: Multiplay Hosting compute consumption (cloud, bare metal, or hybrid).
+    unit: instance-hour
     aggregation: sum
     dimensions:
-      - api
       - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - instance_type
+  - name: vivox_minutes
+    description: Voice / text chat usage via Vivox.
+    unit: minute
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Unity Player Authentication API
-    baseURL: ''
-    tags:
-      - Authentication
-      - Identity
-      - Players
-      - OAuth
-      - Sign-In
-    serviceName: Unity Player Authentication API
-    serviceCategory: API
-  - name: Unity Cloud Code API
-    baseURL: ''
-    tags:
-      - Cloud
-      - Code Execution
-      - Serverless
-      - Functions
-    serviceName: Unity Cloud Code API
-    serviceCategory: API
-  - name: Unity Cloud Save API
-    baseURL: ''
-    tags:
-      - Cloud Storage
-      - Game State
-      - Player Data
-      - Persistence
-    serviceName: Unity Cloud Save API
-    serviceCategory: API
-  - name: Unity Economy API
-    baseURL: ''
-    tags:
-      - Economy
-      - In-App Purchases
-      - Virtual Currency
-      - Inventory
-    serviceName: Unity Economy API
-    serviceCategory: API
-  - name: Unity Leaderboards API
-    baseURL: ''
-    tags:
-      - Leaderboards
-      - Rankings
-      - Scores
-      - Competitive Gaming
-    serviceName: Unity Leaderboards API
-    serviceCategory: API
-  - name: Unity Remote Config API
-    baseURL: ''
-    tags:
-      - Configuration
-      - Feature Flags
-      - Remote Config
-      - A/B Testing
-    serviceName: Unity Remote Config API
-    serviceCategory: API
-  - name: Unity Analytics API
-    baseURL: ''
-    tags:
-      - Analytics
-      - Events
-      - Telemetry
-      - Player Behavior
-    serviceName: Unity Analytics API
-    serviceCategory: API
-  - name: Unity Lobby API
-    baseURL: ''
-    tags:
-      - Lobby
-      - Matchmaking
-      - Multiplayer
-      - Game Sessions
-    serviceName: Unity Lobby API
-    serviceCategory: API
-  - name: Unity Matchmaker API
-    baseURL: ''
-    tags:
-      - Matchmaking
-      - Multiplayer
-      - Skill-Based Matching
-    serviceName: Unity Matchmaker API
-    serviceCategory: API
-  - name: Unity Relay API
-    baseURL: ''
-    tags:
-      - Multiplayer
-      - Networking
-      - Relay
-      - Peer-to-Peer
-    serviceName: Unity Relay API
-    serviceCategory: API
-  - name: Unity Multiplay Game Server Hosting API
-    baseURL: ''
-    tags:
-      - Game Servers
-      - Hosting
-      - Multiplayer
-      - Infrastructure
-    serviceName: Unity Multiplay Game Server Hosting API
-    serviceCategory: API
-  - name: Unity Cloud Content Delivery API
-    baseURL: ''
-    tags:
-      - Assets
-      - CDN
-      - Content Delivery
-      - Game Updates
-    serviceName: Unity Cloud Content Delivery API
-    serviceCategory: API
-  - name: Unity Triggers API
-    baseURL: ''
-    tags:
-      - Automation
-      - Events
-      - Triggers
-      - Cloud Code
-    serviceName: Unity Triggers API
-    serviceCategory: API
-  - name: Unity Scheduler API
-    baseURL: ''
-    tags:
-      - Automation
-      - Cron
-      - Scheduler
-      - Cloud Code
-    serviceName: Unity Scheduler API
-    serviceCategory: API
-  - name: Unity Friends API
-    baseURL: ''
-    tags:
-      - Friends
-      - Multiplayer
-      - Social
-      - Player Relationships
-    serviceName: Unity Friends API
-    serviceCategory: API
-  - name: Unity Vivox Voice and Text Chat API
-    baseURL: ''
-    tags:
-      - Communication
-      - Text Chat
-      - Voice Chat
-      - Real-Time Audio
-    serviceName: Unity Vivox Voice and Text Chat API
-    serviceCategory: API
-  - name: Unity Moderation API
-    baseURL: ''
-    tags:
-      - Moderation
-      - Safety
-      - Trust
-      - Community Health
-    serviceName: Unity Moderation API
-    serviceCategory: API
-  - name: Unity User Generated Content API
-    baseURL: ''
-    tags:
-      - Community
-      - Content
-      - UGC
-      - Player Content
-    serviceName: Unity User Generated Content API
-    serviceCategory: API
-  - name: Unity Push Notifications API
-    baseURL: ''
-    tags:
-      - Messaging
-      - Mobile
-      - Push Notifications
-      - iOS
-      - Android
-    serviceName: Unity Push Notifications API
-    serviceCategory: API
-  - name: Unity Build Automation API
-    baseURL: ''
-    tags:
-      - Build
-      - CI/CD
-      - DevOps
-      - Automation
-    serviceName: Unity Build Automation API
-    serviceCategory: API
-  - name: Unity Version Control API
-    baseURL: ''
-    tags:
-      - DevOps
-      - Source Control
-      - Version Control
-      - Branching
-    serviceName: Unity Version Control API
-    serviceCategory: API
-  - name: Unity Access API
-    baseURL: ''
-    tags:
-      - Access Control
-      - Permissions
-      - Security
-      - IAM
-    serviceName: Unity Access API
-    serviceCategory: API
-  - name: Unity SCIM API
-    baseURL: ''
-    tags:
-      - Identity
-      - Provisioning
-      - SCIM
-      - SSO
-    serviceName: Unity SCIM API
-    serviceCategory: API
-  - name: Unity Distributed Authority API
-    baseURL: ''
-    tags:
-      - Distributed
-      - Multiplayer
-      - Networking
-      - State Management
-    serviceName: Unity Distributed Authority API
-    serviceCategory: API
-  - name: Unity Safe Text API
-    baseURL: ''
-    tags:
-      - Moderation
-      - Safety
-      - Text Filtering
-      - AI Moderation
-    serviceName: Unity Safe Text API
-    serviceCategory: API
-  - name: Unity Asset Manager API
-    baseURL: ''
-    tags:
-      - Assets
-      - Asset Management
-      - 3D Content
-      - Collaboration
-    serviceName: Unity Asset Manager API
-    serviceCategory: API
-  - name: Unity Monetize API
-    baseURL: ''
-    tags:
-      - Monetization
-      - Advertising
-      - Revenue
-      - Mobile Ads
-    serviceName: Unity Monetize API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - channel_type
+principles:
+  - name: Visibility
+    description: Use the Unity Cloud / UGS dashboard and the Unity pricing estimator to see consumption
+      per service; the estimator is non-binding so reconcile against actual invoice line items.
+  - name: Allocation
+    description: Use a separate Unity project per game / environment so MAU and Multiplay spend can
+      be attributed; segment Engine seats per studio or business unit.
+  - name: Optimization
+    description: Stay inside per-service free tiers via auth-only flows where possible, batch Cloud
+      Save writes, right-size Multiplay fleets and use lower-cost regions, and choose the engine
+      tier that matches your revenue band rather than over-buying.
+  - name: Accountability
+    description: Assign an owner per Unity project to monitor MAU growth, with payment-details-on-file
+      checks ahead of expected free-tier exhaustion to avoid the UGS access block.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-  - name: Unity Technologies
-    email: support@unity.com
-    url: https://unity.com

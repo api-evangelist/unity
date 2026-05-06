@@ -4,219 +4,39 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Unity
 providerId: unity
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Game Development
-  - Real-Time 3D
-  - Multiplayer
-  - Game Services
   - Cloud Gaming
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Unity API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+description: Unity Gaming Services applies per-service free tiers as the primary throttling mechanism
+  - if free tier limits are exceeded without payment details on file, UGS access is blocked until
+  payment information is added. Numeric per-second / per-minute API limits per service are documented
+  in the per-service docs at docs.unity.com/ugs but were not reconcilable from primary sources due
+  to portal access restrictions during this pass.
+sources:
+  - https://docs.unity.com/ugs/manual/overview
+notes: Primary unity.com pricing pages returned 403 during reconciliation. Capture qualitative behavior
+  here; numeric per-service limits should be filled from the per-service docs (Cloud Save, Auth,
+  Multiplay, Vivox, Lobby) when re-reconciled.
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Unity Player Authentication API
-      - Unity Cloud Code API
-      - Unity Cloud Save API
-      - Unity Economy API
-      - Unity Leaderboards API
-      - Unity Remote Config API
-      - Unity Analytics API
-      - Unity Lobby API
-      - Unity Matchmaker API
-      - Unity Relay API
-      - Unity Multiplay Game Server Hosting API
-      - Unity Cloud Content Delivery API
-      - Unity Triggers API
-      - Unity Scheduler API
-      - Unity Friends API
-      - Unity Vivox Voice and Text Chat API
-      - Unity Moderation API
-      - Unity User Generated Content API
-      - Unity Push Notifications API
-      - Unity Build Automation API
-      - Unity Version Control API
-      - Unity Access API
-      - Unity SCIM API
-      - Unity Distributed Authority API
-      - Unity Safe Text API
-      - Unity Asset Manager API
-      - Unity Monetize API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Unity Player Authentication API
-      - Unity Cloud Code API
-      - Unity Cloud Save API
-      - Unity Economy API
-      - Unity Leaderboards API
-      - Unity Remote Config API
-      - Unity Analytics API
-      - Unity Lobby API
-      - Unity Matchmaker API
-      - Unity Relay API
-      - Unity Multiplay Game Server Hosting API
-      - Unity Cloud Content Delivery API
-      - Unity Triggers API
-      - Unity Scheduler API
-      - Unity Friends API
-      - Unity Vivox Voice and Text Chat API
-      - Unity Moderation API
-      - Unity User Generated Content API
-      - Unity Push Notifications API
-      - Unity Build Automation API
-      - Unity Version Control API
-      - Unity Access API
-      - Unity SCIM API
-      - Unity Distributed Authority API
-      - Unity Safe Text API
-      - Unity Asset Manager API
-      - Unity Monetize API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Unity Player Authentication API
-      - Unity Cloud Code API
-      - Unity Cloud Save API
-      - Unity Economy API
-      - Unity Leaderboards API
-      - Unity Remote Config API
-      - Unity Analytics API
-      - Unity Lobby API
-      - Unity Matchmaker API
-      - Unity Relay API
-      - Unity Multiplay Game Server Hosting API
-      - Unity Cloud Content Delivery API
-      - Unity Triggers API
-      - Unity Scheduler API
-      - Unity Friends API
-      - Unity Vivox Voice and Text Chat API
-      - Unity Moderation API
-      - Unity User Generated Content API
-      - Unity Push Notifications API
-      - Unity Build Automation API
-      - Unity Version Control API
-      - Unity Access API
-      - Unity SCIM API
-      - Unity Distributed Authority API
-      - Unity Safe Text API
-      - Unity Asset Manager API
-      - Unity Monetize API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Unity Player Authentication API
-      - Unity Cloud Code API
-      - Unity Cloud Save API
-      - Unity Economy API
-      - Unity Leaderboards API
-      - Unity Remote Config API
-      - Unity Analytics API
-      - Unity Lobby API
-      - Unity Matchmaker API
-      - Unity Relay API
-      - Unity Multiplay Game Server Hosting API
-      - Unity Cloud Content Delivery API
-      - Unity Triggers API
-      - Unity Scheduler API
-      - Unity Friends API
-      - Unity Vivox Voice and Text Chat API
-      - Unity Moderation API
-      - Unity User Generated Content API
-      - Unity Push Notifications API
-      - Unity Build Automation API
-      - Unity Version Control API
-      - Unity Access API
-      - Unity SCIM API
-      - Unity Distributed Authority API
-      - Unity Safe Text API
-      - Unity Asset Manager API
-      - Unity Monetize API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Unity Player Authentication API
-      - Unity Cloud Code API
-      - Unity Cloud Save API
-      - Unity Economy API
-      - Unity Leaderboards API
-      - Unity Remote Config API
-      - Unity Analytics API
-      - Unity Lobby API
-      - Unity Matchmaker API
-      - Unity Relay API
-      - Unity Multiplay Game Server Hosting API
-      - Unity Cloud Content Delivery API
-      - Unity Triggers API
-      - Unity Scheduler API
-      - Unity Friends API
-      - Unity Vivox Voice and Text Chat API
-      - Unity Moderation API
-      - Unity User Generated Content API
-      - Unity Push Notifications API
-      - Unity Build Automation API
-      - Unity Version Control API
-      - Unity Access API
-      - Unity SCIM API
-      - Unity Distributed Authority API
-      - Unity Safe Text API
-      - Unity Asset Manager API
-      - Unity Monetize API
+  - name: UGS free-tier limits
+    scope: project
+    metric: varies
+    limit: see per-service Unity Gaming Services docs
+    notes: Each UGS service has its own free-tier limit (typically MAU- or request-based). Exceeding
+      it blocks UGS access until payment details are added.
+  - name: Per-service runtime limits
+    scope: project
+    metric: varies
+    limit: see service-specific UGS reference
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Free Tier Enforcement
+    description: Unity Gaming Services blocks access to all UGS services if a project exceeds free
+      tier limits without payment details on file; access resumes once payment is configured.
+  - name: Pay-As-You-Go
+    description: Above the free tier, services are billed on a pay-as-you-go basis rather than hard-throttled.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-  - name: Unity Technologies
-    email: support@unity.com
-    url: https://unity.com
