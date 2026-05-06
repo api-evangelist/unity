@@ -1,171 +1,374 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Unity Player Identity"
-  description: "Unified capability combining Unity Player Authentication, Friends, and Cloud Save APIs for complete player identity and social management. Enables player authentication, account management, social connections, and game state persistence."
+  label: Unity Player Identity
+  description: Unified capability combining Unity Player Authentication, Friends, and Cloud Save APIs for complete player
+    identity and social management. Enables player authentication, account management, social connections, and game state
+    persistence.
   tags:
-    - Unity
-    - Authentication
-    - Identity
-    - Friends
-    - Social
-    - Player Management
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Unity
+  - Authentication
+  - Identity
+  - Friends
+  - Social
+  - Player Management
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      UNITY_AUTH_TOKEN: UNITY_AUTH_TOKEN
-      UNITY_CLOUD_SAVE_TOKEN: UNITY_CLOUD_SAVE_TOKEN
-
+- namespace: env
+  keys:
+    UNITY_AUTH_TOKEN: UNITY_AUTH_TOKEN
+    UNITY_CLOUD_SAVE_TOKEN: UNITY_CLOUD_SAVE_TOKEN
 capability:
   consumes:
-    - import: unity-auth
-      location: ./shared/authentication.yaml
-    - import: unity-cloud-save
-      location: ./shared/cloud-save.yaml
-
+  - type: http
+    namespace: unity-auth
+    baseUri: https://player-auth.services.api.unity.com
+    description: Unity Player Authentication API
+    authentication:
+      type: bearer
+      token: '{{UNITY_AUTH_TOKEN}}'
+    resources:
+    - name: anonymous-auth
+      path: /v1/authentication/anonymous
+      description: Anonymous player authentication
+      operations:
+      - name: sign-in-anonymously
+        method: POST
+        description: Sign in a player anonymously
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            sessionTokens: '{{tools.session_tokens}}'
+    - name: username-password-auth
+      path: /v1/authentication/usernamepassword/sign-in
+      description: Username and password sign-in
+      operations:
+      - name: sign-in-with-password
+        method: POST
+        description: Sign in with username and password
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            username: '{{tools.username}}'
+            password: '{{tools.password}}'
+    - name: external-token-auth
+      path: /v1/authentication/external-token
+      description: External identity provider authentication
+      operations:
+      - name: sign-in-with-external-token
+        method: POST
+        description: Sign in with external identity provider token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            idProvider: '{{tools.id_provider}}'
+            token: '{{tools.token}}'
+    - name: token-refresh
+      path: /v1/token/refresh
+      description: Token refresh
+      operations:
+      - name: refresh-token
+        method: POST
+        description: Refresh an authentication token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            refreshToken: '{{tools.refresh_token}}'
+    - name: players-admin
+      path: /v1/players
+      description: Player account administration
+      operations:
+      - name: list-players
+        method: GET
+        description: List all players in the project
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of players to return
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: player-admin
+      path: /v1/players/{playerId}
+      description: Individual player management
+      operations:
+      - name: get-player
+        method: GET
+        description: Get player details
+        inputParameters:
+        - name: playerId
+          in: path
+          type: string
+          required: true
+          description: Unity player identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-player
+        method: DELETE
+        description: Delete a player account
+        inputParameters:
+        - name: playerId
+          in: path
+          type: string
+          required: true
+          description: Unity player identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: unity-cloud-save
+    baseUri: https://cloud-save.services.api.unity.com
+    description: Unity Cloud Save API for player game state persistence
+    authentication:
+      type: bearer
+      token: '{{UNITY_CLOUD_SAVE_TOKEN}}'
+    resources:
+    - name: player-data
+      path: /v1/data/projects/{projectId}/players/{playerId}
+      description: Player data operations
+      operations:
+      - name: get-player-data
+        method: GET
+        description: Get all data items for a player
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: Unity project identifier
+        - name: playerId
+          in: path
+          type: string
+          required: true
+          description: Unity player identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: player-data-items
+      path: /v1/data/projects/{projectId}/players/{playerId}/items
+      description: Set player data items
+      operations:
+      - name: set-player-data
+        method: POST
+        description: Create or update player data items
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: Unity project identifier
+        - name: playerId
+          in: path
+          type: string
+          required: true
+          description: Unity player identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            data: '{{tools.data}}'
+    - name: player-query
+      path: /v1/data/projects/{projectId}/players/{playerId}/query
+      description: Query player data with filters
+      operations:
+      - name: query-player-data
+        method: POST
+        description: Query player data using field-based filters
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: Unity project identifier
+        - name: playerId
+          in: path
+          type: string
+          required: true
+          description: Unity player identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            returnKeys: '{{tools.return_keys}}'
+            fields: '{{tools.fields}}'
   exposes:
-    - type: rest
-      port: 8082
-      namespace: unity-player-identity-api
-      description: "Unified REST API for Unity player identity, authentication, and data management."
-      resources:
-        - path: /v1/players
-          name: players
-          description: "Player account management"
-          operations:
-            - method: GET
-              name: list-players
-              description: "List All Players"
-              call: "unity-auth.list-players"
-              with: {}
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/players/{playerId}
-          name: player
-          description: "Individual player operations"
-          operations:
-            - method: GET
-              name: get-player
-              description: "Get Player Details"
-              call: "unity-auth.get-player"
-              with:
-                playerId: "rest.playerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: DELETE
-              name: delete-player
-              description: "Delete Player Account"
-              call: "unity-auth.delete-player"
-              with:
-                playerId: "rest.playerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/players/{playerId}/data
-          name: player-data
-          description: "Player game data"
-          operations:
-            - method: GET
-              name: get-player-data
-              description: "Get Player Game Data"
-              call: "unity-cloud-save.get-player-data"
-              with:
-                projectId: "rest.projectId"
-                playerId: "rest.playerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: save-player-data
-              description: "Save Player Game Data"
-              call: "unity-cloud-save.set-player-data"
-              with:
-                projectId: "rest.projectId"
-                playerId: "rest.playerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9082
-      namespace: unity-player-identity-mcp
-      transport: http
-      description: "MCP server for AI-assisted Unity player identity management."
-      tools:
-        - name: list-players
-          description: "List all player accounts in the project"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "unity-auth.list-players"
-          with: {}
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-player-account
-          description: "Get details for a specific player account"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "unity-auth.get-player"
-          with:
-            playerId: "tools.playerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-player-account
-          description: "Permanently delete a player account"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "unity-auth.delete-player"
-          with:
-            playerId: "tools.playerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-player-game-data
-          description: "Get a player's saved game data from the cloud"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "unity-cloud-save.get-player-data"
-          with:
-            projectId: "tools.projectId"
-            playerId: "tools.playerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: update-player-game-data
-          description: "Update a player's saved game data in the cloud"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "unity-cloud-save.set-player-data"
-          with:
-            projectId: "tools.projectId"
-            playerId: "tools.playerId"
-            data: "tools.data"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: query-player-data
-          description: "Query player data with field-based filters"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "unity-cloud-save.query-player-data"
-          with:
-            projectId: "tools.projectId"
-            playerId: "tools.playerId"
-            return_keys: "tools.return_keys"
-            fields: "tools.fields"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8082
+    namespace: unity-player-identity-api
+    description: Unified REST API for Unity player identity, authentication, and data management.
+    resources:
+    - path: /v1/players
+      name: players
+      description: Player account management
+      operations:
+      - method: GET
+        name: list-players
+        description: List All Players
+        call: unity-auth.list-players
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/players/{playerId}
+      name: player
+      description: Individual player operations
+      operations:
+      - method: GET
+        name: get-player
+        description: Get Player Details
+        call: unity-auth.get-player
+        with:
+          playerId: rest.playerId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete-player
+        description: Delete Player Account
+        call: unity-auth.delete-player
+        with:
+          playerId: rest.playerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/players/{playerId}/data
+      name: player-data
+      description: Player game data
+      operations:
+      - method: GET
+        name: get-player-data
+        description: Get Player Game Data
+        call: unity-cloud-save.get-player-data
+        with:
+          projectId: rest.projectId
+          playerId: rest.playerId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: save-player-data
+        description: Save Player Game Data
+        call: unity-cloud-save.set-player-data
+        with:
+          projectId: rest.projectId
+          playerId: rest.playerId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9082
+    namespace: unity-player-identity-mcp
+    transport: http
+    description: MCP server for AI-assisted Unity player identity management.
+    tools:
+    - name: list-players
+      description: List all player accounts in the project
+      hints:
+        readOnly: true
+        openWorld: true
+      call: unity-auth.list-players
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-player-account
+      description: Get details for a specific player account
+      hints:
+        readOnly: true
+        openWorld: false
+      call: unity-auth.get-player
+      with:
+        playerId: tools.playerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-player-account
+      description: Permanently delete a player account
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: unity-auth.delete-player
+      with:
+        playerId: tools.playerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-player-game-data
+      description: Get a player's saved game data from the cloud
+      hints:
+        readOnly: true
+        openWorld: false
+      call: unity-cloud-save.get-player-data
+      with:
+        projectId: tools.projectId
+        playerId: tools.playerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-player-game-data
+      description: Update a player's saved game data in the cloud
+      hints:
+        readOnly: false
+        idempotent: true
+      call: unity-cloud-save.set-player-data
+      with:
+        projectId: tools.projectId
+        playerId: tools.playerId
+        data: tools.data
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: query-player-data
+      description: Query player data with field-based filters
+      hints:
+        readOnly: true
+        openWorld: false
+      call: unity-cloud-save.query-player-data
+      with:
+        projectId: tools.projectId
+        playerId: tools.playerId
+        return_keys: tools.return_keys
+        fields: tools.fields
+      outputParameters:
+      - type: object
+        mapping: $.

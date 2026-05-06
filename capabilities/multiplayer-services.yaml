@@ -1,233 +1,489 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Unity Multiplayer Services"
-  description: "Unified capability combining Unity Lobby, Matchmaker, and Multiplay Game Server Hosting APIs for complete multiplayer session management. Enables player discovery, skill-based matching, server allocation, and session lifecycle management."
+  label: Unity Multiplayer Services
+  description: Unified capability combining Unity Lobby, Matchmaker, and Multiplay Game Server Hosting APIs for complete multiplayer
+    session management. Enables player discovery, skill-based matching, server allocation, and session lifecycle management.
   tags:
-    - Unity
-    - Multiplayer
-    - Lobby
-    - Matchmaking
-    - Game Server Hosting
-    - Online Gaming
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Unity
+  - Multiplayer
+  - Lobby
+  - Matchmaking
+  - Game Server Hosting
+  - Online Gaming
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      UNITY_LOBBY_TOKEN: UNITY_LOBBY_TOKEN
-      UNITY_MATCHMAKER_TOKEN: UNITY_MATCHMAKER_TOKEN
-      UNITY_MULTIPLAY_TOKEN: UNITY_MULTIPLAY_TOKEN
-
+- namespace: env
+  keys:
+    UNITY_LOBBY_TOKEN: UNITY_LOBBY_TOKEN
+    UNITY_MATCHMAKER_TOKEN: UNITY_MATCHMAKER_TOKEN
+    UNITY_MULTIPLAY_TOKEN: UNITY_MULTIPLAY_TOKEN
 capability:
   consumes:
-    - import: unity-lobby
-      location: ./shared/lobby.yaml
-    - import: unity-matchmaker
-      location: ./shared/matchmaker.yaml
-
+  - type: http
+    namespace: unity-lobby
+    baseUri: https://lobby.services.api.unity.com
+    description: Unity Lobby API for multiplayer lobby management
+    authentication:
+      type: bearer
+      token: '{{UNITY_LOBBY_TOKEN}}'
+    resources:
+    - name: lobbies
+      path: /v1/lobbies
+      description: Lobby creation and listing
+      operations:
+      - name: create-lobby
+        method: POST
+        description: Create a new multiplayer lobby
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            maxPlayers: '{{tools.max_players}}'
+            isPrivate: '{{tools.is_private}}'
+    - name: lobby-by-id
+      path: /v1/lobbies/{lobbyId}
+      description: Lobby management by ID
+      operations:
+      - name: get-lobby
+        method: GET
+        description: Get lobby details
+        inputParameters:
+        - name: lobbyId
+          in: path
+          type: string
+          required: true
+          description: Lobby identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-lobby
+        method: PATCH
+        description: Update lobby configuration
+        inputParameters:
+        - name: lobbyId
+          in: path
+          type: string
+          required: true
+          description: Lobby identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            isLocked: '{{tools.is_locked}}'
+      - name: delete-lobby
+        method: DELETE
+        description: Delete a lobby
+        inputParameters:
+        - name: lobbyId
+          in: path
+          type: string
+          required: true
+          description: Lobby identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lobby-join
+      path: /v1/lobbies/{lobbyId}/join
+      description: Join a lobby by ID
+      operations:
+      - name: join-lobby-by-id
+        method: POST
+        description: Join a lobby using its ID
+        inputParameters:
+        - name: lobbyId
+          in: path
+          type: string
+          required: true
+          description: Lobby identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            playerId: '{{tools.player_id}}'
+    - name: lobby-by-code
+      path: /v1/lobbies/code/{lobbyCode}
+      description: Join a lobby by code
+      operations:
+      - name: join-lobby-by-code
+        method: POST
+        description: Join a lobby using its join code
+        inputParameters:
+        - name: lobbyCode
+          in: path
+          type: string
+          required: true
+          description: Lobby join code
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            playerId: '{{tools.player_id}}'
+    - name: lobby-query
+      path: /v1/lobbies/query
+      description: Search for available lobbies
+      operations:
+      - name: query-lobbies
+        method: POST
+        description: Search for public lobbies with filters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            count: '{{tools.count}}'
+    - name: lobby-heartbeat
+      path: /v1/lobbies/{lobbyId}/heartbeat
+      description: Lobby heartbeat
+      operations:
+      - name: heartbeat-lobby
+        method: POST
+        description: Send heartbeat to keep lobby active
+        inputParameters:
+        - name: lobbyId
+          in: path
+          type: string
+          required: true
+          description: Lobby identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: unity-matchmaker
+    baseUri: https://matchmaker.services.api.unity.com
+    description: Unity Matchmaker API for player matching
+    authentication:
+      type: bearer
+      token: '{{UNITY_MATCHMAKER_TOKEN}}'
+    resources:
+    - name: tickets
+      path: /v3/projects/{projectId}/environments/{environmentId}/tickets
+      description: Matchmaking ticket management
+      operations:
+      - name: create-ticket
+        method: POST
+        description: Create a matchmaking ticket
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: Unity project identifier
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+          description: Environment identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            players: '{{tools.players}}'
+            queueName: '{{tools.queue_name}}'
+    - name: ticket-by-id
+      path: /v3/projects/{projectId}/environments/{environmentId}/tickets/{ticketId}
+      description: Ticket status and deletion
+      operations:
+      - name: get-ticket
+        method: GET
+        description: Get matchmaking ticket status
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: Unity project identifier
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+          description: Environment identifier
+        - name: ticketId
+          in: path
+          type: string
+          required: true
+          description: Ticket identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-ticket
+        method: DELETE
+        description: Cancel a matchmaking ticket
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: Unity project identifier
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+          description: Environment identifier
+        - name: ticketId
+          in: path
+          type: string
+          required: true
+          description: Ticket identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: queues
+      path: /v3/projects/{projectId}/environments/{environmentId}/queues
+      description: Matchmaking queue configuration
+      operations:
+      - name: list-queues
+        method: GET
+        description: List all matchmaking queues
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: Unity project identifier
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+          description: Environment identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8081
-      namespace: unity-multiplayer-api
-      description: "Unified REST API for Unity multiplayer services including lobby creation, matchmaking, and server allocation."
-      resources:
-        - path: /v1/lobbies
-          name: lobbies
-          description: "Game lobby management"
-          operations:
-            - method: POST
-              name: create-lobby
-              description: "Create a New Game Lobby"
-              call: "unity-lobby.create-lobby"
-              with: {}
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/lobbies/{lobbyId}
-          name: lobby
-          description: "Individual lobby operations"
-          operations:
-            - method: GET
-              name: get-lobby
-              description: "Get Lobby Details"
-              call: "unity-lobby.get-lobby"
-              with:
-                lobbyId: "rest.lobbyId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/lobbies/search
-          name: lobby-search
-          description: "Lobby discovery"
-          operations:
-            - method: POST
-              name: search-lobbies
-              description: "Search Available Lobbies"
-              call: "unity-lobby.query-lobbies"
-              with: {}
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/matchmaking/tickets
-          name: matchmaking-tickets
-          description: "Matchmaking queue management"
-          operations:
-            - method: POST
-              name: create-ticket
-              description: "Enter Matchmaking Queue"
-              call: "unity-matchmaker.create-ticket"
-              with:
-                projectId: "rest.projectId"
-                environmentId: "rest.environmentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/matchmaking/tickets/{ticketId}
-          name: matchmaking-ticket
-          description: "Individual matchmaking ticket"
-          operations:
-            - method: GET
-              name: get-ticket-status
-              description: "Get Matchmaking Status"
-              call: "unity-matchmaker.get-ticket"
-              with:
-                projectId: "rest.projectId"
-                environmentId: "rest.environmentId"
-                ticketId: "rest.ticketId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: DELETE
-              name: cancel-ticket
-              description: "Cancel Matchmaking"
-              call: "unity-matchmaker.delete-ticket"
-              with:
-                projectId: "rest.projectId"
-                environmentId: "rest.environmentId"
-                ticketId: "rest.ticketId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9081
-      namespace: unity-multiplayer-mcp
-      transport: http
-      description: "MCP server for AI-assisted Unity multiplayer session management."
-      tools:
-        # Lobby tools
-        - name: create-game-lobby
-          description: "Create a new multiplayer game lobby"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "unity-lobby.create-lobby"
-          with:
-            name: "tools.name"
-            max_players: "tools.max_players"
-            is_private: "tools.is_private"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-lobby-details
-          description: "Get the current state of a game lobby"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "unity-lobby.get-lobby"
-          with:
-            lobbyId: "tools.lobbyId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: join-game-lobby
-          description: "Join an existing game lobby by ID"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "unity-lobby.join-lobby-by-id"
-          with:
-            lobbyId: "tools.lobbyId"
-            player_id: "tools.player_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: search-available-lobbies
-          description: "Search for available public game lobbies"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "unity-lobby.query-lobbies"
-          with:
-            count: "tools.count"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: close-game-lobby
-          description: "Delete and close a game lobby"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "unity-lobby.delete-lobby"
-          with:
-            lobbyId: "tools.lobbyId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        # Matchmaker tools
-        - name: start-matchmaking
-          description: "Enter the matchmaking queue for a game session"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "unity-matchmaker.create-ticket"
-          with:
-            projectId: "tools.projectId"
-            environmentId: "tools.environmentId"
-            players: "tools.players"
-            queue_name: "tools.queue_name"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: check-matchmaking-status
-          description: "Check if a match has been found for a matchmaking ticket"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "unity-matchmaker.get-ticket"
-          with:
-            projectId: "tools.projectId"
-            environmentId: "tools.environmentId"
-            ticketId: "tools.ticketId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: cancel-matchmaking
-          description: "Cancel an active matchmaking ticket"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "unity-matchmaker.delete-ticket"
-          with:
-            projectId: "tools.projectId"
-            environmentId: "tools.environmentId"
-            ticketId: "tools.ticketId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-matchmaking-queues
-          description: "List all configured matchmaking queues"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "unity-matchmaker.list-queues"
-          with:
-            projectId: "tools.projectId"
-            environmentId: "tools.environmentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8081
+    namespace: unity-multiplayer-api
+    description: Unified REST API for Unity multiplayer services including lobby creation, matchmaking, and server allocation.
+    resources:
+    - path: /v1/lobbies
+      name: lobbies
+      description: Game lobby management
+      operations:
+      - method: POST
+        name: create-lobby
+        description: Create a New Game Lobby
+        call: unity-lobby.create-lobby
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lobbies/{lobbyId}
+      name: lobby
+      description: Individual lobby operations
+      operations:
+      - method: GET
+        name: get-lobby
+        description: Get Lobby Details
+        call: unity-lobby.get-lobby
+        with:
+          lobbyId: rest.lobbyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lobbies/search
+      name: lobby-search
+      description: Lobby discovery
+      operations:
+      - method: POST
+        name: search-lobbies
+        description: Search Available Lobbies
+        call: unity-lobby.query-lobbies
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/matchmaking/tickets
+      name: matchmaking-tickets
+      description: Matchmaking queue management
+      operations:
+      - method: POST
+        name: create-ticket
+        description: Enter Matchmaking Queue
+        call: unity-matchmaker.create-ticket
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/matchmaking/tickets/{ticketId}
+      name: matchmaking-ticket
+      description: Individual matchmaking ticket
+      operations:
+      - method: GET
+        name: get-ticket-status
+        description: Get Matchmaking Status
+        call: unity-matchmaker.get-ticket
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          ticketId: rest.ticketId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: cancel-ticket
+        description: Cancel Matchmaking
+        call: unity-matchmaker.delete-ticket
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          ticketId: rest.ticketId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9081
+    namespace: unity-multiplayer-mcp
+    transport: http
+    description: MCP server for AI-assisted Unity multiplayer session management.
+    tools:
+    - name: create-game-lobby
+      description: Create a new multiplayer game lobby
+      hints:
+        readOnly: false
+        idempotent: false
+      call: unity-lobby.create-lobby
+      with:
+        name: tools.name
+        max_players: tools.max_players
+        is_private: tools.is_private
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-lobby-details
+      description: Get the current state of a game lobby
+      hints:
+        readOnly: true
+        openWorld: false
+      call: unity-lobby.get-lobby
+      with:
+        lobbyId: tools.lobbyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: join-game-lobby
+      description: Join an existing game lobby by ID
+      hints:
+        readOnly: false
+        idempotent: false
+      call: unity-lobby.join-lobby-by-id
+      with:
+        lobbyId: tools.lobbyId
+        player_id: tools.player_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-available-lobbies
+      description: Search for available public game lobbies
+      hints:
+        readOnly: true
+        openWorld: true
+      call: unity-lobby.query-lobbies
+      with:
+        count: tools.count
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: close-game-lobby
+      description: Delete and close a game lobby
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: unity-lobby.delete-lobby
+      with:
+        lobbyId: tools.lobbyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-matchmaking
+      description: Enter the matchmaking queue for a game session
+      hints:
+        readOnly: false
+        idempotent: false
+      call: unity-matchmaker.create-ticket
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        players: tools.players
+        queue_name: tools.queue_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-matchmaking-status
+      description: Check if a match has been found for a matchmaking ticket
+      hints:
+        readOnly: true
+        openWorld: false
+      call: unity-matchmaker.get-ticket
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        ticketId: tools.ticketId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-matchmaking
+      description: Cancel an active matchmaking ticket
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: unity-matchmaker.delete-ticket
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        ticketId: tools.ticketId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-matchmaking-queues
+      description: List all configured matchmaking queues
+      hints:
+        readOnly: true
+        openWorld: true
+      call: unity-matchmaker.list-queues
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+      outputParameters:
+      - type: object
+        mapping: $.
