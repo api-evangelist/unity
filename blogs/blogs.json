@@ -3,11 +3,11 @@
   "feeds": [
     {
       "source": "https://blog.unity.com",
-      "feed_url": "https://unity.com/blog/rss",
-      "saved": 10,
-      "title": "Unity Blog RSS Feed"
+      "feed_url": "https://blog.unity.com/feed/",
+      "title": "Unity Blog RSS Feed",
+      "saved": 0
     }
   ],
   "post_count": 10,
-  "fetched": "2026-05-03T23:37:57Z"
+  "fetched": "2026-05-09T20:17:51Z"
 }
