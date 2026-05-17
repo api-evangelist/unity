@@ -29,7 +29,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/player-auth-admin/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-player-authentication-openapi.yml
@@ -45,7 +45,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/cloud-code-admin/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-cloud-code-openapi.yml
@@ -61,7 +61,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/cloud-save/manual/reference/rest-api
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/cloud-save-admin/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-cloud-save-openapi.yml
@@ -77,7 +77,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/economy/manual/write-configuration/rest-api
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/economy-admin/v2/index.html
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-economy-openapi.yml
@@ -93,7 +93,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/leaderboards/manual/write-configuration/rest-api
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/leaderboards-admin/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-leaderboards-openapi.yml
@@ -109,7 +109,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/remote-config/manual/write-configuration/rest-api
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/remote-config-admin/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-remote-config-openapi.yml
@@ -125,7 +125,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/analytics/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-analytics-openapi.yml
@@ -154,7 +154,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/matchmaker/manual/matchmaker-api
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/matchmaker-admin/v3/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-matchmaker-openapi.yml
@@ -170,7 +170,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/relay/manual/rest-api
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/relay-allocations/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-relay-openapi.yml
@@ -186,7 +186,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/game-server-hosting/manual/api/rest-api
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/multiplay-config/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-multiplay-openapi.yml
@@ -202,7 +202,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/manual/ccd/manual/ccd-rest-api
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/content-delivery-management/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-cloud-content-delivery-openapi.yml
@@ -218,7 +218,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual/triggers
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/triggers-admin/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-triggers-openapi.yml
@@ -234,7 +234,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual/triggers
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/scheduler-admin/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-scheduler-openapi.yml
@@ -250,7 +250,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/friends/manual/overview
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/friends/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-friends-openapi.yml
@@ -266,7 +266,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/vivox-unity/manual/Unity/Unity
-      - type: API Reference
+      - type: APIReference
         url: https://docs.unity.com/ugs/en-us/manual/vivox-core/manual/reference-manual/core/api-reference
   - aid: unity:moderation
     name: Unity Moderation API
@@ -280,7 +280,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/moderation/manual/overview
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/moderation/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-moderation-openapi.yml
@@ -323,7 +323,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/manual/devops/manual/build-automation/build-automation-api
-      - type: API Reference
+      - type: APIReference
         url: https://build-api.cloud.unity3d.com/docs/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-build-automation-openapi.yml
@@ -339,7 +339,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/devops/manual/unity-version-control
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/guides/unity-version-control-cm/overview/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-version-control-openapi.yml
@@ -355,7 +355,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/manual/overview/manual/access-control
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/access/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-access-openapi.yml
@@ -371,7 +371,7 @@ apis:
     properties:
       - type: Documentation
         url: https://support.unity.com/hc/en-us/articles/38766626849684-How-do-I-configure-SCIM-provisioning
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/scim/v2/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-scim-openapi.yml
@@ -387,7 +387,7 @@ apis:
     properties:
       - type: Documentation
         url: https://unity.com/products/distributed-authority
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/distributed-authority/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-distributed-authority-openapi.yml
@@ -417,7 +417,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ugs/en-us/manual/asset-manager/manual
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/assets-manager/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-asset-manager-openapi.yml
@@ -433,7 +433,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unity.com/ads/en-us/manual/MonetizationResourceCenter
-      - type: API Reference
+      - type: APIReference
         url: https://services.docs.unity.com/monetize/v1/
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/openapi/unity-monetize-openapi.yml
@@ -449,25 +449,25 @@ common:
   - url: https://dashboard.unity3d.com
     type: Dashboard
   - url: https://id.unity.com
-    type: Sign Up
+    type: SignUp
   - url: https://status.unity.com
-    type: Status
+    type: StatusPage
   - url: https://support.unity.com
     type: Support
   - url: https://unity.com/legal/terms-of-service
-    type: Terms of Service
+    type: TermsOfService
   - url: https://unity.com/legal/privacy-policy
-    type: Privacy Policy
+    type: PrivacyPolicy
   - url: https://blog.unity.com
     type: Blog
   - url: https://github.com/Unity-Technologies
-    type: GitHub Organization
+    type: GitHubOrganization
   - url: https://services.docs.unity.com/
-    type: API Reference
+    type: APIReference
   - url: https://docs.unity.com/ugs
     type: Documentation
   - url: https://docs.unity.com/ugs/en-us/manual/overview/manual/getting-started
-    type: Getting Started
+    type: GettingStarted
   - url: https://services.docs.unity.com/docs/service-account-auth/
     type: Authentication
   - url: https://services.docs.unity.com/docs/client-auth/
@@ -487,7 +487,7 @@ common:
   - url: https://services.docs.unity.com/docs/api-lifecycle/
     type: API Lifecycle
   - url: https://unity.com/releases/unity-6/support
-    type: Change Log
+    type: ChangeLog
   - url: https://assetstore.unity.com
     type: Marketplace
   - url: https://learn.unity.com
