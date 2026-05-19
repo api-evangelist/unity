@@ -1,0 +1,207 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Cloud Code API — Modules
+  description: 'Unity Cloud Code API — Modules. 4 operations. Lead operation: List Modules. Self-contained Naftiko capability
+    covering one Unity business surface.'
+  tags:
+  - Unity
+  - Modules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-code-modules
+    baseUri: https://cloud-code.services.api.unity.com
+    description: Unity Cloud Code API — Modules business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-projects-projectId-modules
+      path: /v1/projects/{projectId}/modules
+      operations:
+      - name: listmodules
+        method: GET
+        description: List Modules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+      - name: uploadmodule
+        method: POST
+        description: Upload Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-projects-projectId-modules-moduleName
+      path: /v1/projects/{projectId}/modules/{moduleName}
+      operations:
+      - name: getmodule
+        method: GET
+        description: Get Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: moduleName
+          in: path
+          type: string
+          required: true
+      - name: deletemodule
+        method: DELETE
+        description: Delete Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: moduleName
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-code-modules-rest
+    port: 8080
+    description: REST adapter for Unity Cloud Code API — Modules. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/projects/{projectid}/modules
+      name: v1-projects-projectid-modules
+      description: REST surface for v1-projects-projectId-modules.
+      operations:
+      - method: GET
+        name: listmodules
+        description: List Modules
+        call: cloud-code-modules.listmodules
+        with:
+          projectId: rest.projectId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: uploadmodule
+        description: Upload Module
+        call: cloud-code-modules.uploadmodule
+        with:
+          projectId: rest.projectId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/projects/{projectid}/modules/{modulename}
+      name: v1-projects-projectid-modules-modulename
+      description: REST surface for v1-projects-projectId-modules-moduleName.
+      operations:
+      - method: GET
+        name: getmodule
+        description: Get Module
+        call: cloud-code-modules.getmodule
+        with:
+          projectId: rest.projectId
+          moduleName: rest.moduleName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletemodule
+        description: Delete Module
+        call: cloud-code-modules.deletemodule
+        with:
+          projectId: rest.projectId
+          moduleName: rest.moduleName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-code-modules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Cloud Code API — Modules. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-modules
+      description: List Modules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-code-modules.listmodules
+      with:
+        projectId: tools.projectId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-module
+      description: Upload Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-code-modules.uploadmodule
+      with:
+        projectId: tools.projectId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-module
+      description: Get Module
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-code-modules.getmodule
+      with:
+        projectId: tools.projectId
+        moduleName: tools.moduleName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-module
+      description: Delete Module
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-code-modules.deletemodule
+      with:
+        projectId: tools.projectId
+        moduleName: tools.moduleName
+      outputParameters:
+      - type: object
+        mapping: $.

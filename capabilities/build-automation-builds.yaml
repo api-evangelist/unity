@@ -1,0 +1,266 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Build Automation API — Builds
+  description: 'Unity Build Automation API — Builds. 4 operations. Lead operation: Get Builds. Self-contained Naftiko capability
+    covering one Unity business surface.'
+  tags:
+  - Unity
+  - Builds
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: build-automation-builds
+    baseUri: https://build-api.cloud.unity3d.com/api/v1
+    description: Unity Build Automation API — Builds business capability. Self-contained, no shared references.
+    resources:
+    - name: orgs-orgid-projects-projectid-buildtargets-buildtargetid-builds
+      path: /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}/builds
+      operations:
+      - name: getbuilds
+        method: GET
+        description: Get Builds
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgid
+          in: path
+          type: string
+          required: true
+        - name: projectid
+          in: path
+          type: string
+          required: true
+        - name: buildtargetid
+          in: path
+          type: string
+          required: true
+        - name: per_page
+          in: query
+          type: integer
+        - name: page
+          in: query
+          type: integer
+      - name: startbuild
+        method: POST
+        description: Start Build
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgid
+          in: path
+          type: string
+          required: true
+        - name: projectid
+          in: path
+          type: string
+          required: true
+        - name: buildtargetid
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: orgs-orgid-projects-projectid-buildtargets-buildtargetid-builds-number
+      path: /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}/builds/{number}
+      operations:
+      - name: getbuild
+        method: GET
+        description: Get Build
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgid
+          in: path
+          type: string
+          required: true
+        - name: projectid
+          in: path
+          type: string
+          required: true
+        - name: buildtargetid
+          in: path
+          type: string
+          required: true
+        - name: number
+          in: path
+          type: string
+          required: true
+      - name: cancelbuild
+        method: DELETE
+        description: Cancel Build
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgid
+          in: path
+          type: string
+          required: true
+        - name: projectid
+          in: path
+          type: string
+          required: true
+        - name: buildtargetid
+          in: path
+          type: string
+          required: true
+        - name: number
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.UNITY_USER}}'
+      password: '{{env.UNITY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: build-automation-builds-rest
+    port: 8080
+    description: REST adapter for Unity Build Automation API — Builds. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}/builds
+      name: orgs-orgid-projects-projectid-buildtargets-buildtargetid-builds
+      description: REST surface for orgs-orgid-projects-projectid-buildtargets-buildtargetid-builds.
+      operations:
+      - method: GET
+        name: getbuilds
+        description: Get Builds
+        call: build-automation-builds.getbuilds
+        with:
+          orgid: rest.orgid
+          projectid: rest.projectid
+          buildtargetid: rest.buildtargetid
+          per_page: rest.per_page
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: startbuild
+        description: Start Build
+        call: build-automation-builds.startbuild
+        with:
+          orgid: rest.orgid
+          projectid: rest.projectid
+          buildtargetid: rest.buildtargetid
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}/builds/{number}
+      name: orgs-orgid-projects-projectid-buildtargets-buildtargetid-builds-number
+      description: REST surface for orgs-orgid-projects-projectid-buildtargets-buildtargetid-builds-number.
+      operations:
+      - method: GET
+        name: getbuild
+        description: Get Build
+        call: build-automation-builds.getbuild
+        with:
+          orgid: rest.orgid
+          projectid: rest.projectid
+          buildtargetid: rest.buildtargetid
+          number: rest.number
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: cancelbuild
+        description: Cancel Build
+        call: build-automation-builds.cancelbuild
+        with:
+          orgid: rest.orgid
+          projectid: rest.projectid
+          buildtargetid: rest.buildtargetid
+          number: rest.number
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: build-automation-builds-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Build Automation API — Builds. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-builds
+      description: Get Builds
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: build-automation-builds.getbuilds
+      with:
+        orgid: tools.orgid
+        projectid: tools.projectid
+        buildtargetid: tools.buildtargetid
+        per_page: tools.per_page
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-build
+      description: Start Build
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: build-automation-builds.startbuild
+      with:
+        orgid: tools.orgid
+        projectid: tools.projectid
+        buildtargetid: tools.buildtargetid
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-build
+      description: Get Build
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: build-automation-builds.getbuild
+      with:
+        orgid: tools.orgid
+        projectid: tools.projectid
+        buildtargetid: tools.buildtargetid
+        number: tools.number
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-build
+      description: Cancel Build
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: build-automation-builds.cancelbuild
+      with:
+        orgid: tools.orgid
+        projectid: tools.projectid
+        buildtargetid: tools.buildtargetid
+        number: tools.number
+      outputParameters:
+      - type: object
+        mapping: $.

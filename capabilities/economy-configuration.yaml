@@ -1,0 +1,148 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Economy API — Configuration
+  description: 'Unity Economy API — Configuration. 2 operations. Lead operation: List Economy Configurations. Self-contained
+    Naftiko capability covering one Unity business surface.'
+  tags:
+  - Unity
+  - Configuration
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: economy-configuration
+    baseUri: https://economy.services.api.unity.com
+    description: Unity Economy API — Configuration business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-projects-projectId-environments-environmentId-configs-items
+      path: /v2/projects/{projectId}/environments/{environmentId}/configs/items
+      operations:
+      - name: listeconomyconfigs
+        method: GET
+        description: List Economy Configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: after
+          in: query
+          type: string
+    - name: v2-projects-projectId-environments-environmentId-configs-items-resourceId
+      path: /v2/projects/{projectId}/environments/{environmentId}/configs/items/{resourceId}
+      operations:
+      - name: geteconomyconfig
+        method: GET
+        description: Get Economy Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: resourceId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: economy-configuration-rest
+    port: 8080
+    description: REST adapter for Unity Economy API — Configuration. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v2/projects/{projectid}/environments/{environmentid}/configs/items
+      name: v2-projects-projectid-environments-environmentid-configs-items
+      description: REST surface for v2-projects-projectId-environments-environmentId-configs-items.
+      operations:
+      - method: GET
+        name: listeconomyconfigs
+        description: List Economy Configurations
+        call: economy-configuration.listeconomyconfigs
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          limit: rest.limit
+          after: rest.after
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/projects/{projectid}/environments/{environmentid}/configs/items/{resourceid}
+      name: v2-projects-projectid-environments-environmentid-configs-items-resourceid
+      description: REST surface for v2-projects-projectId-environments-environmentId-configs-items-resourceId.
+      operations:
+      - method: GET
+        name: geteconomyconfig
+        description: Get Economy Configuration
+        call: economy-configuration.geteconomyconfig
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          resourceId: rest.resourceId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: economy-configuration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Economy API — Configuration. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-economy-configurations
+      description: List Economy Configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: economy-configuration.listeconomyconfigs
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        limit: tools.limit
+        after: tools.after
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-economy-configuration
+      description: Get Economy Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: economy-configuration.geteconomyconfig
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        resourceId: tools.resourceId
+      outputParameters:
+      - type: object
+        mapping: $.

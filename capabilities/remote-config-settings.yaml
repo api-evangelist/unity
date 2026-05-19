@@ -1,0 +1,144 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Remote Config API — Settings
+  description: 'Unity Remote Config API — Settings. 2 operations. Lead operation: List Config Settings. Self-contained Naftiko
+    capability covering one Unity business surface.'
+  tags:
+  - Unity
+  - Settings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: remote-config-settings
+    baseUri: https://remote-config.services.api.unity.com
+    description: Unity Remote Config API — Settings business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-projects-projectId-environments-environmentId-configs-configId-settings
+      path: /v1/projects/{projectId}/environments/{environmentId}/configs/{configId}/settings
+      operations:
+      - name: listsettings
+        method: GET
+        description: List Config Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: configId
+          in: path
+          type: string
+          required: true
+      - name: addsetting
+        method: POST
+        description: Add Config Setting
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: configId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: remote-config-settings-rest
+    port: 8080
+    description: REST adapter for Unity Remote Config API — Settings. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/projects/{projectid}/environments/{environmentid}/configs/{configid}/settings
+      name: v1-projects-projectid-environments-environmentid-configs-configid-settings
+      description: REST surface for v1-projects-projectId-environments-environmentId-configs-configId-settings.
+      operations:
+      - method: GET
+        name: listsettings
+        description: List Config Settings
+        call: remote-config-settings.listsettings
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          configId: rest.configId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addsetting
+        description: Add Config Setting
+        call: remote-config-settings.addsetting
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          configId: rest.configId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: remote-config-settings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Remote Config API — Settings. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-config-settings
+      description: List Config Settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: remote-config-settings.listsettings
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        configId: tools.configId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-config-setting
+      description: Add Config Setting
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: remote-config-settings.addsetting
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        configId: tools.configId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

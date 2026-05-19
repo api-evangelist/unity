@@ -1,0 +1,285 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Build Automation API — Build Targets
+  description: 'Unity Build Automation API — Build Targets. 5 operations. Lead operation: List Build Targets. Self-contained
+    Naftiko capability covering one Unity business surface.'
+  tags:
+  - Unity
+  - Build Targets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: build-automation-build-targets
+    baseUri: https://build-api.cloud.unity3d.com/api/v1
+    description: Unity Build Automation API — Build Targets business capability. Self-contained, no shared references.
+    resources:
+    - name: orgs-orgid-projects-projectid-buildtargets
+      path: /orgs/{orgid}/projects/{projectid}/buildtargets
+      operations:
+      - name: listbuildtargets
+        method: GET
+        description: List Build Targets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgid
+          in: path
+          type: string
+          required: true
+        - name: projectid
+          in: path
+          type: string
+          required: true
+      - name: createbuildtarget
+        method: POST
+        description: Create Build Target
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgid
+          in: path
+          type: string
+          required: true
+        - name: projectid
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: orgs-orgid-projects-projectid-buildtargets-buildtargetid
+      path: /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}
+      operations:
+      - name: getbuildtarget
+        method: GET
+        description: Get Build Target
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgid
+          in: path
+          type: string
+          required: true
+        - name: projectid
+          in: path
+          type: string
+          required: true
+        - name: buildtargetid
+          in: path
+          type: string
+          required: true
+      - name: updatebuildtarget
+        method: PATCH
+        description: Update Build Target
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgid
+          in: path
+          type: string
+          required: true
+        - name: projectid
+          in: path
+          type: string
+          required: true
+        - name: buildtargetid
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletebuildtarget
+        method: DELETE
+        description: Delete Build Target
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgid
+          in: path
+          type: string
+          required: true
+        - name: projectid
+          in: path
+          type: string
+          required: true
+        - name: buildtargetid
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.UNITY_USER}}'
+      password: '{{env.UNITY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: build-automation-build-targets-rest
+    port: 8080
+    description: REST adapter for Unity Build Automation API — Build Targets. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/orgs/{orgid}/projects/{projectid}/buildtargets
+      name: orgs-orgid-projects-projectid-buildtargets
+      description: REST surface for orgs-orgid-projects-projectid-buildtargets.
+      operations:
+      - method: GET
+        name: listbuildtargets
+        description: List Build Targets
+        call: build-automation-build-targets.listbuildtargets
+        with:
+          orgid: rest.orgid
+          projectid: rest.projectid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createbuildtarget
+        description: Create Build Target
+        call: build-automation-build-targets.createbuildtarget
+        with:
+          orgid: rest.orgid
+          projectid: rest.projectid
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}
+      name: orgs-orgid-projects-projectid-buildtargets-buildtargetid
+      description: REST surface for orgs-orgid-projects-projectid-buildtargets-buildtargetid.
+      operations:
+      - method: GET
+        name: getbuildtarget
+        description: Get Build Target
+        call: build-automation-build-targets.getbuildtarget
+        with:
+          orgid: rest.orgid
+          projectid: rest.projectid
+          buildtargetid: rest.buildtargetid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatebuildtarget
+        description: Update Build Target
+        call: build-automation-build-targets.updatebuildtarget
+        with:
+          orgid: rest.orgid
+          projectid: rest.projectid
+          buildtargetid: rest.buildtargetid
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletebuildtarget
+        description: Delete Build Target
+        call: build-automation-build-targets.deletebuildtarget
+        with:
+          orgid: rest.orgid
+          projectid: rest.projectid
+          buildtargetid: rest.buildtargetid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: build-automation-build-targets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Build Automation API — Build Targets. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-build-targets
+      description: List Build Targets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: build-automation-build-targets.listbuildtargets
+      with:
+        orgid: tools.orgid
+        projectid: tools.projectid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-build-target
+      description: Create Build Target
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: build-automation-build-targets.createbuildtarget
+      with:
+        orgid: tools.orgid
+        projectid: tools.projectid
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-build-target
+      description: Get Build Target
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: build-automation-build-targets.getbuildtarget
+      with:
+        orgid: tools.orgid
+        projectid: tools.projectid
+        buildtargetid: tools.buildtargetid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-build-target
+      description: Update Build Target
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: build-automation-build-targets.updatebuildtarget
+      with:
+        orgid: tools.orgid
+        projectid: tools.projectid
+        buildtargetid: tools.buildtargetid
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-build-target
+      description: Delete Build Target
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: build-automation-build-targets.deletebuildtarget
+      with:
+        orgid: tools.orgid
+        projectid: tools.projectid
+        buildtargetid: tools.buildtargetid
+      outputParameters:
+      - type: object
+        mapping: $.

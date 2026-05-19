@@ -1,0 +1,238 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Remote Config API — Override Rules
+  description: 'Unity Remote Config API — Override Rules. 4 operations. Lead operation: List Override Rules. Self-contained
+    Naftiko capability covering one Unity business surface.'
+  tags:
+  - Unity
+  - Override Rules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: remote-config-override-rules
+    baseUri: https://remote-config.services.api.unity.com
+    description: Unity Remote Config API — Override Rules business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-projects-projectId-environments-environmentId-rules
+      path: /v1/projects/{projectId}/environments/{environmentId}/rules
+      operations:
+      - name: listoverriderules
+        method: GET
+        description: List Override Rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+      - name: createoverriderule
+        method: POST
+        description: Create Override Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-projects-projectId-environments-environmentId-rules-ruleId
+      path: /v1/projects/{projectId}/environments/{environmentId}/rules/{ruleId}
+      operations:
+      - name: updateoverriderule
+        method: PUT
+        description: Update Override Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: ruleId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteoverriderule
+        method: DELETE
+        description: Delete Override Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: ruleId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: remote-config-override-rules-rest
+    port: 8080
+    description: REST adapter for Unity Remote Config API — Override Rules. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/projects/{projectid}/environments/{environmentid}/rules
+      name: v1-projects-projectid-environments-environmentid-rules
+      description: REST surface for v1-projects-projectId-environments-environmentId-rules.
+      operations:
+      - method: GET
+        name: listoverriderules
+        description: List Override Rules
+        call: remote-config-override-rules.listoverriderules
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createoverriderule
+        description: Create Override Rule
+        call: remote-config-override-rules.createoverriderule
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/projects/{projectid}/environments/{environmentid}/rules/{ruleid}
+      name: v1-projects-projectid-environments-environmentid-rules-ruleid
+      description: REST surface for v1-projects-projectId-environments-environmentId-rules-ruleId.
+      operations:
+      - method: PUT
+        name: updateoverriderule
+        description: Update Override Rule
+        call: remote-config-override-rules.updateoverriderule
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          ruleId: rest.ruleId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteoverriderule
+        description: Delete Override Rule
+        call: remote-config-override-rules.deleteoverriderule
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          ruleId: rest.ruleId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: remote-config-override-rules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Remote Config API — Override Rules. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-override-rules
+      description: List Override Rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: remote-config-override-rules.listoverriderules
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-override-rule
+      description: Create Override Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: remote-config-override-rules.createoverriderule
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-override-rule
+      description: Update Override Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: remote-config-override-rules.updateoverriderule
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        ruleId: tools.ruleId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-override-rule
+      description: Delete Override Rule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: remote-config-override-rules.deleteoverriderule
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        ruleId: tools.ruleId
+      outputParameters:
+      - type: object
+        mapping: $.

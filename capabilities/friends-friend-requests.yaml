@@ -1,0 +1,198 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Friends API — Friend Requests
+  description: 'Unity Friends API — Friend Requests. 4 operations. Lead operation: List Incoming Friend Requests. Self-contained
+    Naftiko capability covering one Unity business surface.'
+  tags:
+  - Unity
+  - Friend Requests
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: friends-friend-requests
+    baseUri: https://social.services.api.unity.com
+    description: Unity Friends API — Friend Requests business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-me-relationships-requests-incoming
+      path: /v1/me/relationships/requests/incoming
+      operations:
+      - name: listincomingfriendrequests
+        method: GET
+        description: List Incoming Friend Requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+        - name: after
+          in: query
+          type: string
+    - name: v1-me-relationships-requests-outgoing
+      path: /v1/me/relationships/requests/outgoing
+      operations:
+      - name: listoutgoingfriendrequests
+        method: GET
+        description: List Outgoing Friend Requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-me-relationships-memberId-accept
+      path: /v1/me/relationships/{memberId}/accept
+      operations:
+      - name: acceptfriendrequest
+        method: POST
+        description: Accept Friend Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: memberId
+          in: path
+          type: string
+          required: true
+    - name: v1-me-relationships-memberId-request
+      path: /v1/me/relationships/{memberId}/request
+      operations:
+      - name: sendfriendrequest
+        method: POST
+        description: Send Friend Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: memberId
+          in: path
+          type: string
+          description: The Unity player ID to send a request to
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: friends-friend-requests-rest
+    port: 8080
+    description: REST adapter for Unity Friends API — Friend Requests. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/me/relationships/requests/incoming
+      name: v1-me-relationships-requests-incoming
+      description: REST surface for v1-me-relationships-requests-incoming.
+      operations:
+      - method: GET
+        name: listincomingfriendrequests
+        description: List Incoming Friend Requests
+        call: friends-friend-requests.listincomingfriendrequests
+        with:
+          limit: rest.limit
+          after: rest.after
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/me/relationships/requests/outgoing
+      name: v1-me-relationships-requests-outgoing
+      description: REST surface for v1-me-relationships-requests-outgoing.
+      operations:
+      - method: GET
+        name: listoutgoingfriendrequests
+        description: List Outgoing Friend Requests
+        call: friends-friend-requests.listoutgoingfriendrequests
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/me/relationships/{memberid}/accept
+      name: v1-me-relationships-memberid-accept
+      description: REST surface for v1-me-relationships-memberId-accept.
+      operations:
+      - method: POST
+        name: acceptfriendrequest
+        description: Accept Friend Request
+        call: friends-friend-requests.acceptfriendrequest
+        with:
+          memberId: rest.memberId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/me/relationships/{memberid}/request
+      name: v1-me-relationships-memberid-request
+      description: REST surface for v1-me-relationships-memberId-request.
+      operations:
+      - method: POST
+        name: sendfriendrequest
+        description: Send Friend Request
+        call: friends-friend-requests.sendfriendrequest
+        with:
+          memberId: rest.memberId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: friends-friend-requests-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Friends API — Friend Requests. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-incoming-friend-requests
+      description: List Incoming Friend Requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: friends-friend-requests.listincomingfriendrequests
+      with:
+        limit: tools.limit
+        after: tools.after
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-outgoing-friend-requests
+      description: List Outgoing Friend Requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: friends-friend-requests.listoutgoingfriendrequests
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: accept-friend-request
+      description: Accept Friend Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: friends-friend-requests.acceptfriendrequest
+      with:
+        memberId: tools.memberId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: send-friend-request
+      description: Send Friend Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: friends-friend-requests.sendfriendrequest
+      with:
+        memberId: tools.memberId
+      outputParameters:
+      - type: object
+        mapping: $.

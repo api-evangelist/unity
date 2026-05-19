@@ -1,0 +1,248 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Player Authentication API — Authentication
+  description: 'Unity Player Authentication API — Authentication. 5 operations. Lead operation: Sign In Anonymously. Self-contained
+    Naftiko capability covering one Unity business surface.'
+  tags:
+  - Unity
+  - Authentication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: player-authentication-authentication
+    baseUri: https://player-auth.services.api.unity.com
+    description: Unity Player Authentication API — Authentication business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-authentication-anonymous
+      path: /v1/authentication/anonymous
+      operations:
+      - name: signinanonymously
+        method: POST
+        description: Sign In Anonymously
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-authentication-external-token
+      path: /v1/authentication/external-token
+      operations:
+      - name: signinwithexternaltoken
+        method: POST
+        description: Sign In With External Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-authentication-usernamepassword-sign-in
+      path: /v1/authentication/usernamepassword/sign-in
+      operations:
+      - name: signinwithusernamepassword
+        method: POST
+        description: Sign In With Username and Password
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-authentication-usernamepassword-sign-up
+      path: /v1/authentication/usernamepassword/sign-up
+      operations:
+      - name: signupwithusernamepassword
+        method: POST
+        description: Sign Up With Username and Password
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-token-refresh
+      path: /v1/token/refresh
+      operations:
+      - name: refreshtoken
+        method: POST
+        description: Refresh Authentication Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: player-authentication-authentication-rest
+    port: 8080
+    description: REST adapter for Unity Player Authentication API — Authentication. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/authentication/anonymous
+      name: v1-authentication-anonymous
+      description: REST surface for v1-authentication-anonymous.
+      operations:
+      - method: POST
+        name: signinanonymously
+        description: Sign In Anonymously
+        call: player-authentication-authentication.signinanonymously
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/authentication/external-token
+      name: v1-authentication-external-token
+      description: REST surface for v1-authentication-external-token.
+      operations:
+      - method: POST
+        name: signinwithexternaltoken
+        description: Sign In With External Token
+        call: player-authentication-authentication.signinwithexternaltoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/authentication/usernamepassword/sign-in
+      name: v1-authentication-usernamepassword-sign-in
+      description: REST surface for v1-authentication-usernamepassword-sign-in.
+      operations:
+      - method: POST
+        name: signinwithusernamepassword
+        description: Sign In With Username and Password
+        call: player-authentication-authentication.signinwithusernamepassword
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/authentication/usernamepassword/sign-up
+      name: v1-authentication-usernamepassword-sign-up
+      description: REST surface for v1-authentication-usernamepassword-sign-up.
+      operations:
+      - method: POST
+        name: signupwithusernamepassword
+        description: Sign Up With Username and Password
+        call: player-authentication-authentication.signupwithusernamepassword
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/token/refresh
+      name: v1-token-refresh
+      description: REST surface for v1-token-refresh.
+      operations:
+      - method: POST
+        name: refreshtoken
+        description: Refresh Authentication Token
+        call: player-authentication-authentication.refreshtoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: player-authentication-authentication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Player Authentication API — Authentication. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: sign-anonymously
+      description: Sign In Anonymously
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: player-authentication-authentication.signinanonymously
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sign-external-token
+      description: Sign In With External Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: player-authentication-authentication.signinwithexternaltoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sign-username-and-password
+      description: Sign In With Username and Password
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: player-authentication-authentication.signinwithusernamepassword
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sign-up-username-and-password
+      description: Sign Up With Username and Password
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: player-authentication-authentication.signupwithusernamepassword
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: refresh-authentication-token
+      description: Refresh Authentication Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: player-authentication-authentication.refreshtoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

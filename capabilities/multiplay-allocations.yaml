@@ -1,0 +1,98 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Multiplay Game Server Hosting API — Allocations
+  description: 'Unity Multiplay Game Server Hosting API — Allocations. 1 operations. Lead operation: Allocate Server. Self-contained
+    Naftiko capability covering one Unity business surface.'
+  tags:
+  - Unity
+  - Allocations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: multiplay-allocations
+    baseUri: https://multiplay.services.api.unity.com
+    description: Unity Multiplay Game Server Hosting API — Allocations business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-projects-projectId-regions-regionId-fleets-fleetId-allocations
+      path: /v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}/allocations
+      operations:
+      - name: allocateserver
+        method: POST
+        description: Allocate Server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: regionId
+          in: path
+          type: string
+          required: true
+        - name: fleetId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: multiplay-allocations-rest
+    port: 8080
+    description: REST adapter for Unity Multiplay Game Server Hosting API — Allocations. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/projects/{projectid}/regions/{regionid}/fleets/{fleetid}/allocations
+      name: v1-projects-projectid-regions-regionid-fleets-fleetid-allocations
+      description: REST surface for v1-projects-projectId-regions-regionId-fleets-fleetId-allocations.
+      operations:
+      - method: POST
+        name: allocateserver
+        description: Allocate Server
+        call: multiplay-allocations.allocateserver
+        with:
+          projectId: rest.projectId
+          regionId: rest.regionId
+          fleetId: rest.fleetId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: multiplay-allocations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Multiplay Game Server Hosting API — Allocations. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: allocate-server
+      description: Allocate Server
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: multiplay-allocations.allocateserver
+      with:
+        projectId: tools.projectId
+        regionId: tools.regionId
+        fleetId: tools.fleetId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

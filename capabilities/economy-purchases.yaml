@@ -1,0 +1,98 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Economy API — Purchases
+  description: 'Unity Economy API — Purchases. 1 operations. Lead operation: Make Virtual Purchase. Self-contained Naftiko
+    capability covering one Unity business surface.'
+  tags:
+  - Unity
+  - Purchases
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: economy-purchases
+    baseUri: https://economy.services.api.unity.com
+    description: Unity Economy API — Purchases business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-projects-projectId-environments-environmentId-players-playerId-purchases-virt
+      path: /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/purchases/virtual
+      operations:
+      - name: makevirtualpurchase
+        method: POST
+        description: Make Virtual Purchase
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: playerId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: economy-purchases-rest
+    port: 8080
+    description: REST adapter for Unity Economy API — Purchases. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v2/projects/{projectid}/environments/{environmentid}/players/{playerid}/purchases/virtual
+      name: v2-projects-projectid-environments-environmentid-players-playerid-purchases-virt
+      description: REST surface for v2-projects-projectId-environments-environmentId-players-playerId-purchases-virt.
+      operations:
+      - method: POST
+        name: makevirtualpurchase
+        description: Make Virtual Purchase
+        call: economy-purchases.makevirtualpurchase
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          playerId: rest.playerId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: economy-purchases-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Economy API — Purchases. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: make-virtual-purchase
+      description: Make Virtual Purchase
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: economy-purchases.makevirtualpurchase
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        playerId: tools.playerId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

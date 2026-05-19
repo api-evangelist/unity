@@ -1,0 +1,191 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Matchmaker API — Tickets
+  description: 'Unity Matchmaker API — Tickets. 3 operations. Lead operation: Create Matchmaking Ticket. Self-contained Naftiko
+    capability covering one Unity business surface.'
+  tags:
+  - Unity
+  - Tickets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: matchmaker-tickets
+    baseUri: https://matchmaker.services.api.unity.com
+    description: Unity Matchmaker API — Tickets business capability. Self-contained, no shared references.
+    resources:
+    - name: v3-projects-projectId-environments-environmentId-tickets
+      path: /v3/projects/{projectId}/environments/{environmentId}/tickets
+      operations:
+      - name: createticket
+        method: POST
+        description: Create Matchmaking Ticket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-projects-projectId-environments-environmentId-tickets-ticketId
+      path: /v3/projects/{projectId}/environments/{environmentId}/tickets/{ticketId}
+      operations:
+      - name: getticket
+        method: GET
+        description: Get Matchmaking Ticket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: ticketId
+          in: path
+          type: string
+          required: true
+      - name: deleteticket
+        method: DELETE
+        description: Delete Matchmaking Ticket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: ticketId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: matchmaker-tickets-rest
+    port: 8080
+    description: REST adapter for Unity Matchmaker API — Tickets. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v3/projects/{projectid}/environments/{environmentid}/tickets
+      name: v3-projects-projectid-environments-environmentid-tickets
+      description: REST surface for v3-projects-projectId-environments-environmentId-tickets.
+      operations:
+      - method: POST
+        name: createticket
+        description: Create Matchmaking Ticket
+        call: matchmaker-tickets.createticket
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/projects/{projectid}/environments/{environmentid}/tickets/{ticketid}
+      name: v3-projects-projectid-environments-environmentid-tickets-ticketid
+      description: REST surface for v3-projects-projectId-environments-environmentId-tickets-ticketId.
+      operations:
+      - method: GET
+        name: getticket
+        description: Get Matchmaking Ticket
+        call: matchmaker-tickets.getticket
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          ticketId: rest.ticketId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteticket
+        description: Delete Matchmaking Ticket
+        call: matchmaker-tickets.deleteticket
+        with:
+          projectId: rest.projectId
+          environmentId: rest.environmentId
+          ticketId: rest.ticketId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: matchmaker-tickets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Matchmaker API — Tickets. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-matchmaking-ticket
+      description: Create Matchmaking Ticket
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: matchmaker-tickets.createticket
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-matchmaking-ticket
+      description: Get Matchmaking Ticket
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: matchmaker-tickets.getticket
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        ticketId: tools.ticketId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-matchmaking-ticket
+      description: Delete Matchmaking Ticket
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: matchmaker-tickets.deleteticket
+      with:
+        projectId: tools.projectId
+        environmentId: tools.environmentId
+        ticketId: tools.ticketId
+      outputParameters:
+      - type: object
+        mapping: $.

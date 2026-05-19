@@ -1,0 +1,333 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Lobby API — Lobbies
+  description: 'Unity Lobby API — Lobbies. 7 operations. Lead operation: Create Lobby. Self-contained Naftiko capability covering
+    one Unity business surface.'
+  tags:
+  - Unity
+  - Lobbies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: lobby-lobbies
+    baseUri: https://lobby.services.api.unity.com
+    description: Unity Lobby API — Lobbies business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-lobbies
+      path: /v1/lobbies
+      operations:
+      - name: createlobby
+        method: POST
+        description: Create Lobby
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-lobbies-code-lobbyCode
+      path: /v1/lobbies/code/{lobbyCode}
+      operations:
+      - name: joinlobbybycode
+        method: POST
+        description: Join Lobby By Code
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lobbyCode
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-lobbies-lobbyId
+      path: /v1/lobbies/{lobbyId}
+      operations:
+      - name: getlobby
+        method: GET
+        description: Get Lobby
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lobbyId
+          in: path
+          type: string
+          required: true
+      - name: updatelobby
+        method: PATCH
+        description: Update Lobby
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lobbyId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletelobby
+        method: DELETE
+        description: Delete Lobby
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lobbyId
+          in: path
+          type: string
+          required: true
+    - name: v1-lobbies-lobbyId-heartbeat
+      path: /v1/lobbies/{lobbyId}/heartbeat
+      operations:
+      - name: heartbeatlobby
+        method: POST
+        description: Heartbeat Lobby
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lobbyId
+          in: path
+          type: string
+          required: true
+    - name: v1-lobbies-lobbyId-join
+      path: /v1/lobbies/{lobbyId}/join
+      operations:
+      - name: joinlobbybyid
+        method: POST
+        description: Join Lobby By ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lobbyId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: lobby-lobbies-rest
+    port: 8080
+    description: REST adapter for Unity Lobby API — Lobbies. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/lobbies
+      name: v1-lobbies
+      description: REST surface for v1-lobbies.
+      operations:
+      - method: POST
+        name: createlobby
+        description: Create Lobby
+        call: lobby-lobbies.createlobby
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/lobbies/code/{lobbycode}
+      name: v1-lobbies-code-lobbycode
+      description: REST surface for v1-lobbies-code-lobbyCode.
+      operations:
+      - method: POST
+        name: joinlobbybycode
+        description: Join Lobby By Code
+        call: lobby-lobbies.joinlobbybycode
+        with:
+          lobbyCode: rest.lobbyCode
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/lobbies/{lobbyid}
+      name: v1-lobbies-lobbyid
+      description: REST surface for v1-lobbies-lobbyId.
+      operations:
+      - method: GET
+        name: getlobby
+        description: Get Lobby
+        call: lobby-lobbies.getlobby
+        with:
+          lobbyId: rest.lobbyId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatelobby
+        description: Update Lobby
+        call: lobby-lobbies.updatelobby
+        with:
+          lobbyId: rest.lobbyId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletelobby
+        description: Delete Lobby
+        call: lobby-lobbies.deletelobby
+        with:
+          lobbyId: rest.lobbyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/lobbies/{lobbyid}/heartbeat
+      name: v1-lobbies-lobbyid-heartbeat
+      description: REST surface for v1-lobbies-lobbyId-heartbeat.
+      operations:
+      - method: POST
+        name: heartbeatlobby
+        description: Heartbeat Lobby
+        call: lobby-lobbies.heartbeatlobby
+        with:
+          lobbyId: rest.lobbyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/lobbies/{lobbyid}/join
+      name: v1-lobbies-lobbyid-join
+      description: REST surface for v1-lobbies-lobbyId-join.
+      operations:
+      - method: POST
+        name: joinlobbybyid
+        description: Join Lobby By ID
+        call: lobby-lobbies.joinlobbybyid
+        with:
+          lobbyId: rest.lobbyId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: lobby-lobbies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Lobby API — Lobbies. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: create-lobby
+      description: Create Lobby
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: lobby-lobbies.createlobby
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: join-lobby-code
+      description: Join Lobby By Code
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: lobby-lobbies.joinlobbybycode
+      with:
+        lobbyCode: tools.lobbyCode
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-lobby
+      description: Get Lobby
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lobby-lobbies.getlobby
+      with:
+        lobbyId: tools.lobbyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-lobby
+      description: Update Lobby
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: lobby-lobbies.updatelobby
+      with:
+        lobbyId: tools.lobbyId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-lobby
+      description: Delete Lobby
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: lobby-lobbies.deletelobby
+      with:
+        lobbyId: tools.lobbyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: heartbeat-lobby
+      description: Heartbeat Lobby
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: lobby-lobbies.heartbeatlobby
+      with:
+        lobbyId: tools.lobbyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: join-lobby-id
+      description: Join Lobby By ID
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: lobby-lobbies.joinlobbybyid
+      with:
+        lobbyId: tools.lobbyId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

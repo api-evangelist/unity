@@ -1,0 +1,264 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Cloud Code API — Scripts
+  description: 'Unity Cloud Code API — Scripts. 5 operations. Lead operation: List Scripts. Self-contained Naftiko capability
+    covering one Unity business surface.'
+  tags:
+  - Unity
+  - Scripts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-code-scripts
+    baseUri: https://cloud-code.services.api.unity.com
+    description: Unity Cloud Code API — Scripts business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-projects-projectId-scripts
+      path: /v1/projects/{projectId}/scripts
+      operations:
+      - name: listscripts
+        method: GET
+        description: List Scripts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: after
+          in: query
+          type: string
+      - name: createscript
+        method: POST
+        description: Create Script
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-projects-projectId-scripts-scriptName
+      path: /v1/projects/{projectId}/scripts/{scriptName}
+      operations:
+      - name: getscript
+        method: GET
+        description: Get Script
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: scriptName
+          in: path
+          type: string
+          required: true
+      - name: updatescript
+        method: PUT
+        description: Update Script
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: scriptName
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletescript
+        method: DELETE
+        description: Delete Script
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: scriptName
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-code-scripts-rest
+    port: 8080
+    description: REST adapter for Unity Cloud Code API — Scripts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/projects/{projectid}/scripts
+      name: v1-projects-projectid-scripts
+      description: REST surface for v1-projects-projectId-scripts.
+      operations:
+      - method: GET
+        name: listscripts
+        description: List Scripts
+        call: cloud-code-scripts.listscripts
+        with:
+          projectId: rest.projectId
+          limit: rest.limit
+          after: rest.after
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createscript
+        description: Create Script
+        call: cloud-code-scripts.createscript
+        with:
+          projectId: rest.projectId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/projects/{projectid}/scripts/{scriptname}
+      name: v1-projects-projectid-scripts-scriptname
+      description: REST surface for v1-projects-projectId-scripts-scriptName.
+      operations:
+      - method: GET
+        name: getscript
+        description: Get Script
+        call: cloud-code-scripts.getscript
+        with:
+          projectId: rest.projectId
+          scriptName: rest.scriptName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatescript
+        description: Update Script
+        call: cloud-code-scripts.updatescript
+        with:
+          projectId: rest.projectId
+          scriptName: rest.scriptName
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletescript
+        description: Delete Script
+        call: cloud-code-scripts.deletescript
+        with:
+          projectId: rest.projectId
+          scriptName: rest.scriptName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-code-scripts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Cloud Code API — Scripts. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-scripts
+      description: List Scripts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-code-scripts.listscripts
+      with:
+        projectId: tools.projectId
+        limit: tools.limit
+        after: tools.after
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-script
+      description: Create Script
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-code-scripts.createscript
+      with:
+        projectId: tools.projectId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-script
+      description: Get Script
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-code-scripts.getscript
+      with:
+        projectId: tools.projectId
+        scriptName: tools.scriptName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-script
+      description: Update Script
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-code-scripts.updatescript
+      with:
+        projectId: tools.projectId
+        scriptName: tools.scriptName
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-script
+      description: Delete Script
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-code-scripts.deletescript
+      with:
+        projectId: tools.projectId
+        scriptName: tools.scriptName
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,92 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unity Cloud Save API — Queries
+  description: 'Unity Cloud Save API — Queries. 1 operations. Lead operation: Query Player Data. Self-contained Naftiko capability
+    covering one Unity business surface.'
+  tags:
+  - Unity
+  - Queries
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITY_API_KEY: UNITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-save-queries
+    baseUri: https://cloud-save.services.api.unity.com
+    description: Unity Cloud Save API — Queries business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-data-projects-projectId-players-playerId-query
+      path: /v1/data/projects/{projectId}/players/{playerId}/query
+      operations:
+      - name: queryplayerdata
+        method: POST
+        description: Query Player Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: playerId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-save-queries-rest
+    port: 8080
+    description: REST adapter for Unity Cloud Save API — Queries. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/data/projects/{projectid}/players/{playerid}/query
+      name: v1-data-projects-projectid-players-playerid-query
+      description: REST surface for v1-data-projects-projectId-players-playerId-query.
+      operations:
+      - method: POST
+        name: queryplayerdata
+        description: Query Player Data
+        call: cloud-save-queries.queryplayerdata
+        with:
+          projectId: rest.projectId
+          playerId: rest.playerId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-save-queries-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unity Cloud Save API — Queries. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: query-player-data
+      description: Query Player Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: cloud-save-queries.queryplayerdata
+      with:
+        projectId: tools.projectId
+        playerId: tools.playerId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
