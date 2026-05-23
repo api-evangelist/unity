@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RunScriptRequest",
+  "title": "RunScriptRequest",
+  "type": "object",
+  "properties": {
+    "params": {
+      "type": "object",
+      "description": "Parameters to pass to the script"
+    }
+  }
+}

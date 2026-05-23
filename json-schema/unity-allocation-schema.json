@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Allocation",
+  "title": "Allocation",
+  "type": "object",
+  "properties": {
+    "allocationID": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "serverID": {
+      "type": "integer"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "port": {
+      "type": "integer"
+    },
+    "queryPort": {
+      "type": "integer"
+    }
+  }
+}

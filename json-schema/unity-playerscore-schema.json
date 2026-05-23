@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlayerScore",
+  "title": "PlayerScore",
+  "type": "object",
+  "properties": {
+    "playerId": {
+      "type": "string"
+    },
+    "playerName": {
+      "type": "string"
+    },
+    "rank": {
+      "type": "integer"
+    },
+    "score": {
+      "type": "number"
+    },
+    "tier": {
+      "type": "string"
+    },
+    "updatedTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "string"
+    }
+  }
+}

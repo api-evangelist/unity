@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Lobby",
+  "title": "Lobby",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "lobbyCode": {
+      "type": "string",
+      "description": "Join code for private lobbies"
+    },
+    "isPrivate": {
+      "type": "boolean"
+    },
+    "isLocked": {
+      "type": "boolean"
+    },
+    "maxPlayers": {
+      "type": "integer"
+    },
+    "availableSlots": {
+      "type": "integer"
+    },
+    "hostId": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/DataObject"
+      }
+    },
+    "players": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/LobbyPlayer"
+      }
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

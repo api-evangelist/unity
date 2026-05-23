@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LeaderboardUpdate",
+  "title": "LeaderboardUpdate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "sortOrder": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    },
+    "resetConfig": {
+      "$ref": "#/components/schemas/ResetConfig"
+    }
+  }
+}

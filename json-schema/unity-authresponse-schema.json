@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AuthResponse",
+  "title": "AuthResponse",
+  "type": "object",
+  "properties": {
+    "idToken": {
+      "type": "string",
+      "description": "JWT access token"
+    },
+    "sessionToken": {
+      "type": "string"
+    },
+    "expiresIn": {
+      "type": "integer",
+      "description": "Token expiry in seconds"
+    },
+    "userId": {
+      "type": "string"
+    },
+    "isNew": {
+      "type": "boolean",
+      "description": "True if a new account was created"
+    }
+  }
+}

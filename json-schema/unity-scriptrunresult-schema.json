@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScriptRunResult",
+  "title": "ScriptRunResult",
+  "type": "object",
+  "properties": {
+    "output": {
+      "description": "The return value from the script"
+    }
+  }
+}

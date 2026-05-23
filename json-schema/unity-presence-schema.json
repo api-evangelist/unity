@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Presence",
+  "title": "Presence",
+  "type": "object",
+  "properties": {
+    "availability": {
+      "type": "string",
+      "enum": [
+        "ONLINE",
+        "OFFLINE",
+        "INVISIBLE",
+        "BUSY"
+      ]
+    },
+    "activity": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Script",
+  "title": "Script",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "JS"
+      ]
+    },
+    "activeScript": {
+      "$ref": "#/components/schemas/ScriptVersion"
+    },
+    "versions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ScriptVersion"
+      }
+    },
+    "params": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ScriptParameter"
+      }
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

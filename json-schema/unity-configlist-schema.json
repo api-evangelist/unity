@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ConfigList",
+  "title": "ConfigList",
+  "type": "object",
+  "properties": {
+    "configs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Config"
+      }
+    }
+  }
+}

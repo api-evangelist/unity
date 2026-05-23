@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EconomyConfig",
+  "title": "EconomyConfig",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "CURRENCY",
+        "INVENTORY_ITEM",
+        "VIRTUAL_PURCHASE",
+        "REAL_MONEY_PURCHASE"
+      ]
+    },
+    "initial": {
+      "type": "number",
+      "description": "Initial balance (for currencies)"
+    },
+    "max": {
+      "type": "number",
+      "description": "Maximum balance (for currencies)"
+    },
+    "customData": {
+      "type": "object"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

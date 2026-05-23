@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/QueryRequest",
+  "title": "QueryRequest",
+  "type": "object",
+  "properties": {
+    "returnKeys": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keys to return in the query results"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FieldFilter"
+      }
+    },
+    "offset": {
+      "type": "integer",
+      "default": 0
+    },
+    "limit": {
+      "type": "integer",
+      "default": 10
+    }
+  }
+}

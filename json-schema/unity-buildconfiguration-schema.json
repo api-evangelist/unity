@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BuildConfiguration",
+  "title": "BuildConfiguration",
+  "type": "object",
+  "properties": {
+    "buildId": {
+      "type": "integer"
+    },
+    "commandLine": {
+      "type": "string"
+    },
+    "queryType": {
+      "type": "string",
+      "enum": [
+        "SQPQUERYTYPE",
+        "A2SQUERYTYPE",
+        "NONE"
+      ]
+    },
+    "binaryPath": {
+      "type": "string"
+    },
+    "cores": {
+      "type": "integer"
+    },
+    "speedMhz": {
+      "type": "integer"
+    },
+    "memory": {
+      "type": "integer"
+    }
+  }
+}

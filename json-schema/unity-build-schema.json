@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Build",
+  "title": "Build",
+  "type": "object",
+  "properties": {
+    "build": {
+      "type": "integer"
+    },
+    "buildtargetid": {
+      "type": "string"
+    },
+    "buildTargetName": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "sentToBuilder",
+        "started",
+        "restarted",
+        "success",
+        "failure",
+        "canceled",
+        "unknown"
+      ]
+    },
+    "changeset": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "commitId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BuildArtifact"
+      }
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finished": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "duration": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TicketStatus",
+  "title": "TicketStatus",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "InProgress",
+        "Found",
+        "Failed"
+      ],
+      "description": "Current ticket status"
+    },
+    "assignment": {
+      "$ref": "#/components/schemas/MatchAssignment"
+    }
+  }
+}

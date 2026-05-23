@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VirtualPurchaseResult",
+  "title": "VirtualPurchaseResult",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "purchased": {
+      "type": "object",
+      "properties": {
+        "currencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CurrencyBalance"
+          }
+        },
+        "inventory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/InventoryItem"
+          }
+        }
+      }
+    },
+    "costs": {
+      "type": "object",
+      "properties": {
+        "currencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CurrencyBalance"
+          }
+        },
+        "inventory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/InventoryItem"
+          }
+        }
+      }
+    }
+  }
+}

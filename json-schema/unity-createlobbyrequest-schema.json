@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateLobbyRequest",
+  "title": "CreateLobbyRequest",
+  "type": "object",
+  "required": [
+    "name",
+    "maxPlayers"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "maxPlayers": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "isPrivate": {
+      "type": "boolean",
+      "default": false
+    },
+    "player": {
+      "$ref": "#/components/schemas/CreatePlayerRequest"
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/DataObject"
+      }
+    }
+  }
+}

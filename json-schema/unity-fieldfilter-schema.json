@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FieldFilter",
+  "title": "FieldFilter",
+  "type": "object",
+  "required": [
+    "key",
+    "value",
+    "op"
+  ],
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "value": {},
+    "op": {
+      "type": "string",
+      "enum": [
+        "EQ",
+        "NE",
+        "LT",
+        "LE",
+        "GT",
+        "GE"
+      ]
+    }
+  }
+}

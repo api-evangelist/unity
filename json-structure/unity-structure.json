@@ -1,0 +1,186 @@
+{
+  "provider": "Unity",
+  "providerId": "unity",
+  "kind": "json-structure",
+  "description": "Structural overview of the Unity API surface; extracted from openapi/.",
+  "schemaCount": 13,
+  "operationCount": 10,
+  "schemas": [
+    {
+      "name": "Fleet",
+      "type": "object",
+      "propertyCount": 10,
+      "required": []
+    },
+    {
+      "name": "FleetList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "BuildConfiguration",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "ScalingSettings",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "CreateFleetRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name",
+        "buildConfiguration"
+      ]
+    },
+    {
+      "name": "UpdateFleetRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Build",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "BuildList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "CreateBuildRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "buildName",
+        "os"
+      ]
+    },
+    {
+      "name": "Server",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "ServerList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "AllocateServerRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Allocation",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/v1/projects/{projectId}/regions/{regionId}/fleets",
+      "operationId": "listFleets",
+      "summary": "List Fleets",
+      "tags": [
+        "Fleets"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/projects/{projectId}/regions/{regionId}/fleets",
+      "operationId": "createFleet",
+      "summary": "Create Fleet",
+      "tags": [
+        "Fleets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}",
+      "operationId": "getFleet",
+      "summary": "Get Fleet",
+      "tags": [
+        "Fleets"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}",
+      "operationId": "deleteFleet",
+      "summary": "Delete Fleet",
+      "tags": [
+        "Fleets"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}",
+      "operationId": "updateFleet",
+      "summary": "Update Fleet",
+      "tags": [
+        "Fleets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{projectId}/builds",
+      "operationId": "listBuilds",
+      "summary": "List Builds",
+      "tags": [
+        "Builds"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/projects/{projectId}/builds",
+      "operationId": "createBuild",
+      "summary": "Create Build",
+      "tags": [
+        "Builds"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{projectId}/builds/{buildId}",
+      "operationId": "getBuild",
+      "summary": "Get Build",
+      "tags": [
+        "Builds"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}/servers",
+      "operationId": "listServers",
+      "summary": "List Servers",
+      "tags": [
+        "Servers"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}/allocations",
+      "operationId": "allocateServer",
+      "summary": "Allocate Server",
+      "tags": [
+        "Allocations"
+      ]
+    }
+  ]
+}

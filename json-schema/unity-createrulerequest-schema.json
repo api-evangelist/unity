@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateRuleRequest",
+  "title": "CreateRuleRequest",
+  "type": "object",
+  "required": [
+    "name",
+    "enabled",
+    "priority",
+    "condition",
+    "value"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "condition": {
+      "type": "string"
+    },
+    "rolloutPercentage": {
+      "type": "integer",
+      "default": 100
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "value": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Setting"
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BuildTarget",
+  "title": "BuildTarget",
+  "type": "object",
+  "properties": {
+    "buildtargetid": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string",
+      "enum": [
+        "ios",
+        "android",
+        "webgl",
+        "standaloneosxintel64",
+        "standalonewindows64",
+        "standalonelinux64"
+      ]
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "unity": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string"
+            }
+          }
+        },
+        "scm": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "branch": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

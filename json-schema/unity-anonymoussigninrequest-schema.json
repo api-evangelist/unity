@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AnonymousSignInRequest",
+  "title": "AnonymousSignInRequest",
+  "type": "object",
+  "required": [
+    "sessionTokens"
+  ],
+  "properties": {
+    "sessionTokens": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of session tokens for anonymous sign-in continuity"
+    }
+  }
+}

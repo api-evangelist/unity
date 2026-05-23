@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateScriptRequest",
+  "title": "CreateScriptRequest",
+  "type": "object",
+  "required": [
+    "name",
+    "language",
+    "code"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Unique script name within the project"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "JS"
+      ]
+    },
+    "code": {
+      "type": "string",
+      "description": "JavaScript code for the script"
+    },
+    "params": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ScriptParameter"
+      }
+    }
+  }
+}

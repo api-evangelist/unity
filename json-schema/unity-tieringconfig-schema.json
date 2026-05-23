@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TieringConfig",
+  "title": "TieringConfig",
+  "type": "object",
+  "properties": {
+    "strategy": {
+      "type": "string",
+      "enum": [
+        "score",
+        "percentile"
+      ]
+    },
+    "tiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "cutoff": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

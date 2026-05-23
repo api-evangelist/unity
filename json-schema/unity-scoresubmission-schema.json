@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScoreSubmission",
+  "title": "ScoreSubmission",
+  "type": "object",
+  "required": [
+    "score"
+  ],
+  "properties": {
+    "score": {
+      "type": "number",
+      "description": "The player's score value"
+    },
+    "metadata": {
+      "type": "string",
+      "description": "Optional metadata to store with the score (up to 255 characters)"
+    }
+  }
+}

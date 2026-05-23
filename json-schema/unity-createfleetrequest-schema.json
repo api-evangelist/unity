@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateFleetRequest",
+  "title": "CreateFleetRequest",
+  "type": "object",
+  "required": [
+    "name",
+    "buildConfiguration"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "buildConfiguration": {
+      "$ref": "#/components/schemas/BuildConfiguration"
+    },
+    "scalingSettings": {
+      "$ref": "#/components/schemas/ScalingSettings"
+    }
+  }
+}

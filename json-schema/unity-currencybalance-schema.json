@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CurrencyBalance",
+  "title": "CurrencyBalance",
+  "type": "object",
+  "properties": {
+    "currencyId": {
+      "type": "string"
+    },
+    "balance": {
+      "type": "integer"
+    },
+    "writeLock": {
+      "type": "string"
+    },
+    "created": {
+      "$ref": "#/components/schemas/Timestamp"
+    },
+    "modified": {
+      "$ref": "#/components/schemas/Timestamp"
+    }
+  }
+}

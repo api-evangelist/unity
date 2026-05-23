@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/QueryLobbiesRequest",
+  "title": "QueryLobbiesRequest",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "integer",
+      "default": 10
+    },
+    "continuationToken": {
+      "type": "string"
+    },
+    "filter": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/QueryFilter"
+      }
+    },
+    "order": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/QueryOrder"
+      }
+    }
+  }
+}

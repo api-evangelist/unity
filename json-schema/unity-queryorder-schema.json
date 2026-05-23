@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/QueryOrder",
+  "title": "QueryOrder",
+  "type": "object",
+  "properties": {
+    "field": {
+      "type": "string"
+    },
+    "asc": {
+      "type": "boolean"
+    }
+  }
+}

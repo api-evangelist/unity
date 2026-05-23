@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Pool",
+  "title": "Pool",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "maximumPlayerCount": {
+      "type": "integer"
+    },
+    "minimumPlayerCount": {
+      "type": "integer"
+    },
+    "matchLogic": {
+      "$ref": "#/components/schemas/MatchLogic"
+    }
+  }
+}

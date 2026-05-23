@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateTicketRequest",
+  "title": "CreateTicketRequest",
+  "type": "object",
+  "required": [
+    "players",
+    "queueName"
+  ],
+  "properties": {
+    "players": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Player"
+      },
+      "description": "Players to include in the matchmaking ticket"
+    },
+    "queueName": {
+      "type": "string",
+      "description": "Name of the matchmaking queue to enter"
+    },
+    "attributes": {
+      "$ref": "#/components/schemas/TicketAttributes"
+    }
+  }
+}

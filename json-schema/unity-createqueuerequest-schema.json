@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateQueueRequest",
+  "title": "CreateQueueRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "defaultEscalationRules": {
+      "$ref": "#/components/schemas/EscalationRules"
+    },
+    "pools": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Pool"
+      }
+    }
+  }
+}

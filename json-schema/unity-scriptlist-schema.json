@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScriptList",
+  "title": "ScriptList",
+  "type": "object",
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Script"
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "next": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

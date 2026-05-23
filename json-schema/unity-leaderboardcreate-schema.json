@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LeaderboardCreate",
+  "title": "LeaderboardCreate",
+  "type": "object",
+  "required": [
+    "id",
+    "sortOrder"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "sortOrder": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    },
+    "bucketSize": {
+      "type": "number"
+    },
+    "resetConfig": {
+      "$ref": "#/components/schemas/ResetConfig"
+    }
+  }
+}

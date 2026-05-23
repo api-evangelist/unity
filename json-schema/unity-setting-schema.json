@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Setting",
+  "title": "Setting",
+  "type": "object",
+  "required": [
+    "key",
+    "type",
+    "value"
+  ],
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Configuration key name"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "string",
+        "int",
+        "bool",
+        "float",
+        "json"
+      ],
+      "description": "Data type of the setting"
+    },
+    "value": {},
+    "description": {
+      "type": "string"
+    }
+  }
+}

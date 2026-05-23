@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Queue",
+  "title": "Queue",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "defaultEscalationRules": {
+      "$ref": "#/components/schemas/EscalationRules"
+    },
+    "pools": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Pool"
+      }
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

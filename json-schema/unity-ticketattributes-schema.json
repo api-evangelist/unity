@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TicketAttributes",
+  "title": "TicketAttributes",
+  "type": "object",
+  "properties": {
+    "skill": {
+      "type": "number",
+      "description": "Player skill rating for skill-based matchmaking"
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": {}
+    }
+  }
+}

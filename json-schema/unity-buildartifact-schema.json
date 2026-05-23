@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BuildArtifact",
+  "title": "BuildArtifact",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "primary": {
+      "type": "boolean"
+    },
+    "show_download": {
+      "type": "boolean"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

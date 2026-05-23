@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateLobbyRequest",
+  "title": "UpdateLobbyRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "maxPlayers": {
+      "type": "integer"
+    },
+    "isPrivate": {
+      "type": "boolean"
+    },
+    "isLocked": {
+      "type": "boolean"
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/DataObject"
+      }
+    },
+    "hostId": {
+      "type": "string",
+      "description": "Transfer host to this player ID"
+    }
+  }
+}

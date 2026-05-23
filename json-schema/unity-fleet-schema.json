@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Fleet",
+  "title": "Fleet",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "buildConfiguration": {
+      "$ref": "#/components/schemas/BuildConfiguration"
+    },
+    "scalingSettings": {
+      "$ref": "#/components/schemas/ScalingSettings"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "OFFLINE",
+        "DELETED"
+      ]
+    },
+    "serverCount": {
+      "type": "integer"
+    },
+    "freeServerCount": {
+      "type": "integer"
+    },
+    "allocationCount": {
+      "type": "integer"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

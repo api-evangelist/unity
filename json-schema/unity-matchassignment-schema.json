@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MatchAssignment",
+  "title": "MatchAssignment",
+  "type": "object",
+  "properties": {
+    "connection": {
+      "type": "string",
+      "description": "Server connection string for the matched game"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Additional match data"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScalingSettings",
+  "title": "ScalingSettings",
+  "type": "object",
+  "properties": {
+    "minFreeServers": {
+      "type": "integer"
+    },
+    "maxFreeServers": {
+      "type": "integer"
+    }
+  }
+}

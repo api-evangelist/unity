@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CurrencyBalanceUpdate",
+  "title": "CurrencyBalanceUpdate",
+  "type": "object",
+  "required": [
+    "amount"
+  ],
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "writeLock": {
+      "type": "string",
+      "description": "Optimistic lock token to prevent race conditions"
+    }
+  }
+}

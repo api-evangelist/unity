@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExternalTokenSignInRequest",
+  "title": "ExternalTokenSignInRequest",
+  "type": "object",
+  "required": [
+    "idProvider",
+    "token"
+  ],
+  "properties": {
+    "idProvider": {
+      "type": "string",
+      "enum": [
+        "google",
+        "apple",
+        "steam",
+        "facebook",
+        "custom"
+      ],
+      "description": "The external identity provider"
+    },
+    "token": {
+      "type": "string",
+      "description": "The identity token from the external provider"
+    },
+    "signInOnly": {
+      "type": "boolean",
+      "description": "If true, only sign in and do not create a new account"
+    }
+  }
+}

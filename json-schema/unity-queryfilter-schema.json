@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/QueryFilter",
+  "title": "QueryFilter",
+  "type": "object",
+  "required": [
+    "field",
+    "value",
+    "op"
+  ],
+  "properties": {
+    "field": {
+      "type": "string",
+      "enum": [
+        "AvailableSlots",
+        "MaxPlayers",
+        "Created",
+        "LastUpdated",
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5"
+      ]
+    },
+    "value": {
+      "type": "string"
+    },
+    "op": {
+      "type": "string",
+      "enum": [
+        "EQ",
+        "NE",
+        "LT",
+        "LE",
+        "GT",
+        "GE",
+        "CONTAINS",
+        "NOT_CONTAINS"
+      ]
+    }
+  }
+}

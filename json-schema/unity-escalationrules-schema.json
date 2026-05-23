@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EscalationRules",
+  "title": "EscalationRules",
+  "type": "object",
+  "properties": {
+    "timeoutSeconds": {
+      "type": "integer"
+    },
+    "backfillEnabled": {
+      "type": "boolean"
+    }
+  }
+}

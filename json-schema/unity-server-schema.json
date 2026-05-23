@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Server",
+  "title": "Server",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "port": {
+      "type": "integer"
+    },
+    "queryPort": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ONLINE",
+        "ALLOCATED",
+        "OFFLINE"
+      ]
+    },
+    "machineID": {
+      "type": "integer"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
