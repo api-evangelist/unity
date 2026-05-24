@@ -598,3 +598,5 @@ common:
     type: Vocabulary
   - url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/json-ld/unity-context.jsonld
     type: JSON-LD Context
+  - type: LLMsTxt
+    url: https://docs.unity.com/llms.txt
