@@ -2,12 +2,14 @@
   "repo": "unity",
   "feeds": [
     {
+      "source": "https://blog.unity.com/feed/",
+      "error": "HTTPError"
+    },
+    {
       "source": "https://blog.unity.com",
-      "feed_url": "https://blog.unity.com/feed/",
-      "title": "Unity Blog RSS Feed",
-      "saved": 47
+      "error": "HTTPError"
     }
   ],
   "post_count": 57,
-  "fetched": "2026-05-17T20:20:35Z"
+  "fetched": "2026-06-01T23:35:02Z"
 }
