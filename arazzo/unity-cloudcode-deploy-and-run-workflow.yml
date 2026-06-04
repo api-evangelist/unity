@@ -1,0 +1,112 @@
+arazzo: 1.0.1
+info:
+  title: Unity Cloud Code Deploy and Run
+  summary: Create a JavaScript Cloud Code script, confirm it deployed, then execute it with parameters.
+  description: >-
+    The author-to-execution loop for Unity Cloud Code. The workflow creates a
+    new JavaScript script, reads the script back to confirm it deployed and to
+    surface its active version, and then runs the script with a parameter
+    payload, capturing the execution output. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cloudCodeApi
+  url: ../openapi/unity-cloud-code-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cloudcode-deploy-and-run
+  summary: Create a Cloud Code script, verify deployment, and execute it.
+  description: >-
+    Creates a JavaScript script, reads it back to confirm deployment, then runs
+    it with the supplied parameters.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - scriptName
+    - code
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the service account deploying the script.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      scriptName:
+        type: string
+        description: Unique name for the script within the project.
+      code:
+        type: string
+        description: The JavaScript code for the script.
+      runParams:
+        type: object
+        description: Parameters to pass to the script at execution time.
+  steps:
+  - stepId: createScript
+    description: >-
+      Create a new JavaScript Cloud Code script with the supplied name and code.
+    operationId: createScript
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.scriptName
+        language: JS
+        code: $inputs.code
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      createdName: $response.body#/name
+  - stepId: getScript
+    description: >-
+      Read the script back to confirm it deployed and to surface its active
+      version.
+    operationId: getScript
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: scriptName
+      in: path
+      value: $steps.createScript.outputs.createdName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      language: $response.body#/language
+      activeScript: $response.body#/activeScript
+  - stepId: runScript
+    description: >-
+      Execute the script with the supplied parameters and capture its output.
+    operationId: runScript
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: scriptName
+      in: path
+      value: $steps.createScript.outputs.createdName
+    requestBody:
+      contentType: application/json
+      payload:
+        params: $inputs.runParams
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      output: $response.body#/output
+  outputs:
+    scriptName: $steps.createScript.outputs.createdName
+    output: $steps.runScript.outputs.output

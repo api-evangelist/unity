@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Unity Lobby Join By Code
+  summary: Join a private lobby by code, set the joining player's data, then heartbeat to stay active.
+  description: >-
+    The joining-player side of a private Unity Lobby. The workflow joins a
+    private lobby using a shared join code, updates the joining player's custom
+    data within the lobby (for example readiness or character selection), and
+    sends a heartbeat to keep the membership active. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: lobbyApi
+  url: ../openapi/unity-lobby-openapi.yml
+  type: openapi
+workflows:
+- workflowId: lobby-join-by-code
+  summary: Join a private lobby by code, set player data, and heartbeat.
+  description: >-
+    Joins a private lobby using a join code, updates the joining player's data,
+    then sends a heartbeat to keep the lobby active.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - lobbyCode
+    - playerId
+    - readyValue
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the joining player.
+      lobbyCode:
+        type: string
+        description: The lobby join code shared by the host.
+      playerId:
+        type: string
+        description: The Unity player id of the joining player.
+      readyValue:
+        type: string
+        description: A custom data value to set for the player (for example "ready").
+  steps:
+  - stepId: joinByCode
+    description: >-
+      Join the private lobby using the shared join code, registering the
+      joining player.
+    operationId: joinLobbyByCode
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: lobbyCode
+      in: path
+      value: $inputs.lobbyCode
+    requestBody:
+      contentType: application/json
+      payload:
+        playerId: $inputs.playerId
+        player:
+          id: $inputs.playerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lobbyId: $response.body#/id
+      availableSlots: $response.body#/availableSlots
+  - stepId: setPlayerData
+    description: >-
+      Update the joining player's custom data within the lobby, for example a
+      readiness flag.
+    operationId: updatePlayerData
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: lobbyId
+      in: path
+      value: $steps.joinByCode.outputs.lobbyId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    requestBody:
+      contentType: application/json
+      payload:
+        data:
+          ready:
+            value: $inputs.readyValue
+            visibility: Member
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      players: $response.body#/players
+  - stepId: heartbeat
+    description: >-
+      Send a heartbeat to keep the lobby and the player's membership active.
+    operationId: heartbeatLobby
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: lobbyId
+      in: path
+      value: $steps.joinByCode.outputs.lobbyId
+    successCriteria:
+    - condition: $statusCode == 204
+  outputs:
+    lobbyId: $steps.joinByCode.outputs.lobbyId
+    players: $steps.setPlayerData.outputs.players

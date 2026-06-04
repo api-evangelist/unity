@@ -1,0 +1,67 @@
+arazzo: 1.0.1
+info:
+  title: Unity Anonymous Sign-In and Token Refresh
+  summary: Sign a player in anonymously and immediately exchange the session for a refreshed access token.
+  description: >-
+    The most common entry point for a guest player session in Unity Gaming
+    Services. The workflow signs the player in anonymously to mint an initial
+    access token and session token, then exercises the token refresh endpoint
+    to demonstrate seamlessly extending that session without re-authenticating
+    the player. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: playerAuthApi
+  url: ../openapi/unity-player-authentication-openapi.yml
+  type: openapi
+workflows:
+- workflowId: anonymous-signin-refresh
+  summary: Establish an anonymous player session and refresh its access token.
+  description: >-
+    Signs the player in anonymously, capturing the issued access token, session
+    token and player id, then refreshes the session to obtain a fresh access
+    token using the issued session token as the refresh token.
+  inputs:
+    type: object
+    properties:
+      sessionTokens:
+        type: array
+        items:
+          type: string
+        description: Optional prior session tokens for anonymous sign-in continuity.
+  steps:
+  - stepId: signIn
+    description: >-
+      Sign the player in anonymously, creating a new player account when the
+      supplied session tokens do not match an existing player.
+    operationId: signInAnonymously
+    requestBody:
+      contentType: application/json
+      payload:
+        sessionTokens: $inputs.sessionTokens
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      idToken: $response.body#/idToken
+      sessionToken: $response.body#/sessionToken
+      userId: $response.body#/userId
+      isNew: $response.body#/isNew
+  - stepId: refresh
+    description: >-
+      Exchange the session token issued at sign-in for a new access token,
+      extending the player session without prompting the player again.
+    operationId: refreshToken
+    requestBody:
+      contentType: application/json
+      payload:
+        refreshToken: $steps.signIn.outputs.sessionToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      idToken: $response.body#/idToken
+      expiresIn: $response.body#/expiresIn
+  outputs:
+    userId: $steps.signIn.outputs.userId
+    isNew: $steps.signIn.outputs.isNew
+    refreshedToken: $steps.refresh.outputs.idToken
+    expiresIn: $steps.refresh.outputs.expiresIn

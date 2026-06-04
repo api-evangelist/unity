@@ -1,0 +1,95 @@
+arazzo: 1.0.1
+info:
+  title: Unity Friends Accept Incoming Request
+  summary: List incoming friend requests, accept the first pending one, then confirm it appears in the friend list.
+  description: >-
+    The accept side of the Unity Friends relationship flow. The workflow lists
+    the current player's incoming friend requests, branches on whether any are
+    pending, accepts the first pending request when one exists, and reads the
+    friend list back to confirm the new friend relationship. When there are no
+    pending requests the workflow ends gracefully. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: friendsApi
+  url: ../openapi/unity-friends-openapi.yml
+  type: openapi
+workflows:
+- workflowId: friends-accept-request
+  summary: Accept the first incoming friend request and confirm the friendship.
+  description: >-
+    Lists incoming friend requests, accepts the first pending one if present,
+    then lists friends to confirm the relationship was created.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the current player.
+  steps:
+  - stepId: listIncoming
+    description: >-
+      List the current player's pending incoming friend requests.
+    operationId: listIncomingFriendRequests
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: limit
+      in: query
+      value: 20
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstRequesterId: $response.body#/results/0/member/id
+    onSuccess:
+    - name: hasPendingRequest
+      type: goto
+      stepId: acceptRequest
+      criteria:
+      - context: $response.body
+        condition: $.results.length > 0
+        type: jsonpath
+    - name: noPendingRequests
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.results.length == 0
+        type: jsonpath
+  - stepId: acceptRequest
+    description: >-
+      Accept the first pending incoming friend request.
+    operationId: acceptFriendRequest
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: memberId
+      in: path
+      value: $steps.listIncoming.outputs.firstRequesterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      relationshipType: $response.body#/type
+      friendId: $response.body#/member/id
+  - stepId: confirmFriend
+    description: >-
+      List the friend list to confirm the accepted player is now a friend.
+    operationId: listFriends
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: limit
+      in: query
+      value: 20
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      friends: $response.body#/results
+  outputs:
+    friendId: $steps.acceptRequest.outputs.friendId
+    friends: $steps.confirmFriend.outputs.friends

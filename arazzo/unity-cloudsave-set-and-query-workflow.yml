@@ -1,0 +1,124 @@
+arazzo: 1.0.1
+info:
+  title: Unity Cloud Save Set and Query
+  summary: Write player data items, query them by an indexed field, then read the full item list back.
+  description: >-
+    A persistence round-trip through Unity Cloud Save. The workflow writes one
+    or more key-value data items for a player, queries the player's data using a
+    field-based filter to confirm the indexed value is searchable, and reads the
+    complete item list back to verify the write. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cloudSaveApi
+  url: ../openapi/unity-cloud-save-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cloudsave-set-and-query
+  summary: Save player data, query it by field, and read it back.
+  description: >-
+    Writes a player data item, queries player data by a field filter, then
+    reads all player data items to confirm the write.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - playerId
+    - key
+    - value
+    - filterOp
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the player or service account.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      playerId:
+        type: string
+        description: The player whose data is being written and queried.
+      key:
+        type: string
+        description: The data key to write and query on.
+      value:
+        description: The value to store for the key (any JSON-serializable value).
+      filterOp:
+        type: string
+        description: The comparison operator for the query filter (EQ, NE, LT, LE, GT, or GE).
+  steps:
+  - stepId: setData
+    description: >-
+      Create or update a key-value data item for the player.
+    operationId: setPlayerData
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    requestBody:
+      contentType: application/json
+      payload:
+        data:
+        - key: $inputs.key
+          value: $inputs.value
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      savedItems: $response.body#/results
+  - stepId: queryData
+    description: >-
+      Query the player's data using a field filter to confirm the value is
+      searchable via the configured index.
+    operationId: queryPlayerData
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    requestBody:
+      contentType: application/json
+      payload:
+        returnKeys:
+        - $inputs.key
+        fields:
+        - key: $inputs.key
+          op: $inputs.filterOp
+          value: $inputs.value
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      queryTotal: $response.body#/total
+      queryResults: $response.body#/results
+  - stepId: readData
+    description: >-
+      Read all of the player's data items back to confirm the write persisted.
+    operationId: getPlayerData
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      items: $response.body#/results
+  outputs:
+    queryTotal: $steps.queryData.outputs.queryTotal
+    items: $steps.readData.outputs.items

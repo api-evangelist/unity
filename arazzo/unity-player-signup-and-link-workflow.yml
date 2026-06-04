@@ -1,0 +1,106 @@
+arazzo: 1.0.1
+info:
+  title: Unity Player Sign-Up and Identity Linking
+  summary: Create a username/password player account, link an external identity, then read back the admin player record.
+  description: >-
+    Builds a complete first-class player identity in Unity Player
+    Authentication. The workflow signs a new player up with a username and
+    password to obtain an access token and player id, links an external identity
+    provider (for example Steam or Google) to that account so the player can sign
+    in across platforms, and finally reads the resulting player record through
+    the admin API to confirm the linked external ids. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: playerAuthApi
+  url: ../openapi/unity-player-authentication-openapi.yml
+  type: openapi
+workflows:
+- workflowId: player-signup-and-link
+  summary: Sign up a player, link an external identity, and verify the player record.
+  description: >-
+    Creates a username/password account, links an external identity provider
+    token to the new player id, then fetches the admin player record to confirm
+    the external identity was attached.
+  inputs:
+    type: object
+    required:
+    - username
+    - password
+    - idProvider
+    - externalToken
+    properties:
+      username:
+        type: string
+        description: Desired username for the new account (3-20 characters).
+      password:
+        type: string
+        description: Password for the new account (minimum 8 characters).
+      idProvider:
+        type: string
+        description: External identity provider to link (google, apple, steam, facebook, or custom).
+      externalToken:
+        type: string
+        description: The identity token issued by the external provider.
+      serviceAccountToken:
+        type: string
+        description: Bearer JWT for the admin Players API used to read the player record.
+  steps:
+  - stepId: signUp
+    description: >-
+      Create a new player account with the supplied username and password,
+      returning an access token and the new player id.
+    operationId: signUpWithUsernamePassword
+    requestBody:
+      contentType: application/json
+      payload:
+        username: $inputs.username
+        password: $inputs.password
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      idToken: $response.body#/idToken
+      userId: $response.body#/userId
+  - stepId: linkIdentity
+    description: >-
+      Link an external identity provider token to the newly created player so
+      the account can be recovered or signed into from that platform.
+    operationId: linkExternalIdentity
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $steps.signUp.outputs.idToken"
+    - name: playerId
+      in: path
+      value: $steps.signUp.outputs.userId
+    requestBody:
+      contentType: application/json
+      payload:
+        idProvider: $inputs.idProvider
+        token: $inputs.externalToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      externalIds: $response.body#/externalIds
+  - stepId: verifyPlayer
+    description: >-
+      Read the admin player record to confirm the player exists and carries the
+      linked external identity.
+    operationId: getPlayer
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.serviceAccountToken"
+    - name: playerId
+      in: path
+      value: $steps.signUp.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      playerId: $response.body#/id
+      externalIds: $response.body#/externalIds
+      createdAt: $response.body#/createdAt
+  outputs:
+    playerId: $steps.verifyPlayer.outputs.playerId
+    externalIds: $steps.verifyPlayer.outputs.externalIds

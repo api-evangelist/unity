@@ -1,0 +1,152 @@
+arazzo: 1.0.1
+info:
+  title: Unity Remote Config Feature Rollout
+  summary: Add a config setting, create a targeted override rule for it, then confirm the rule is listed.
+  description: >-
+    A staged feature rollout through Unity Remote Config. The workflow adds a
+    new key-value setting to a configuration as the default value, creates a
+    targeting override rule that overrides that setting for a player segment
+    with a percentage rollout, and lists the environment's override rules to
+    confirm the new rule is active. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: remoteConfigApi
+  url: ../openapi/unity-remote-config-openapi.yml
+  type: openapi
+workflows:
+- workflowId: remote-config-rollout
+  summary: Add a setting, create a targeted override rule, and confirm it.
+  description: >-
+    Adds a default config setting, creates a percentage-rollout override rule
+    targeting a player segment, then lists override rules to confirm the rule
+    is present.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - environmentId
+    - configId
+    - settingKey
+    - settingType
+    - defaultValue
+    - overrideValue
+    - ruleName
+    - condition
+    - rolloutPercentage
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the service account.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      environmentId:
+        type: string
+        description: The Unity environment identifier.
+      configId:
+        type: string
+        description: The configuration id to add the setting to.
+      settingKey:
+        type: string
+        description: The configuration key name.
+      settingType:
+        type: string
+        description: The data type of the setting (string, int, bool, float, or json).
+      defaultValue:
+        description: The default value for the setting.
+      overrideValue:
+        description: The override value applied by the targeting rule.
+      ruleName:
+        type: string
+        description: Display name for the override rule.
+      condition:
+        type: string
+        description: The rule condition expression selecting the target segment.
+      rolloutPercentage:
+        type: integer
+        description: The percentage of the targeted segment that receives the override (0-100).
+  steps:
+  - stepId: addSetting
+    description: >-
+      Add the new key-value setting to the configuration as the default value.
+    operationId: addSetting
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: configId
+      in: path
+      value: $inputs.configId
+    requestBody:
+      contentType: application/json
+      payload:
+        key: $inputs.settingKey
+        type: $inputs.settingType
+        value: $inputs.defaultValue
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      settingKey: $response.body#/key
+  - stepId: createRule
+    description: >-
+      Create a targeting override rule that overrides the setting for a player
+      segment with the supplied rollout percentage.
+    operationId: createOverrideRule
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.ruleName
+        enabled: true
+        priority: 1000
+        condition: $inputs.condition
+        rolloutPercentage: $inputs.rolloutPercentage
+        value:
+        - key: $inputs.settingKey
+          type: $inputs.settingType
+          value: $inputs.overrideValue
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ruleId: $response.body#/id
+  - stepId: listRules
+    description: >-
+      List the environment's override rules to confirm the new rule is present
+      and active.
+    operationId: listOverrideRules
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rules: $response.body#/rules
+  outputs:
+    settingKey: $steps.addSetting.outputs.settingKey
+    ruleId: $steps.createRule.outputs.ruleId
+    rules: $steps.listRules.outputs.rules

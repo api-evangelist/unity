@@ -1,0 +1,125 @@
+arazzo: 1.0.1
+info:
+  title: Unity Cloud Save Publish Public Profile
+  summary: Write a server-protected stat, publish a public profile item, then read the player's data back.
+  description: >-
+    Demonstrates the access-class controls in Unity Cloud Save. The workflow
+    writes a server-protected data item that only the server can change but the
+    player can read, publishes a public data item visible to all players, and
+    reads the player's default data back to confirm the player-scoped values.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cloudSaveApi
+  url: ../openapi/unity-cloud-save-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cloudsave-publish-public-profile
+  summary: Set protected and public player data, then read player data back.
+  description: >-
+    Writes a protected data item, publishes a public data item, then reads the
+    player's default data items to confirm.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - playerId
+    - protectedKey
+    - protectedValue
+    - publicKey
+    - publicValue
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the service account.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      playerId:
+        type: string
+        description: The player whose data is being written.
+      protectedKey:
+        type: string
+        description: The key for the server-protected data item.
+      protectedValue:
+        description: The value for the protected data item.
+      publicKey:
+        type: string
+        description: The key for the public data item.
+      publicValue:
+        description: The value for the public data item.
+  steps:
+  - stepId: setProtected
+    description: >-
+      Write a server-protected data item that only the server can modify but the
+      player can read.
+    operationId: setProtectedPlayerData
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    requestBody:
+      contentType: application/json
+      payload:
+        data:
+        - key: $inputs.protectedKey
+          value: $inputs.protectedValue
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      protectedItems: $response.body#/results
+  - stepId: setPublic
+    description: >-
+      Publish a public data item visible to all players in the game.
+    operationId: setPublicPlayerData
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    requestBody:
+      contentType: application/json
+      payload:
+        data:
+        - key: $inputs.publicKey
+          value: $inputs.publicValue
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      publicItems: $response.body#/results
+  - stepId: readDefault
+    description: >-
+      Read the player's default-access data items back to confirm the
+      player-scoped values.
+    operationId: getPlayerData
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      items: $response.body#/results
+  outputs:
+    protectedItems: $steps.setProtected.outputs.protectedItems
+    publicItems: $steps.setPublic.outputs.publicItems
+    defaultItems: $steps.readDefault.outputs.items

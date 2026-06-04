@@ -1,0 +1,120 @@
+arazzo: 1.0.1
+info:
+  title: Unity Matchmaking Ticket and Poll
+  summary: Create a matchmaking ticket and poll its status until a match is found or matchmaking fails.
+  description: >-
+    The end-to-end Unity Matchmaker client loop. The workflow creates a
+    matchmaking ticket for a player in a named queue, then polls the ticket
+    status. While the ticket is still InProgress the poll step retries itself;
+    when the status resolves to Found it surfaces the match assignment and
+    connection string, and when it resolves to Failed it ends the workflow.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: matchmakerApi
+  url: ../openapi/unity-matchmaker-openapi.yml
+  type: openapi
+workflows:
+- workflowId: matchmaking-ticket-poll
+  summary: Create a matchmaking ticket and poll until matched or failed.
+  description: >-
+    Creates a matchmaking ticket and polls the ticket status, retrying while
+    InProgress and branching on Found versus Failed.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - environmentId
+    - queueName
+    - playerId
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the player or service account.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      environmentId:
+        type: string
+        description: The Unity environment identifier.
+      queueName:
+        type: string
+        description: The matchmaking queue to enter.
+      playerId:
+        type: string
+        description: The player id to include in the ticket.
+  steps:
+  - stepId: createTicket
+    description: >-
+      Create a matchmaking ticket placing the player into the named queue.
+    operationId: createTicket
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    requestBody:
+      contentType: application/json
+      payload:
+        queueName: $inputs.queueName
+        players:
+        - id: $inputs.playerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ticketId: $response.body#/id
+  - stepId: pollTicket
+    description: >-
+      Poll the ticket status. Retry while the ticket is still InProgress; stop
+      when a match is Found or matchmaking has Failed.
+    operationId: getTicket
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: ticketId
+      in: path
+      value: $steps.createTicket.outputs.ticketId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      connection: $response.body#/assignment/connection
+    onSuccess:
+    - name: retryWhileInProgress
+      type: retry
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "InProgress"
+        type: jsonpath
+    - name: matchFound
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "Found"
+        type: jsonpath
+    - name: matchFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "Failed"
+        type: jsonpath
+  outputs:
+    ticketId: $steps.createTicket.outputs.ticketId
+    status: $steps.pollTicket.outputs.status
+    connection: $steps.pollTicket.outputs.connection

@@ -1,0 +1,145 @@
+arazzo: 1.0.1
+info:
+  title: Unity Build Automation Trigger and Poll
+  summary: Confirm a build target, start a clean build, then poll the build until it succeeds or fails.
+  description: >-
+    The continuous-integration loop for Unity Build Automation. The workflow
+    confirms the target build target exists and is enabled, starts a clean
+    build, and then polls the build status. While the build is queued or running
+    the poll step retries itself; it ends when the build reaches success or
+    failure. Build Automation uses HTTP basic authentication, so each step
+    carries an inline Basic Authorization header. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: buildAutomationApi
+  url: ../openapi/unity-build-automation-openapi.yml
+  type: openapi
+workflows:
+- workflowId: build-trigger-and-poll
+  summary: Verify a build target, start a build, and poll to completion.
+  description: >-
+    Reads the build target, starts a clean build, then polls the build status,
+    retrying while queued or running and ending on success or failure.
+  inputs:
+    type: object
+    required:
+    - basicAuth
+    - orgid
+    - projectid
+    - buildtargetid
+    properties:
+      basicAuth:
+        type: string
+        description: Base64-encoded credentials for HTTP Basic authentication.
+      orgid:
+        type: string
+        description: The Unity organization id.
+      projectid:
+        type: string
+        description: The Unity project id.
+      buildtargetid:
+        type: string
+        description: The build target id to build.
+  steps:
+  - stepId: getBuildTarget
+    description: >-
+      Confirm the build target exists and read its configuration before
+      triggering a build.
+    operationId: getBuildTarget
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: orgid
+      in: path
+      value: $inputs.orgid
+    - name: projectid
+      in: path
+      value: $inputs.projectid
+    - name: buildtargetid
+      in: path
+      value: $inputs.buildtargetid
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      platform: $response.body#/platform
+      enabled: $response.body#/enabled
+  - stepId: startBuild
+    description: >-
+      Trigger a new clean build for the build target. The response is an array
+      of started builds; the first element carries the build number.
+    operationId: startBuild
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: orgid
+      in: path
+      value: $inputs.orgid
+    - name: projectid
+      in: path
+      value: $inputs.projectid
+    - name: buildtargetid
+      in: path
+      value: $inputs.buildtargetid
+    requestBody:
+      contentType: application/json
+      payload:
+        clean: true
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      buildNumber: $response.body#/0/build
+  - stepId: pollBuild
+    description: >-
+      Poll the build status. Retry while the build is queued, sent to the
+      builder, started or restarted; end when it reaches success or failure.
+    operationId: getBuild
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: orgid
+      in: path
+      value: $inputs.orgid
+    - name: projectid
+      in: path
+      value: $inputs.projectid
+    - name: buildtargetid
+      in: path
+      value: $inputs.buildtargetid
+    - name: number
+      in: path
+      value: $steps.startBuild.outputs.buildNumber
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      artifacts: $response.body#/artifacts
+    onSuccess:
+    - name: retryWhileRunning
+      type: retry
+      retryAfter: 15
+      retryLimit: 40
+      criteria:
+      - context: $response.body
+        condition: $.status in ["queued","sentToBuilder","started","restarted"]
+        type: jsonpath
+    - name: buildSucceeded
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "success"
+        type: jsonpath
+    - name: buildFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status in ["failure","canceled"]
+        type: jsonpath
+  outputs:
+    buildNumber: $steps.startBuild.outputs.buildNumber
+    status: $steps.pollBuild.outputs.status
+    artifacts: $steps.pollBuild.outputs.artifacts

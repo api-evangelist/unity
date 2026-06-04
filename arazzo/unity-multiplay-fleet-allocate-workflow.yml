@@ -1,0 +1,128 @@
+arazzo: 1.0.1
+info:
+  title: Unity Multiplay Fleet Provisioning and Allocation
+  summary: Register a server build, create a fleet that runs it, then allocate a server from the fleet.
+  description: >-
+    The full provisioning path for Unity Multiplay Hosting. The workflow
+    registers a new game server build, creates a fleet whose build
+    configuration points at that build, and allocates a server from the new
+    fleet to confirm it can host a session. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: multiplayApi
+  url: ../openapi/unity-multiplay-openapi.yml
+  type: openapi
+workflows:
+- workflowId: multiplay-fleet-allocate
+  summary: Register a build, create a fleet, and allocate a server.
+  description: >-
+    Creates a game server build, creates a fleet referencing that build, then
+    allocates a server from the fleet.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - regionId
+    - buildName
+    - os
+    - fleetName
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the service account.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      regionId:
+        type: string
+        description: The Multiplay region to create servers and allocate in.
+      buildName:
+        type: string
+        description: Name for the new game server build.
+      os:
+        type: string
+        description: The build operating system (LINUX or WINDOWS).
+      fleetName:
+        type: string
+        description: Name for the new fleet.
+  steps:
+  - stepId: createBuild
+    description: >-
+      Register a new game server build for the project.
+    operationId: createBuild
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    requestBody:
+      contentType: application/json
+      payload:
+        buildName: $inputs.buildName
+        os: $inputs.os
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      buildId: $response.body#/id
+  - stepId: createFleet
+    description: >-
+      Create a fleet whose build configuration runs the newly registered build.
+    operationId: createFleet
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: regionId
+      in: path
+      value: $inputs.regionId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.fleetName
+        buildConfiguration:
+          buildId: $steps.createBuild.outputs.buildId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      fleetId: $response.body#/id
+      status: $response.body#/status
+  - stepId: allocateServer
+    description: >-
+      Allocate an available server from the new fleet to confirm it can host a
+      game session.
+    operationId: allocateServer
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: regionId
+      in: path
+      value: $inputs.regionId
+    - name: fleetId
+      in: path
+      value: $steps.createFleet.outputs.fleetId
+    requestBody:
+      contentType: application/json
+      payload:
+        allocationContext: $inputs.fleetName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      allocationID: $response.body#/allocationID
+      ip: $response.body#/ip
+      port: $response.body#/port
+  outputs:
+    buildId: $steps.createBuild.outputs.buildId
+    fleetId: $steps.createFleet.outputs.fleetId
+    allocationID: $steps.allocateServer.outputs.allocationID

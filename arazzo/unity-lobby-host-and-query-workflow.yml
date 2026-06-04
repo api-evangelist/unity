@@ -1,0 +1,102 @@
+arazzo: 1.0.1
+info:
+  title: Unity Lobby Host and Query
+  summary: Create a public lobby, send a keep-alive heartbeat, then confirm it is discoverable via query.
+  description: >-
+    The host side of the Unity Lobby matchmaking flow. The workflow creates a
+    new public lobby with the requesting player as host, sends a heartbeat so
+    the lobby stays active and is not garbage collected, and then queries
+    available public lobbies to confirm the new lobby is discoverable by other
+    players. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: lobbyApi
+  url: ../openapi/unity-lobby-openapi.yml
+  type: openapi
+workflows:
+- workflowId: lobby-host-and-query
+  summary: Host a public lobby, heartbeat it, and confirm it is discoverable.
+  description: >-
+    Creates a public lobby, sends a heartbeat to keep it alive, then queries
+    public lobbies to confirm the new lobby is listed.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - lobbyName
+    - maxPlayers
+    - hostPlayerId
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the hosting player.
+      lobbyName:
+        type: string
+        description: Display name for the new lobby.
+      maxPlayers:
+        type: integer
+        description: Maximum number of players the lobby allows.
+      hostPlayerId:
+        type: string
+        description: The Unity player id of the host.
+  steps:
+  - stepId: createLobby
+    description: >-
+      Create a public lobby with the requesting player as host.
+    operationId: createLobby
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.lobbyName
+        maxPlayers: $inputs.maxPlayers
+        isPrivate: false
+        player:
+          id: $inputs.hostPlayerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lobbyId: $response.body#/id
+      availableSlots: $response.body#/availableSlots
+  - stepId: heartbeat
+    description: >-
+      Send a heartbeat to keep the lobby active so it is not automatically
+      deleted.
+    operationId: heartbeatLobby
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: lobbyId
+      in: path
+      value: $steps.createLobby.outputs.lobbyId
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: queryLobbies
+    description: >-
+      Query public lobbies that still have open slots to confirm the new lobby
+      is discoverable by other players.
+    operationId: queryLobbies
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        count: 25
+        filter:
+        - field: AvailableSlots
+          op: GT
+          value: "0"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      results: $response.body#/results
+  outputs:
+    lobbyId: $steps.createLobby.outputs.lobbyId
+    discoverableLobbies: $steps.queryLobbies.outputs.results

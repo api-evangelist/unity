@@ -1,0 +1,130 @@
+arazzo: 1.0.1
+info:
+  title: Unity Economy Grant Currency
+  summary: Resolve a currency configuration, increment a player's balance, then read back the updated balances.
+  description: >-
+    A server-authoritative currency grant in Unity Economy, useful for quest
+    rewards, daily bonuses or compensation grants. The workflow first resolves
+    the currency resource configuration to confirm the currency exists and to
+    surface its maximum balance, increments the player's balance by the granted
+    amount, and reads back all balances to confirm the new total. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: economyApi
+  url: ../openapi/unity-economy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: economy-grant-currency
+  summary: Confirm a currency config, increment a player's balance, and verify it.
+  description: >-
+    Resolves the currency configuration by resource id, increments the player's
+    balance by the granted amount, then reads the full balance list to confirm
+    the new amount.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - environmentId
+    - playerId
+    - currencyId
+    - amount
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the service account performing the grant.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      environmentId:
+        type: string
+        description: The Unity environment identifier.
+      playerId:
+        type: string
+        description: The player to grant currency to.
+      currencyId:
+        type: string
+        description: The currency resource id, used both as the config resourceId and the currency path id.
+      amount:
+        type: integer
+        description: The positive amount of currency to grant.
+  steps:
+  - stepId: resolveConfig
+    description: >-
+      Resolve the currency resource configuration to confirm the currency
+      exists and to surface its maximum balance before granting.
+    operationId: getEconomyConfig
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: resourceId
+      in: path
+      value: $inputs.currencyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currencyType: $response.body#/type
+      maxBalance: $response.body#/max
+  - stepId: grant
+    description: >-
+      Increment the player's currency balance by the granted amount.
+    operationId: incrementPlayerCurrencyBalance
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    - name: currencyId
+      in: path
+      value: $inputs.currencyId
+    requestBody:
+      contentType: application/json
+      payload:
+        amount: $inputs.amount
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      newBalance: $response.body#/balance
+      writeLock: $response.body#/writeLock
+  - stepId: confirmBalances
+    description: >-
+      Read all of the player's currency balances to confirm the grant was
+      applied.
+    operationId: getPlayerCurrencyBalances
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      balances: $response.body#/results
+  outputs:
+    newBalance: $steps.grant.outputs.newBalance
+    balances: $steps.confirmBalances.outputs.balances

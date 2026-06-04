@@ -1,0 +1,122 @@
+arazzo: 1.0.1
+info:
+  title: Unity Economy Virtual Purchase
+  summary: Check a player's currency balances, make a virtual purchase, then confirm the resulting inventory.
+  description: >-
+    Drives a runtime in-game store purchase through Unity Economy. The workflow
+    reads the player's current currency balances so the cost can be afforded,
+    executes a virtual purchase using a configured purchase id, and then reads
+    the player's inventory back to confirm the granted items landed. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: economyApi
+  url: ../openapi/unity-economy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: economy-virtual-purchase
+  summary: Verify balances, purchase a virtual item, and confirm inventory.
+  description: >-
+    Reads the player's currency balances, makes a virtual purchase by its
+    configuration id, and reads the player inventory to confirm the purchased
+    items were granted.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - environmentId
+    - playerId
+    - purchaseId
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the player or service account.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      environmentId:
+        type: string
+        description: The Unity environment identifier.
+      playerId:
+        type: string
+        description: The player making the purchase.
+      purchaseId:
+        type: string
+        description: The virtual purchase configuration id to execute.
+  steps:
+  - stepId: getBalances
+    description: >-
+      Read all of the player's currency balances before the purchase so the
+      caller can confirm the player can afford the cost.
+    operationId: getPlayerCurrencyBalances
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      balances: $response.body#/results
+  - stepId: purchase
+    description: >-
+      Execute the virtual purchase, spending the player's currency or items and
+      granting the purchase rewards.
+    operationId: makeVirtualPurchase
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    requestBody:
+      contentType: application/json
+      payload:
+        id: $inputs.purchaseId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      purchasedInventory: $response.body#/purchased/inventory
+      costs: $response.body#/costs
+  - stepId: confirmInventory
+    description: >-
+      Read the player's inventory after the purchase to confirm the granted
+      items are present.
+    operationId: getPlayerInventory
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      inventory: $response.body#/results
+  outputs:
+    purchasedInventory: $steps.purchase.outputs.purchasedInventory
+    finalInventory: $steps.confirmInventory.outputs.inventory

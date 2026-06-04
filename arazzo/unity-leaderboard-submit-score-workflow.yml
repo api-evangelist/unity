@@ -1,0 +1,136 @@
+arazzo: 1.0.1
+info:
+  title: Unity Leaderboard Submit Score and Read Rank
+  summary: Confirm a leaderboard exists, submit a player's score, then read back the player's rank.
+  description: >-
+    The core player-facing leaderboard loop in Unity Leaderboards. The workflow
+    confirms the target leaderboard definition exists and reads its sort order,
+    submits or updates the player's score, and then reads the player's score and
+    rank back so the game UI can display their standing. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: leaderboardsApi
+  url: ../openapi/unity-leaderboards-openapi.yml
+  type: openapi
+workflows:
+- workflowId: leaderboard-submit-score
+  summary: Verify a leaderboard, submit a score, and read the player's rank.
+  description: >-
+    Reads the leaderboard definition, submits the player's score, then fetches
+    the player's score and rank entry.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - environmentId
+    - leaderboardId
+    - playerId
+    - score
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the player or service account.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      environmentId:
+        type: string
+        description: The Unity environment identifier.
+      leaderboardId:
+        type: string
+        description: The target leaderboard id.
+      playerId:
+        type: string
+        description: The player submitting the score.
+      score:
+        type: number
+        description: The score value to submit.
+      metadata:
+        type: string
+        description: Optional metadata to store alongside the score (up to 255 characters).
+  steps:
+  - stepId: getLeaderboard
+    description: >-
+      Confirm the leaderboard exists and read its sort order before submitting a
+      score.
+    operationId: getLeaderboard
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: leaderboardId
+      in: path
+      value: $inputs.leaderboardId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sortOrder: $response.body#/sortOrder
+      name: $response.body#/name
+  - stepId: submitScore
+    description: >-
+      Submit or update the player's score on the leaderboard.
+    operationId: addLeaderboardPlayerScore
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: leaderboardId
+      in: path
+      value: $inputs.leaderboardId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    requestBody:
+      contentType: application/json
+      payload:
+        score: $inputs.score
+        metadata: $inputs.metadata
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      submittedScore: $response.body#/score
+  - stepId: readRank
+    description: >-
+      Read the player's current score and rank on the leaderboard for display.
+    operationId: getLeaderboardPlayerScore
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: leaderboardId
+      in: path
+      value: $inputs.leaderboardId
+    - name: playerId
+      in: path
+      value: $inputs.playerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rank: $response.body#/rank
+      score: $response.body#/score
+      tier: $response.body#/tier
+  outputs:
+    rank: $steps.readRank.outputs.rank
+    score: $steps.readRank.outputs.score
+    tier: $steps.readRank.outputs.tier

@@ -1,0 +1,130 @@
+arazzo: 1.0.1
+info:
+  title: Unity Matchmaker Queue Provisioning
+  summary: Create a matchmaking queue, read it back, then list all queues to confirm it is registered.
+  description: >-
+    An admin provisioning flow for Unity Matchmaker. The workflow creates a new
+    matchmaking queue with a pool and escalation rules, reads the queue back by
+    name to confirm its configuration, and lists all queues for the environment
+    to confirm the new queue is registered. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: matchmakerApi
+  url: ../openapi/unity-matchmaker-openapi.yml
+  type: openapi
+workflows:
+- workflowId: matchmaker-queue-provision
+  summary: Create a matchmaking queue, verify it, and confirm it is listed.
+  description: >-
+    Creates a matchmaking queue with a pool, reads the queue back by name, then
+    lists all queues to confirm registration.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - environmentId
+    - queueName
+    - poolName
+    - minimumPlayerCount
+    - maximumPlayerCount
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the service account.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      environmentId:
+        type: string
+        description: The Unity environment identifier.
+      queueName:
+        type: string
+        description: The name to assign to the new queue.
+      poolName:
+        type: string
+        description: The name of the pool within the queue.
+      minimumPlayerCount:
+        type: integer
+        description: Minimum players required to form a match in the pool.
+      maximumPlayerCount:
+        type: integer
+        description: Maximum players allowed in a match in the pool.
+  steps:
+  - stepId: createQueue
+    description: >-
+      Create the matchmaking queue with a single pool and default escalation
+      rules.
+    operationId: createQueue
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.queueName
+        enabled: true
+        defaultEscalationRules:
+          timeoutSeconds: 60
+          backfillEnabled: false
+        pools:
+        - name: $inputs.poolName
+          minimumPlayerCount: $inputs.minimumPlayerCount
+          maximumPlayerCount: $inputs.maximumPlayerCount
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      createdName: $response.body#/name
+  - stepId: getQueue
+    description: >-
+      Read the queue back by name to confirm its configuration was applied.
+    operationId: getQueue
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: queueName
+      in: path
+      value: $steps.createQueue.outputs.createdName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      enabled: $response.body#/enabled
+      pools: $response.body#/pools
+  - stepId: listQueues
+    description: >-
+      List all queues for the environment to confirm the new queue is
+      registered.
+    operationId: listQueues
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      queues: $response.body#/results
+  outputs:
+    queueName: $steps.createQueue.outputs.createdName
+    queues: $steps.listQueues.outputs.queues

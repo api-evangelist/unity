@@ -1,0 +1,141 @@
+arazzo: 1.0.1
+info:
+  title: Unity Leaderboard Provisioning
+  summary: Create a leaderboard, seed it with an initial player score, then read the top scores.
+  description: >-
+    An admin provisioning flow for Unity Leaderboards. The workflow creates a
+    new leaderboard definition with a chosen sort order, seeds it with an
+    initial player score so it is non-empty, and then reads the top scores back
+    to confirm the leaderboard is live and ranking. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: leaderboardsApi
+  url: ../openapi/unity-leaderboards-openapi.yml
+  type: openapi
+workflows:
+- workflowId: leaderboard-provision
+  summary: Create a leaderboard, seed an initial score, and read the rankings.
+  description: >-
+    Creates a leaderboard definition, submits a seed score for a player, then
+    reads the top of the leaderboard.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - environmentId
+    - leaderboardId
+    - sortOrder
+    - seedPlayerId
+    - seedScore
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the service account performing the provisioning.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      environmentId:
+        type: string
+        description: The Unity environment identifier.
+      leaderboardId:
+        type: string
+        description: The id to assign to the new leaderboard.
+      leaderboardName:
+        type: string
+        description: Optional display name for the leaderboard.
+      sortOrder:
+        type: string
+        description: Score sort order, either asc or desc.
+      seedPlayerId:
+        type: string
+        description: The player id used to seed an initial score.
+      seedScore:
+        type: number
+        description: The initial score value to seed.
+  steps:
+  - stepId: createLeaderboard
+    description: >-
+      Create the leaderboard definition with the supplied id and sort order.
+    operationId: createLeaderboard
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    requestBody:
+      contentType: application/json
+      payload:
+        id: $inputs.leaderboardId
+        name: $inputs.leaderboardName
+        sortOrder: $inputs.sortOrder
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      createdId: $response.body#/id
+  - stepId: seedScore
+    description: >-
+      Submit a seed score for a player so the new leaderboard has at least one
+      ranked entry.
+    operationId: addLeaderboardPlayerScore
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: leaderboardId
+      in: path
+      value: $steps.createLeaderboard.outputs.createdId
+    - name: playerId
+      in: path
+      value: $inputs.seedPlayerId
+    requestBody:
+      contentType: application/json
+      payload:
+        score: $inputs.seedScore
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      seededRank: $response.body#/rank
+  - stepId: readScores
+    description: >-
+      Read the top scores from the new leaderboard to confirm the seed entry is
+      ranked.
+    operationId: getLeaderboardScores
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: leaderboardId
+      in: path
+      value: $steps.createLeaderboard.outputs.createdId
+    - name: limit
+      in: query
+      value: 10
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      total: $response.body#/total
+      results: $response.body#/results
+  outputs:
+    leaderboardId: $steps.createLeaderboard.outputs.createdId
+    total: $steps.readScores.outputs.total
+    results: $steps.readScores.outputs.results

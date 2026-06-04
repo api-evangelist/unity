@@ -1,0 +1,155 @@
+arazzo: 1.0.1
+info:
+  title: Unity Matchmaking to Server Allocation
+  summary: Create a matchmaking ticket, poll until matched, then allocate a Multiplay game server for the session.
+  description: >-
+    A cross-service flow that bridges Unity Matchmaker and Unity Multiplay
+    Hosting. The workflow creates a matchmaking ticket and polls it until a
+    match is Found, then allocates a dedicated game server from a Multiplay
+    fleet so the matched players have somewhere to connect. Because the
+    matchmaker and multiplay descriptions each define their own operations, the
+    sourceDescriptions form is used to disambiguate. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: matchmakerApi
+  url: ../openapi/unity-matchmaker-openapi.yml
+  type: openapi
+- name: multiplayApi
+  url: ../openapi/unity-multiplay-openapi.yml
+  type: openapi
+workflows:
+- workflowId: matchmaking-allocate-server
+  summary: Match players then allocate a Multiplay server for the session.
+  description: >-
+    Creates a matchmaking ticket, polls until a match is found, then allocates
+    a game server from a Multiplay fleet for the matched session.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - projectId
+    - environmentId
+    - queueName
+    - playerId
+    - regionId
+    - fleetId
+    properties:
+      accessToken:
+        type: string
+        description: Bearer JWT for the service account.
+      projectId:
+        type: string
+        description: The Unity project identifier.
+      environmentId:
+        type: string
+        description: The Unity environment identifier (matchmaker).
+      queueName:
+        type: string
+        description: The matchmaking queue to enter.
+      playerId:
+        type: string
+        description: The player id to include in the ticket.
+      regionId:
+        type: string
+        description: The Multiplay region to allocate a server in.
+      fleetId:
+        type: string
+        description: The Multiplay fleet to allocate a server from.
+  steps:
+  - stepId: createTicket
+    description: >-
+      Create a matchmaking ticket placing the player into the named queue.
+    operationId: $sourceDescriptions.matchmakerApi.createTicket
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    requestBody:
+      contentType: application/json
+      payload:
+        queueName: $inputs.queueName
+        players:
+        - id: $inputs.playerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ticketId: $response.body#/id
+  - stepId: pollTicket
+    description: >-
+      Poll the ticket status, retrying while InProgress and continuing once a
+      match is Found.
+    operationId: $sourceDescriptions.matchmakerApi.getTicket
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: environmentId
+      in: path
+      value: $inputs.environmentId
+    - name: ticketId
+      in: path
+      value: $steps.createTicket.outputs.ticketId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: retryWhileInProgress
+      type: retry
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "InProgress"
+        type: jsonpath
+    - name: matchFound
+      type: goto
+      stepId: allocateServer
+      criteria:
+      - context: $response.body
+        condition: $.status == "Found"
+        type: jsonpath
+  - stepId: allocateServer
+    description: >-
+      Allocate an available game server from the Multiplay fleet for the matched
+      session.
+    operationId: $sourceDescriptions.multiplayApi.allocateServer
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: regionId
+      in: path
+      value: $inputs.regionId
+    - name: fleetId
+      in: path
+      value: $inputs.fleetId
+    requestBody:
+      contentType: application/json
+      payload:
+        allocationContext: $steps.createTicket.outputs.ticketId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      allocationID: $response.body#/allocationID
+      ip: $response.body#/ip
+      port: $response.body#/port
+  outputs:
+    ticketId: $steps.createTicket.outputs.ticketId
+    allocationID: $steps.allocateServer.outputs.allocationID
+    serverIp: $steps.allocateServer.outputs.ip
+    serverPort: $steps.allocateServer.outputs.port
