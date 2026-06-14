@@ -1,0 +1,1265 @@
+"""
+Unity Gaming Services – Conceptual GraphQL Schema
+Derived from the Unity Gaming Services REST API surface:
+  https://services.docs.unity.com/
+  https://docs.unity.com/ugs
+"""
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar DateTime
+scalar JSON
+scalar Upload
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum BuildStatus {
+  QUEUED
+  SENTTOBUILDER
+  STARTED
+  RESTARTED
+  SUCCESS
+  FAILURE
+  CANCELED
+  UNKNOWN
+}
+
+enum BuildPlatform {
+  IOS
+  ANDROID
+  WEBGL
+  STANDALONEOSXUNIVERSAL
+  STANDALONEOSXINTEL
+  STANDALONELINUX64
+  STANDALONEWINDOWS
+  STANDALONEWINDOWS64
+}
+
+enum CloudCodeScriptStatus {
+  ACTIVE
+  INACTIVE
+  DRAFT
+}
+
+enum CloudCodeModuleStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum EconomyCurrencyType {
+  CURRENCY
+}
+
+enum EconomyResourceType {
+  CURRENCY
+  INVENTORY_ITEM
+  VIRTUAL_PURCHASE
+  MONEY_PURCHASE
+}
+
+enum LobbyVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum LobbyStatus {
+  OPEN
+  CLOSED
+  FULL
+  IN_PROGRESS
+}
+
+enum MatchmakerTicketStatus {
+  IN_PROGRESS
+  FOUND
+  TIMEOUT
+  FAILED
+  CANCELED
+}
+
+enum ServerStatus {
+  ONLINE
+  OFFLINE
+  READY
+  ALLOCATED
+  RESERVED
+  PROVISIONING
+  ERROR
+}
+
+enum FleetStatus {
+  ONLINE
+  OFFLINE
+  PARTIAL
+}
+
+enum FriendRequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  BLOCKED
+}
+
+enum PresenceAvailability {
+  AVAILABLE
+  AWAY
+  BUSY
+  OFFLINE
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+  CANCELED
+}
+
+enum RelayAllocationStatus {
+  READY
+  TIMEOUT
+  ERROR
+}
+
+enum AccessClass {
+  DEFAULT
+  PRIVATE
+  PROTECTED
+  PUBLIC
+}
+
+enum ConfigValueType {
+  STRING
+  INT
+  FLOAT
+  BOOL
+  JSON
+}
+
+enum AuthProviderType {
+  UNITY
+  GOOGLE
+  APPLE
+  STEAM
+  FACEBOOK
+  OCULUS
+  CUSTOM
+  ANONYMOUS
+}
+
+enum SubscriptionType {
+  LOBBY_CHANGES
+  LOBBY_PLAYER
+  MATCHMAKER_TICKET
+  RELAY_HEARTBEAT
+}
+
+# ---------------------------------------------------------------------------
+# Project and Environment
+# ---------------------------------------------------------------------------
+
+"""Top-level organizational unit for a Unity Gaming Services project."""
+type Project {
+  id: ID!
+  name: String!
+  organizationId: String!
+  organizationName: String
+  environments: [Environment!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An isolated runtime context within a Unity project (e.g., production, staging)."""
+type Environment {
+  id: ID!
+  projectId: ID!
+  name: String!
+  isDefault: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Build Automation
+# ---------------------------------------------------------------------------
+
+"""A compiled game artifact produced by the Build Automation service."""
+type Build {
+  id: ID!
+  buildTargetId: ID!
+  buildConfiguration: BuildConfiguration
+  projectId: ID!
+  buildNumber: Int!
+  buildStatus: BuildStatus!
+  platform: BuildPlatform!
+  totalTimeInSeconds: Float
+  downloadUrl: String
+  commitId: String
+  commitMessage: String
+  branch: String
+  createdAt: DateTime!
+  finishedAt: DateTime
+}
+
+"""Platform target and settings that drive a Build Automation job."""
+type BuildConfiguration {
+  id: ID!
+  projectId: ID!
+  name: String!
+  platform: BuildPlatform!
+  enabled: Boolean!
+  branch: String
+  autoBuild: Boolean!
+  unityVersion: String
+  credentials: JSON
+  envVars: JSON
+  builds: [Build!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Cloud Code
+# ---------------------------------------------------------------------------
+
+"""Aggregate service representation for Cloud Code within a project environment."""
+type CloudCode {
+  projectId: ID!
+  environmentId: ID!
+  scripts: [CloudCodeScript!]!
+  modules: [CloudCodeModule!]!
+}
+
+"""A compiled C# module deployed to the Cloud Code serverless runtime."""
+type CloudCodeModule {
+  id: ID!
+  name: String!
+  projectId: ID!
+  environmentId: ID!
+  status: CloudCodeModuleStatus!
+  functions: [Function!]!
+  language: String!
+  sizeBytes: Int
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A JavaScript script deployed to the Cloud Code serverless runtime."""
+type CloudCodeScript {
+  id: ID!
+  name: String!
+  projectId: ID!
+  environmentId: ID!
+  status: CloudCodeScriptStatus!
+  code: String
+  language: String!
+  parameters: [ScriptParameter!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A named parameter definition for a Cloud Code script."""
+type ScriptParameter {
+  name: String!
+  type: String!
+  required: Boolean!
+  description: String
+}
+
+"""A callable function within a Cloud Code module or script."""
+type Function {
+  name: String!
+  moduleName: String
+  scriptName: String
+  parameters: [ScriptParameter!]!
+}
+
+"""A recorded invocation (execution) of a Cloud Code function."""
+type FunctionInvocation {
+  id: ID!
+  functionName: String!
+  projectId: ID!
+  environmentId: ID!
+  playerId: String
+  input: JSON
+  output: JSON
+  durationMs: Int
+  success: Boolean!
+  error: String
+  invokedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Cloud Save
+# ---------------------------------------------------------------------------
+
+"""Service-level aggregate for Cloud Save player and game data persistence."""
+type CloudSave {
+  projectId: ID!
+  environmentId: ID!
+  playerData(playerId: ID!): [CloudSaveData!]!
+}
+
+"""A key-value data item stored in Cloud Save for a player or as shared game state."""
+type CloudSaveData {
+  key: String!
+  value: JSON
+  playerId: String
+  accessClass: AccessClass!
+  writeLock: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Economy
+# ---------------------------------------------------------------------------
+
+"""Aggregate service representation for in-game economy configuration."""
+type Economy {
+  projectId: ID!
+  environmentId: ID!
+  currencies: [EconomyCurrency!]!
+  inventoryItems: [EconomyInventoryItem!]!
+  virtualPurchases: [EconomyVirtualPurchase!]!
+  realMoneyPurchases: [EconomyRealMoneyPurchase!]!
+}
+
+"""A virtual currency definition within the Economy service."""
+type EconomyCurrency {
+  id: ID!
+  resourceId: String!
+  name: String!
+  type: EconomyCurrencyType!
+  initial: Int!
+  max: Int
+  projectId: ID!
+  environmentId: ID!
+  customData: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An abstract resource in the Economy service (currency, item, or purchase)."""
+interface EconomyResource {
+  id: ID!
+  resourceId: String!
+  name: String!
+  type: EconomyResourceType!
+  projectId: ID!
+  environmentId: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An exchange of virtual currency for resources or other currency."""
+type EconomyVirtualPurchase implements EconomyResource {
+  id: ID!
+  resourceId: String!
+  name: String!
+  type: EconomyResourceType!
+  projectId: ID!
+  environmentId: ID!
+  costs: [PurchaseCost!]!
+  rewards: [PurchaseReward!]!
+  customData: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An in-app purchase backed by a platform store receipt."""
+type EconomyRealMoneyPurchase implements EconomyResource {
+  id: ID!
+  resourceId: String!
+  name: String!
+  type: EconomyResourceType!
+  projectId: ID!
+  environmentId: ID!
+  storeIdentifiers: JSON
+  rewards: [PurchaseReward!]!
+  customData: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""The cost component of a virtual purchase (currency spent)."""
+type PurchaseCost {
+  resourceId: String!
+  amount: Int!
+}
+
+"""The reward component of a virtual purchase (items or currency received)."""
+type PurchaseReward {
+  resourceId: String!
+  amount: Int!
+}
+
+"""A player's instance of an economy resource in their inventory."""
+type EconomyInventoryItem {
+  playlistItemId: ID!
+  inventoryItemId: String!
+  resourceId: String!
+  playerId: ID!
+  quantity: Int!
+  instanceData: JSON
+  writeLock: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Friends and Social
+# ---------------------------------------------------------------------------
+
+"""Service-level aggregate for the Friends social graph."""
+type Friends {
+  projectId: ID!
+  playerId: ID!
+  friends: [Player!]!
+  incomingRequests: [FriendRequest!]!
+  outgoingRequests: [FriendRequest!]!
+  blocked: [Player!]!
+}
+
+"""A pending or resolved friend request between two players."""
+type FriendRequest {
+  id: ID!
+  fromPlayerId: ID!
+  toPlayerId: ID!
+  status: FriendRequestStatus!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Real-time online and activity status for a player."""
+type Presence {
+  playerId: ID!
+  availability: PresenceAvailability!
+  activityStatus: String
+  lastSeen: DateTime
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Lobby
+# ---------------------------------------------------------------------------
+
+"""A pre-match gathering space for players with custom data and query filters."""
+type Lobby {
+  id: ID!
+  name: String!
+  lobbyCode: String!
+  maxPlayers: Int!
+  availableSlots: Int!
+  visibility: LobbyVisibility!
+  status: LobbyStatus!
+  hostId: ID!
+  players: [LobbyPlayer!]!
+  data: JSON
+  playerData: JSON
+  isLocked: Boolean!
+  hasPassword: Boolean!
+  environmentId: ID!
+  created: DateTime!
+  lastUpdated: DateTime!
+}
+
+"""A player slot within a Lobby with associated player-level data."""
+type LobbyPlayer {
+  id: ID!
+  connectionInfo: String
+  allocationId: String
+  joined: DateTime!
+  data: JSON
+}
+
+# ---------------------------------------------------------------------------
+# Players
+# ---------------------------------------------------------------------------
+
+"""A registered game player with profile and service data."""
+type Player {
+  id: ID!
+  projectId: ID!
+  externalIds: [ExternalIdentity!]!
+  disabled: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  lastLoginAt: DateTime
+}
+
+"""An external identity provider link associated with a player."""
+type ExternalIdentity {
+  providerId: String!
+  externalId: String!
+  providerType: AuthProviderType!
+}
+
+# ---------------------------------------------------------------------------
+# Leaderboards
+# ---------------------------------------------------------------------------
+
+"""A ranked list configuration with scoring rules and optional reset schedules."""
+type Leaderboard {
+  id: ID!
+  name: String!
+  projectId: ID!
+  environmentId: ID!
+  sortOrder: String!
+  updateType: String!
+  bucketSize: Int
+  resetConfig: JSON
+  tierDefinitions: JSON
+  scores(limit: Int, offset: Int): [LeaderboardEntry!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A single player's ranked record in a Leaderboard."""
+type LeaderboardEntry {
+  rank: Int!
+  playerId: ID!
+  score: Float!
+  tier: String
+  metadata: JSON
+  updatedAt: DateTime!
+}
+
+"""A numeric score value submitted to a leaderboard."""
+type Score {
+  leaderboardId: ID!
+  playerId: ID!
+  score: Float!
+  metadata: JSON
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Matchmaking
+# ---------------------------------------------------------------------------
+
+"""A completed match result linking players to an allocated game server."""
+type Match {
+  id: ID!
+  queueName: String!
+  poolName: String
+  players: [MatchPlayer!]!
+  assignment: MatchAssignment
+  createdAt: DateTime!
+}
+
+"""A player included in a match result."""
+type MatchPlayer {
+  playerId: ID!
+  teamId: String
+  customData: JSON
+}
+
+"""Server assignment details returned when a match is found."""
+type MatchAssignment {
+  serverId: String
+  serverIp: String
+  serverPort: Int
+  allocationId: String
+  customData: JSON
+}
+
+"""A request submitted to the Unity Matchmaker service for player grouping."""
+type MatchmakerTicket {
+  id: ID!
+  queueName: String!
+  status: MatchmakerTicketStatus!
+  players: [MatchPlayer!]!
+  assignment: MatchAssignment
+  attributes: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A matchmaking ticket with simplified state representation."""
+type Ticket {
+  id: ID!
+  status: MatchmakerTicketStatus!
+  assignment: MatchAssignment
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Multiplay / Game Server Hosting
+# ---------------------------------------------------------------------------
+
+"""Service-level aggregate for dedicated game server infrastructure."""
+type Multiplay {
+  projectId: ID!
+  environmentId: ID!
+  fleets: [Fleet!]!
+  servers: [Server!]!
+}
+
+"""A physical or virtual machine registered in the Multiplay service."""
+type Server {
+  id: ID!
+  fleetId: ID!
+  ip: String!
+  port: Int
+  queryPort: Int
+  status: ServerStatus!
+  locationId: ID
+  machineId: ID
+  buildConfigurationId: ID
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A reservation of a Multiplay server for an active game session."""
+type ServerAllocation {
+  id: ID!
+  serverId: ID!
+  fleetId: ID!
+  regionId: ID!
+  requestId: String
+  allocationContext: JSON
+  ip: String
+  port: Int
+  createdAt: DateTime!
+  expiresAt: DateTime
+}
+
+"""A managed pool of game servers with auto-scaling configuration."""
+type Fleet {
+  id: ID!
+  name: String!
+  projectId: ID!
+  environmentId: ID!
+  buildConfigurationId: ID!
+  status: FleetStatus!
+  regions: [FleetRegion!]!
+  servers: [Server!]!
+  osFamily: String
+  serverEvents: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A geographic deployment region within a Fleet."""
+type FleetRegion {
+  regionId: ID!
+  name: String!
+  minAvailableServers: Int!
+  maxServers: Int!
+  scalingEnabled: Boolean!
+  currentServers: Int
+  availableServers: Int
+}
+
+"""A running game server process with full lifecycle state."""
+type GameServer {
+  serverId: ID!
+  fleetId: ID!
+  ip: String!
+  port: Int!
+  queryPort: Int
+  status: ServerStatus!
+  allocationId: String
+  gameServerBuildConfigurationName: String
+  locationRegionId: ID
+  labels: JSON
+  logDir: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Analytics
+# ---------------------------------------------------------------------------
+
+"""Service-level aggregate for Unity Analytics event ingestion and reporting."""
+type Analytics {
+  projectId: ID!
+  environmentId: ID!
+}
+
+"""A single player or game telemetry event ingested by Analytics."""
+type Event {
+  id: ID!
+  eventName: String!
+  eventType: String!
+  projectId: ID!
+  environmentId: ID!
+  userId: String
+  sessionId: String
+  eventTimestamp: DateTime!
+  eventData: JSON
+  userAttributes: [UserAttribute!]!
+}
+
+"""A batch of analytics events submitted together for ingestion efficiency."""
+type EventBatch {
+  batchId: ID!
+  projectId: ID!
+  events: [Event!]!
+  submittedAt: DateTime!
+  accepted: Int!
+  rejected: Int!
+}
+
+"""A custom attribute applied to a player for analytics segmentation."""
+type UserAttribute {
+  name: String!
+  value: String!
+  type: String!
+}
+
+# ---------------------------------------------------------------------------
+# Remote Config
+# ---------------------------------------------------------------------------
+
+"""Service-level aggregate for Unity Remote Config delivery."""
+type RemoteConfig {
+  projectId: ID!
+  environmentId: ID!
+  configValues: [ConfigValue!]!
+  gameOverrides: [GameOverride!]!
+}
+
+"""A conditional rule that overrides default config values for a player segment."""
+type GameOverride {
+  id: ID!
+  name: String!
+  projectId: ID!
+  environmentId: ID!
+  enabled: Boolean!
+  condition: String!
+  variants: [ConfigValue!]!
+  startDate: DateTime
+  endDate: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A typed key-value configuration entry in Remote Config."""
+type ConfigValue {
+  key: String!
+  value: JSON!
+  type: ConfigValueType!
+  schemaId: String
+}
+
+# ---------------------------------------------------------------------------
+# Authentication
+# ---------------------------------------------------------------------------
+
+"""Service-level aggregate for player identity and session management."""
+type Authentication {
+  projectId: ID!
+  environmentId: ID!
+}
+
+"""A short-lived JWT granting a player access to Unity Gaming Services."""
+type AccessToken {
+  token: String!
+  expiresIn: Int!
+  tokenType: String!
+  issuedAt: DateTime!
+}
+
+"""A completed sign-in session with provider and token details."""
+type SignIn {
+  sessionToken: String!
+  userId: ID!
+  idDomain: String
+  expiresIn: Int!
+  accessToken: AccessToken!
+  provider: AuthProviderType!
+  createdAt: DateTime!
+}
+
+"""An anonymous guest sign-in session."""
+type GuestSignIn {
+  sessionToken: String!
+  userId: ID!
+  accessToken: AccessToken!
+  createdAt: DateTime!
+}
+
+"""A Unity-issued token that encapsulates a player session identity."""
+type UnityToken {
+  token: String!
+  userId: ID!
+  projectId: ID!
+  expiresAt: DateTime!
+  issuedAt: DateTime!
+  provider: AuthProviderType!
+}
+
+# ---------------------------------------------------------------------------
+# Notifications
+# ---------------------------------------------------------------------------
+
+"""A push notification definition targeted at player devices."""
+type Notification {
+  id: ID!
+  projectId: ID!
+  environmentId: ID!
+  title: String!
+  body: String!
+  targetPlayers: [String!]!
+  scheduledAt: DateTime
+  status: NotificationStatus!
+  platform: String
+  data: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Relay
+# ---------------------------------------------------------------------------
+
+"""Service-level aggregate for relay-based peer-to-peer multiplayer networking."""
+type Relay {
+  projectId: ID!
+  environmentId: ID!
+  regions: [RelayRegion!]!
+}
+
+"""A geographic region for Unity Relay QoS and server selection."""
+type RelayRegion {
+  id: ID!
+  name: String!
+  description: String
+}
+
+"""A relay server slot allocated for a host player."""
+type RelayAllocation {
+  allocationId: ID!
+  connectionData: String!
+  key: String!
+  ip: String!
+  port: Int!
+  expiresAt: DateTime!
+  region: RelayRegion
+}
+
+"""A relay join token allowing a client to connect to a host's relay allocation."""
+type RelayAllocationJoin {
+  allocationId: ID!
+  hostConnectionData: String!
+  joinCode: String!
+  connectionData: String!
+  key: String!
+  expiresAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Subscriptions / Real-Time
+# ---------------------------------------------------------------------------
+
+"""A real-time event subscription for live data updates from UGS services."""
+type Subscription {
+  id: ID!
+  subscriptionType: SubscriptionType!
+  resourceId: ID!
+  playerId: ID!
+  projectId: ID!
+  createdAt: DateTime!
+  expiresAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Vivox Voice and Text Chat
+# ---------------------------------------------------------------------------
+
+"""A Vivox voice or text communication channel."""
+type VivoxChannel {
+  id: ID!
+  name: String!
+  channelType: String!
+  is3D: Boolean!
+  participants: [VivoxParticipant!]!
+  createdAt: DateTime!
+}
+
+"""A participant in a Vivox channel."""
+type VivoxParticipant {
+  playerId: ID!
+  isMuted: Boolean!
+  isSpeaking: Boolean!
+  joinedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Input Types
+# ---------------------------------------------------------------------------
+
+input CreateBuildConfigurationInput {
+  projectId: ID!
+  name: String!
+  platform: BuildPlatform!
+  branch: String
+  autoBuild: Boolean
+  unityVersion: String
+}
+
+input CreateCloudCodeScriptInput {
+  projectId: ID!
+  environmentId: ID!
+  name: String!
+  code: String!
+  parameters: [ScriptParameterInput!]
+}
+
+input ScriptParameterInput {
+  name: String!
+  type: String!
+  required: Boolean!
+  description: String
+}
+
+input InvokeFunctionInput {
+  projectId: ID!
+  environmentId: ID!
+  functionName: String!
+  playerId: ID!
+  params: JSON
+}
+
+input SetCloudSaveDataInput {
+  projectId: ID!
+  environmentId: ID!
+  playerId: ID!
+  key: String!
+  value: JSON!
+  accessClass: AccessClass
+  writeLock: String
+}
+
+input CreateEconomyCurrencyInput {
+  projectId: ID!
+  environmentId: ID!
+  resourceId: String!
+  name: String!
+  initial: Int!
+  max: Int
+  customData: JSON
+}
+
+input GrantCurrencyInput {
+  projectId: ID!
+  environmentId: ID!
+  playerId: ID!
+  currencyId: String!
+  amount: Int!
+}
+
+input CreateLobbyInput {
+  name: String!
+  maxPlayers: Int!
+  visibility: LobbyVisibility!
+  password: String
+  data: JSON
+  playerData: JSON
+  projectId: ID!
+  environmentId: ID!
+}
+
+input SubmitScoreInput {
+  leaderboardId: ID!
+  playerId: ID!
+  projectId: ID!
+  environmentId: ID!
+  score: Float!
+  metadata: JSON
+}
+
+input CreateMatchmakerTicketInput {
+  projectId: ID!
+  environmentId: ID!
+  queueName: String!
+  players: [MatchPlayerInput!]!
+  attributes: JSON
+}
+
+input MatchPlayerInput {
+  playerId: ID!
+  customData: JSON
+}
+
+input CreateFleetInput {
+  projectId: ID!
+  environmentId: ID!
+  name: String!
+  buildConfigurationId: ID!
+  regions: [FleetRegionInput!]!
+}
+
+input FleetRegionInput {
+  regionId: ID!
+  minAvailableServers: Int!
+  maxServers: Int!
+  scalingEnabled: Boolean
+}
+
+input SubmitAnalyticsEventInput {
+  projectId: ID!
+  environmentId: ID!
+  eventName: String!
+  eventType: String!
+  userId: String
+  sessionId: String
+  eventTimestamp: DateTime
+  eventData: JSON
+}
+
+input SetConfigValueInput {
+  projectId: ID!
+  environmentId: ID!
+  key: String!
+  value: JSON!
+  type: ConfigValueType!
+}
+
+input CreateGameOverrideInput {
+  projectId: ID!
+  environmentId: ID!
+  name: String!
+  condition: String!
+  variants: [SetConfigValueInput!]!
+  startDate: DateTime
+  endDate: DateTime
+}
+
+input SignInInput {
+  projectId: ID!
+  externalToken: String!
+  provider: AuthProviderType!
+}
+
+input GuestSignInInput {
+  projectId: ID!
+}
+
+input CreateNotificationInput {
+  projectId: ID!
+  environmentId: ID!
+  title: String!
+  body: String!
+  targetPlayers: [String!]!
+  scheduledAt: DateTime
+  platform: String
+  data: JSON
+}
+
+input AllocateRelayInput {
+  projectId: ID!
+  environmentId: ID!
+  region: String
+  maxConnections: Int!
+}
+
+input JoinRelayInput {
+  projectId: ID!
+  environmentId: ID!
+  joinCode: String!
+}
+
+input SendFriendRequestInput {
+  projectId: ID!
+  fromPlayerId: ID!
+  toPlayerId: ID!
+}
+
+input UpdatePresenceInput {
+  projectId: ID!
+  playerId: ID!
+  availability: PresenceAvailability!
+  activityStatus: String
+}
+
+# ---------------------------------------------------------------------------
+# Query Root
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Projects and Environments
+  project(id: ID!): Project
+  projects(organizationId: ID!): [Project!]!
+  environment(projectId: ID!, environmentId: ID!): Environment
+  environments(projectId: ID!): [Environment!]!
+
+  # Build Automation
+  build(projectId: ID!, buildId: ID!): Build
+  builds(projectId: ID!, buildTargetId: ID): [Build!]!
+  buildConfiguration(projectId: ID!, configId: ID!): BuildConfiguration
+  buildConfigurations(projectId: ID!): [BuildConfiguration!]!
+
+  # Cloud Code
+  cloudCodeScript(projectId: ID!, environmentId: ID!, scriptName: String!): CloudCodeScript
+  cloudCodeScripts(projectId: ID!, environmentId: ID!): [CloudCodeScript!]!
+  cloudCodeModule(projectId: ID!, environmentId: ID!, moduleName: String!): CloudCodeModule
+  cloudCodeModules(projectId: ID!, environmentId: ID!): [CloudCodeModule!]!
+
+  # Cloud Save
+  cloudSaveData(projectId: ID!, environmentId: ID!, playerId: ID!): [CloudSaveData!]!
+  cloudSaveItem(projectId: ID!, environmentId: ID!, playerId: ID!, key: String!): CloudSaveData
+
+  # Economy
+  economy(projectId: ID!, environmentId: ID!): Economy
+  economyCurrency(projectId: ID!, environmentId: ID!, currencyId: String!): EconomyCurrency
+  economyCurrencies(projectId: ID!, environmentId: ID!): [EconomyCurrency!]!
+  playerInventory(projectId: ID!, environmentId: ID!, playerId: ID!): [EconomyInventoryItem!]!
+
+  # Leaderboards
+  leaderboard(projectId: ID!, environmentId: ID!, leaderboardId: ID!): Leaderboard
+  leaderboards(projectId: ID!, environmentId: ID!): [Leaderboard!]!
+  leaderboardEntry(projectId: ID!, environmentId: ID!, leaderboardId: ID!, playerId: ID!): LeaderboardEntry
+  leaderboardTopScores(projectId: ID!, environmentId: ID!, leaderboardId: ID!, limit: Int): [LeaderboardEntry!]!
+
+  # Matchmaking
+  matchmakerTicket(projectId: ID!, environmentId: ID!, ticketId: ID!): MatchmakerTicket
+  matchmakerTickets(projectId: ID!, environmentId: ID!, queueName: String): [MatchmakerTicket!]!
+
+  # Relay
+  relay(projectId: ID!, environmentId: ID!): Relay
+  relayRegions(projectId: ID!, environmentId: ID!): [RelayRegion!]!
+
+  # Multiplay
+  fleet(projectId: ID!, environmentId: ID!, fleetId: ID!): Fleet
+  fleets(projectId: ID!, environmentId: ID!): [Fleet!]!
+  server(projectId: ID!, environmentId: ID!, serverId: ID!): Server
+  servers(projectId: ID!, environmentId: ID!, fleetId: ID): [Server!]!
+  serverAllocation(projectId: ID!, environmentId: ID!, allocationId: ID!): ServerAllocation
+  gameServer(projectId: ID!, environmentId: ID!, serverId: ID!): GameServer
+
+  # Analytics
+  analyticsEvents(projectId: ID!, environmentId: ID!, userId: String, limit: Int): [Event!]!
+
+  # Remote Config
+  remoteConfig(projectId: ID!, environmentId: ID!): RemoteConfig
+  configValue(projectId: ID!, environmentId: ID!, key: String!): ConfigValue
+  gameOverride(projectId: ID!, environmentId: ID!, overrideId: ID!): GameOverride
+  gameOverrides(projectId: ID!, environmentId: ID!): [GameOverride!]!
+
+  # Authentication
+  player(projectId: ID!, playerId: ID!): Player
+  players(projectId: ID!, limit: Int, offset: Int): [Player!]!
+
+  # Friends and Social
+  friends(projectId: ID!, playerId: ID!): Friends
+  friendRequests(projectId: ID!, playerId: ID!): [FriendRequest!]!
+  presence(projectId: ID!, playerId: ID!): Presence
+
+  # Lobby
+  lobby(projectId: ID!, lobbyId: ID!): Lobby
+  queryLobbies(projectId: ID!, filter: JSON, limit: Int): [Lobby!]!
+
+  # Notifications
+  notification(projectId: ID!, notificationId: ID!): Notification
+  notifications(projectId: ID!, environmentId: ID!): [Notification!]!
+
+  # Vivox
+  vivoxChannel(channelId: ID!): VivoxChannel
+  vivoxChannels(projectId: ID!): [VivoxChannel!]!
+}
+
+# ---------------------------------------------------------------------------
+# Mutation Root
+# ---------------------------------------------------------------------------
+
+type Mutation {
+  # Build Automation
+  triggerBuild(projectId: ID!, buildTargetId: ID!, clean: Boolean): Build!
+  cancelBuild(projectId: ID!, buildId: ID!): Build!
+  createBuildConfiguration(input: CreateBuildConfigurationInput!): BuildConfiguration!
+  updateBuildConfiguration(projectId: ID!, configId: ID!, input: CreateBuildConfigurationInput!): BuildConfiguration!
+  deleteBuildConfiguration(projectId: ID!, configId: ID!): Boolean!
+
+  # Cloud Code
+  createCloudCodeScript(input: CreateCloudCodeScriptInput!): CloudCodeScript!
+  updateCloudCodeScript(projectId: ID!, environmentId: ID!, scriptName: String!, code: String!): CloudCodeScript!
+  deleteCloudCodeScript(projectId: ID!, environmentId: ID!, scriptName: String!): Boolean!
+  invokeFunction(input: InvokeFunctionInput!): FunctionInvocation!
+
+  # Cloud Save
+  setCloudSaveData(input: SetCloudSaveDataInput!): CloudSaveData!
+  deleteCloudSaveData(projectId: ID!, environmentId: ID!, playerId: ID!, key: String!): Boolean!
+
+  # Economy
+  createEconomyCurrency(input: CreateEconomyCurrencyInput!): EconomyCurrency!
+  grantCurrency(input: GrantCurrencyInput!): EconomyInventoryItem!
+  makeVirtualPurchase(projectId: ID!, environmentId: ID!, playerId: ID!, purchaseId: String!): EconomyVirtualPurchase!
+
+  # Leaderboards
+  createLeaderboard(projectId: ID!, environmentId: ID!, name: String!, sortOrder: String!, updateType: String!): Leaderboard!
+  submitScore(input: SubmitScoreInput!): Score!
+  deleteLeaderboard(projectId: ID!, environmentId: ID!, leaderboardId: ID!): Boolean!
+
+  # Matchmaking
+  createMatchmakerTicket(input: CreateMatchmakerTicketInput!): MatchmakerTicket!
+  cancelMatchmakerTicket(projectId: ID!, environmentId: ID!, ticketId: ID!): Boolean!
+
+  # Relay
+  allocateRelay(input: AllocateRelayInput!): RelayAllocation!
+  joinRelay(input: JoinRelayInput!): RelayAllocationJoin!
+
+  # Multiplay
+  createFleet(input: CreateFleetInput!): Fleet!
+  deleteFleet(projectId: ID!, environmentId: ID!, fleetId: ID!): Boolean!
+  allocateServer(projectId: ID!, environmentId: ID!, fleetId: ID!, regionId: ID!): ServerAllocation!
+  deallocateServer(projectId: ID!, environmentId: ID!, allocationId: ID!): Boolean!
+
+  # Analytics
+  submitAnalyticsEvent(input: SubmitAnalyticsEventInput!): Event!
+  submitAnalyticsEventBatch(projectId: ID!, environmentId: ID!, events: [SubmitAnalyticsEventInput!]!): EventBatch!
+
+  # Remote Config
+  setConfigValue(input: SetConfigValueInput!): ConfigValue!
+  deleteConfigValue(projectId: ID!, environmentId: ID!, key: String!): Boolean!
+  createGameOverride(input: CreateGameOverrideInput!): GameOverride!
+  updateGameOverride(projectId: ID!, environmentId: ID!, overrideId: ID!, enabled: Boolean): GameOverride!
+  deleteGameOverride(projectId: ID!, environmentId: ID!, overrideId: ID!): Boolean!
+
+  # Authentication
+  signIn(input: SignInInput!): SignIn!
+  guestSignIn(input: GuestSignInInput!): GuestSignIn!
+  signOut(projectId: ID!, playerId: ID!): Boolean!
+  refreshToken(projectId: ID!, sessionToken: String!): AccessToken!
+  linkExternalIdentity(projectId: ID!, playerId: ID!, provider: AuthProviderType!, externalToken: String!): Player!
+  unlinkExternalIdentity(projectId: ID!, playerId: ID!, provider: AuthProviderType!): Player!
+
+  # Friends and Social
+  sendFriendRequest(input: SendFriendRequestInput!): FriendRequest!
+  acceptFriendRequest(projectId: ID!, requestId: ID!): FriendRequest!
+  rejectFriendRequest(projectId: ID!, requestId: ID!): FriendRequest!
+  removeFriend(projectId: ID!, playerId: ID!, friendPlayerId: ID!): Boolean!
+  blockPlayer(projectId: ID!, playerId: ID!, targetPlayerId: ID!): Boolean!
+  unblockPlayer(projectId: ID!, playerId: ID!, targetPlayerId: ID!): Boolean!
+  updatePresence(input: UpdatePresenceInput!): Presence!
+
+  # Lobby
+  createLobby(input: CreateLobbyInput!): Lobby!
+  joinLobby(projectId: ID!, lobbyId: ID!, playerId: ID!, password: String): Lobby!
+  joinLobbyByCode(projectId: ID!, lobbyCode: String!, playerId: ID!, password: String): Lobby!
+  leaveLobby(projectId: ID!, lobbyId: ID!, playerId: ID!): Boolean!
+  deleteLobby(projectId: ID!, lobbyId: ID!): Boolean!
+  heartbeatLobby(projectId: ID!, lobbyId: ID!, playerId: ID!): Boolean!
+  updateLobby(projectId: ID!, lobbyId: ID!, data: JSON): Lobby!
+
+  # Notifications
+  createNotification(input: CreateNotificationInput!): Notification!
+  cancelNotification(projectId: ID!, notificationId: ID!): Notification!
+}
+
+# ---------------------------------------------------------------------------
+# Subscription Root
+# ---------------------------------------------------------------------------
+
+type SubscriptionRoot {
+  lobbyUpdated(projectId: ID!, lobbyId: ID!): Lobby!
+  matchmakerTicketUpdated(projectId: ID!, environmentId: ID!, ticketId: ID!): MatchmakerTicket!
+  presenceUpdated(projectId: ID!, playerId: ID!): Presence!
+}
