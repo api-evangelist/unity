@@ -1,0 +1,240 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Lobby API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lobbies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Lobby",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://lobby.services.api.unity.com/v1/lobbies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new lobby with the specified configuration. The requesting player becomes the lobby host."
+        },
+        {
+          "info": {
+            "name": "Get Lobby",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://lobby.services.api.unity.com/v1/lobbies/:lobbyId",
+            "params": [
+              {
+                "name": "lobbyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the current state and configuration of a lobby."
+        },
+        {
+          "info": {
+            "name": "Update Lobby",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://lobby.services.api.unity.com/v1/lobbies/:lobbyId",
+            "params": [
+              {
+                "name": "lobbyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates lobby configuration and data. Only the lobby host can update the lobby."
+        },
+        {
+          "info": {
+            "name": "Delete Lobby",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://lobby.services.api.unity.com/v1/lobbies/:lobbyId",
+            "params": [
+              {
+                "name": "lobbyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a lobby. Only the host can delete the lobby."
+        },
+        {
+          "info": {
+            "name": "Join Lobby By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://lobby.services.api.unity.com/v1/lobbies/:lobbyId/join",
+            "params": [
+              {
+                "name": "lobbyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Joins an existing lobby by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Join Lobby By Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://lobby.services.api.unity.com/v1/lobbies/code/:lobbyCode",
+            "params": [
+              {
+                "name": "lobbyCode",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Joins a private lobby using a lobby join code shared by the host."
+        },
+        {
+          "info": {
+            "name": "Heartbeat Lobby",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://lobby.services.api.unity.com/v1/lobbies/:lobbyId/heartbeat",
+            "params": [
+              {
+                "name": "lobbyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Sends a heartbeat to keep the lobby active. Lobbies without recent heartbeats are automatically deleted."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Lobbies",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://lobby.services.api.unity.com/v1/lobbies/query",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for available lobbies using filter and sort criteria. Only returns public lobbies."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Players",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Player Data In Lobby",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://lobby.services.api.unity.com/v1/lobbies/:lobbyId/players/:playerId",
+            "params": [
+              {
+                "name": "lobbyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a player's custom data within the lobby."
+        },
+        {
+          "info": {
+            "name": "Remove Player From Lobby",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://lobby.services.api.unity.com/v1/lobbies/:lobbyId/players/:playerId",
+            "params": [
+              {
+                "name": "lobbyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a player from the lobby. Host can remove any player; players can remove themselves."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

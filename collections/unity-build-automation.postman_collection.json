@@ -1,0 +1,1383 @@
+{
+  "item": [
+    {
+      "id": "7352855d-92a6-4ddb-b21a-08179bd8bc4f",
+      "name": "Builds",
+      "description": {
+        "content": "Manage and trigger builds",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1cb2c9ed-e49e-4b17-9c23-0593f881a308",
+          "name": "Get Builds",
+          "request": {
+            "name": "Get Builds",
+            "description": {
+              "content": "Returns the build history for a build target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orgs",
+                ":orgid",
+                "projects",
+                ":projectid",
+                "buildtargets",
+                ":buildtargetid",
+                "builds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "buildtargetid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0efb28d3-c2b9-4d86-94be-3b18f6a26ead",
+              "name": "Build history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orgs",
+                    ":orgid",
+                    "projects",
+                    ":projectid",
+                    "buildtargets",
+                    ":buildtargetid",
+                    "builds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "25"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "buildtargetid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"build\": 9650,\n    \"buildtargetid\": \"string\",\n    \"buildTargetName\": \"string\",\n    \"platform\": \"string\",\n    \"status\": \"sentToBuilder\",\n    \"changeset\": [\n      {\n        \"commitId\": \"string\",\n        \"message\": \"string\",\n        \"timestamp\": \"1957-11-03T18:58:22.886Z\"\n      },\n      {\n        \"commitId\": \"string\",\n        \"message\": \"string\",\n        \"timestamp\": \"1956-09-22T12:14:41.469Z\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"key\": \"string\",\n        \"name\": \"string\",\n        \"primary\": true,\n        \"show_download\": false,\n        \"links\": {\n          \"href\": \"string\"\n        }\n      },\n      {\n        \"key\": \"string\",\n        \"name\": \"string\",\n        \"primary\": true,\n        \"show_download\": false,\n        \"links\": {\n          \"href\": \"string\"\n        }\n      }\n    ],\n    \"created\": \"1998-12-05T13:27:26.392Z\",\n    \"finished\": \"1988-05-09T18:43:20.122Z\",\n    \"duration\": 2861\n  },\n  {\n    \"build\": 2054,\n    \"buildtargetid\": \"string\",\n    \"buildTargetName\": \"string\",\n    \"platform\": \"string\",\n    \"status\": \"started\",\n    \"changeset\": [\n      {\n        \"commitId\": \"string\",\n        \"message\": \"string\",\n        \"timestamp\": \"2015-06-25T00:47:08.825Z\"\n      },\n      {\n        \"commitId\": \"string\",\n        \"message\": \"string\",\n        \"timestamp\": \"1955-08-14T20:05:20.656Z\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"key\": \"string\",\n        \"name\": \"string\",\n        \"primary\": true,\n        \"show_download\": true,\n        \"links\": {\n          \"href\": \"string\"\n        }\n      },\n      {\n        \"key\": \"string\",\n        \"name\": \"string\",\n        \"primary\": false,\n        \"show_download\": true,\n        \"links\": {\n          \"href\": \"string\"\n        }\n      }\n    ],\n    \"created\": \"1981-09-07T19:30:56.449Z\",\n    \"finished\": \"1971-09-21T01:52:18.477Z\",\n    \"duration\": 2393\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5cf54dd-5abc-4120-9ce2-c1944007fe27",
+          "name": "Start Build",
+          "request": {
+            "name": "Start Build",
+            "description": {
+              "content": "Triggers a new build for the specified build target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orgs",
+                ":orgid",
+                "projects",
+                ":projectid",
+                "buildtargets",
+                ":buildtargetid",
+                "builds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "buildtargetid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clean\": \"<boolean>\",\n  \"delay\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "52246eda-1d2e-4313-848a-fd4d72f0f0d3",
+              "name": "Build started",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orgs",
+                    ":orgid",
+                    "projects",
+                    ":projectid",
+                    "buildtargets",
+                    ":buildtargetid",
+                    "builds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "buildtargetid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clean\": \"<boolean>\",\n  \"delay\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"build\": 6335,\n    \"buildtargetid\": \"string\",\n    \"buildTargetName\": \"string\",\n    \"platform\": \"string\",\n    \"status\": \"sentToBuilder\",\n    \"changeset\": [\n      {\n        \"commitId\": \"string\",\n        \"message\": \"string\",\n        \"timestamp\": \"1975-01-18T10:29:24.777Z\"\n      },\n      {\n        \"commitId\": \"string\",\n        \"message\": \"string\",\n        \"timestamp\": \"1973-09-22T00:42:23.677Z\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"key\": \"string\",\n        \"name\": \"string\",\n        \"primary\": false,\n        \"show_download\": false,\n        \"links\": {\n          \"href\": \"string\"\n        }\n      },\n      {\n        \"key\": \"string\",\n        \"name\": \"string\",\n        \"primary\": false,\n        \"show_download\": true,\n        \"links\": {\n          \"href\": \"string\"\n        }\n      }\n    ],\n    \"created\": \"1952-09-16T03:57:02.422Z\",\n    \"finished\": \"2017-07-17T04:49:42.635Z\",\n    \"duration\": 2675\n  },\n  {\n    \"build\": 3725,\n    \"buildtargetid\": \"string\",\n    \"buildTargetName\": \"string\",\n    \"platform\": \"string\",\n    \"status\": \"unknown\",\n    \"changeset\": [\n      {\n        \"commitId\": \"string\",\n        \"message\": \"string\",\n        \"timestamp\": \"1991-06-13T14:41:37.958Z\"\n      },\n      {\n        \"commitId\": \"string\",\n        \"message\": \"string\",\n        \"timestamp\": \"2024-02-23T22:18:02.324Z\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"key\": \"string\",\n        \"name\": \"string\",\n        \"primary\": false,\n        \"show_download\": false,\n        \"links\": {\n          \"href\": \"string\"\n        }\n      },\n      {\n        \"key\": \"string\",\n        \"name\": \"string\",\n        \"primary\": false,\n        \"show_download\": false,\n        \"links\": {\n          \"href\": \"string\"\n        }\n      }\n    ],\n    \"created\": \"2008-02-21T12:56:29.086Z\",\n    \"finished\": \"1952-12-17T22:06:56.711Z\",\n    \"duration\": 5731\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d4bf857-9e14-4168-9ac0-bbb106adf5f2",
+          "name": "Get Build",
+          "request": {
+            "name": "Get Build",
+            "description": {
+              "content": "Returns details for a specific build including status, artifacts, and logs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orgs",
+                ":orgid",
+                "projects",
+                ":projectid",
+                "buildtargets",
+                ":buildtargetid",
+                "builds",
+                ":number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "buildtargetid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "number",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae4fba48-11ac-4b27-99f1-921becec190f",
+              "name": "Build details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orgs",
+                    ":orgid",
+                    "projects",
+                    ":projectid",
+                    "buildtargets",
+                    ":buildtargetid",
+                    "builds",
+                    ":number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "buildtargetid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "number",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"build\": 5098,\n  \"buildtargetid\": \"string\",\n  \"buildTargetName\": \"string\",\n  \"platform\": \"string\",\n  \"status\": \"sentToBuilder\",\n  \"changeset\": [\n    {\n      \"commitId\": \"string\",\n      \"message\": \"string\",\n      \"timestamp\": \"1999-10-17T01:35:10.638Z\"\n    },\n    {\n      \"commitId\": \"string\",\n      \"message\": \"string\",\n      \"timestamp\": \"2019-10-16T12:45:28.830Z\"\n    }\n  ],\n  \"artifacts\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"primary\": true,\n      \"show_download\": false,\n      \"links\": {\n        \"href\": \"string\"\n      }\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"primary\": false,\n      \"show_download\": true,\n      \"links\": {\n        \"href\": \"string\"\n      }\n    }\n  ],\n  \"created\": \"2023-06-29T03:01:46.890Z\",\n  \"finished\": \"1960-11-13T05:01:59.248Z\",\n  \"duration\": 449\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ea5e42a-0124-4b2a-bc49-99c7eae4bc2a",
+          "name": "Cancel Build",
+          "request": {
+            "name": "Cancel Build",
+            "description": {
+              "content": "Cancels an in-progress build.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orgs",
+                ":orgid",
+                "projects",
+                ":projectid",
+                "buildtargets",
+                ":buildtargetid",
+                "builds",
+                ":number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "buildtargetid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "number",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97004ea9-3860-4d8c-b3ea-f329451d8370",
+              "name": "Build cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orgs",
+                    ":orgid",
+                    "projects",
+                    ":projectid",
+                    "buildtargets",
+                    ":buildtargetid",
+                    "builds",
+                    ":number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "buildtargetid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "number",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "98f12c51-509c-46c3-bbb0-7471585a749b",
+      "name": "Build Targets",
+      "description": {
+        "content": "Configure build targets and platforms",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "304e2332-29f1-4389-bd5f-79f0efce98a6",
+          "name": "List Build Targets",
+          "request": {
+            "name": "List Build Targets",
+            "description": {
+              "content": "Returns all configured build targets for the specified project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orgs",
+                ":orgid",
+                "projects",
+                ":projectid",
+                "buildtargets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44cfd573-be6d-47b5-a9ac-ea0e8fa7cd98",
+              "name": "List of build targets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orgs",
+                    ":orgid",
+                    "projects",
+                    ":projectid",
+                    "buildtargets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"buildtargetid\": \"string\",\n    \"name\": \"string\",\n    \"platform\": \"standaloneosxintel64\",\n    \"enabled\": true,\n    \"settings\": {\n      \"unity\": {\n        \"version\": \"string\"\n      },\n      \"scm\": {\n        \"type\": \"string\",\n        \"branch\": \"string\"\n      }\n    },\n    \"created\": \"2012-12-30T03:46:16.578Z\",\n    \"modified\": \"2009-03-16T04:11:27.147Z\"\n  },\n  {\n    \"buildtargetid\": \"string\",\n    \"name\": \"string\",\n    \"platform\": \"standaloneosxintel64\",\n    \"enabled\": true,\n    \"settings\": {\n      \"unity\": {\n        \"version\": \"string\"\n      },\n      \"scm\": {\n        \"type\": \"string\",\n        \"branch\": \"string\"\n      }\n    },\n    \"created\": \"1972-06-10T11:58:50.621Z\",\n    \"modified\": \"1950-11-27T03:39:36.332Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bf599c2-b263-4ccd-9abb-bb2569c0254b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orgs",
+                    ":orgid",
+                    "projects",
+                    ":projectid",
+                    "buildtargets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3b6d255-17fd-4ffa-bc6d-9825e9f65c7e",
+          "name": "Create Build Target",
+          "request": {
+            "name": "Create Build Target",
+            "description": {
+              "content": "Creates a new build target for a specific platform and configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orgs",
+                ":orgid",
+                "projects",
+                ":projectid",
+                "buildtargets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"settings\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b48f8866-cb2d-40a0-a160-ca035c234cf0",
+              "name": "Build target created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orgs",
+                    ":orgid",
+                    "projects",
+                    ":projectid",
+                    "buildtargets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"settings\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buildtargetid\": \"string\",\n  \"name\": \"string\",\n  \"platform\": \"standaloneosxintel64\",\n  \"enabled\": true,\n  \"settings\": {\n    \"unity\": {\n      \"version\": \"string\"\n    },\n    \"scm\": {\n      \"type\": \"string\",\n      \"branch\": \"string\"\n    }\n  },\n  \"created\": \"2003-09-27T02:02:28.208Z\",\n  \"modified\": \"2022-01-14T05:50:03.236Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e02b973f-fdb2-4e21-a038-308d3881d29e",
+          "name": "Get Build Target",
+          "request": {
+            "name": "Get Build Target",
+            "description": {
+              "content": "Returns the configuration for a specific build target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orgs",
+                ":orgid",
+                "projects",
+                ":projectid",
+                "buildtargets",
+                ":buildtargetid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "buildtargetid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0547469d-a8e2-4620-bd35-4071dd8b1e40",
+              "name": "Build target details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orgs",
+                    ":orgid",
+                    "projects",
+                    ":projectid",
+                    "buildtargets",
+                    ":buildtargetid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "buildtargetid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buildtargetid\": \"string\",\n  \"name\": \"string\",\n  \"platform\": \"standaloneosxintel64\",\n  \"enabled\": true,\n  \"settings\": {\n    \"unity\": {\n      \"version\": \"string\"\n    },\n    \"scm\": {\n      \"type\": \"string\",\n      \"branch\": \"string\"\n    }\n  },\n  \"created\": \"2003-09-27T02:02:28.208Z\",\n  \"modified\": \"2022-01-14T05:50:03.236Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7660c8ad-ef85-4165-b72b-c56201b38036",
+          "name": "Update Build Target",
+          "request": {
+            "name": "Update Build Target",
+            "description": {
+              "content": "Updates the configuration of an existing build target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orgs",
+                ":orgid",
+                "projects",
+                ":projectid",
+                "buildtargets",
+                ":buildtargetid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "buildtargetid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"settings\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55bb7dc5-f51f-430a-8775-b195c8ab5851",
+              "name": "Build target updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orgs",
+                    ":orgid",
+                    "projects",
+                    ":projectid",
+                    "buildtargets",
+                    ":buildtargetid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "buildtargetid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"settings\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buildtargetid\": \"string\",\n  \"name\": \"string\",\n  \"platform\": \"standaloneosxintel64\",\n  \"enabled\": true,\n  \"settings\": {\n    \"unity\": {\n      \"version\": \"string\"\n    },\n    \"scm\": {\n      \"type\": \"string\",\n      \"branch\": \"string\"\n    }\n  },\n  \"created\": \"2003-09-27T02:02:28.208Z\",\n  \"modified\": \"2022-01-14T05:50:03.236Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2a65aa5-977a-4611-94da-7d52d8d72014",
+          "name": "Delete Build Target",
+          "request": {
+            "name": "Delete Build Target",
+            "description": {
+              "content": "Deletes a build target configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orgs",
+                ":orgid",
+                "projects",
+                ":projectid",
+                "buildtargets",
+                ":buildtargetid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "buildtargetid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "889c3dec-9f23-40bb-89c3-c1b43ad075ae",
+              "name": "Build target deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orgs",
+                    ":orgid",
+                    "projects",
+                    ":projectid",
+                    "buildtargets",
+                    ":buildtargetid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "buildtargetid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e2c8ff68-b0e7-4442-9ca8-56cd3489243f",
+      "name": "Orgs",
+      "description": {
+        "content": "Organization management",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://build-api.cloud.unity3d.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "42f5affa-32bb-40aa-8962-dd00bfc0cf71",
+    "name": "Unity Build Automation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Build Automation REST API enables automating and integrating continuous integration builds into custom workflows. It provides access to build history, build status, build artifacts, and supports webhook callbacks for build lifecycle events. Supports cloud builds for iOS, Android, WebGL, Windows, Mac, Linux, and console platforms.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

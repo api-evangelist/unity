@@ -1,0 +1,281 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Economy API",
+    "version": "v2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Economy Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://economy.services.api.unity.com/v2/projects/:projectId/environments/:environmentId/configs/items",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of all economy resource configurations for the project."
+        },
+        {
+          "info": {
+            "name": "Get Economy Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://economy.services.api.unity.com/v2/projects/:projectId/environments/:environmentId/configs/items/:resourceId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific economy resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Currencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Player Currency Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://economy.services.api.unity.com/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all currency balances for the specified player."
+        },
+        {
+          "info": {
+            "name": "Increment Player Currency Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://economy.services.api.unity.com/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies/:currencyId/increment",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "currencyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Increases a player's currency balance by the specified amount."
+        },
+        {
+          "info": {
+            "name": "Decrement Player Currency Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://economy.services.api.unity.com/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies/:currencyId/decrement",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "currencyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Decreases a player's currency balance by the specified amount."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Player Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://economy.services.api.unity.com/v2/projects/:projectId/environments/:environmentId/players/:playerId/inventory",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playersItemIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "itemIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all inventory items currently held by the player."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Purchases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Make Virtual Purchase",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://economy.services.api.unity.com/v2/projects/:projectId/environments/:environmentId/players/:playerId/purchases/virtual",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Processes a virtual purchase using the player's in-game currency or items."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

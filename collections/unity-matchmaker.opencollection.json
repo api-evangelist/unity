@@ -1,0 +1,253 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Matchmaker API",
+    "version": "v3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tickets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Matchmaking Ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://matchmaker.services.api.unity.com/v3/projects/:projectId/environments/:environmentId/tickets",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a matchmaking ticket for a player or group of players. The ticket enters the matchmaking queue and is matched with other players based on configured rules."
+        },
+        {
+          "info": {
+            "name": "Get Matchmaking Ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://matchmaker.services.api.unity.com/v3/projects/:projectId/environments/:environmentId/tickets/:ticketId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the current status of a matchmaking ticket. Polls this endpoint to check if a match has been found."
+        },
+        {
+          "info": {
+            "name": "Delete Matchmaking Ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://matchmaker.services.api.unity.com/v3/projects/:projectId/environments/:environmentId/tickets/:ticketId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels and deletes a matchmaking ticket. Used when a player exits the matchmaking queue."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Queues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Matchmaking Queues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://matchmaker.services.api.unity.com/v3/projects/:projectId/environments/:environmentId/queues",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all configured matchmaking queues for the environment."
+        },
+        {
+          "info": {
+            "name": "Create Matchmaking Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://matchmaker.services.api.unity.com/v3/projects/:projectId/environments/:environmentId/queues",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new matchmaking queue with specified rules and pool configuration."
+        },
+        {
+          "info": {
+            "name": "Get Matchmaking Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://matchmaker.services.api.unity.com/v3/projects/:projectId/environments/:environmentId/queues/:queueName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns configuration and status for a specific matchmaking queue."
+        },
+        {
+          "info": {
+            "name": "Update Matchmaking Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://matchmaker.services.api.unity.com/v3/projects/:projectId/environments/:environmentId/queues/:queueName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing matchmaking queue."
+        },
+        {
+          "info": {
+            "name": "Delete Matchmaking Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://matchmaker.services.api.unity.com/v3/projects/:projectId/environments/:environmentId/queues/:queueName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a matchmaking queue and all its configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,293 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Remote Config API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Remote Configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://remote-config.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/configs",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all configuration schemas and their settings for the specified project environment."
+        },
+        {
+          "info": {
+            "name": "Get Remote Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://remote-config.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/configs/:configId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "configId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a specific configuration with all its settings."
+        },
+        {
+          "info": {
+            "name": "Update Remote Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://remote-config.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/configs/:configId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "configId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates the complete set of settings for a configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Config Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://remote-config.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/configs/:configId/settings",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "configId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all settings (key-value pairs) in the configuration."
+        },
+        {
+          "info": {
+            "name": "Add Config Setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://remote-config.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/configs/:configId/settings",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "configId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new key-value setting to the configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Override Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Override Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://remote-config.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/rules",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all override rules for the environment. Rules target specific player segments with configuration overrides."
+        },
+        {
+          "info": {
+            "name": "Create Override Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://remote-config.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/rules",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new override rule targeting a specific player segment with custom configuration values."
+        },
+        {
+          "info": {
+            "name": "Update Override Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://remote-config.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/rules/:ruleId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing override rule's conditions or settings."
+        },
+        {
+          "info": {
+            "name": "Delete Override Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://remote-config.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/rules/:ruleId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a targeting override rule."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

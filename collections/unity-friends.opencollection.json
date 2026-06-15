@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Friends API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Friends",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Friends",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://social.services.api.unity.com/v1/me/relationships/friends",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the current player's friend list with presence information."
+        },
+        {
+          "info": {
+            "name": "Remove Friend or Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://social.services.api.unity.com/v1/me/relationships/:memberId",
+            "params": [
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a friend from the friend list or cancels/rejects a pending friend request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Friend Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Incoming Friend Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://social.services.api.unity.com/v1/me/relationships/requests/incoming",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all pending incoming friend requests for the current player."
+        },
+        {
+          "info": {
+            "name": "List Outgoing Friend Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://social.services.api.unity.com/v1/me/relationships/requests/outgoing"
+          },
+          "docs": "Returns all pending outgoing friend requests sent by the current player."
+        },
+        {
+          "info": {
+            "name": "Send Friend Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://social.services.api.unity.com/v1/me/relationships/:memberId/request",
+            "params": [
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path",
+                "description": "The Unity player ID to send a request to"
+              }
+            ]
+          },
+          "docs": "Sends a friend request to another player."
+        },
+        {
+          "info": {
+            "name": "Accept Friend Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://social.services.api.unity.com/v1/me/relationships/:memberId/accept",
+            "params": [
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Accepts a pending incoming friend request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Blocked Players",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://social.services.api.unity.com/v1/me/relationships/blocks"
+          },
+          "docs": "Returns all players that the current player has blocked."
+        },
+        {
+          "info": {
+            "name": "Block Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://social.services.api.unity.com/v1/me/relationships/:memberId/block",
+            "params": [
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Blocks a player, preventing them from sending friend requests or messages."
+        },
+        {
+          "info": {
+            "name": "Unblock Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://social.services.api.unity.com/v1/me/relationships/:memberId/unblock",
+            "params": [
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unblocks a previously blocked player."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1383 @@
+{
+  "item": [
+    {
+      "id": "8b057cf0-a275-4034-a3b6-156674dec245",
+      "name": "Configuration",
+      "description": {
+        "content": "Admin endpoints for managing economy resources",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e6ccaa4c-4c56-4705-9f37-ddd340c33e3e",
+          "name": "List Economy Configurations",
+          "request": {
+            "name": "List Economy Configurations",
+            "description": {
+              "content": "Returns a list of all economy resource configurations for the project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "configs",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "890a6aa7-3559-4c8a-8244-f910110ea0a5",
+              "name": "List of economy configurations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "configs",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"CURRENCY\",\n      \"initial\": 3278.690613189097,\n      \"max\": 7155.303327035845,\n      \"customData\": {},\n      \"created\": \"1967-09-24T16:17:53.993Z\",\n      \"modified\": \"1975-08-31T12:35:39.614Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"VIRTUAL_PURCHASE\",\n      \"initial\": 3537.125189135465,\n      \"max\": 6779.2549519288,\n      \"customData\": {},\n      \"created\": \"1980-07-07T14:20:01.646Z\",\n      \"modified\": \"1980-07-09T10:27:20.666Z\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61bdd435-8796-44c0-a104-13d9a231ab3e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "configs",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "177036dd-f4c0-4cbe-8887-1652970e495d",
+          "name": "Get Economy Configuration",
+          "request": {
+            "name": "Get Economy Configuration",
+            "description": {
+              "content": "Returns the configuration of a specific economy resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "configs",
+                "items",
+                ":resourceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dee0a314-1910-4368-88df-72dbb83d9d62",
+              "name": "Economy resource configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "configs",
+                    "items",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"INVENTORY_ITEM\",\n  \"initial\": 2393.818128199342,\n  \"max\": 7775.408407460856,\n  \"customData\": {},\n  \"created\": \"2001-07-19T03:52:06.701Z\",\n  \"modified\": \"1969-09-12T20:20:48.368Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "faba1c34-e6d8-42b3-996b-9d01ae8f7ee7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "configs",
+                    "items",
+                    ":resourceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7604ade3-9462-4851-982e-8dc48ae651b7",
+      "name": "Currencies",
+      "description": {
+        "content": "Manage virtual currencies and player balances",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7e3d3d35-8cbc-40d6-bb9b-21443f7754aa",
+          "name": "Get Player Currency Balances",
+          "request": {
+            "name": "Get Player Currency Balances",
+            "description": {
+              "content": "Returns all currency balances for the specified player.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "players",
+                ":playerId",
+                "currencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8528da7-47e0-4e35-b3c3-9bf5ca90f776",
+              "name": "Player currency balances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "players",
+                    ":playerId",
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"currencyId\": \"string\",\n      \"balance\": 5436,\n      \"writeLock\": \"string\",\n      \"created\": {\n        \"date\": \"1964-06-10T22:20:33.693Z\"\n      },\n      \"modified\": {\n        \"date\": \"1964-08-08T12:30:50.181Z\"\n      }\n    },\n    {\n      \"currencyId\": \"string\",\n      \"balance\": 1866,\n      \"writeLock\": \"string\",\n      \"created\": {\n        \"date\": \"1992-05-15T16:20:12.771Z\"\n      },\n      \"modified\": {\n        \"date\": \"1992-08-04T16:19:50.503Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2afe0e3-32fd-4ea7-888a-5717254513cd",
+          "name": "Increment Player Currency Balance",
+          "request": {
+            "name": "Increment Player Currency Balance",
+            "description": {
+              "content": "Increases a player's currency balance by the specified amount.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "players",
+                ":playerId",
+                "currencies",
+                ":currencyId",
+                "increment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "currencyId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"writeLock\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f3d7e1d6-dd5f-4b24-9742-139fcbbb34bf",
+              "name": "Updated currency balance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "players",
+                    ":playerId",
+                    "currencies",
+                    ":currencyId",
+                    "increment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "currencyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"writeLock\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currencyId\": \"string\",\n  \"balance\": 9570,\n  \"writeLock\": \"string\",\n  \"created\": {\n    \"date\": \"1951-05-27T23:38:09.954Z\"\n  },\n  \"modified\": {\n    \"date\": \"1973-10-29T15:32:22.066Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9e613ad-c8e9-4aff-a41e-4f7c915f8582",
+          "name": "Decrement Player Currency Balance",
+          "request": {
+            "name": "Decrement Player Currency Balance",
+            "description": {
+              "content": "Decreases a player's currency balance by the specified amount.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "players",
+                ":playerId",
+                "currencies",
+                ":currencyId",
+                "decrement"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "currencyId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"writeLock\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f9a69187-07e0-4a1d-aa58-2aed813845b6",
+              "name": "Updated currency balance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "players",
+                    ":playerId",
+                    "currencies",
+                    ":currencyId",
+                    "decrement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "currencyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"writeLock\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currencyId\": \"string\",\n  \"balance\": 9570,\n  \"writeLock\": \"string\",\n  \"created\": {\n    \"date\": \"1951-05-27T23:38:09.954Z\"\n  },\n  \"modified\": {\n    \"date\": \"1973-10-29T15:32:22.066Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8b23b0eb-fd3f-49e5-a8df-c7c878cf5e33",
+      "name": "Inventory",
+      "description": {
+        "content": "Manage inventory items and player inventory",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e88acaf8-23f0-4a7f-96a8-df209ade45c4",
+          "name": "Get Player Inventory",
+          "request": {
+            "name": "Get Player Inventory",
+            "description": {
+              "content": "Returns all inventory items currently held by the player.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "players",
+                ":playerId",
+                "inventory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "playersItemIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "playersItemIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemIds",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7fbac34-b860-4c84-98b1-d296cee5532e",
+              "name": "Player inventory items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "players",
+                    ":playerId",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "playersItemIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "playersItemIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"playersItemId\": \"string\",\n      \"inventoryItemId\": \"string\",\n      \"quantity\": 1550,\n      \"instanceData\": {},\n      \"writeLock\": \"string\",\n      \"created\": {\n        \"date\": \"1994-05-14T11:55:59.099Z\"\n      },\n      \"modified\": {\n        \"date\": \"1997-07-25T01:29:55.347Z\"\n      }\n    },\n    {\n      \"playersItemId\": \"string\",\n      \"inventoryItemId\": \"string\",\n      \"quantity\": 7404,\n      \"instanceData\": {},\n      \"writeLock\": \"string\",\n      \"created\": {\n        \"date\": \"1946-12-25T20:59:11.048Z\"\n      },\n      \"modified\": {\n        \"date\": \"1952-04-24T22:01:42.141Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d67eee81-d141-4067-b2b1-ef802aaf2fa9",
+      "name": "Purchases",
+      "description": {
+        "content": "Process virtual and real-money purchases",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4cf1a00e-d5e6-4c62-803c-acd90587a37d",
+          "name": "Make Virtual Purchase",
+          "request": {
+            "name": "Make Virtual Purchase",
+            "description": {
+              "content": "Processes a virtual purchase using the player's in-game currency or items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "players",
+                ":playerId",
+                "purchases",
+                "virtual"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e269e05-f32a-4599-8725-64cda03c2bcc",
+              "name": "Purchase successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "players",
+                    ":playerId",
+                    "purchases",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"purchased\": {\n    \"currencies\": [\n      {\n        \"currencyId\": \"string\",\n        \"balance\": 1366,\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1970-07-04T02:04:29.833Z\"\n        },\n        \"modified\": {\n          \"date\": \"1953-04-17T22:30:22.759Z\"\n        }\n      },\n      {\n        \"currencyId\": \"string\",\n        \"balance\": 1996,\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"2006-05-06T22:09:28.290Z\"\n        },\n        \"modified\": {\n          \"date\": \"1985-01-20T04:14:49.706Z\"\n        }\n      }\n    ],\n    \"inventory\": [\n      {\n        \"playersItemId\": \"string\",\n        \"inventoryItemId\": \"string\",\n        \"quantity\": 8618,\n        \"instanceData\": {},\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1965-02-04T00:59:55.293Z\"\n        },\n        \"modified\": {\n          \"date\": \"1959-10-18T22:40:24.236Z\"\n        }\n      },\n      {\n        \"playersItemId\": \"string\",\n        \"inventoryItemId\": \"string\",\n        \"quantity\": 9746,\n        \"instanceData\": {},\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1949-01-22T10:51:21.566Z\"\n        },\n        \"modified\": {\n          \"date\": \"1946-10-16T01:33:10.860Z\"\n        }\n      }\n    ]\n  },\n  \"costs\": {\n    \"currencies\": [\n      {\n        \"currencyId\": \"string\",\n        \"balance\": 204,\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"2014-12-08T16:11:16.763Z\"\n        },\n        \"modified\": {\n          \"date\": \"1966-10-24T05:43:22.095Z\"\n        }\n      },\n      {\n        \"currencyId\": \"string\",\n        \"balance\": 4668,\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1962-10-02T19:48:03.415Z\"\n        },\n        \"modified\": {\n          \"date\": \"1999-11-21T02:39:50.582Z\"\n        }\n      }\n    ],\n    \"inventory\": [\n      {\n        \"playersItemId\": \"string\",\n        \"inventoryItemId\": \"string\",\n        \"quantity\": 8063,\n        \"instanceData\": {},\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"2010-09-13T06:13:26.371Z\"\n        },\n        \"modified\": {\n          \"date\": \"1990-11-09T18:37:09.048Z\"\n        }\n      },\n      {\n        \"playersItemId\": \"string\",\n        \"inventoryItemId\": \"string\",\n        \"quantity\": 8488,\n        \"instanceData\": {},\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1967-11-16T07:35:27.769Z\"\n        },\n        \"modified\": {\n          \"date\": \"1998-04-28T06:39:19.604Z\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75c79ab0-95c9-447b-b2ef-80e53e2e06c8",
+              "name": "Insufficient funds",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "players",
+                    ":playerId",
+                    "purchases",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://economy.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2f7e7e8a-e833-4db2-861e-d6de4bfb77d2",
+    "name": "Unity Economy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Economy REST API allows you to manage in-game economies including virtual currencies, inventory items, purchases, and player balances. It provides both Admin endpoints for configuring economy resources and Player endpoints for runtime player interactions such as making purchases and checking balances.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

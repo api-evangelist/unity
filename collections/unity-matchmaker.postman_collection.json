@@ -1,0 +1,1464 @@
+{
+  "item": [
+    {
+      "id": "5a5814b1-6b68-4d56-8a09-ea38d7a6582c",
+      "name": "Tickets",
+      "description": {
+        "content": "Create and manage matchmaking tickets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9fbdf10a-ae72-447d-8ac5-a6665b2ff56e",
+          "name": "Create Matchmaking Ticket",
+          "request": {
+            "name": "Create Matchmaking Ticket",
+            "description": {
+              "content": "Creates a matchmaking ticket for a player or group of players. The ticket enters the matchmaking queue and is matched with other players based on configured rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "tickets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"attributes\": \"<object>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"attributes\": \"<object>\"\n    }\n  ],\n  \"queueName\": \"<string>\",\n  \"attributes\": {\n    \"skill\": \"<number>\",\n    \"attributes\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d99d0223-b203-4293-84cc-245a4ea67015",
+              "name": "Ticket created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"attributes\": \"<object>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"attributes\": \"<object>\"\n    }\n  ],\n  \"queueName\": \"<string>\",\n  \"attributes\": {\n    \"skill\": \"<number>\",\n    \"attributes\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b3d92af-1af7-49ea-b407-08af3b74e200",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"attributes\": \"<object>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"attributes\": \"<object>\"\n    }\n  ],\n  \"queueName\": \"<string>\",\n  \"attributes\": {\n    \"skill\": \"<number>\",\n    \"attributes\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3beea0e4-69ed-4b86-ba94-1ed27f74bac2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"attributes\": \"<object>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"attributes\": \"<object>\"\n    }\n  ],\n  \"queueName\": \"<string>\",\n  \"attributes\": {\n    \"skill\": \"<number>\",\n    \"attributes\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "536258f8-254f-45ed-93f0-6e3fc553d547",
+          "name": "Get Matchmaking Ticket",
+          "request": {
+            "name": "Get Matchmaking Ticket",
+            "description": {
+              "content": "Retrieves the current status of a matchmaking ticket. Polls this endpoint to check if a match has been found.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "tickets",
+                ":ticketId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5007a6a1-b1a2-4f37-b46d-f1e54aaf7541",
+              "name": "Ticket status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "tickets",
+                    ":ticketId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"Found\",\n  \"assignment\": {\n    \"connection\": \"string\",\n    \"payload\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7ce2177-717a-446b-a875-33c45134b619",
+              "name": "Ticket not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "tickets",
+                    ":ticketId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4de37406-f75a-4e66-aee7-d0254d6cf0c9",
+          "name": "Delete Matchmaking Ticket",
+          "request": {
+            "name": "Delete Matchmaking Ticket",
+            "description": {
+              "content": "Cancels and deletes a matchmaking ticket. Used when a player exits the matchmaking queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "tickets",
+                ":ticketId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e4d9e58-2889-4089-a3f0-bc8bdb38aa44",
+              "name": "Ticket deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "tickets",
+                    ":ticketId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2050a503-9566-4daa-80a8-defd81beaca2",
+              "name": "Ticket not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "tickets",
+                    ":ticketId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7cdceddf-9992-439a-9b82-026a29b4185a",
+      "name": "Queues",
+      "description": {
+        "content": "Configure matchmaking queues and pools",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6897492f-7ebc-4440-99dd-64282288079f",
+          "name": "List Matchmaking Queues",
+          "request": {
+            "name": "List Matchmaking Queues",
+            "description": {
+              "content": "Returns all configured matchmaking queues for the environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "queues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "963cfe9b-2533-437e-ad5b-503aca8f444b",
+              "name": "List of queues",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"name\": \"string\",\n      \"enabled\": false,\n      \"defaultEscalationRules\": {\n        \"timeoutSeconds\": 3203,\n        \"backfillEnabled\": false\n      },\n      \"pools\": [\n        {\n          \"name\": \"string\",\n          \"maximumPlayerCount\": 7931,\n          \"minimumPlayerCount\": 1214,\n          \"matchLogic\": {\n            \"name\": \"string\",\n            \"script\": \"string\"\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"maximumPlayerCount\": 2446,\n          \"minimumPlayerCount\": 9112,\n          \"matchLogic\": {\n            \"name\": \"string\",\n            \"script\": \"string\"\n          }\n        }\n      ],\n      \"created\": \"1992-05-07T12:09:01.920Z\",\n      \"modified\": \"1955-12-08T10:29:59.967Z\"\n    },\n    {\n      \"name\": \"string\",\n      \"enabled\": true,\n      \"defaultEscalationRules\": {\n        \"timeoutSeconds\": 9074,\n        \"backfillEnabled\": false\n      },\n      \"pools\": [\n        {\n          \"name\": \"string\",\n          \"maximumPlayerCount\": 6490,\n          \"minimumPlayerCount\": 9177,\n          \"matchLogic\": {\n            \"name\": \"string\",\n            \"script\": \"string\"\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"maximumPlayerCount\": 8872,\n          \"minimumPlayerCount\": 9191,\n          \"matchLogic\": {\n            \"name\": \"string\",\n            \"script\": \"string\"\n          }\n        }\n      ],\n      \"created\": \"1946-09-05T23:53:51.620Z\",\n      \"modified\": \"1974-08-14T22:50:52.891Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cb0d31e-cdde-4e91-946e-cd475bd0511b",
+          "name": "Create Matchmaking Queue",
+          "request": {
+            "name": "Create Matchmaking Queue",
+            "description": {
+              "content": "Creates a new matchmaking queue with specified rules and pool configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "queues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": true,\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e6f19a31-6958-4d7e-8b7a-b04f0118aa01",
+              "name": "Queue created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": true,\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"enabled\": true,\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ],\n  \"created\": \"1956-12-28T01:23:11.564Z\",\n  \"modified\": \"2021-10-22T21:04:16.580Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59575a46-e21f-46b0-8466-bdc16c745b80",
+          "name": "Get Matchmaking Queue",
+          "request": {
+            "name": "Get Matchmaking Queue",
+            "description": {
+              "content": "Returns configuration and status for a specific matchmaking queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "queues",
+                ":queueName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "queueName",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01a32af1-26e6-4600-b1ca-0e021316e318",
+              "name": "Queue details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues",
+                    ":queueName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"enabled\": true,\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ],\n  \"created\": \"1956-12-28T01:23:11.564Z\",\n  \"modified\": \"2021-10-22T21:04:16.580Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "733cb27e-6ee7-462d-a511-88f885c3b312",
+              "name": "Queue not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues",
+                    ":queueName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e6605d5-8c40-4e17-8760-91639316843a",
+          "name": "Update Matchmaking Queue",
+          "request": {
+            "name": "Update Matchmaking Queue",
+            "description": {
+              "content": "Updates the configuration of an existing matchmaking queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "queues",
+                ":queueName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "queueName",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7405a41c-dd3e-4c94-afbb-499a67a88dbb",
+              "name": "Queue updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues",
+                    ":queueName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"enabled\": true,\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ],\n  \"created\": \"1956-12-28T01:23:11.564Z\",\n  \"modified\": \"2021-10-22T21:04:16.580Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "105510ba-546c-44db-a74e-95b196c6324d",
+          "name": "Delete Matchmaking Queue",
+          "request": {
+            "name": "Delete Matchmaking Queue",
+            "description": {
+              "content": "Deletes a matchmaking queue and all its configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "queues",
+                ":queueName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "queueName",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ff6ee3d-44ab-4847-9b83-ec93721d97ed",
+              "name": "Queue deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues",
+                    ":queueName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "23842861-c6ab-4cef-8860-b2511913d6a7",
+      "name": "Environments",
+      "description": {
+        "content": "Manage matchmaker environments",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://matchmaker.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0df539f7-12e9-4e4a-a43b-34a8c85cb3dc",
+    "name": "Unity Matchmaker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Matchmaker REST API provides endpoints for creating and managing matchmaking tickets, defining matchmaking rules, and configuring match pools and queues. It enables skill-based and attribute-based player matching with low latency for games of all sizes.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

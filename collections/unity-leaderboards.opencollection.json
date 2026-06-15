@@ -1,0 +1,297 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Leaderboards API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leaderboards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Leaderboards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://leaderboards.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Unity project identifier"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of leaderboards to return"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination"
+              }
+            ]
+          },
+          "docs": "Returns a list of all leaderboard definitions for the specified project and environment."
+        },
+        {
+          "info": {
+            "name": "Create Leaderboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://leaderboards.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new leaderboard definition for the specified project and environment."
+        },
+        {
+          "info": {
+            "name": "Get Leaderboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://leaderboards.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "leaderboardId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns configuration details for a specific leaderboard."
+        },
+        {
+          "info": {
+            "name": "Update Leaderboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://leaderboards.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "leaderboardId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing leaderboard."
+        },
+        {
+          "info": {
+            "name": "Delete Leaderboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://leaderboards.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "leaderboardId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a leaderboard and all associated scores."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Scores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Player Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://leaderboards.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores/players/:playerId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "leaderboardId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific player's score and rank on a leaderboard."
+        },
+        {
+          "info": {
+            "name": "Add Player Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://leaderboards.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores/players/:playerId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "leaderboardId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits or updates a player's score on a leaderboard."
+        },
+        {
+          "info": {
+            "name": "Get Leaderboard Scores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://leaderboards.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "leaderboardId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeMetadata",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the top scores for a leaderboard with optional pagination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

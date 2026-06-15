@@ -1,0 +1,309 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Multiplay Game Server Hosting API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fleets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Fleets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://multiplay.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all configured server fleets for the specified project region."
+        },
+        {
+          "info": {
+            "name": "Create Fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://multiplay.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new server fleet with specified configuration and build version."
+        },
+        {
+          "info": {
+            "name": "Get Fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://multiplay.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets/:fleetId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the configuration and status of a specific fleet."
+        },
+        {
+          "info": {
+            "name": "Update Fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://multiplay.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets/:fleetId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates fleet configuration including scaling settings and build version."
+        },
+        {
+          "info": {
+            "name": "Delete Fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://multiplay.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets/:fleetId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a server fleet and terminates all associated servers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Builds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Builds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://multiplay.services.api.unity.com/v1/projects/:projectId/builds",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all game server builds for the project."
+        },
+        {
+          "info": {
+            "name": "Create Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://multiplay.services.api.unity.com/v1/projects/:projectId/builds",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new game server build configuration."
+        },
+        {
+          "info": {
+            "name": "Get Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://multiplay.services.api.unity.com/v1/projects/:projectId/builds/:buildId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific game server build."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://multiplay.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets/:fleetId/servers",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all server instances in the specified fleet."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Allocations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Allocate Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://multiplay.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets/:fleetId/allocations",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allocates an available server from the fleet for a new game session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

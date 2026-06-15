@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Cloud Save API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Player Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Player Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud-save.services.api.unity.com/v1/data/projects/:projectId/players/:playerId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "keys",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific keys"
+              }
+            ]
+          },
+          "docs": "Returns all data items stored for the specified player."
+        },
+        {
+          "info": {
+            "name": "Set Player Data Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud-save.services.api.unity.com/v1/data/projects/:projectId/players/:playerId/items",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates one or more key-value data items for a player. Supports optimistic concurrency via write locks."
+        },
+        {
+          "info": {
+            "name": "Delete Player Data Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud-save.services.api.unity.com/v1/data/projects/:projectId/players/:playerId/items/:key",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a specific data item by key for a player."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Custom Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set Protected Player Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud-save.services.api.unity.com/v1/data/projects/:projectId/players/:playerId/protected-items",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates protected data items that can only be written by the server but read by the player."
+        },
+        {
+          "info": {
+            "name": "Set Public Player Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud-save.services.api.unity.com/v1/data/projects/:projectId/players/:playerId/public-items",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates public data items visible to all players in the game."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Player Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud-save.services.api.unity.com/v1/data/projects/:projectId/players/:playerId/query",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query player data items using field-based filters. Requires indexed fields to be defined in the project configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

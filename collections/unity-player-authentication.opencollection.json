@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Player Authentication API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sign In Anonymously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://player-auth.services.api.unity.com/v1/authentication/anonymous",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Signs in a player anonymously and returns an access token. Creates a new player account if the session ID does not match any existing player."
+        },
+        {
+          "info": {
+            "name": "Sign In With Username and Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://player-auth.services.api.unity.com/v1/authentication/usernamepassword/sign-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates a player using their username and password credentials."
+        },
+        {
+          "info": {
+            "name": "Sign Up With Username and Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://player-auth.services.api.unity.com/v1/authentication/usernamepassword/sign-up",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new player account with username and password credentials."
+        },
+        {
+          "info": {
+            "name": "Sign In With External Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://player-auth.services.api.unity.com/v1/authentication/external-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates a player using a token from an external identity provider such as Google, Apple, Steam, Facebook, or a custom provider."
+        },
+        {
+          "info": {
+            "name": "Refresh Authentication Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://player-auth.services.api.unity.com/v1/token/refresh",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchanges a refresh token for a new access token without requiring the player to re-authenticate."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Players",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Players",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://player-auth.services.api.unity.com/v1/players",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all players for the project. Admin operation."
+        },
+        {
+          "info": {
+            "name": "Get Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://player-auth.services.api.unity.com/v1/players/:playerId",
+            "params": [
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns information about a specific player."
+        },
+        {
+          "info": {
+            "name": "Delete Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://player-auth.services.api.unity.com/v1/players/:playerId",
+            "params": [
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a player account and all associated data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Identity Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Link External Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://player-auth.services.api.unity.com/v1/players/:playerId/link/external-token",
+            "params": [
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Links an external identity provider to an existing player account."
+        },
+        {
+          "info": {
+            "name": "Unlink External Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://player-auth.services.api.unity.com/v1/players/:playerId/unlink/external-token",
+            "params": [
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a linked external identity provider from a player account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,282 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Cloud Code API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scripts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Scripts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud-code.services.api.unity.com/v1/projects/:projectId/scripts",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all Cloud Code scripts for the project."
+        },
+        {
+          "info": {
+            "name": "Create Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud-code.services.api.unity.com/v1/projects/:projectId/scripts",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Cloud Code JavaScript script."
+        },
+        {
+          "info": {
+            "name": "Get Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud-code.services.api.unity.com/v1/projects/:projectId/scripts/:scriptName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scriptName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the details and latest code for a specific Cloud Code script."
+        },
+        {
+          "info": {
+            "name": "Update Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud-code.services.api.unity.com/v1/projects/:projectId/scripts/:scriptName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scriptName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the code and configuration of an existing Cloud Code script."
+        },
+        {
+          "info": {
+            "name": "Delete Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud-code.services.api.unity.com/v1/projects/:projectId/scripts/:scriptName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scriptName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a Cloud Code script and all its versions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Executions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Run Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud-code.services.api.unity.com/v1/projects/:projectId/scripts/:scriptName/run",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scriptName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a Cloud Code script with the provided parameters. The script runs asynchronously and returns the result."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Modules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Modules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud-code.services.api.unity.com/v1/projects/:projectId/modules",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all Cloud Code C# modules for the project."
+        },
+        {
+          "info": {
+            "name": "Upload Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud-code.services.api.unity.com/v1/projects/:projectId/modules",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a compiled C# Cloud Code module (.ccm file)."
+        },
+        {
+          "info": {
+            "name": "Get Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud-code.services.api.unity.com/v1/projects/:projectId/modules/:moduleName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "moduleName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns details about a specific Cloud Code C# module."
+        },
+        {
+          "info": {
+            "name": "Delete Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud-code.services.api.unity.com/v1/projects/:projectId/modules/:moduleName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "moduleName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a Cloud Code C# module."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
