@@ -507,85 +507,63 @@ maintainers:
   email: support@unity.com
   url: https://unity.com
 common:
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/unity-analytics-validate-and-record-workflow.yml
-    name: Unity Analytics Validate and Record
-    summary: Validate an analytics event batch against the schema, then record it
-      only when validation passes.
-  - url: arazzo/unity-anonymous-signin-refresh-workflow.yml
-    name: Unity Anonymous Sign-In and Token Refresh
-    summary: Sign a player in anonymously and immediately exchange the session for
-      a refreshed access token.
-  - url: arazzo/unity-build-trigger-and-poll-workflow.yml
-    name: Unity Build Automation Trigger and Poll
-    summary: Confirm a build target, start a clean build, then poll the build until
-      it succeeds or fails.
-  - url: arazzo/unity-cloudcode-deploy-and-run-workflow.yml
-    name: Unity Cloud Code Deploy and Run
-    summary: Create a JavaScript Cloud Code script, confirm it deployed, then execute
-      it with parameters.
-  - url: arazzo/unity-cloudsave-publish-public-profile-workflow.yml
-    name: Unity Cloud Save Publish Public Profile
-    summary: Write a server-protected stat, publish a public profile item, then read
-      the player's data back.
-  - url: arazzo/unity-cloudsave-set-and-query-workflow.yml
-    name: Unity Cloud Save Set and Query
-    summary: Write player data items, query them by an indexed field, then read the
-      full item list back.
-  - url: arazzo/unity-economy-grant-currency-workflow.yml
-    name: Unity Economy Grant Currency
-    summary: Resolve a currency configuration, increment a player's balance, then
-      read back the updated balances.
-  - url: arazzo/unity-economy-virtual-purchase-workflow.yml
-    name: Unity Economy Virtual Purchase
-    summary: Check a player's currency balances, make a virtual purchase, then confirm
-      the resulting inventory.
-  - url: arazzo/unity-friends-accept-request-workflow.yml
-    name: Unity Friends Accept Incoming Request
-    summary: List incoming friend requests, accept the first pending one, then confirm
-      it appears in the friend list.
-  - url: arazzo/unity-leaderboard-provision-workflow.yml
-    name: Unity Leaderboard Provisioning
-    summary: Create a leaderboard, seed it with an initial player score, then read
-      the top scores.
-  - url: arazzo/unity-leaderboard-submit-score-workflow.yml
-    name: Unity Leaderboard Submit Score and Read Rank
-    summary: Confirm a leaderboard exists, submit a player's score, then read back
-      the player's rank.
-  - url: arazzo/unity-lobby-host-and-query-workflow.yml
-    name: Unity Lobby Host and Query
-    summary: Create a public lobby, send a keep-alive heartbeat, then confirm it is
-      discoverable via query.
-  - url: arazzo/unity-lobby-join-by-code-workflow.yml
-    name: Unity Lobby Join By Code
-    summary: Join a private lobby by code, set the joining player's data, then heartbeat
-      to stay active.
-  - url: arazzo/unity-matchmaker-queue-provision-workflow.yml
-    name: Unity Matchmaker Queue Provisioning
-    summary: Create a matchmaking queue, read it back, then list all queues to confirm
-      it is registered.
-  - url: arazzo/unity-matchmaking-allocate-server-workflow.yml
-    name: Unity Matchmaking to Server Allocation
-    summary: Create a matchmaking ticket, poll until matched, then allocate a Multiplay
-      game server for the session.
-  - url: arazzo/unity-matchmaking-ticket-poll-workflow.yml
-    name: Unity Matchmaking Ticket and Poll
-    summary: Create a matchmaking ticket and poll its status until a match is found
-      or matchmaking fails.
-  - url: arazzo/unity-multiplay-fleet-allocate-workflow.yml
-    name: Unity Multiplay Fleet Provisioning and Allocation
-    summary: Register a server build, create a fleet that runs it, then allocate a
-      server from the fleet.
-  - url: arazzo/unity-player-signup-and-link-workflow.yml
-    name: Unity Player Sign-Up and Identity Linking
-    summary: Create a username/password player account, link an external identity,
-      then read back the admin player record.
-  - url: arazzo/unity-remote-config-rollout-workflow.yml
-    name: Unity Remote Config Feature Rollout
-    summary: Add a config setting, create a targeted override rule for it, then confirm
-      the rule is listed.
+- type: Arazzo
+  url: arazzo/unity-analytics-validate-and-record-workflow.yml
+  name: Unity Analytics Validate and Record
+- type: Arazzo
+  url: arazzo/unity-anonymous-signin-refresh-workflow.yml
+  name: Unity Anonymous Sign-In and Token Refresh
+- type: Arazzo
+  url: arazzo/unity-build-trigger-and-poll-workflow.yml
+  name: Unity Build Automation Trigger and Poll
+- type: Arazzo
+  url: arazzo/unity-cloudcode-deploy-and-run-workflow.yml
+  name: Unity Cloud Code Deploy and Run
+- type: Arazzo
+  url: arazzo/unity-cloudsave-publish-public-profile-workflow.yml
+  name: Unity Cloud Save Publish Public Profile
+- type: Arazzo
+  url: arazzo/unity-cloudsave-set-and-query-workflow.yml
+  name: Unity Cloud Save Set and Query
+- type: Arazzo
+  url: arazzo/unity-economy-grant-currency-workflow.yml
+  name: Unity Economy Grant Currency
+- type: Arazzo
+  url: arazzo/unity-economy-virtual-purchase-workflow.yml
+  name: Unity Economy Virtual Purchase
+- type: Arazzo
+  url: arazzo/unity-friends-accept-request-workflow.yml
+  name: Unity Friends Accept Incoming Request
+- type: Arazzo
+  url: arazzo/unity-leaderboard-provision-workflow.yml
+  name: Unity Leaderboard Provisioning
+- type: Arazzo
+  url: arazzo/unity-leaderboard-submit-score-workflow.yml
+  name: Unity Leaderboard Submit Score and Read Rank
+- type: Arazzo
+  url: arazzo/unity-lobby-host-and-query-workflow.yml
+  name: Unity Lobby Host and Query
+- type: Arazzo
+  url: arazzo/unity-lobby-join-by-code-workflow.yml
+  name: Unity Lobby Join By Code
+- type: Arazzo
+  url: arazzo/unity-matchmaker-queue-provision-workflow.yml
+  name: Unity Matchmaker Queue Provisioning
+- type: Arazzo
+  url: arazzo/unity-matchmaking-allocate-server-workflow.yml
+  name: Unity Matchmaking to Server Allocation
+- type: Arazzo
+  url: arazzo/unity-matchmaking-ticket-poll-workflow.yml
+  name: Unity Matchmaking Ticket and Poll
+- type: Arazzo
+  url: arazzo/unity-multiplay-fleet-allocate-workflow.yml
+  name: Unity Multiplay Fleet Provisioning and Allocation
+- type: Arazzo
+  url: arazzo/unity-player-signup-and-link-workflow.yml
+  name: Unity Player Sign-Up and Identity Linking
+- type: Arazzo
+  url: arazzo/unity-remote-config-rollout-workflow.yml
+  name: Unity Remote Config Feature Rollout
 - type: LinkedIn
   url: https://www.linkedin.com/company/unity
 - url: https://cloud.unity.com
@@ -593,7 +571,7 @@ common:
 - url: https://dashboard.unity3d.com
   type: Dashboard
 - url: https://id.unity.com
-  type: SignUp
+  type: Signup
 - url: https://status.unity.com
   type: StatusPage
 - url: https://support.unity.com
@@ -619,7 +597,7 @@ common:
 - url: https://unity.com/products/gaming-services/pricing
   type: Pricing
 - url: https://discussions.unity.com/
-  type: Forum
+  type: Forums
 - url: https://unity.com/community
   type: Community
 - url: https://unity.com/developer-tools
@@ -627,7 +605,7 @@ common:
 - url: https://unity.com/faq
   type: FAQ
 - url: https://services.docs.unity.com/docs/errors/
-  type: Errors
+  type: ErrorCodes
 - url: https://services.docs.unity.com/docs/api-lifecycle/
   type: API Lifecycle
 - url: https://unity.com/releases/unity-6/support
@@ -637,10 +615,10 @@ common:
 - url: https://learn.unity.com
   type: Learning
 - url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/rules/unity-spectral-rules.yml
-  type: Spectral Rules
+  type: SpectralRules
 - url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/vocabulary/unity-vocabulary.yml
   type: Vocabulary
 - url: https://raw.githubusercontent.com/api-evangelist/unity/refs/heads/main/json-ld/unity-context.jsonld
-  type: JSON-LD Context
-- type: LLMsTxt
+  type: JSONLDContext
+- type: LlmsText
   url: https://docs.unity.com/llms.txt
