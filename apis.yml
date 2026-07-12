@@ -507,6 +507,12 @@ maintainers:
   email: support@unity.com
   url: https://unity.com
 common:
+- type: TrustCenter
+  url: security/unity-trust-center.yml
+- type: DomainSecurity
+  url: security/unity-domain-security.yml
+- type: Authentication
+  url: authentication/unity-authentication.yml
 - type: Arazzo
   url: arazzo/unity-analytics-validate-and-record-workflow.yml
   name: Unity Analytics Validate and Record

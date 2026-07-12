@@ -1,0 +1,40 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/unity-analytics-openapi.yml, openapi/unity-build-automation-openapi.yml, openapi/unity-cloud-code-openapi.yml,
+  openapi/unity-cloud-save-openapi.yml, openapi/unity-economy-openapi.yml, openapi/unity-friends-openapi.yml,
+  openapi/unity-leaderboards-openapi.yml, openapi/unity-lobby-openapi.yml, openapi/unity-matchmaker-openapi.yml,
+  openapi/unity-multiplay-openapi.yml, openapi/unity-player-authentication-openapi.yml, openapi/unity-remote-config-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/unity-analytics-openapi.yml
+- name: basicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/unity-build-automation-openapi.yml
+  - openapi/unity-player-authentication-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/unity-cloud-code-openapi.yml
+  - openapi/unity-cloud-save-openapi.yml
+  - openapi/unity-economy-openapi.yml
+  - openapi/unity-friends-openapi.yml
+  - openapi/unity-leaderboards-openapi.yml
+  - openapi/unity-lobby-openapi.yml
+  - openapi/unity-matchmaker-openapi.yml
+  - openapi/unity-multiplay-openapi.yml
+  - openapi/unity-player-authentication-openapi.yml
+  - openapi/unity-remote-config-openapi.yml
