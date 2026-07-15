@@ -507,6 +507,8 @@ maintainers:
   email: support@unity.com
   url: https://unity.com
 common:
+- type: AgenticAccess
+  url: agentic-access/unity-agentic-access.yml
 - type: TrustCenter
   url: security/unity-trust-center.yml
 - type: DomainSecurity
