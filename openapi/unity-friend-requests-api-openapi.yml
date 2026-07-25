@@ -1,0 +1,163 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Friend Requests API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Friend Requests
+  description: Send and receive friend requests
+paths:
+  /v1/me/relationships/requests/incoming:
+    get:
+      operationId: listIncomingFriendRequests
+      summary: List Incoming Friend Requests
+      description: Returns all pending incoming friend requests for the current player.
+      tags:
+      - Friend Requests
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Incoming friend requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendRequestList'
+  /v1/me/relationships/requests/outgoing:
+    get:
+      operationId: listOutgoingFriendRequests
+      summary: List Outgoing Friend Requests
+      description: Returns all pending outgoing friend requests sent by the current player.
+      tags:
+      - Friend Requests
+      responses:
+        '200':
+          description: Outgoing friend requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendRequestList'
+  /v1/me/relationships/{memberId}/request:
+    post:
+      operationId: sendFriendRequest
+      summary: Send Friend Request
+      description: Sends a friend request to another player.
+      tags:
+      - Friend Requests
+      parameters:
+      - name: memberId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The Unity player ID to send a request to
+      responses:
+        '200':
+          description: Friend request sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relationship'
+        '409':
+          description: Already friends or request already sent
+  /v1/me/relationships/{memberId}/accept:
+    post:
+      operationId: acceptFriendRequest
+      summary: Accept Friend Request
+      description: Accepts a pending incoming friend request.
+      tags:
+      - Friend Requests
+      parameters:
+      - name: memberId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Friend request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relationship'
+components:
+  schemas:
+    PlayerProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        presence:
+          $ref: '#/components/schemas/Presence'
+    Presence:
+      type: object
+      properties:
+        availability:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - INVISIBLE
+          - BUSY
+        activity:
+          type: object
+          properties:
+            status:
+              type: string
+    FriendRequestList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
+        next:
+          type: string
+    Relationship:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - FRIEND
+          - FRIEND_REQUEST
+          - BLOCK
+        member:
+          $ref: '#/components/schemas/PlayerProfile'
+        created:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

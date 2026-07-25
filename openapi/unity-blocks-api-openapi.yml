@@ -1,0 +1,128 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Blocks API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Blocks
+  description: Manage blocked players
+paths:
+  /v1/me/relationships/blocks:
+    get:
+      operationId: listBlockedPlayers
+      summary: List Blocked Players
+      description: Returns all players that the current player has blocked.
+      tags:
+      - Blocks
+      responses:
+        '200':
+          description: Blocked players list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipList'
+  /v1/me/relationships/{memberId}/block:
+    post:
+      operationId: blockPlayer
+      summary: Block Player
+      description: Blocks a player, preventing them from sending friend requests or messages.
+      tags:
+      - Blocks
+      parameters:
+      - name: memberId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Player blocked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relationship'
+  /v1/me/relationships/{memberId}/unblock:
+    post:
+      operationId: unblockPlayer
+      summary: Unblock Player
+      description: Unblocks a previously blocked player.
+      tags:
+      - Blocks
+      parameters:
+      - name: memberId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Player unblocked
+components:
+  schemas:
+    PlayerProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        presence:
+          $ref: '#/components/schemas/Presence'
+    Presence:
+      type: object
+      properties:
+        availability:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - INVISIBLE
+          - BUSY
+        activity:
+          type: object
+          properties:
+            status:
+              type: string
+    Relationship:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - FRIEND
+          - FRIEND_REQUEST
+          - BLOCK
+        member:
+          $ref: '#/components/schemas/PlayerProfile'
+        created:
+          type: string
+          format: date-time
+    RelationshipList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

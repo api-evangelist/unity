@@ -1,0 +1,126 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Friends API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Friends
+  description: Manage player friend lists
+paths:
+  /v1/me/relationships/friends:
+    get:
+      operationId: listFriends
+      summary: List Friends
+      description: Returns the current player's friend list with presence information.
+      tags:
+      - Friends
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Friend list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendList'
+        '401':
+          description: Unauthorized
+  /v1/me/relationships/{memberId}:
+    delete:
+      operationId: removeFriendOrRequest
+      summary: Remove Friend or Request
+      description: Removes a friend from the friend list or cancels/rejects a pending friend request.
+      tags:
+      - Friends
+      parameters:
+      - name: memberId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Relationship removed
+        '404':
+          description: Relationship not found
+components:
+  schemas:
+    PlayerProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        presence:
+          $ref: '#/components/schemas/Presence'
+    Presence:
+      type: object
+      properties:
+        availability:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - INVISIBLE
+          - BUSY
+        activity:
+          type: object
+          properties:
+            status:
+              type: string
+    FriendList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
+        next:
+          type: string
+    Relationship:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - FRIEND
+          - FRIEND_REQUEST
+          - BLOCK
+        member:
+          $ref: '#/components/schemas/PlayerProfile'
+        created:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

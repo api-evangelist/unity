@@ -1,0 +1,224 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Authentication API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Authentication
+  description: Player sign-in and token management
+paths:
+  /v1/authentication/anonymous:
+    post:
+      operationId: signInAnonymously
+      summary: Sign In Anonymously
+      description: Signs in a player anonymously and returns an access token. Creates a new player account if the session ID does not match any existing player.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnonymousSignInRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+  /v1/authentication/usernamepassword/sign-in:
+    post:
+      operationId: signInWithUsernamePassword
+      summary: Sign In With Username and Password
+      description: Authenticates a player using their username and password credentials.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernamePasswordSignInRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Invalid credentials
+  /v1/authentication/usernamepassword/sign-up:
+    post:
+      operationId: signUpWithUsernamePassword
+      summary: Sign Up With Username and Password
+      description: Creates a new player account with username and password credentials.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernamePasswordSignUpRequest'
+      responses:
+        '200':
+          description: Account created and signed in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Bad Request - invalid or duplicate username
+  /v1/authentication/external-token:
+    post:
+      operationId: signInWithExternalToken
+      summary: Sign In With External Token
+      description: Authenticates a player using a token from an external identity provider such as Google, Apple, Steam, Facebook, or a custom provider.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalTokenSignInRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Invalid external token
+  /v1/token/refresh:
+    post:
+      operationId: refreshToken
+      summary: Refresh Authentication Token
+      description: Exchanges a refresh token for a new access token without requiring the player to re-authenticate.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: New access token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Invalid or expired refresh token
+components:
+  schemas:
+    UsernamePasswordSignInRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    AuthResponse:
+      type: object
+      properties:
+        idToken:
+          type: string
+          description: JWT access token
+        sessionToken:
+          type: string
+        expiresIn:
+          type: integer
+          description: Token expiry in seconds
+        userId:
+          type: string
+        isNew:
+          type: boolean
+          description: True if a new account was created
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
+          type: string
+    AnonymousSignInRequest:
+      type: object
+      required:
+      - sessionTokens
+      properties:
+        sessionTokens:
+          type: array
+          items:
+            type: string
+          description: List of session tokens for anonymous sign-in continuity
+    UsernamePasswordSignUpRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+          minLength: 3
+          maxLength: 20
+        password:
+          type: string
+          minLength: 8
+    ExternalTokenSignInRequest:
+      type: object
+      required:
+      - idProvider
+      - token
+      properties:
+        idProvider:
+          type: string
+          enum:
+          - google
+          - apple
+          - steam
+          - facebook
+          - custom
+          description: The external identity provider
+        token:
+          type: string
+          description: The identity token from the external provider
+        signInOnly:
+          type: boolean
+          description: If true, only sign in and do not create a new account
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

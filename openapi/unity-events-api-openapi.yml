@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Unity Analytics API
+  title: Unity Analytics Allocations Events API
   description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
@@ -10,17 +10,14 @@ info:
   license:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
-externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
 servers:
-  - url: https://analytics.services.api.unity.com
-    description: Unity Analytics Production Server
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
 tags:
-  - name: Events
-    description: Ingest analytics events
-  - name: Data Export
-    description: Export raw analytics data
+- name: Events
+  description: Ingest analytics events
 paths:
   /v1/projects/{projectId}/events:
     post:
@@ -28,13 +25,13 @@ paths:
       summary: Record Analytics Events
       description: Records one or more analytics events from a game client or server. Events are batched and sent together for efficiency.
       tags:
-        - Events
+      - Events
       parameters:
-        - name: projectId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
@@ -56,13 +53,13 @@ paths:
       summary: Validate Analytics Events
       description: Validates analytics events without recording them. Used to test event schemas before publishing to production.
       tags:
-        - Events
+      - Events
       parameters:
-        - name: projectId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
@@ -78,24 +75,15 @@ paths:
                 $ref: '#/components/schemas/ValidationResult'
 components:
   schemas:
-    RecordEventsRequest:
-      type: object
-      required:
-        - events
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsEvent'
     AnalyticsEvent:
       type: object
       required:
-        - name
-        - eventVersion
-        - eventTimestamp
-        - eventUuid
-        - installationUuid
-        - sessionUuid
+      - name
+      - eventVersion
+      - eventTimestamp
+      - eventUuid
+      - installationUuid
+      - sessionUuid
       properties:
         name:
           type: string
@@ -136,6 +124,15 @@ components:
         userId:
           type: string
           description: Unity player ID if authenticated
+    RecordEventsRequest:
+      type: object
+      required:
+      - events
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsEvent'
     ValidationResult:
       type: object
       properties:
@@ -162,5 +159,6 @@ components:
       type: apiKey
       in: header
       name: x-api-key
-security:
-  - apiKeyAuth: []
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

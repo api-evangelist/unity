@@ -1,0 +1,198 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Scores API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Scores
+  description: Submit and retrieve leaderboard scores
+paths:
+  /v1/projects/{projectId}/environments/{environmentId}/leaderboards/{leaderboardId}/scores/players/{playerId}:
+    post:
+      operationId: addLeaderboardPlayerScore
+      summary: Add Player Score
+      description: Submits or updates a player's score on a leaderboard.
+      tags:
+      - Scores
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: leaderboardId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScoreSubmission'
+      responses:
+        '200':
+          description: Score submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerScore'
+    get:
+      operationId: getLeaderboardPlayerScore
+      summary: Get Player Score
+      description: Retrieves a specific player's score and rank on a leaderboard.
+      tags:
+      - Scores
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: leaderboardId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Player score and rank
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerScore'
+        '404':
+          description: Not Found
+  /v1/projects/{projectId}/environments/{environmentId}/leaderboards/{leaderboardId}/scores:
+    get:
+      operationId: getLeaderboardScores
+      summary: Get Leaderboard Scores
+      description: Retrieves the top scores for a leaderboard with optional pagination.
+      tags:
+      - Scores
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: leaderboardId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          maximum: 1000
+      - name: includeMetadata
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Leaderboard scores
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaderboardScoreList'
+components:
+  schemas:
+    LeaderboardScoreList:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerScore'
+    PlayerScore:
+      type: object
+      properties:
+        playerId:
+          type: string
+        playerName:
+          type: string
+        rank:
+          type: integer
+        score:
+          type: number
+        tier:
+          type: string
+        updatedTime:
+          type: string
+          format: date-time
+        metadata:
+          type: string
+    ScoreSubmission:
+      type: object
+      required:
+      - score
+      properties:
+        score:
+          type: number
+          description: The player's score value
+        metadata:
+          type: string
+          description: Optional metadata to store with the score (up to 255 characters)
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

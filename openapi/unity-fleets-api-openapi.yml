@@ -1,0 +1,266 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Fleets API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Fleets
+  description: Manage server fleets
+paths:
+  /v1/projects/{projectId}/regions/{regionId}/fleets:
+    get:
+      operationId: listFleets
+      summary: List Fleets
+      description: Returns all configured server fleets for the specified project region.
+      tags:
+      - Fleets
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: regionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of fleets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetList'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createFleet
+      summary: Create Fleet
+      description: Creates a new server fleet with specified configuration and build version.
+      tags:
+      - Fleets
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: regionId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFleetRequest'
+      responses:
+        '200':
+          description: Fleet created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fleet'
+  /v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}:
+    get:
+      operationId: getFleet
+      summary: Get Fleet
+      description: Returns the configuration and status of a specific fleet.
+      tags:
+      - Fleets
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: regionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fleetId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Fleet details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fleet'
+        '404':
+          description: Fleet not found
+    patch:
+      operationId: updateFleet
+      summary: Update Fleet
+      description: Updates fleet configuration including scaling settings and build version.
+      tags:
+      - Fleets
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: regionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fleetId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFleetRequest'
+      responses:
+        '200':
+          description: Fleet updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fleet'
+    delete:
+      operationId: deleteFleet
+      summary: Delete Fleet
+      description: Deletes a server fleet and terminates all associated servers.
+      tags:
+      - Fleets
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: regionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fleetId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Fleet deleted
+components:
+  schemas:
+    FleetList:
+      type: object
+      properties:
+        fleets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fleet'
+    CreateFleetRequest:
+      type: object
+      required:
+      - name
+      - buildConfiguration
+      properties:
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
+    BuildConfiguration:
+      type: object
+      properties:
+        buildId:
+          type: integer
+        commandLine:
+          type: string
+        queryType:
+          type: string
+          enum:
+          - SQPQUERYTYPE
+          - A2SQUERYTYPE
+          - NONE
+        binaryPath:
+          type: string
+        cores:
+          type: integer
+        speedMhz:
+          type: integer
+        memory:
+          type: integer
+    Fleet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - OFFLINE
+          - DELETED
+        serverCount:
+          type: integer
+        freeServerCount:
+          type: integer
+        allocationCount:
+          type: integer
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    UpdateFleetRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
+    ScalingSettings:
+      type: object
+      properties:
+        minFreeServers:
+          type: integer
+        maxFreeServers:
+          type: integer
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

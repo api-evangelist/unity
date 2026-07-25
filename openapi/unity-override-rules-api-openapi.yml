@@ -1,0 +1,257 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Override Rules API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Override Rules
+  description: Manage targeting rules for configuration overrides
+paths:
+  /v1/projects/{projectId}/environments/{environmentId}/rules:
+    get:
+      operationId: listOverrideRules
+      summary: List Override Rules
+      description: Returns all override rules for the environment. Rules target specific player segments with configuration overrides.
+      tags:
+      - Override Rules
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of override rules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleList'
+    post:
+      operationId: createOverrideRule
+      summary: Create Override Rule
+      description: Creates a new override rule targeting a specific player segment with custom configuration values.
+      tags:
+      - Override Rules
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRuleRequest'
+      responses:
+        '200':
+          description: Rule created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+  /v1/projects/{projectId}/environments/{environmentId}/rules/{ruleId}:
+    put:
+      operationId: updateOverrideRule
+      summary: Update Override Rule
+      description: Updates an existing override rule's conditions or settings.
+      tags:
+      - Override Rules
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRuleRequest'
+      responses:
+        '200':
+          description: Rule updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+    delete:
+      operationId: deleteOverrideRule
+      summary: Delete Override Rule
+      description: Deletes a targeting override rule.
+      tags:
+      - Override Rules
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Rule deleted
+components:
+  schemas:
+    RuleList:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+    CreateRuleRequest:
+      type: object
+      required:
+      - name
+      - enabled
+      - priority
+      - condition
+      - value
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        priority:
+          type: integer
+        condition:
+          type: string
+        rolloutPercentage:
+          type: integer
+          default: 100
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    Setting:
+      type: object
+      required:
+      - key
+      - type
+      - value
+      properties:
+        key:
+          type: string
+          description: Configuration key name
+        type:
+          type: string
+          enum:
+          - string
+          - int
+          - bool
+          - float
+          - json
+          description: Data type of the setting
+        value: {}
+        description:
+          type: string
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        enabled:
+          type: boolean
+        priority:
+          type: integer
+        condition:
+          type: string
+          description: Rule condition expression
+        rolloutPercentage:
+          type: integer
+          minimum: 0
+          maximum: 100
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    UpdateRuleRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        priority:
+          type: integer
+        condition:
+          type: string
+        rolloutPercentage:
+          type: integer
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

@@ -1,0 +1,180 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Currencies API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Currencies
+  description: Manage virtual currencies and player balances
+paths:
+  /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/currencies:
+    get:
+      operationId: getPlayerCurrencyBalances
+      summary: Get Player Currency Balances
+      description: Returns all currency balances for the specified player.
+      tags:
+      - Currencies
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Player currency balances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerCurrencyBalances'
+  /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/currencies/{currencyId}/increment:
+    post:
+      operationId: incrementPlayerCurrencyBalance
+      summary: Increment Player Currency Balance
+      description: Increases a player's currency balance by the specified amount.
+      tags:
+      - Currencies
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: currencyId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CurrencyBalanceUpdate'
+      responses:
+        '200':
+          description: Updated currency balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrencyBalance'
+  /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/currencies/{currencyId}/decrement:
+    post:
+      operationId: decrementPlayerCurrencyBalance
+      summary: Decrement Player Currency Balance
+      description: Decreases a player's currency balance by the specified amount.
+      tags:
+      - Currencies
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: currencyId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CurrencyBalanceUpdate'
+      responses:
+        '200':
+          description: Updated currency balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrencyBalance'
+components:
+  schemas:
+    CurrencyBalance:
+      type: object
+      properties:
+        currencyId:
+          type: string
+        balance:
+          type: integer
+        writeLock:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestamp'
+        modified:
+          $ref: '#/components/schemas/Timestamp'
+    CurrencyBalanceUpdate:
+      type: object
+      required:
+      - amount
+      properties:
+        amount:
+          type: integer
+          minimum: 1
+        writeLock:
+          type: string
+          description: Optimistic lock token to prevent race conditions
+    PlayerCurrencyBalances:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyBalance'
+    Timestamp:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

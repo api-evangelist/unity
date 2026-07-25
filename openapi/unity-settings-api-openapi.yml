@@ -1,0 +1,125 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Settings API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Settings
+  description: Manage configuration settings and schemas
+paths:
+  /v1/projects/{projectId}/environments/{environmentId}/configs/{configId}/settings:
+    get:
+      operationId: listSettings
+      summary: List Config Settings
+      description: Returns all settings (key-value pairs) in the configuration.
+      tags:
+      - Settings
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: configId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Configuration settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingsList'
+    post:
+      operationId: addSetting
+      summary: Add Config Setting
+      description: Adds a new key-value setting to the configuration.
+      tags:
+      - Settings
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: configId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Setting'
+      responses:
+        '200':
+          description: Setting added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Setting'
+components:
+  schemas:
+    SettingsList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    Setting:
+      type: object
+      required:
+      - key
+      - type
+      - value
+      properties:
+        key:
+          type: string
+          description: Configuration key name
+        type:
+          type: string
+          enum:
+          - string
+          - int
+          - bool
+          - float
+          - json
+          description: Data type of the setting
+        value: {}
+        description:
+          type: string
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

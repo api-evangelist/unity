@@ -1,0 +1,182 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Search API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Search
+  description: Discover and join lobbies
+paths:
+  /v1/lobbies/query:
+    post:
+      operationId: queryLobbies
+      summary: Query Lobbies
+      description: Searches for available lobbies using filter and sort criteria. Only returns public lobbies.
+      tags:
+      - Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryLobbiesRequest'
+      responses:
+        '200':
+          description: List of matching lobbies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LobbyList'
+components:
+  schemas:
+    LobbyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    QueryFilter:
+      type: object
+      required:
+      - field
+      - value
+      - op
+      properties:
+        field:
+          type: string
+          enum:
+          - AvailableSlots
+          - MaxPlayers
+          - Created
+          - LastUpdated
+          - S1
+          - S2
+          - S3
+          - S4
+          - S5
+          - N1
+          - N2
+          - N3
+          - N4
+          - N5
+        value:
+          type: string
+        op:
+          type: string
+          enum:
+          - EQ
+          - NE
+          - LT
+          - LE
+          - GT
+          - GE
+          - CONTAINS
+          - NOT_CONTAINS
+    DataObject:
+      type: object
+      properties:
+        value:
+          type: string
+        visibility:
+          type: string
+          enum:
+          - Public
+          - Member
+          - Private
+        index:
+          type: string
+    QueryLobbiesRequest:
+      type: object
+      properties:
+        count:
+          type: integer
+          default: 10
+        continuationToken:
+          type: string
+        filter:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryFilter'
+        order:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryOrder'
+    Lobby:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        lobbyCode:
+          type: string
+          description: Join code for private lobbies
+        isPrivate:
+          type: boolean
+        isLocked:
+          type: boolean
+        maxPlayers:
+          type: integer
+        availableSlots:
+          type: integer
+        hostId:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/LobbyPlayer'
+        created:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    QueryOrder:
+      type: object
+      properties:
+        field:
+          type: string
+        asc:
+          type: boolean
+    LobbyList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lobby'
+        continuationToken:
+          type: string
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

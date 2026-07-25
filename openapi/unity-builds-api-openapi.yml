@@ -1,0 +1,358 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Builds API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Builds
+  description: Manage and trigger builds
+paths:
+  /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}/builds:
+    get:
+      operationId: getBuilds
+      summary: Get Builds
+      description: Returns the build history for a build target.
+      tags:
+      - Builds
+      parameters:
+      - name: orgid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: buildtargetid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 25
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: Build history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Build'
+    post:
+      operationId: startBuild
+      summary: Start Build
+      description: Triggers a new build for the specified build target.
+      tags:
+      - Builds
+      parameters:
+      - name: orgid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: buildtargetid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartBuildRequest'
+      responses:
+        '202':
+          description: Build started
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Build'
+  /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}/builds/{number}:
+    get:
+      operationId: getBuild
+      summary: Get Build
+      description: Returns details for a specific build including status, artifacts, and logs.
+      tags:
+      - Builds
+      parameters:
+      - name: orgid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: buildtargetid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: number
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Build details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Build'
+    delete:
+      operationId: cancelBuild
+      summary: Cancel Build
+      description: Cancels an in-progress build.
+      tags:
+      - Builds
+      parameters:
+      - name: orgid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: buildtargetid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: number
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Build cancelled
+  /v1/projects/{projectId}/builds:
+    get:
+      operationId: listBuilds
+      summary: List Builds
+      description: Returns all game server builds for the project.
+      tags:
+      - Builds
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of builds
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildList'
+    post:
+      operationId: createBuild
+      summary: Create Build
+      description: Creates a new game server build configuration.
+      tags:
+      - Builds
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBuildRequest'
+      responses:
+        '200':
+          description: Build created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Build_2'
+  /v1/projects/{projectId}/builds/{buildId}:
+    get:
+      operationId: getBuild
+      summary: Get Build
+      description: Returns details of a specific game server build.
+      tags:
+      - Builds
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: buildId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Build details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Build_2'
+components:
+  schemas:
+    Build:
+      type: object
+      properties:
+        build:
+          type: integer
+        buildtargetid:
+          type: string
+        buildTargetName:
+          type: string
+        platform:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - sentToBuilder
+          - started
+          - restarted
+          - success
+          - failure
+          - canceled
+          - unknown
+        changeset:
+          type: array
+          items:
+            type: object
+            properties:
+              commitId:
+                type: string
+              message:
+                type: string
+              timestamp:
+                type: string
+                format: date-time
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildArtifact'
+        created:
+          type: string
+          format: date-time
+        finished:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+    BuildList:
+      type: object
+      properties:
+        builds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Build_2'
+    StartBuildRequest:
+      type: object
+      properties:
+        clean:
+          type: boolean
+          description: Whether to start a clean build
+        delay:
+          type: integer
+          description: Seconds to delay before starting
+    Build_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        buildID:
+          type: integer
+        buildName:
+          type: string
+        os:
+          type: string
+          enum:
+          - LINUX
+          - WINDOWS
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    CreateBuildRequest:
+      type: object
+      required:
+      - buildName
+      - os
+      properties:
+        buildName:
+          type: string
+        os:
+          type: string
+          enum:
+          - LINUX
+          - WINDOWS
+    BuildArtifact:
+      type: object
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        primary:
+          type: boolean
+        show_download:
+          type: boolean
+        links:
+          type: object
+          properties:
+            href:
+              type: string
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

@@ -1,0 +1,140 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Custom Data API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Custom Data
+  description: Manage custom data with access class controls
+paths:
+  /v1/data/projects/{projectId}/players/{playerId}/protected-items:
+    post:
+      operationId: setProtectedPlayerData
+      summary: Set Protected Player Data
+      description: Creates or updates protected data items that can only be written by the server but read by the player.
+      tags:
+      - Custom Data
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPlayerDataRequest'
+      responses:
+        '200':
+          description: Protected data items saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDataList'
+  /v1/data/projects/{projectId}/players/{playerId}/public-items:
+    post:
+      operationId: setPublicPlayerData
+      summary: Set Public Player Data
+      description: Creates or updates public data items visible to all players in the game.
+      tags:
+      - Custom Data
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPlayerDataRequest'
+      responses:
+        '200':
+          description: Public data items saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDataList'
+components:
+  schemas:
+    PlayerDataList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataItem'
+        links:
+          type: object
+          properties:
+            next:
+              type: string
+    DataItem:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Data key (up to 255 characters)
+        value:
+          description: Data value (any JSON-serializable value)
+        writeLock:
+          type: string
+          description: Optimistic concurrency lock token
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    SetPlayerDataRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - key
+            - value
+            properties:
+              key:
+                type: string
+              value: {}
+              writeLock:
+                type: string
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

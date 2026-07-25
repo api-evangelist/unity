@@ -1,0 +1,77 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Executions API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Executions
+  description: Execute cloud code scripts
+paths:
+  /v1/projects/{projectId}/scripts/{scriptName}/run:
+    post:
+      operationId: runScript
+      summary: Run Script
+      description: Executes a Cloud Code script with the provided parameters. The script runs asynchronously and returns the result.
+      tags:
+      - Executions
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: scriptName
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunScriptRequest'
+      responses:
+        '200':
+          description: Script execution result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptRunResult'
+        '400':
+          description: Bad Request
+        '404':
+          description: Script not found
+components:
+  schemas:
+    RunScriptRequest:
+      type: object
+      properties:
+        params:
+          type: object
+          description: Parameters to pass to the script
+    ScriptRunResult:
+      type: object
+      properties:
+        output:
+          description: The return value from the script
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

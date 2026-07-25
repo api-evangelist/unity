@@ -1,0 +1,311 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Lobbies API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Lobbies
+  description: Create and manage game lobbies
+paths:
+  /v1/lobbies:
+    post:
+      operationId: createLobby
+      summary: Create Lobby
+      description: Creates a new lobby with the specified configuration. The requesting player becomes the lobby host.
+      tags:
+      - Lobbies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLobbyRequest'
+      responses:
+        '200':
+          description: Lobby created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+  /v1/lobbies/{lobbyId}:
+    get:
+      operationId: getLobby
+      summary: Get Lobby
+      description: Returns the current state and configuration of a lobby.
+      tags:
+      - Lobbies
+      parameters:
+      - name: lobbyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Lobby details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+        '404':
+          description: Lobby not found
+    patch:
+      operationId: updateLobby
+      summary: Update Lobby
+      description: Updates lobby configuration and data. Only the lobby host can update the lobby.
+      tags:
+      - Lobbies
+      parameters:
+      - name: lobbyId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLobbyRequest'
+      responses:
+        '200':
+          description: Lobby updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+    delete:
+      operationId: deleteLobby
+      summary: Delete Lobby
+      description: Deletes a lobby. Only the host can delete the lobby.
+      tags:
+      - Lobbies
+      parameters:
+      - name: lobbyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Lobby deleted
+  /v1/lobbies/{lobbyId}/join:
+    post:
+      operationId: joinLobbyById
+      summary: Join Lobby By ID
+      description: Joins an existing lobby by its unique identifier.
+      tags:
+      - Lobbies
+      parameters:
+      - name: lobbyId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JoinLobbyRequest'
+      responses:
+        '200':
+          description: Joined lobby successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+        '404':
+          description: Lobby not found
+        '409':
+          description: Lobby is full or not joinable
+  /v1/lobbies/code/{lobbyCode}:
+    post:
+      operationId: joinLobbyByCode
+      summary: Join Lobby By Code
+      description: Joins a private lobby using a lobby join code shared by the host.
+      tags:
+      - Lobbies
+      parameters:
+      - name: lobbyCode
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JoinLobbyRequest'
+      responses:
+        '200':
+          description: Joined lobby successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+        '404':
+          description: Invalid lobby code
+  /v1/lobbies/{lobbyId}/heartbeat:
+    post:
+      operationId: heartbeatLobby
+      summary: Heartbeat Lobby
+      description: Sends a heartbeat to keep the lobby active. Lobbies without recent heartbeats are automatically deleted.
+      tags:
+      - Lobbies
+      parameters:
+      - name: lobbyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Heartbeat received
+components:
+  schemas:
+    CreatePlayerRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+    LobbyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    CreateLobbyRequest:
+      type: object
+      required:
+      - name
+      - maxPlayers
+      properties:
+        name:
+          type: string
+        maxPlayers:
+          type: integer
+          minimum: 1
+        isPrivate:
+          type: boolean
+          default: false
+        player:
+          $ref: '#/components/schemas/CreatePlayerRequest'
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+    DataObject:
+      type: object
+      properties:
+        value:
+          type: string
+        visibility:
+          type: string
+          enum:
+          - Public
+          - Member
+          - Private
+        index:
+          type: string
+    Lobby:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        lobbyCode:
+          type: string
+          description: Join code for private lobbies
+        isPrivate:
+          type: boolean
+        isLocked:
+          type: boolean
+        maxPlayers:
+          type: integer
+        availableSlots:
+          type: integer
+        hostId:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/LobbyPlayer'
+        created:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    UpdateLobbyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        maxPlayers:
+          type: integer
+        isPrivate:
+          type: boolean
+        isLocked:
+          type: boolean
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        hostId:
+          type: string
+          description: Transfer host to this player ID
+    JoinLobbyRequest:
+      type: object
+      required:
+      - playerId
+      properties:
+        playerId:
+          type: string
+        player:
+          $ref: '#/components/schemas/CreatePlayerRequest'
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

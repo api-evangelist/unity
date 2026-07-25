@@ -1,0 +1,89 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Allocations
+  description: Allocate servers for game sessions
+paths:
+  /v1/projects/{projectId}/regions/{regionId}/fleets/{fleetId}/allocations:
+    post:
+      operationId: allocateServer
+      summary: Allocate Server
+      description: Allocates an available server from the fleet for a new game session.
+      tags:
+      - Allocations
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: regionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fleetId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllocateServerRequest'
+      responses:
+        '200':
+          description: Server allocated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allocation'
+        '404':
+          description: No servers available
+components:
+  schemas:
+    AllocateServerRequest:
+      type: object
+      properties:
+        allocationContext:
+          type: string
+          description: Custom context data for the allocation
+    Allocation:
+      type: object
+      properties:
+        allocationID:
+          type: string
+          format: uuid
+        serverID:
+          type: integer
+        ip:
+          type: string
+        port:
+          type: integer
+        queryPort:
+          type: integer
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

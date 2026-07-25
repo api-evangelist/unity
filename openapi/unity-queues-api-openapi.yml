@@ -1,0 +1,257 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Queues API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Queues
+  description: Configure matchmaking queues and pools
+paths:
+  /v3/projects/{projectId}/environments/{environmentId}/queues:
+    get:
+      operationId: listQueues
+      summary: List Matchmaking Queues
+      description: Returns all configured matchmaking queues for the environment.
+      tags:
+      - Queues
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of queues
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueList'
+    post:
+      operationId: createQueue
+      summary: Create Matchmaking Queue
+      description: Creates a new matchmaking queue with specified rules and pool configuration.
+      tags:
+      - Queues
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateQueueRequest'
+      responses:
+        '200':
+          description: Queue created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+  /v3/projects/{projectId}/environments/{environmentId}/queues/{queueName}:
+    get:
+      operationId: getQueue
+      summary: Get Matchmaking Queue
+      description: Returns configuration and status for a specific matchmaking queue.
+      tags:
+      - Queues
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: queueName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Queue details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+        '404':
+          description: Queue not found
+    put:
+      operationId: updateQueue
+      summary: Update Matchmaking Queue
+      description: Updates the configuration of an existing matchmaking queue.
+      tags:
+      - Queues
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: queueName
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateQueueRequest'
+      responses:
+        '200':
+          description: Queue updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+    delete:
+      operationId: deleteQueue
+      summary: Delete Matchmaking Queue
+      description: Deletes a matchmaking queue and all its configuration.
+      tags:
+      - Queues
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: queueName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Queue deleted
+components:
+  schemas:
+    EscalationRules:
+      type: object
+      properties:
+        timeoutSeconds:
+          type: integer
+        backfillEnabled:
+          type: boolean
+    QueueList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Queue'
+    Queue:
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    CreateQueueRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+          default: true
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+    MatchLogic:
+      type: object
+      properties:
+        name:
+          type: string
+        script:
+          type: string
+          description: MMScript for match rules
+    Pool:
+      type: object
+      properties:
+        name:
+          type: string
+        maximumPlayerCount:
+          type: integer
+        minimumPlayerCount:
+          type: integer
+        matchLogic:
+          $ref: '#/components/schemas/MatchLogic'
+    UpdateQueueRequest:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

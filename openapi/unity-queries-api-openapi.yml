@@ -1,0 +1,136 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Queries API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Queries
+  description: Query stored data using indexes
+paths:
+  /v1/data/projects/{projectId}/players/{playerId}/query:
+    post:
+      operationId: queryPlayerData
+      summary: Query Player Data
+      description: Query player data items using field-based filters. Requires indexed fields to be defined in the project configuration.
+      tags:
+      - Queries
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: Query results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResult'
+components:
+  schemas:
+    QueryRequest:
+      type: object
+      properties:
+        returnKeys:
+          type: array
+          items:
+            type: string
+          description: Keys to return in the query results
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldFilter'
+        offset:
+          type: integer
+          default: 0
+        limit:
+          type: integer
+          default: 10
+    QueryResult:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              playerId:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataItem'
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+    DataItem:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Data key (up to 255 characters)
+        value:
+          description: Data value (any JSON-serializable value)
+        writeLock:
+          type: string
+          description: Optimistic concurrency lock token
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    FieldFilter:
+      type: object
+      required:
+      - key
+      - value
+      - op
+      properties:
+        key:
+          type: string
+        value: {}
+        op:
+          type: string
+          enum:
+          - EQ
+          - NE
+          - LT
+          - LE
+          - GT
+          - GE
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

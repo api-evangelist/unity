@@ -1,0 +1,249 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Players API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Players
+  description: Manage players within a lobby
+paths:
+  /v1/lobbies/{lobbyId}/players/{playerId}:
+    delete:
+      operationId: removePlayer
+      summary: Remove Player From Lobby
+      description: Removes a player from the lobby. Host can remove any player; players can remove themselves.
+      tags:
+      - Players
+      parameters:
+      - name: lobbyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Player removed
+    patch:
+      operationId: updatePlayerData
+      summary: Update Player Data In Lobby
+      description: Updates a player's custom data within the lobby.
+      tags:
+      - Players
+      parameters:
+      - name: lobbyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlayerRequest'
+      responses:
+        '200':
+          description: Player data updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
+  /v1/players:
+    get:
+      operationId: listPlayers
+      summary: List Players
+      description: Returns a paginated list of all players for the project. Admin operation.
+      tags:
+      - Players
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of players
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerList'
+        '401':
+          description: Unauthorized
+  /v1/players/{playerId}:
+    get:
+      operationId: getPlayer
+      summary: Get Player
+      description: Returns information about a specific player.
+      tags:
+      - Players
+      parameters:
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Player details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '404':
+          description: Player not found
+    delete:
+      operationId: deletePlayer
+      summary: Delete Player
+      description: Deletes a player account and all associated data.
+      tags:
+      - Players
+      parameters:
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Player deleted
+        '404':
+          description: Player not found
+components:
+  schemas:
+    LobbyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    DataObject:
+      type: object
+      properties:
+        value:
+          type: string
+        visibility:
+          type: string
+          enum:
+          - Public
+          - Member
+          - Private
+        index:
+          type: string
+    Lobby:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        lobbyCode:
+          type: string
+          description: Join code for private lobbies
+        isPrivate:
+          type: boolean
+        isLocked:
+          type: boolean
+        maxPlayers:
+          type: integer
+        availableSlots:
+          type: integer
+        hostId:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/LobbyPlayer'
+        created:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    PlayerList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+        next:
+          type: string
+    UpdatePlayerRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          type: array
+          items:
+            type: object
+            properties:
+              providerId:
+                type: string
+              externalId:
+                type: string
+        disabled:
+          type: boolean
+        lastLoginDate:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

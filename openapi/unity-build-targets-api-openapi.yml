@@ -1,0 +1,242 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Build Targets API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Build Targets
+  description: Configure build targets and platforms
+paths:
+  /orgs/{orgid}/projects/{projectid}/buildtargets:
+    get:
+      operationId: listBuildTargets
+      summary: List Build Targets
+      description: Returns all configured build targets for the specified project.
+      tags:
+      - Build Targets
+      parameters:
+      - name: orgid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of build targets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BuildTarget'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createBuildTarget
+      summary: Create Build Target
+      description: Creates a new build target for a specific platform and configuration.
+      tags:
+      - Build Targets
+      parameters:
+      - name: orgid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBuildTargetRequest'
+      responses:
+        '201':
+          description: Build target created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildTarget'
+  /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}:
+    get:
+      operationId: getBuildTarget
+      summary: Get Build Target
+      description: Returns the configuration for a specific build target.
+      tags:
+      - Build Targets
+      parameters:
+      - name: orgid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: buildtargetid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Build target details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildTarget'
+    patch:
+      operationId: updateBuildTarget
+      summary: Update Build Target
+      description: Updates the configuration of an existing build target.
+      tags:
+      - Build Targets
+      parameters:
+      - name: orgid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: buildtargetid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBuildTargetRequest'
+      responses:
+        '200':
+          description: Build target updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildTarget'
+    delete:
+      operationId: deleteBuildTarget
+      summary: Delete Build Target
+      description: Deletes a build target configuration.
+      tags:
+      - Build Targets
+      parameters:
+      - name: orgid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: buildtargetid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Build target deleted
+components:
+  schemas:
+    BuildTarget:
+      type: object
+      properties:
+        buildtargetid:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+          enum:
+          - ios
+          - android
+          - webgl
+          - standaloneosxintel64
+          - standalonewindows64
+          - standalonelinux64
+        enabled:
+          type: boolean
+        settings:
+          type: object
+          properties:
+            unity:
+              type: object
+              properties:
+                version:
+                  type: string
+            scm:
+              type: object
+              properties:
+                type:
+                  type: string
+                branch:
+                  type: string
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    UpdateBuildTargetRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        settings:
+          type: object
+    CreateBuildTargetRequest:
+      type: object
+      required:
+      - name
+      - platform
+      properties:
+        name:
+          type: string
+        platform:
+          type: string
+        enabled:
+          type: boolean
+        settings:
+          type: object
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

@@ -1,0 +1,141 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Configuration API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Configuration
+  description: Admin endpoints for managing economy resources
+paths:
+  /v2/projects/{projectId}/environments/{environmentId}/configs/items:
+    get:
+      operationId: listEconomyConfigs
+      summary: List Economy Configurations
+      description: Returns a list of all economy resource configurations for the project.
+      tags:
+      - Configuration
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of economy configurations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EconomyConfigList'
+        '401':
+          description: Unauthorized
+  /v2/projects/{projectId}/environments/{environmentId}/configs/items/{resourceId}:
+    get:
+      operationId: getEconomyConfig
+      summary: Get Economy Configuration
+      description: Returns the configuration of a specific economy resource.
+      tags:
+      - Configuration
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: resourceId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Economy resource configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EconomyConfig'
+        '404':
+          description: Not Found
+components:
+  schemas:
+    EconomyConfigList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EconomyConfig'
+        links:
+          type: object
+          properties:
+            next:
+              type: string
+    EconomyConfig:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - CURRENCY
+          - INVENTORY_ITEM
+          - VIRTUAL_PURCHASE
+          - REAL_MONEY_PURCHASE
+        initial:
+          type: number
+          description: Initial balance (for currencies)
+        max:
+          type: number
+          description: Maximum balance (for currencies)
+        customData:
+          type: object
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

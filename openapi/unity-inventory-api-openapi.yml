@@ -1,0 +1,105 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Inventory API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Inventory
+  description: Manage inventory items and player inventory
+paths:
+  /v2/projects/{projectId}/environments/{environmentId}/players/{playerId}/inventory:
+    get:
+      operationId: getPlayerInventory
+      summary: Get Player Inventory
+      description: Returns all inventory items currently held by the player.
+      tags:
+      - Inventory
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: playersItemIds
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: itemIds
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Player inventory items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerInventory'
+components:
+  schemas:
+    Timestamp:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+    PlayerInventory:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
+    InventoryItem:
+      type: object
+      properties:
+        playersItemId:
+          type: string
+        inventoryItemId:
+          type: string
+        quantity:
+          type: integer
+        instanceData:
+          type: object
+        writeLock:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestamp'
+        modified:
+          $ref: '#/components/schemas/Timestamp'
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api

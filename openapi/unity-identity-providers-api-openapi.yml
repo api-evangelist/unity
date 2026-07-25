@@ -1,0 +1,173 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics Allocations Identity Providers API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+servers:
+- url: https://analytics.services.api.unity.com
+  description: Unity Analytics Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Identity Providers
+  description: External identity provider linking
+paths:
+  /v1/authentication/external-token:
+    post:
+      operationId: signInWithExternalToken
+      summary: Sign In With External Token
+      description: Authenticates a player using a token from an external identity provider such as Google, Apple, Steam, Facebook, or a custom provider.
+      tags:
+      - Identity Providers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalTokenSignInRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Invalid external token
+  /v1/players/{playerId}/link/external-token:
+    post:
+      operationId: linkExternalIdentity
+      summary: Link External Identity
+      description: Links an external identity provider to an existing player account.
+      tags:
+      - Identity Providers
+      parameters:
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalTokenSignInRequest'
+      responses:
+        '200':
+          description: Identity linked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '409':
+          description: Identity already linked to another account
+  /v1/players/{playerId}/unlink/external-token:
+    post:
+      operationId: unlinkExternalIdentity
+      summary: Unlink External Identity
+      description: Removes a linked external identity provider from a player account.
+      tags:
+      - Identity Providers
+      parameters:
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnlinkIdentityRequest'
+      responses:
+        '200':
+          description: Identity unlinked
+        '404':
+          description: Identity not found
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          type: array
+          items:
+            type: object
+            properties:
+              providerId:
+                type: string
+              externalId:
+                type: string
+        disabled:
+          type: boolean
+        lastLoginDate:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+    ExternalTokenSignInRequest:
+      type: object
+      required:
+      - idProvider
+      - token
+      properties:
+        idProvider:
+          type: string
+          enum:
+          - google
+          - apple
+          - steam
+          - facebook
+          - custom
+          description: The external identity provider
+        token:
+          type: string
+          description: The identity token from the external provider
+        signInOnly:
+          type: boolean
+          description: If true, only sign in and do not create a new account
+    UnlinkIdentityRequest:
+      type: object
+      required:
+      - idProvider
+      properties:
+        idProvider:
+          type: string
+    AuthResponse:
+      type: object
+      properties:
+        idToken:
+          type: string
+          description: JWT access token
+        sessionToken:
+          type: string
+        expiresIn:
+          type: integer
+          description: Token expiry in seconds
+        userId:
+          type: string
+        isNew:
+          type: boolean
+          description: True if a new account was created
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
