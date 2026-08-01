@@ -1,0 +1,473 @@
+openapi: 3.0.1
+info:
+  title: Unity Remote Config API
+  description: The Unity Remote Config REST API enables launching new features, testing functionality, and modifying game configurations without requiring app updates. The Admin API manages settings, schemas, and override rules. The Runtime API delivers configuration values to game clients at runtime.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Remote Config Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/remote-config/manual/write-configuration/rest-api
+servers:
+  - url: https://remote-config.services.api.unity.com
+    description: Unity Remote Config Admin Server
+  - url: https://config.unity3d.com
+    description: Unity Remote Config Runtime Server
+tags:
+  - name: Config
+    description: Manage remote configuration key-value pairs
+  - name: Settings
+    description: Manage configuration settings and schemas
+  - name: Override Rules
+    description: Manage targeting rules for configuration overrides
+paths:
+  /v1/projects/{projectId}/environments/{environmentId}/configs:
+    get:
+      operationId: listRemoteConfigs
+      summary: List Remote Configs
+      description: Returns all configuration schemas and their settings for the specified project environment.
+      tags:
+        - Config
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of configurations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigList'
+        '401':
+          description: Unauthorized
+  /v1/projects/{projectId}/environments/{environmentId}/configs/{configId}:
+    get:
+      operationId: getRemoteConfig
+      summary: Get Remote Config
+      description: Returns a specific configuration with all its settings.
+      tags:
+        - Config
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: configId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Configuration details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Config'
+        '404':
+          description: Config not found
+    put:
+      operationId: updateRemoteConfig
+      summary: Update Remote Config
+      description: Creates or updates the complete set of settings for a configuration.
+      tags:
+        - Config
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: configId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConfigRequest'
+      responses:
+        '200':
+          description: Configuration updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Config'
+  /v1/projects/{projectId}/environments/{environmentId}/configs/{configId}/settings:
+    get:
+      operationId: listSettings
+      summary: List Config Settings
+      description: Returns all settings (key-value pairs) in the configuration.
+      tags:
+        - Settings
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: configId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Configuration settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingsList'
+    post:
+      operationId: addSetting
+      summary: Add Config Setting
+      description: Adds a new key-value setting to the configuration.
+      tags:
+        - Settings
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: configId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Setting'
+      responses:
+        '200':
+          description: Setting added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Setting'
+  /v1/projects/{projectId}/environments/{environmentId}/rules:
+    get:
+      operationId: listOverrideRules
+      summary: List Override Rules
+      description: Returns all override rules for the environment. Rules target specific player segments with configuration overrides.
+      tags:
+        - Override Rules
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of override rules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleList'
+    post:
+      operationId: createOverrideRule
+      summary: Create Override Rule
+      description: Creates a new override rule targeting a specific player segment with custom configuration values.
+      tags:
+        - Override Rules
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRuleRequest'
+      responses:
+        '200':
+          description: Rule created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+  /v1/projects/{projectId}/environments/{environmentId}/rules/{ruleId}:
+    put:
+      operationId: updateOverrideRule
+      summary: Update Override Rule
+      description: Updates an existing override rule's conditions or settings.
+      tags:
+        - Override Rules
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: ruleId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRuleRequest'
+      responses:
+        '200':
+          description: Rule updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+    delete:
+      operationId: deleteOverrideRule
+      summary: Delete Override Rule
+      description: Deletes a targeting override rule.
+      tags:
+        - Override Rules
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: ruleId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Rule deleted
+components:
+  schemas:
+    Config:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - settings
+        projectId:
+          type: string
+        environmentId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    ConfigList:
+      type: object
+      properties:
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Config'
+    UpdateConfigRequest:
+      type: object
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          enum:
+            - settings
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    Setting:
+      type: object
+      required:
+        - key
+        - type
+        - value
+      properties:
+        key:
+          type: string
+          description: Configuration key name
+        type:
+          type: string
+          enum:
+            - string
+            - int
+            - bool
+            - float
+            - json
+          description: Data type of the setting
+        value: {}
+        description:
+          type: string
+    SettingsList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        enabled:
+          type: boolean
+        priority:
+          type: integer
+        condition:
+          type: string
+          description: Rule condition expression
+        rolloutPercentage:
+          type: integer
+          minimum: 0
+          maximum: 100
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    RuleList:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+    CreateRuleRequest:
+      type: object
+      required:
+        - name
+        - enabled
+        - priority
+        - condition
+        - value
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        priority:
+          type: integer
+        condition:
+          type: string
+        rolloutPercentage:
+          type: integer
+          default: 100
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    UpdateRuleRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        priority:
+          type: integer
+        condition:
+          type: string
+        rolloutPercentage:
+          type: integer
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

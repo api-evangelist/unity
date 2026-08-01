@@ -1,0 +1,328 @@
+openapi: 3.0.1
+info:
+  title: Unity Cloud Save API
+  description: The Unity Cloud Save REST API provides endpoints for persisting player data and game state in the cloud. It supports player-scoped data, custom data with access classes (default, protected, public), and admin operations for managing data across all players. Data is stored as key-value pairs with optional indexing for querying.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Cloud Save Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/cloud-save/manual/reference/rest-api
+servers:
+  - url: https://cloud-save.services.api.unity.com
+    description: Unity Cloud Save Production Server
+tags:
+  - name: Player Data
+    description: Manage player-scoped key-value data
+  - name: Custom Data
+    description: Manage custom data with access class controls
+  - name: Queries
+    description: Query stored data using indexes
+paths:
+  /v1/data/projects/{projectId}/players/{playerId}:
+    get:
+      operationId: getPlayerData
+      summary: Get Player Data
+      description: Returns all data items stored for the specified player.
+      tags:
+        - Player Data
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: keys
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          description: Filter by specific keys
+      responses:
+        '200':
+          description: Player data items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDataList'
+        '401':
+          description: Unauthorized
+  /v1/data/projects/{projectId}/players/{playerId}/items:
+    post:
+      operationId: setPlayerData
+      summary: Set Player Data Items
+      description: Creates or updates one or more key-value data items for a player. Supports optimistic concurrency via write locks.
+      tags:
+        - Player Data
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPlayerDataRequest'
+      responses:
+        '200':
+          description: Data items saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDataList'
+        '400':
+          description: Bad Request
+  /v1/data/projects/{projectId}/players/{playerId}/items/{key}:
+    delete:
+      operationId: deletePlayerDataItem
+      summary: Delete Player Data Item
+      description: Deletes a specific data item by key for a player.
+      tags:
+        - Player Data
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Item deleted
+        '404':
+          description: Item not found
+  /v1/data/projects/{projectId}/players/{playerId}/protected-items:
+    post:
+      operationId: setProtectedPlayerData
+      summary: Set Protected Player Data
+      description: Creates or updates protected data items that can only be written by the server but read by the player.
+      tags:
+        - Custom Data
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPlayerDataRequest'
+      responses:
+        '200':
+          description: Protected data items saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDataList'
+  /v1/data/projects/{projectId}/players/{playerId}/public-items:
+    post:
+      operationId: setPublicPlayerData
+      summary: Set Public Player Data
+      description: Creates or updates public data items visible to all players in the game.
+      tags:
+        - Custom Data
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPlayerDataRequest'
+      responses:
+        '200':
+          description: Public data items saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDataList'
+  /v1/data/projects/{projectId}/players/{playerId}/query:
+    post:
+      operationId: queryPlayerData
+      summary: Query Player Data
+      description: Query player data items using field-based filters. Requires indexed fields to be defined in the project configuration.
+      tags:
+        - Queries
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: Query results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResult'
+components:
+  schemas:
+    DataItem:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Data key (up to 255 characters)
+        value:
+          description: Data value (any JSON-serializable value)
+        writeLock:
+          type: string
+          description: Optimistic concurrency lock token
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    PlayerDataList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataItem'
+        links:
+          type: object
+          properties:
+            next:
+              type: string
+    SetPlayerDataRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+              - key
+              - value
+            properties:
+              key:
+                type: string
+              value: {}
+              writeLock:
+                type: string
+    QueryRequest:
+      type: object
+      properties:
+        returnKeys:
+          type: array
+          items:
+            type: string
+          description: Keys to return in the query results
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldFilter'
+        offset:
+          type: integer
+          default: 0
+        limit:
+          type: integer
+          default: 10
+    FieldFilter:
+      type: object
+      required:
+        - key
+        - value
+        - op
+      properties:
+        key:
+          type: string
+        value: {}
+        op:
+          type: string
+          enum:
+            - EQ
+            - NE
+            - LT
+            - LE
+            - GT
+            - GE
+    QueryResult:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              playerId:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataItem'
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

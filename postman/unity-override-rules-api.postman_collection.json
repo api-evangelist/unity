@@ -1,0 +1,587 @@
+{
+  "info": {
+    "_postman_id": "9de85a1b-1656-42f8-8a7f-300d56ce24ad",
+    "name": "Unity Analytics Allocations Override Rules API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:46.000Z",
+    "updatedAt": "2026-07-28T03:23:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9de85a1b-1656-42f8-8a7f-300d56ce24ad"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "environments",
+                  "item": [
+                    {
+                      "name": "{environmentId}",
+                      "item": [
+                        {
+                          "name": "rules",
+                          "item": [
+                            {
+                              "name": "{ruleId}",
+                              "item": [
+                                {
+                                  "name": "Update Override Rule",
+                                  "id": "18a9723d-0eea-4718-8b1c-8cfa66f3666d",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"condition\": \"<string>\",\n  \"rolloutPercentage\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"value\": [\n    {\n      \"key\": \"<string>\",\n      \"type\": \"bool\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"type\": \"float\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/rules/:ruleId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "rules",
+                                        ":ruleId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "73d9a83b-985f-4fb4-8e8e-5eb1ac0dfd8a",
+                                          "key": "projectId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "a3b6c6a9-5dca-42df-993e-1149012105b2",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "63c481f0-be7a-4335-85b4-7cf60843d215",
+                                          "key": "ruleId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Updates an existing override rule's conditions or settings."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "d2d70227-8829-4e1b-8aee-5a4e97f4e86c",
+                                      "name": "Rule updated",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"condition\": \"<string>\",\n  \"rolloutPercentage\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"value\": [\n    {\n      \"key\": \"<string>\",\n      \"type\": \"bool\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"type\": \"float\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/rules/:ruleId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "rules",
+                                            ":ruleId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "ruleId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"condition\": \"<string>\",\n  \"rolloutPercentage\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"value\": [\n    {\n      \"key\": \"<string>\",\n      \"type\": \"json\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"type\": \"json\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                                      "createdAt": "2026-07-28T03:23:47.000Z",
+                                      "updatedAt": "2026-07-28T03:23:47.000Z",
+                                      "uid": "35240-d2d70227-8829-4e1b-8aee-5a4e97f4e86c"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:47.000Z",
+                                  "updatedAt": "2026-07-28T03:23:47.000Z",
+                                  "uid": "35240-18a9723d-0eea-4718-8b1c-8cfa66f3666d"
+                                },
+                                {
+                                  "name": "Delete Override Rule",
+                                  "id": "3630e41b-2371-45ea-bcec-d03a3fea3fb4",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "DELETE",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/rules/:ruleId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "rules",
+                                        ":ruleId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "c64c9083-b480-4114-a01e-34ef09323cd9",
+                                          "key": "projectId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "69d470a5-e03c-40e8-a5cf-03d5d83c1132",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "d396d281-ad57-4c30-ba29-82cf111b0000",
+                                          "key": "ruleId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Deletes a targeting override rule."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "84ef5a74-8bd1-4953-b417-8921decb4045",
+                                      "name": "Rule deleted",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/rules/:ruleId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "rules",
+                                            ":ruleId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "ruleId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "No Content",
+                                      "code": 204,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:23:47.000Z",
+                                      "updatedAt": "2026-07-28T03:23:47.000Z",
+                                      "uid": "35240-84ef5a74-8bd1-4953-b417-8921decb4045"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:47.000Z",
+                                  "updatedAt": "2026-07-28T03:23:47.000Z",
+                                  "uid": "35240-3630e41b-2371-45ea-bcec-d03a3fea3fb4"
+                                }
+                              ],
+                              "id": "9c609664-68ce-46eb-b7d8-97437f3e70ee",
+                              "createdAt": "2026-07-28T03:23:47.000Z",
+                              "updatedAt": "2026-07-28T03:23:47.000Z",
+                              "uid": "35240-9c609664-68ce-46eb-b7d8-97437f3e70ee"
+                            },
+                            {
+                              "name": "List Override Rules",
+                              "id": "f21a49ba-d419-4f03-bf79-47235c9a1718",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/rules",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "environments",
+                                    ":environmentId",
+                                    "rules"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "b3a44d8d-8e76-4c7b-91f2-e4aafd066c33",
+                                      "key": "projectId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "e61ba03c-5458-47f3-ad72-ad3d5b7ac9c8",
+                                      "key": "environmentId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Returns all override rules for the environment. Rules target specific player segments with configuration overrides."
+                              },
+                              "response": [
+                                {
+                                  "id": "ebb5a205-9488-4a9d-b511-ce33de2e6676",
+                                  "name": "List of override rules",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/rules",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "rules"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"rules\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"priority\": \"<integer>\",\n      \"condition\": \"<string>\",\n      \"rolloutPercentage\": \"<integer>\",\n      \"startDate\": \"<dateTime>\",\n      \"endDate\": \"<dateTime>\",\n      \"value\": [\n        {\n          \"key\": \"<string>\",\n          \"type\": \"json\",\n          \"value\": {},\n          \"description\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"type\": \"string\",\n          \"value\": {},\n          \"description\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"priority\": \"<integer>\",\n      \"condition\": \"<string>\",\n      \"rolloutPercentage\": \"<integer>\",\n      \"startDate\": \"<dateTime>\",\n      \"endDate\": \"<dateTime>\",\n      \"value\": [\n        {\n          \"key\": \"<string>\",\n          \"type\": \"float\",\n          \"value\": {},\n          \"description\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"type\": \"string\",\n          \"value\": {},\n          \"description\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T03:23:47.000Z",
+                                  "updatedAt": "2026-07-28T03:23:47.000Z",
+                                  "uid": "35240-ebb5a205-9488-4a9d-b511-ce33de2e6676"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:23:47.000Z",
+                              "updatedAt": "2026-07-28T03:23:47.000Z",
+                              "uid": "35240-f21a49ba-d419-4f03-bf79-47235c9a1718"
+                            },
+                            {
+                              "name": "Create Override Rule",
+                              "id": "038840b3-bc28-4775-997e-55c996eb45c9",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"condition\": \"<string>\",\n  \"value\": [\n    {\n      \"key\": \"<string>\",\n      \"type\": \"bool\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"type\": \"string\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    }\n  ],\n  \"rolloutPercentage\": 100,\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/rules",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "environments",
+                                    ":environmentId",
+                                    "rules"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "5b9a69b6-3fed-4ba8-bcb7-b87451bb5667",
+                                      "key": "projectId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "f5787746-2bc5-4bc4-8856-52a99834d57c",
+                                      "key": "environmentId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Creates a new override rule targeting a specific player segment with custom configuration values."
+                              },
+                              "response": [
+                                {
+                                  "id": "947ac1bf-1850-4189-abec-c503b6c89c6e",
+                                  "name": "Rule created",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"condition\": \"<string>\",\n  \"value\": [\n    {\n      \"key\": \"<string>\",\n      \"type\": \"bool\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"type\": \"string\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    }\n  ],\n  \"rolloutPercentage\": 100,\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/rules",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "rules"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"condition\": \"<string>\",\n  \"rolloutPercentage\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"value\": [\n    {\n      \"key\": \"<string>\",\n      \"type\": \"json\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"type\": \"json\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T03:23:47.000Z",
+                                  "updatedAt": "2026-07-28T03:23:47.000Z",
+                                  "uid": "35240-947ac1bf-1850-4189-abec-c503b6c89c6e"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:23:47.000Z",
+                              "updatedAt": "2026-07-28T03:23:47.000Z",
+                              "uid": "35240-038840b3-bc28-4775-997e-55c996eb45c9"
+                            }
+                          ],
+                          "id": "abe4a445-2fc2-4100-ba37-a488a821cba0",
+                          "createdAt": "2026-07-28T03:23:47.000Z",
+                          "updatedAt": "2026-07-28T03:23:47.000Z",
+                          "uid": "35240-abe4a445-2fc2-4100-ba37-a488a821cba0"
+                        }
+                      ],
+                      "id": "f64f0112-d9d9-4144-96d8-21da7da02f68",
+                      "createdAt": "2026-07-28T03:23:47.000Z",
+                      "updatedAt": "2026-07-28T03:23:47.000Z",
+                      "uid": "35240-f64f0112-d9d9-4144-96d8-21da7da02f68"
+                    }
+                  ],
+                  "id": "8ab9106a-0687-469e-a38c-fe45a3188f5b",
+                  "createdAt": "2026-07-28T03:23:47.000Z",
+                  "updatedAt": "2026-07-28T03:23:47.000Z",
+                  "uid": "35240-8ab9106a-0687-469e-a38c-fe45a3188f5b"
+                }
+              ],
+              "id": "6b4239d0-c12c-41bd-8be1-b8987154c4f9",
+              "createdAt": "2026-07-28T03:23:47.000Z",
+              "updatedAt": "2026-07-28T03:23:47.000Z",
+              "uid": "35240-6b4239d0-c12c-41bd-8be1-b8987154c4f9"
+            }
+          ],
+          "id": "7ecec845-90c7-466b-b94d-829dbff6aa15",
+          "createdAt": "2026-07-28T03:23:47.000Z",
+          "updatedAt": "2026-07-28T03:23:47.000Z",
+          "uid": "35240-7ecec845-90c7-466b-b94d-829dbff6aa15"
+        }
+      ],
+      "id": "ec2bada8-48aa-4753-84b8-6a6c4a3c6fbe",
+      "createdAt": "2026-07-28T03:23:47.000Z",
+      "updatedAt": "2026-07-28T03:23:47.000Z",
+      "uid": "35240-ec2bada8-48aa-4753-84b8-6a6c4a3c6fbe"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

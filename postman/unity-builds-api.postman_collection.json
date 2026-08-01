@@ -1,0 +1,992 @@
+{
+  "info": {
+    "_postman_id": "580b6c3b-0572-487f-9917-0c8d550e81fa",
+    "name": "Unity Analytics Allocations Builds API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:02.000Z",
+    "updatedAt": "2026-07-28T03:23:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-580b6c3b-0572-487f-9917-0c8d550e81fa"
+  },
+  "item": [
+    {
+      "name": "orgs",
+      "item": [
+        {
+          "name": "{orgid}",
+          "item": [
+            {
+              "name": "projects",
+              "item": [
+                {
+                  "name": "{projectid}",
+                  "item": [
+                    {
+                      "name": "buildtargets",
+                      "item": [
+                        {
+                          "name": "{buildtargetid}",
+                          "item": [
+                            {
+                              "name": "builds",
+                              "item": [
+                                {
+                                  "name": "{number}",
+                                  "item": [
+                                    {
+                                      "name": "Get Build",
+                                      "id": "ed2a24a2-c426-4642-b7fc-165c73ba2393",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds/:number",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "orgs",
+                                            ":orgid",
+                                            "projects",
+                                            ":projectid",
+                                            "buildtargets",
+                                            ":buildtargetid",
+                                            "builds",
+                                            ":number"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "0ae66894-ae2b-463e-a59c-383956d8e8a0",
+                                              "key": "orgid",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "f602097f-b0cf-4ba4-aa19-d27e4302f27c",
+                                              "key": "projectid",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "b1d35e73-3c3c-4b77-ac72-39aa439ba491",
+                                              "key": "buildtargetid",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "dcd9794e-497b-4dc2-8683-c0ff2dd9dec3",
+                                              "key": "number",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Returns details for a specific build including status, artifacts, and logs."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "b7e0b090-d519-41be-a578-7e085d4913e6",
+                                          "name": "Build details",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds/:number",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "orgs",
+                                                ":orgid",
+                                                "projects",
+                                                ":projectid",
+                                                "buildtargets",
+                                                ":buildtargetid",
+                                                "builds",
+                                                ":number"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "orgid"
+                                                },
+                                                {
+                                                  "key": "projectid"
+                                                },
+                                                {
+                                                  "key": "buildtargetid"
+                                                },
+                                                {
+                                                  "key": "number"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"build\": \"<integer>\",\n  \"buildtargetid\": \"<string>\",\n  \"buildTargetName\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"status\": \"failure\",\n  \"changeset\": [\n    {\n      \"commitId\": \"<string>\",\n      \"message\": \"<string>\",\n      \"timestamp\": \"<dateTime>\"\n    },\n    {\n      \"commitId\": \"<string>\",\n      \"message\": \"<string>\",\n      \"timestamp\": \"<dateTime>\"\n    }\n  ],\n  \"artifacts\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"primary\": \"<boolean>\",\n      \"show_download\": \"<boolean>\",\n      \"links\": {\n        \"href\": \"<string>\"\n      }\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"primary\": \"<boolean>\",\n      \"show_download\": \"<boolean>\",\n      \"links\": {\n        \"href\": \"<string>\"\n      }\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"finished\": \"<dateTime>\",\n  \"duration\": \"<integer>\"\n}",
+                                          "createdAt": "2026-07-28T03:23:03.000Z",
+                                          "updatedAt": "2026-07-28T03:23:03.000Z",
+                                          "uid": "35240-b7e0b090-d519-41be-a578-7e085d4913e6"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:23:03.000Z",
+                                      "updatedAt": "2026-07-28T03:23:03.000Z",
+                                      "uid": "35240-ed2a24a2-c426-4642-b7fc-165c73ba2393"
+                                    },
+                                    {
+                                      "name": "Cancel Build",
+                                      "id": "793fa009-68aa-4095-8a62-7e8aa8dab7e6",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds/:number",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "orgs",
+                                            ":orgid",
+                                            "projects",
+                                            ":projectid",
+                                            "buildtargets",
+                                            ":buildtargetid",
+                                            "builds",
+                                            ":number"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "d9d6405d-1edd-42b5-b1e5-3edeb8cd21b9",
+                                              "key": "orgid",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "f7c9bbaf-4526-4fad-b6fa-7ae523f343e8",
+                                              "key": "projectid",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "ba6ca3ec-5be1-492a-8227-511912cab513",
+                                              "key": "buildtargetid",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "219afe55-89c1-4779-b126-7bb12700cac8",
+                                              "key": "number",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Cancels an in-progress build."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "50b7ee9f-1788-4260-a8b1-16825224d8b5",
+                                          "name": "Build cancelled",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds/:number",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "orgs",
+                                                ":orgid",
+                                                "projects",
+                                                ":projectid",
+                                                "buildtargets",
+                                                ":buildtargetid",
+                                                "builds",
+                                                ":number"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "orgid"
+                                                },
+                                                {
+                                                  "key": "projectid"
+                                                },
+                                                {
+                                                  "key": "buildtargetid"
+                                                },
+                                                {
+                                                  "key": "number"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "No Content",
+                                          "code": 204,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:23:03.000Z",
+                                          "updatedAt": "2026-07-28T03:23:03.000Z",
+                                          "uid": "35240-50b7ee9f-1788-4260-a8b1-16825224d8b5"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:23:03.000Z",
+                                      "updatedAt": "2026-07-28T03:23:03.000Z",
+                                      "uid": "35240-793fa009-68aa-4095-8a62-7e8aa8dab7e6"
+                                    }
+                                  ],
+                                  "id": "9fdbcd28-b6f6-4b4c-9a39-95053bc85ada",
+                                  "createdAt": "2026-07-28T03:23:03.000Z",
+                                  "updatedAt": "2026-07-28T03:23:03.000Z",
+                                  "uid": "35240-9fdbcd28-b6f6-4b4c-9a39-95053bc85ada"
+                                },
+                                {
+                                  "name": "Get Builds",
+                                  "id": "4b9b43c2-eca4-469d-9d66-a82e36149d08",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds?per_page=25&page=1",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "orgs",
+                                        ":orgid",
+                                        "projects",
+                                        ":projectid",
+                                        "buildtargets",
+                                        ":buildtargetid",
+                                        "builds"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "per_page",
+                                          "value": "25"
+                                        },
+                                        {
+                                          "key": "page",
+                                          "value": "1"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "4d8413c4-50b4-450e-aa36-d6ed691ff4b8",
+                                          "key": "orgid",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "80a83067-3920-4403-a0e1-72846526128f",
+                                          "key": "projectid",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "f1b17b3d-1205-4cc4-bac2-77ab8eb6394b",
+                                          "key": "buildtargetid",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Returns the build history for a build target."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "fff99968-8161-4030-9927-20521b600e9c",
+                                      "name": "Build history",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds?per_page=25&page=1",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "orgs",
+                                            ":orgid",
+                                            "projects",
+                                            ":projectid",
+                                            "buildtargets",
+                                            ":buildtargetid",
+                                            "builds"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "per_page",
+                                              "value": "25"
+                                            },
+                                            {
+                                              "key": "page",
+                                              "value": "1"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "orgid"
+                                            },
+                                            {
+                                              "key": "projectid"
+                                            },
+                                            {
+                                              "key": "buildtargetid"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"build\": \"<integer>\",\n    \"buildtargetid\": \"<string>\",\n    \"buildTargetName\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"status\": \"started\",\n    \"changeset\": [\n      {\n        \"commitId\": \"<string>\",\n        \"message\": \"<string>\",\n        \"timestamp\": \"<dateTime>\"\n      },\n      {\n        \"commitId\": \"<string>\",\n        \"message\": \"<string>\",\n        \"timestamp\": \"<dateTime>\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"show_download\": \"<boolean>\",\n        \"links\": {\n          \"href\": \"<string>\"\n        }\n      },\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"show_download\": \"<boolean>\",\n        \"links\": {\n          \"href\": \"<string>\"\n        }\n      }\n    ],\n    \"created\": \"<dateTime>\",\n    \"finished\": \"<dateTime>\",\n    \"duration\": \"<integer>\"\n  },\n  {\n    \"build\": \"<integer>\",\n    \"buildtargetid\": \"<string>\",\n    \"buildTargetName\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"status\": \"unknown\",\n    \"changeset\": [\n      {\n        \"commitId\": \"<string>\",\n        \"message\": \"<string>\",\n        \"timestamp\": \"<dateTime>\"\n      },\n      {\n        \"commitId\": \"<string>\",\n        \"message\": \"<string>\",\n        \"timestamp\": \"<dateTime>\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"show_download\": \"<boolean>\",\n        \"links\": {\n          \"href\": \"<string>\"\n        }\n      },\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"show_download\": \"<boolean>\",\n        \"links\": {\n          \"href\": \"<string>\"\n        }\n      }\n    ],\n    \"created\": \"<dateTime>\",\n    \"finished\": \"<dateTime>\",\n    \"duration\": \"<integer>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T03:23:03.000Z",
+                                      "updatedAt": "2026-07-28T03:23:03.000Z",
+                                      "uid": "35240-fff99968-8161-4030-9927-20521b600e9c"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:03.000Z",
+                                  "updatedAt": "2026-07-28T03:23:03.000Z",
+                                  "uid": "35240-4b9b43c2-eca4-469d-9d66-a82e36149d08"
+                                },
+                                {
+                                  "name": "Start Build",
+                                  "id": "9d774bce-613f-4340-8798-ffb609b6cc8d",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"clean\": \"<boolean>\",\n  \"delay\": \"<integer>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "orgs",
+                                        ":orgid",
+                                        "projects",
+                                        ":projectid",
+                                        "buildtargets",
+                                        ":buildtargetid",
+                                        "builds"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "7ab1321a-5eba-4baf-a00f-6620d592fb2b",
+                                          "key": "orgid",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "574d68b5-0721-4ffc-8657-44f975c145c4",
+                                          "key": "projectid",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "08fb9acf-7d1f-4df2-a89a-299d8bcf3fb6",
+                                          "key": "buildtargetid",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Triggers a new build for the specified build target."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "cdfbb241-a673-4103-82b6-cb63e7ce72b7",
+                                      "name": "Build started",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"clean\": \"<boolean>\",\n  \"delay\": \"<integer>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "orgs",
+                                            ":orgid",
+                                            "projects",
+                                            ":projectid",
+                                            "buildtargets",
+                                            ":buildtargetid",
+                                            "builds"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "orgid"
+                                            },
+                                            {
+                                              "key": "projectid"
+                                            },
+                                            {
+                                              "key": "buildtargetid"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Accepted",
+                                      "code": 202,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"build\": \"<integer>\",\n    \"buildtargetid\": \"<string>\",\n    \"buildTargetName\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"status\": \"started\",\n    \"changeset\": [\n      {\n        \"commitId\": \"<string>\",\n        \"message\": \"<string>\",\n        \"timestamp\": \"<dateTime>\"\n      },\n      {\n        \"commitId\": \"<string>\",\n        \"message\": \"<string>\",\n        \"timestamp\": \"<dateTime>\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"show_download\": \"<boolean>\",\n        \"links\": {\n          \"href\": \"<string>\"\n        }\n      },\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"show_download\": \"<boolean>\",\n        \"links\": {\n          \"href\": \"<string>\"\n        }\n      }\n    ],\n    \"created\": \"<dateTime>\",\n    \"finished\": \"<dateTime>\",\n    \"duration\": \"<integer>\"\n  },\n  {\n    \"build\": \"<integer>\",\n    \"buildtargetid\": \"<string>\",\n    \"buildTargetName\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"status\": \"unknown\",\n    \"changeset\": [\n      {\n        \"commitId\": \"<string>\",\n        \"message\": \"<string>\",\n        \"timestamp\": \"<dateTime>\"\n      },\n      {\n        \"commitId\": \"<string>\",\n        \"message\": \"<string>\",\n        \"timestamp\": \"<dateTime>\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"show_download\": \"<boolean>\",\n        \"links\": {\n          \"href\": \"<string>\"\n        }\n      },\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"show_download\": \"<boolean>\",\n        \"links\": {\n          \"href\": \"<string>\"\n        }\n      }\n    ],\n    \"created\": \"<dateTime>\",\n    \"finished\": \"<dateTime>\",\n    \"duration\": \"<integer>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T03:23:03.000Z",
+                                      "updatedAt": "2026-07-28T03:23:03.000Z",
+                                      "uid": "35240-cdfbb241-a673-4103-82b6-cb63e7ce72b7"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:03.000Z",
+                                  "updatedAt": "2026-07-28T03:23:03.000Z",
+                                  "uid": "35240-9d774bce-613f-4340-8798-ffb609b6cc8d"
+                                }
+                              ],
+                              "id": "1dab58b3-5c91-41c3-a111-f9195c63fd92",
+                              "createdAt": "2026-07-28T03:23:03.000Z",
+                              "updatedAt": "2026-07-28T03:23:03.000Z",
+                              "uid": "35240-1dab58b3-5c91-41c3-a111-f9195c63fd92"
+                            }
+                          ],
+                          "id": "b41b07ad-06dd-4fd7-9555-cd681099f926",
+                          "createdAt": "2026-07-28T03:23:03.000Z",
+                          "updatedAt": "2026-07-28T03:23:03.000Z",
+                          "uid": "35240-b41b07ad-06dd-4fd7-9555-cd681099f926"
+                        }
+                      ],
+                      "id": "830743fc-d518-455e-935b-dc8f134e7936",
+                      "createdAt": "2026-07-28T03:23:03.000Z",
+                      "updatedAt": "2026-07-28T03:23:03.000Z",
+                      "uid": "35240-830743fc-d518-455e-935b-dc8f134e7936"
+                    }
+                  ],
+                  "id": "53ffcf92-c11b-4335-baa9-cee1b2ac811f",
+                  "createdAt": "2026-07-28T03:23:03.000Z",
+                  "updatedAt": "2026-07-28T03:23:03.000Z",
+                  "uid": "35240-53ffcf92-c11b-4335-baa9-cee1b2ac811f"
+                }
+              ],
+              "id": "7bef633d-b83f-486c-866d-25183ee42506",
+              "createdAt": "2026-07-28T03:23:03.000Z",
+              "updatedAt": "2026-07-28T03:23:03.000Z",
+              "uid": "35240-7bef633d-b83f-486c-866d-25183ee42506"
+            }
+          ],
+          "id": "27d5128b-f1d2-4cae-b521-875d1feec87d",
+          "createdAt": "2026-07-28T03:23:03.000Z",
+          "updatedAt": "2026-07-28T03:23:03.000Z",
+          "uid": "35240-27d5128b-f1d2-4cae-b521-875d1feec87d"
+        }
+      ],
+      "id": "da172e6a-9067-45d2-8d13-c4355dcaf853",
+      "createdAt": "2026-07-28T03:23:03.000Z",
+      "updatedAt": "2026-07-28T03:23:03.000Z",
+      "uid": "35240-da172e6a-9067-45d2-8d13-c4355dcaf853"
+    },
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "builds",
+                  "item": [
+                    {
+                      "name": "{buildId}",
+                      "item": [
+                        {
+                          "name": "Get Build",
+                          "id": "a4f43dcf-a3c1-448d-819f-0cb5bda8ae6e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/builds/:buildId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "builds",
+                                ":buildId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6d4c3340-93e5-47e9-9e4e-702202c15626",
+                                  "key": "projectId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "9a4a8da0-7029-46bb-8186-398f51b0a03c",
+                                  "key": "buildId",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Returns details of a specific game server build."
+                          },
+                          "response": [
+                            {
+                              "id": "ddf4f3d7-004b-4dba-a76c-7eeb889cd38e",
+                              "name": "Build details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/builds/:buildId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "builds",
+                                    ":buildId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "projectId"
+                                    },
+                                    {
+                                      "key": "buildId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<integer>\",\n  \"buildID\": \"<integer>\",\n  \"buildName\": \"<string>\",\n  \"os\": \"WINDOWS\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:23:03.000Z",
+                              "updatedAt": "2026-07-28T03:23:03.000Z",
+                              "uid": "35240-ddf4f3d7-004b-4dba-a76c-7eeb889cd38e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:03.000Z",
+                          "updatedAt": "2026-07-28T03:23:03.000Z",
+                          "uid": "35240-a4f43dcf-a3c1-448d-819f-0cb5bda8ae6e"
+                        }
+                      ],
+                      "id": "9098ae34-60f1-4779-98ff-1c3f2acc8806",
+                      "createdAt": "2026-07-28T03:23:03.000Z",
+                      "updatedAt": "2026-07-28T03:23:03.000Z",
+                      "uid": "35240-9098ae34-60f1-4779-98ff-1c3f2acc8806"
+                    },
+                    {
+                      "name": "List Builds",
+                      "id": "faf65810-1693-4c09-b57c-c85e4adc7541",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:projectId/builds",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":projectId",
+                            "builds"
+                          ],
+                          "variable": [
+                            {
+                              "id": "605dd0a9-bcf5-4790-8bdb-b51cb410dafb",
+                              "key": "projectId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Returns all game server builds for the project."
+                      },
+                      "response": [
+                        {
+                          "id": "232b2238-fe6d-47f6-91f6-476d1507e201",
+                          "name": "List of builds",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/builds",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "builds"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"builds\": [\n    {\n      \"id\": \"<integer>\",\n      \"buildID\": \"<integer>\",\n      \"buildName\": \"<string>\",\n      \"os\": \"LINUX\",\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"buildID\": \"<integer>\",\n      \"buildName\": \"<string>\",\n      \"os\": \"LINUX\",\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:23:03.000Z",
+                          "updatedAt": "2026-07-28T03:23:03.000Z",
+                          "uid": "35240-232b2238-fe6d-47f6-91f6-476d1507e201"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:03.000Z",
+                      "updatedAt": "2026-07-28T03:23:03.000Z",
+                      "uid": "35240-faf65810-1693-4c09-b57c-c85e4adc7541"
+                    },
+                    {
+                      "name": "Create Build",
+                      "id": "799f21ec-7a91-4170-a7fd-16602a03f9dc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"buildName\": \"<string>\",\n  \"os\": \"LINUX\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:projectId/builds",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":projectId",
+                            "builds"
+                          ],
+                          "variable": [
+                            {
+                              "id": "72ea309b-3346-4a2f-a669-87fab6487298",
+                              "key": "projectId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Creates a new game server build configuration."
+                      },
+                      "response": [
+                        {
+                          "id": "83c1bf88-076c-4440-a003-0a2bb9267ba1",
+                          "name": "Build created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"buildName\": \"<string>\",\n  \"os\": \"LINUX\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/builds",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "builds"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"buildID\": \"<integer>\",\n  \"buildName\": \"<string>\",\n  \"os\": \"WINDOWS\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T03:23:03.000Z",
+                          "updatedAt": "2026-07-28T03:23:03.000Z",
+                          "uid": "35240-83c1bf88-076c-4440-a003-0a2bb9267ba1"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:03.000Z",
+                      "updatedAt": "2026-07-28T03:23:03.000Z",
+                      "uid": "35240-799f21ec-7a91-4170-a7fd-16602a03f9dc"
+                    }
+                  ],
+                  "id": "20b4ab45-bf83-4a7b-85bc-d2e2c8a6b858",
+                  "createdAt": "2026-07-28T03:23:03.000Z",
+                  "updatedAt": "2026-07-28T03:23:03.000Z",
+                  "uid": "35240-20b4ab45-bf83-4a7b-85bc-d2e2c8a6b858"
+                }
+              ],
+              "id": "f1ad2c66-6578-48af-afd5-dd2f32e89c13",
+              "createdAt": "2026-07-28T03:23:03.000Z",
+              "updatedAt": "2026-07-28T03:23:03.000Z",
+              "uid": "35240-f1ad2c66-6578-48af-afd5-dd2f32e89c13"
+            }
+          ],
+          "id": "2650ba36-2ce6-4a41-a508-06bc71a645fd",
+          "createdAt": "2026-07-28T03:23:03.000Z",
+          "updatedAt": "2026-07-28T03:23:03.000Z",
+          "uid": "35240-2650ba36-2ce6-4a41-a508-06bc71a645fd"
+        }
+      ],
+      "id": "1d8ddaa8-0c97-489a-bd79-565cc29c43f2",
+      "createdAt": "2026-07-28T03:23:03.000Z",
+      "updatedAt": "2026-07-28T03:23:03.000Z",
+      "uid": "35240-1d8ddaa8-0c97-489a-bd79-565cc29c43f2"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

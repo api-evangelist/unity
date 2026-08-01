@@ -1,0 +1,471 @@
+openapi: 3.0.1
+info:
+  title: Unity Leaderboards API
+  description: The Unity Leaderboards REST API provides Player and Admin endpoints for managing competitive leaderboards in Unity games. Player endpoints allow submitting and retrieving scores, while Admin endpoints manage leaderboard configuration, bucket definitions, and score archive policies.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Leaderboards Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/leaderboards/manual/write-configuration/rest-api
+servers:
+  - url: https://leaderboards.services.api.unity.com
+    description: Unity Leaderboards Production Server
+tags:
+  - name: Scores
+    description: Submit and retrieve leaderboard scores
+  - name: Leaderboards
+    description: Manage leaderboard definitions and configuration
+  - name: Archive
+    description: Access archived leaderboard score data
+paths:
+  /v1/projects/{projectId}/environments/{environmentId}/leaderboards:
+    get:
+      operationId: listLeaderboards
+      summary: List Leaderboards
+      description: Returns a list of all leaderboard definitions for the specified project and environment.
+      tags:
+        - Leaderboards
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The Unity project identifier
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The environment identifier
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+          description: Maximum number of leaderboards to return
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Cursor for pagination
+      responses:
+        '200':
+          description: List of leaderboards
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaderboardList'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      operationId: createLeaderboard
+      summary: Create Leaderboard
+      description: Creates a new leaderboard definition for the specified project and environment.
+      tags:
+        - Leaderboards
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeaderboardCreate'
+      responses:
+        '200':
+          description: Leaderboard created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Leaderboard'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+  /v1/projects/{projectId}/environments/{environmentId}/leaderboards/{leaderboardId}:
+    get:
+      operationId: getLeaderboard
+      summary: Get Leaderboard
+      description: Returns configuration details for a specific leaderboard.
+      tags:
+        - Leaderboards
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: leaderboardId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Leaderboard details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Leaderboard'
+        '404':
+          description: Not Found
+    put:
+      operationId: updateLeaderboard
+      summary: Update Leaderboard
+      description: Updates the configuration of an existing leaderboard.
+      tags:
+        - Leaderboards
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: leaderboardId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeaderboardUpdate'
+      responses:
+        '200':
+          description: Leaderboard updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Leaderboard'
+    delete:
+      operationId: deleteLeaderboard
+      summary: Delete Leaderboard
+      description: Deletes a leaderboard and all associated scores.
+      tags:
+        - Leaderboards
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: leaderboardId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Leaderboard deleted
+        '404':
+          description: Not Found
+  /v1/projects/{projectId}/environments/{environmentId}/leaderboards/{leaderboardId}/scores/players/{playerId}:
+    post:
+      operationId: addLeaderboardPlayerScore
+      summary: Add Player Score
+      description: Submits or updates a player's score on a leaderboard.
+      tags:
+        - Scores
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: leaderboardId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScoreSubmission'
+      responses:
+        '200':
+          description: Score submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerScore'
+    get:
+      operationId: getLeaderboardPlayerScore
+      summary: Get Player Score
+      description: Retrieves a specific player's score and rank on a leaderboard.
+      tags:
+        - Scores
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: leaderboardId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Player score and rank
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerScore'
+        '404':
+          description: Not Found
+  /v1/projects/{projectId}/environments/{environmentId}/leaderboards/{leaderboardId}/scores:
+    get:
+      operationId: getLeaderboardScores
+      summary: Get Leaderboard Scores
+      description: Retrieves the top scores for a leaderboard with optional pagination.
+      tags:
+        - Scores
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: leaderboardId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 1000
+        - name: includeMetadata
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Leaderboard scores
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaderboardScoreList'
+components:
+  schemas:
+    Leaderboard:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique leaderboard identifier
+        name:
+          type: string
+          description: Display name for the leaderboard
+        sortOrder:
+          type: string
+          enum:
+            - asc
+            - desc
+          description: Sort order for scores
+        bucketSize:
+          type: number
+          description: Bucket size for bucket leaderboards
+        resetConfig:
+          $ref: '#/components/schemas/ResetConfig'
+        tieringConfig:
+          $ref: '#/components/schemas/TieringConfig'
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+    LeaderboardCreate:
+      type: object
+      required:
+        - id
+        - sortOrder
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        sortOrder:
+          type: string
+          enum:
+            - asc
+            - desc
+        bucketSize:
+          type: number
+        resetConfig:
+          $ref: '#/components/schemas/ResetConfig'
+    LeaderboardUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        sortOrder:
+          type: string
+          enum:
+            - asc
+            - desc
+        resetConfig:
+          $ref: '#/components/schemas/ResetConfig'
+    LeaderboardList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Leaderboard'
+        next:
+          type: string
+          description: Cursor for next page
+    ScoreSubmission:
+      type: object
+      required:
+        - score
+      properties:
+        score:
+          type: number
+          description: The player's score value
+        metadata:
+          type: string
+          description: Optional metadata to store with the score (up to 255 characters)
+    PlayerScore:
+      type: object
+      properties:
+        playerId:
+          type: string
+        playerName:
+          type: string
+        rank:
+          type: integer
+        score:
+          type: number
+        tier:
+          type: string
+        updatedTime:
+          type: string
+          format: date-time
+        metadata:
+          type: string
+    LeaderboardScoreList:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerScore'
+    ResetConfig:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date-time
+        schedule:
+          type: string
+          description: Cron expression for reset schedule
+        archive:
+          type: boolean
+    TieringConfig:
+      type: object
+      properties:
+        strategy:
+          type: string
+          enum:
+            - score
+            - percentile
+        tiers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              cutoff:
+                type: number
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

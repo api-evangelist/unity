@@ -1,0 +1,230 @@
+{
+  "info": {
+    "_postman_id": "289df97d-7648-40bc-a585-bd96cdc66e9e",
+    "name": "Unity Analytics Allocations Servers API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:55.000Z",
+    "updatedAt": "2026-07-28T03:23:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-289df97d-7648-40bc-a585-bd96cdc66e9e"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "regions",
+                  "item": [
+                    {
+                      "name": "{regionId}",
+                      "item": [
+                        {
+                          "name": "fleets",
+                          "item": [
+                            {
+                              "name": "{fleetId}",
+                              "item": [
+                                {
+                                  "name": "servers",
+                                  "item": [
+                                    {
+                                      "name": "List Servers",
+                                      "id": "2d8d456f-a30d-43d6-a77b-597ccc4ba14a",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/regions/:regionId/fleets/:fleetId/servers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "regions",
+                                            ":regionId",
+                                            "fleets",
+                                            ":fleetId",
+                                            "servers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "a5bfbd69-e6cf-40d0-af53-3bbdc735932e",
+                                              "key": "projectId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "7800e7fc-ced3-4f3c-a9ff-ae3b470287f2",
+                                              "key": "regionId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "bd2c808c-54f4-4310-aa6f-ab7b12b8c6bd",
+                                              "key": "fleetId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Returns all server instances in the specified fleet."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "28c85704-bdec-4588-a39c-1c66f54b0e35",
+                                          "name": "List of servers",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v1/projects/:projectId/regions/:regionId/fleets/:fleetId/servers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v1",
+                                                "projects",
+                                                ":projectId",
+                                                "regions",
+                                                ":regionId",
+                                                "fleets",
+                                                ":fleetId",
+                                                "servers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "regionId"
+                                                },
+                                                {
+                                                  "key": "fleetId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"servers\": [\n    {\n      \"id\": \"<integer>\",\n      \"ip\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"queryPort\": \"<integer>\",\n      \"status\": \"OFFLINE\",\n      \"machineID\": \"<integer>\",\n      \"created\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"ip\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"queryPort\": \"<integer>\",\n      \"status\": \"OFFLINE\",\n      \"machineID\": \"<integer>\",\n      \"created\": \"<dateTime>\"\n    }\n  ]\n}",
+                                          "createdAt": "2026-07-28T03:23:56.000Z",
+                                          "updatedAt": "2026-07-28T03:23:56.000Z",
+                                          "uid": "35240-28c85704-bdec-4588-a39c-1c66f54b0e35"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:23:56.000Z",
+                                      "updatedAt": "2026-07-28T03:23:56.000Z",
+                                      "uid": "35240-2d8d456f-a30d-43d6-a77b-597ccc4ba14a"
+                                    }
+                                  ],
+                                  "id": "6f8e518b-a997-4826-a261-541787d2f1ba",
+                                  "createdAt": "2026-07-28T03:23:56.000Z",
+                                  "updatedAt": "2026-07-28T03:23:56.000Z",
+                                  "uid": "35240-6f8e518b-a997-4826-a261-541787d2f1ba"
+                                }
+                              ],
+                              "id": "b0d037e9-5008-44f6-86a6-e1da233874fe",
+                              "createdAt": "2026-07-28T03:23:56.000Z",
+                              "updatedAt": "2026-07-28T03:23:56.000Z",
+                              "uid": "35240-b0d037e9-5008-44f6-86a6-e1da233874fe"
+                            }
+                          ],
+                          "id": "96eb3734-5190-4fed-bcc9-94ad1dfad2c5",
+                          "createdAt": "2026-07-28T03:23:56.000Z",
+                          "updatedAt": "2026-07-28T03:23:56.000Z",
+                          "uid": "35240-96eb3734-5190-4fed-bcc9-94ad1dfad2c5"
+                        }
+                      ],
+                      "id": "023a86b6-79da-440b-a133-f7e11696b8fc",
+                      "createdAt": "2026-07-28T03:23:56.000Z",
+                      "updatedAt": "2026-07-28T03:23:56.000Z",
+                      "uid": "35240-023a86b6-79da-440b-a133-f7e11696b8fc"
+                    }
+                  ],
+                  "id": "9cdfa144-35e5-4137-b31c-462ec70b67e3",
+                  "createdAt": "2026-07-28T03:23:56.000Z",
+                  "updatedAt": "2026-07-28T03:23:56.000Z",
+                  "uid": "35240-9cdfa144-35e5-4137-b31c-462ec70b67e3"
+                }
+              ],
+              "id": "30f934e9-9bc0-4aed-a386-83d5c3ed677e",
+              "createdAt": "2026-07-28T03:23:56.000Z",
+              "updatedAt": "2026-07-28T03:23:56.000Z",
+              "uid": "35240-30f934e9-9bc0-4aed-a386-83d5c3ed677e"
+            }
+          ],
+          "id": "5445aa0d-b130-4a77-9ef8-a26aee81a295",
+          "createdAt": "2026-07-28T03:23:56.000Z",
+          "updatedAt": "2026-07-28T03:23:56.000Z",
+          "uid": "35240-5445aa0d-b130-4a77-9ef8-a26aee81a295"
+        }
+      ],
+      "id": "7e93fc99-6f24-4958-96d3-d547ae3f49b2",
+      "createdAt": "2026-07-28T03:23:56.000Z",
+      "updatedAt": "2026-07-28T03:23:56.000Z",
+      "uid": "35240-7e93fc99-6f24-4958-96d3-d547ae3f49b2"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

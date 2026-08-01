@@ -1,0 +1,667 @@
+{
+  "info": {
+    "_postman_id": "f6d401b7-3275-4a17-a35d-2329f8c840db",
+    "name": "Unity Analytics Allocations Identity Providers API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:29.000Z",
+    "updatedAt": "2026-07-28T03:23:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f6d401b7-3275-4a17-a35d-2329f8c840db"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "authentication",
+          "item": [
+            {
+              "name": "external-token",
+              "item": [
+                {
+                  "name": "Sign In With External Token",
+                  "id": "13b94858-d397-44af-b8aa-efc82ef679f6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"idProvider\": \"custom\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/authentication/external-token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "authentication",
+                        "external-token"
+                      ]
+                    },
+                    "description": "Authenticates a player using a token from an external identity provider such as Google, Apple, Steam, Facebook, or a custom provider."
+                  },
+                  "response": [
+                    {
+                      "id": "68334fb9-cd8c-48f8-838c-87c7b4405594",
+                      "name": "Authentication successful",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"idProvider\": \"custom\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/external-token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "external-token"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"idToken\": \"<string>\",\n  \"sessionToken\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"userId\": \"<string>\",\n  \"isNew\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T03:23:29.000Z",
+                      "updatedAt": "2026-07-28T03:23:29.000Z",
+                      "uid": "35240-68334fb9-cd8c-48f8-838c-87c7b4405594"
+                    },
+                    {
+                      "id": "3dc1a822-199c-42bb-a58f-834fe6399596",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"idProvider\": \"custom\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/external-token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "external-token"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:23:29.000Z",
+                      "updatedAt": "2026-07-28T03:23:29.000Z",
+                      "uid": "35240-3dc1a822-199c-42bb-a58f-834fe6399596"
+                    },
+                    {
+                      "id": "8926c5e9-1f21-4e3c-a75f-01c7954377d7",
+                      "name": "Invalid external token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"idProvider\": \"custom\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/external-token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "external-token"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:23:29.000Z",
+                      "updatedAt": "2026-07-28T03:23:29.000Z",
+                      "uid": "35240-8926c5e9-1f21-4e3c-a75f-01c7954377d7"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:23:29.000Z",
+                  "updatedAt": "2026-07-28T03:23:29.000Z",
+                  "uid": "35240-13b94858-d397-44af-b8aa-efc82ef679f6"
+                }
+              ],
+              "id": "76d95221-0630-4bea-a394-4c3a0a2657c9",
+              "createdAt": "2026-07-28T03:23:29.000Z",
+              "updatedAt": "2026-07-28T03:23:29.000Z",
+              "uid": "35240-76d95221-0630-4bea-a394-4c3a0a2657c9"
+            }
+          ],
+          "id": "c6215f5c-c2b3-4c44-9a05-e0e81108b288",
+          "createdAt": "2026-07-28T03:23:29.000Z",
+          "updatedAt": "2026-07-28T03:23:29.000Z",
+          "uid": "35240-c6215f5c-c2b3-4c44-9a05-e0e81108b288"
+        },
+        {
+          "name": "players",
+          "item": [
+            {
+              "name": "{playerId}",
+              "item": [
+                {
+                  "name": "link",
+                  "item": [
+                    {
+                      "name": "external-token",
+                      "item": [
+                        {
+                          "name": "Link External Identity",
+                          "id": "ec694fb6-1b9b-43ae-9152-33e0cb6549b4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"idProvider\": \"custom\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/players/:playerId/link/external-token",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "players",
+                                ":playerId",
+                                "link",
+                                "external-token"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0a96c061-ad16-4179-a5e7-94a89c8409f8",
+                                  "key": "playerId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Links an external identity provider to an existing player account."
+                          },
+                          "response": [
+                            {
+                              "id": "0eb30520-2d0c-48b2-8f5a-1a0ddf10525b",
+                              "name": "Identity linked",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"idProvider\": \"custom\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/players/:playerId/link/external-token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "players",
+                                    ":playerId",
+                                    "link",
+                                    "external-token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "playerId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"externalIds\": [\n    {\n      \"providerId\": \"<string>\",\n      \"externalId\": \"<string>\"\n    },\n    {\n      \"providerId\": \"<string>\",\n      \"externalId\": \"<string>\"\n    }\n  ],\n  \"disabled\": \"<boolean>\",\n  \"lastLoginDate\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:23:29.000Z",
+                              "updatedAt": "2026-07-28T03:23:29.000Z",
+                              "uid": "35240-0eb30520-2d0c-48b2-8f5a-1a0ddf10525b"
+                            },
+                            {
+                              "id": "79ab45c0-d940-4006-b82d-b117f9276936",
+                              "name": "Identity already linked to another account",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"idProvider\": \"custom\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/players/:playerId/link/external-token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "players",
+                                    ":playerId",
+                                    "link",
+                                    "external-token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "playerId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:23:29.000Z",
+                              "updatedAt": "2026-07-28T03:23:29.000Z",
+                              "uid": "35240-79ab45c0-d940-4006-b82d-b117f9276936"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:29.000Z",
+                          "updatedAt": "2026-07-28T03:23:29.000Z",
+                          "uid": "35240-ec694fb6-1b9b-43ae-9152-33e0cb6549b4"
+                        }
+                      ],
+                      "id": "e0ce4653-63f0-46cf-baad-7873fcbbad2a",
+                      "createdAt": "2026-07-28T03:23:29.000Z",
+                      "updatedAt": "2026-07-28T03:23:29.000Z",
+                      "uid": "35240-e0ce4653-63f0-46cf-baad-7873fcbbad2a"
+                    }
+                  ],
+                  "id": "6db99134-6885-4b3b-ae6f-f15163206008",
+                  "createdAt": "2026-07-28T03:23:29.000Z",
+                  "updatedAt": "2026-07-28T03:23:29.000Z",
+                  "uid": "35240-6db99134-6885-4b3b-ae6f-f15163206008"
+                },
+                {
+                  "name": "unlink",
+                  "item": [
+                    {
+                      "name": "external-token",
+                      "item": [
+                        {
+                          "name": "Unlink External Identity",
+                          "id": "3031f318-550f-4339-a953-08d48e591b4e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"idProvider\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/players/:playerId/unlink/external-token",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "players",
+                                ":playerId",
+                                "unlink",
+                                "external-token"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d0eebfd9-1287-4265-accf-fa5b76619be2",
+                                  "key": "playerId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Removes a linked external identity provider from a player account."
+                          },
+                          "response": [
+                            {
+                              "id": "1ef9eb22-55df-40aa-bd15-a5f23a1d1f0d",
+                              "name": "Identity unlinked",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"idProvider\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/players/:playerId/unlink/external-token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "players",
+                                    ":playerId",
+                                    "unlink",
+                                    "external-token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "playerId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:23:29.000Z",
+                              "updatedAt": "2026-07-28T03:23:29.000Z",
+                              "uid": "35240-1ef9eb22-55df-40aa-bd15-a5f23a1d1f0d"
+                            },
+                            {
+                              "id": "77b08acb-6262-4572-8571-394fe86962be",
+                              "name": "Identity not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"idProvider\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/players/:playerId/unlink/external-token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "players",
+                                    ":playerId",
+                                    "unlink",
+                                    "external-token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "playerId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:23:29.000Z",
+                              "updatedAt": "2026-07-28T03:23:29.000Z",
+                              "uid": "35240-77b08acb-6262-4572-8571-394fe86962be"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:29.000Z",
+                          "updatedAt": "2026-07-28T03:23:29.000Z",
+                          "uid": "35240-3031f318-550f-4339-a953-08d48e591b4e"
+                        }
+                      ],
+                      "id": "07b74407-e334-475a-b864-f43ec91dc2b8",
+                      "createdAt": "2026-07-28T03:23:29.000Z",
+                      "updatedAt": "2026-07-28T03:23:29.000Z",
+                      "uid": "35240-07b74407-e334-475a-b864-f43ec91dc2b8"
+                    }
+                  ],
+                  "id": "20fec611-1906-476d-a93e-62d030f3f448",
+                  "createdAt": "2026-07-28T03:23:29.000Z",
+                  "updatedAt": "2026-07-28T03:23:29.000Z",
+                  "uid": "35240-20fec611-1906-476d-a93e-62d030f3f448"
+                }
+              ],
+              "id": "6dc17733-ae54-425f-878c-d5c927db0d2f",
+              "createdAt": "2026-07-28T03:23:29.000Z",
+              "updatedAt": "2026-07-28T03:23:29.000Z",
+              "uid": "35240-6dc17733-ae54-425f-878c-d5c927db0d2f"
+            }
+          ],
+          "id": "6ba9d565-566a-4fd8-868d-3cc19bdd032d",
+          "createdAt": "2026-07-28T03:23:29.000Z",
+          "updatedAt": "2026-07-28T03:23:29.000Z",
+          "uid": "35240-6ba9d565-566a-4fd8-868d-3cc19bdd032d"
+        }
+      ],
+      "id": "78b80bb6-7f2e-4772-b526-2a9c3eeb0ddf",
+      "createdAt": "2026-07-28T03:23:29.000Z",
+      "updatedAt": "2026-07-28T03:23:29.000Z",
+      "uid": "35240-78b80bb6-7f2e-4772-b526-2a9c3eeb0ddf"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

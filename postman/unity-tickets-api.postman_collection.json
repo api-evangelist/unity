@@ -1,0 +1,674 @@
+{
+  "info": {
+    "_postman_id": "83a39d8a-9aa3-4427-8ed4-e9dd30294f60",
+    "name": "Unity Analytics Allocations Tickets API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:57.000Z",
+    "updatedAt": "2026-07-28T03:23:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-83a39d8a-9aa3-4427-8ed4-e9dd30294f60"
+  },
+  "item": [
+    {
+      "name": "v3",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "environments",
+                  "item": [
+                    {
+                      "name": "{environmentId}",
+                      "item": [
+                        {
+                          "name": "tickets",
+                          "item": [
+                            {
+                              "name": "{ticketId}",
+                              "item": [
+                                {
+                                  "name": "Get Matchmaking Ticket",
+                                  "id": "4c936107-375b-48c9-856c-282dc9218610",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v3/projects/:projectId/environments/:environmentId/tickets/:ticketId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v3",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "tickets",
+                                        ":ticketId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "b52366ed-6211-4195-b822-d548ff4fe35d",
+                                          "key": "projectId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "6314e18d-27be-436b-9545-0ed2ef25b871",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "d1df14e8-c4d0-4115-ae62-3bad45950b5a",
+                                          "key": "ticketId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Retrieves the current status of a matchmaking ticket. Polls this endpoint to check if a match has been found."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "dda8c188-6fff-403d-9290-999c560579fa",
+                                      "name": "Ticket status",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v3/projects/:projectId/environments/:environmentId/tickets/:ticketId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v3",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "tickets",
+                                            ":ticketId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "ticketId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"Found\",\n  \"assignment\": {\n    \"connection\": \"<string>\",\n    \"payload\": {}\n  }\n}",
+                                      "createdAt": "2026-07-28T03:23:58.000Z",
+                                      "updatedAt": "2026-07-28T03:23:58.000Z",
+                                      "uid": "35240-dda8c188-6fff-403d-9290-999c560579fa"
+                                    },
+                                    {
+                                      "id": "e923c60d-849c-41d7-9c3e-7f5ad87441c3",
+                                      "name": "Ticket not found",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v3/projects/:projectId/environments/:environmentId/tickets/:ticketId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v3",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "tickets",
+                                            ":ticketId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "ticketId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:23:58.000Z",
+                                      "updatedAt": "2026-07-28T03:23:58.000Z",
+                                      "uid": "35240-e923c60d-849c-41d7-9c3e-7f5ad87441c3"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:58.000Z",
+                                  "updatedAt": "2026-07-28T03:23:58.000Z",
+                                  "uid": "35240-4c936107-375b-48c9-856c-282dc9218610"
+                                },
+                                {
+                                  "name": "Delete Matchmaking Ticket",
+                                  "id": "b47bc628-15eb-45d7-83be-b496c22029ff",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "DELETE",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v3/projects/:projectId/environments/:environmentId/tickets/:ticketId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v3",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "tickets",
+                                        ":ticketId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "23ab5e7e-2d3e-4a1a-acb7-74e1230017d1",
+                                          "key": "projectId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "87464841-7158-4a78-b0eb-d9755d2be88b",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "ab7e633b-a5d6-4721-9a08-238be4812b92",
+                                          "key": "ticketId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Cancels and deletes a matchmaking ticket. Used when a player exits the matchmaking queue."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "f5f940d7-2366-4761-afe5-8568a1f2df16",
+                                      "name": "Ticket deleted",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v3/projects/:projectId/environments/:environmentId/tickets/:ticketId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v3",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "tickets",
+                                            ":ticketId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "ticketId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "No Content",
+                                      "code": 204,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:23:58.000Z",
+                                      "updatedAt": "2026-07-28T03:23:58.000Z",
+                                      "uid": "35240-f5f940d7-2366-4761-afe5-8568a1f2df16"
+                                    },
+                                    {
+                                      "id": "6d04c45d-ce33-4f04-a811-566322a60d42",
+                                      "name": "Ticket not found",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v3/projects/:projectId/environments/:environmentId/tickets/:ticketId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v3",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "tickets",
+                                            ":ticketId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "ticketId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:23:58.000Z",
+                                      "updatedAt": "2026-07-28T03:23:58.000Z",
+                                      "uid": "35240-6d04c45d-ce33-4f04-a811-566322a60d42"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:58.000Z",
+                                  "updatedAt": "2026-07-28T03:23:58.000Z",
+                                  "uid": "35240-b47bc628-15eb-45d7-83be-b496c22029ff"
+                                }
+                              ],
+                              "id": "5ddab31a-8de5-485f-b4b3-39f077b6f8df",
+                              "createdAt": "2026-07-28T03:23:58.000Z",
+                              "updatedAt": "2026-07-28T03:23:58.000Z",
+                              "uid": "35240-5ddab31a-8de5-485f-b4b3-39f077b6f8df"
+                            },
+                            {
+                              "name": "Create Matchmaking Ticket",
+                              "id": "a80adfff-5205-4ea9-afc6-1979166abe5f",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"attributes\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"attributes\": {}\n    }\n  ],\n  \"queueName\": \"<string>\",\n  \"attributes\": {\n    \"skill\": \"<number>\",\n    \"attributes\": {\n      \"magnae_\": {},\n      \"nonf7\": {}\n    }\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v3/projects/:projectId/environments/:environmentId/tickets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v3",
+                                    "projects",
+                                    ":projectId",
+                                    "environments",
+                                    ":environmentId",
+                                    "tickets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "99a5baea-9d3b-476e-8a61-2ba57a80220d",
+                                      "key": "projectId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "ab0546f0-ebc6-4d9a-9798-1bd2c82b0762",
+                                      "key": "environmentId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Creates a matchmaking ticket for a player or group of players. The ticket enters the matchmaking queue and is matched with other players based on configured rules."
+                              },
+                              "response": [
+                                {
+                                  "id": "e09dac5c-314f-4556-8e22-2287bebc5949",
+                                  "name": "Ticket created",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"attributes\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"attributes\": {}\n    }\n  ],\n  \"queueName\": \"<string>\",\n  \"attributes\": {\n    \"skill\": \"<number>\",\n    \"attributes\": {\n      \"magnae_\": {},\n      \"nonf7\": {}\n    }\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v3/projects/:projectId/environments/:environmentId/tickets",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v3",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "tickets"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T03:23:58.000Z",
+                                  "updatedAt": "2026-07-28T03:23:58.000Z",
+                                  "uid": "35240-e09dac5c-314f-4556-8e22-2287bebc5949"
+                                },
+                                {
+                                  "id": "12435d81-0310-4eb5-a3f2-a2386e765a0e",
+                                  "name": "Bad Request",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"attributes\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"attributes\": {}\n    }\n  ],\n  \"queueName\": \"<string>\",\n  \"attributes\": {\n    \"skill\": \"<number>\",\n    \"attributes\": {\n      \"magnae_\": {},\n      \"nonf7\": {}\n    }\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v3/projects/:projectId/environments/:environmentId/tickets",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v3",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "tickets"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:23:58.000Z",
+                                  "updatedAt": "2026-07-28T03:23:58.000Z",
+                                  "uid": "35240-12435d81-0310-4eb5-a3f2-a2386e765a0e"
+                                },
+                                {
+                                  "id": "c7b564c7-dc9f-4ade-b498-be83ded23f2c",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"attributes\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"attributes\": {}\n    }\n  ],\n  \"queueName\": \"<string>\",\n  \"attributes\": {\n    \"skill\": \"<number>\",\n    \"attributes\": {\n      \"magnae_\": {},\n      \"nonf7\": {}\n    }\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v3/projects/:projectId/environments/:environmentId/tickets",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v3",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "tickets"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:23:58.000Z",
+                                  "updatedAt": "2026-07-28T03:23:58.000Z",
+                                  "uid": "35240-c7b564c7-dc9f-4ade-b498-be83ded23f2c"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:23:58.000Z",
+                              "updatedAt": "2026-07-28T03:23:58.000Z",
+                              "uid": "35240-a80adfff-5205-4ea9-afc6-1979166abe5f"
+                            }
+                          ],
+                          "id": "936cb40d-f5cb-4af3-a18e-dfb9cf7fe75a",
+                          "createdAt": "2026-07-28T03:23:58.000Z",
+                          "updatedAt": "2026-07-28T03:23:58.000Z",
+                          "uid": "35240-936cb40d-f5cb-4af3-a18e-dfb9cf7fe75a"
+                        }
+                      ],
+                      "id": "7dfe5b21-4abd-45bd-8d20-06e90907658c",
+                      "createdAt": "2026-07-28T03:23:58.000Z",
+                      "updatedAt": "2026-07-28T03:23:58.000Z",
+                      "uid": "35240-7dfe5b21-4abd-45bd-8d20-06e90907658c"
+                    }
+                  ],
+                  "id": "7cbbea15-eb63-4d68-8748-86b05d60fee8",
+                  "createdAt": "2026-07-28T03:23:58.000Z",
+                  "updatedAt": "2026-07-28T03:23:58.000Z",
+                  "uid": "35240-7cbbea15-eb63-4d68-8748-86b05d60fee8"
+                }
+              ],
+              "id": "17ec07b9-e9bd-440e-88be-d507ce782d56",
+              "createdAt": "2026-07-28T03:23:58.000Z",
+              "updatedAt": "2026-07-28T03:23:58.000Z",
+              "uid": "35240-17ec07b9-e9bd-440e-88be-d507ce782d56"
+            }
+          ],
+          "id": "823ff327-e808-4352-93b0-a44a756dadd2",
+          "createdAt": "2026-07-28T03:23:58.000Z",
+          "updatedAt": "2026-07-28T03:23:58.000Z",
+          "uid": "35240-823ff327-e808-4352-93b0-a44a756dadd2"
+        }
+      ],
+      "id": "8545900a-893c-403b-afe6-73ee82aa0d42",
+      "createdAt": "2026-07-28T03:23:58.000Z",
+      "updatedAt": "2026-07-28T03:23:58.000Z",
+      "uid": "35240-8545900a-893c-403b-afe6-73ee82aa0d42"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

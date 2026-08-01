@@ -1,0 +1,465 @@
+{
+  "info": {
+    "_postman_id": "6cc74140-7017-45c2-83b9-46dc15c12dfa",
+    "name": "Unity Analytics Allocations Configuration API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:04.000Z",
+    "updatedAt": "2026-07-28T03:23:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6cc74140-7017-45c2-83b9-46dc15c12dfa"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "environments",
+                  "item": [
+                    {
+                      "name": "{environmentId}",
+                      "item": [
+                        {
+                          "name": "configs",
+                          "item": [
+                            {
+                              "name": "items",
+                              "item": [
+                                {
+                                  "name": "{resourceId}",
+                                  "item": [
+                                    {
+                                      "name": "Get Economy Configuration",
+                                      "id": "7f3b6eb7-6afc-4f2b-bb67-8d00ee1d8e41",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/configs/items/:resourceId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v2",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "configs",
+                                            "items",
+                                            ":resourceId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "f8f6672b-586a-4d84-8d00-bb56ed2c8491",
+                                              "key": "projectId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "c4cf976f-5069-4dd5-9fd1-18781898e84f",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "f14ad822-9833-4f73-b68c-762f393a4bb5",
+                                              "key": "resourceId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Returns the configuration of a specific economy resource."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "78dfba50-a260-43fb-a8f1-055b83932508",
+                                          "name": "Economy resource configuration",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/configs/items/:resourceId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v2",
+                                                "projects",
+                                                ":projectId",
+                                                "environments",
+                                                ":environmentId",
+                                                "configs",
+                                                "items",
+                                                ":resourceId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "resourceId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"VIRTUAL_PURCHASE\",\n  \"initial\": \"<number>\",\n  \"max\": \"<number>\",\n  \"customData\": {},\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T03:23:04.000Z",
+                                          "updatedAt": "2026-07-28T03:23:04.000Z",
+                                          "uid": "35240-78dfba50-a260-43fb-a8f1-055b83932508"
+                                        },
+                                        {
+                                          "id": "34936d44-5786-4ca9-a5c3-1f375ff7afa1",
+                                          "name": "Not Found",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/configs/items/:resourceId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v2",
+                                                "projects",
+                                                ":projectId",
+                                                "environments",
+                                                ":environmentId",
+                                                "configs",
+                                                "items",
+                                                ":resourceId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "resourceId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:23:04.000Z",
+                                          "updatedAt": "2026-07-28T03:23:04.000Z",
+                                          "uid": "35240-34936d44-5786-4ca9-a5c3-1f375ff7afa1"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:23:04.000Z",
+                                      "updatedAt": "2026-07-28T03:23:04.000Z",
+                                      "uid": "35240-7f3b6eb7-6afc-4f2b-bb67-8d00ee1d8e41"
+                                    }
+                                  ],
+                                  "id": "fffdcc14-1fa8-4ef6-b525-56826a36a2d1",
+                                  "createdAt": "2026-07-28T03:23:04.000Z",
+                                  "updatedAt": "2026-07-28T03:23:04.000Z",
+                                  "uid": "35240-fffdcc14-1fa8-4ef6-b525-56826a36a2d1"
+                                },
+                                {
+                                  "name": "List Economy Configurations",
+                                  "id": "125fc348-8564-45c2-9940-2300ba4a61a8",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/configs/items?limit=20&after=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v2",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "configs",
+                                        "items"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "limit",
+                                          "value": "20"
+                                        },
+                                        {
+                                          "key": "after",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "68bceb2f-b86f-4b63-8627-2b792183f39d",
+                                          "key": "projectId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "8c14c27f-1cac-439a-bcfd-5eedf2d0180c",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Returns a list of all economy resource configurations for the project."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "72d7cf51-5b23-455e-b3d0-0adda6545144",
+                                      "name": "List of economy configurations",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/configs/items?limit=20&after=<string>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v2",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "configs",
+                                            "items"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "limit",
+                                              "value": "20"
+                                            },
+                                            {
+                                              "key": "after",
+                                              "value": "<string>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"results\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"VIRTUAL_PURCHASE\",\n      \"initial\": \"<number>\",\n      \"max\": \"<number>\",\n      \"customData\": {},\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"REAL_MONEY_PURCHASE\",\n      \"initial\": \"<number>\",\n      \"max\": \"<number>\",\n      \"customData\": {},\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"<string>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:23:04.000Z",
+                                      "updatedAt": "2026-07-28T03:23:04.000Z",
+                                      "uid": "35240-72d7cf51-5b23-455e-b3d0-0adda6545144"
+                                    },
+                                    {
+                                      "id": "2629e2b5-70d1-4522-a3c9-b4e53b9b3e1c",
+                                      "name": "Unauthorized",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/configs/items?limit=20&after=<string>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v2",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "configs",
+                                            "items"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "limit",
+                                              "value": "20"
+                                            },
+                                            {
+                                              "key": "after",
+                                              "value": "<string>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:23:04.000Z",
+                                      "updatedAt": "2026-07-28T03:23:04.000Z",
+                                      "uid": "35240-2629e2b5-70d1-4522-a3c9-b4e53b9b3e1c"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:04.000Z",
+                                  "updatedAt": "2026-07-28T03:23:04.000Z",
+                                  "uid": "35240-125fc348-8564-45c2-9940-2300ba4a61a8"
+                                }
+                              ],
+                              "id": "794f9bae-5301-4a8d-873f-39f60649ec7e",
+                              "createdAt": "2026-07-28T03:23:04.000Z",
+                              "updatedAt": "2026-07-28T03:23:04.000Z",
+                              "uid": "35240-794f9bae-5301-4a8d-873f-39f60649ec7e"
+                            }
+                          ],
+                          "id": "84f7c3f0-4894-4888-9ac4-94116c6ff5d4",
+                          "createdAt": "2026-07-28T03:23:04.000Z",
+                          "updatedAt": "2026-07-28T03:23:04.000Z",
+                          "uid": "35240-84f7c3f0-4894-4888-9ac4-94116c6ff5d4"
+                        }
+                      ],
+                      "id": "e33ac913-363f-43c0-a81c-059a4a501eca",
+                      "createdAt": "2026-07-28T03:23:04.000Z",
+                      "updatedAt": "2026-07-28T03:23:04.000Z",
+                      "uid": "35240-e33ac913-363f-43c0-a81c-059a4a501eca"
+                    }
+                  ],
+                  "id": "32ef5d4a-f44a-492b-9df5-816afe97e5c6",
+                  "createdAt": "2026-07-28T03:23:04.000Z",
+                  "updatedAt": "2026-07-28T03:23:04.000Z",
+                  "uid": "35240-32ef5d4a-f44a-492b-9df5-816afe97e5c6"
+                }
+              ],
+              "id": "29ae6c96-b500-4fab-8b28-2efb4353cafb",
+              "createdAt": "2026-07-28T03:23:04.000Z",
+              "updatedAt": "2026-07-28T03:23:04.000Z",
+              "uid": "35240-29ae6c96-b500-4fab-8b28-2efb4353cafb"
+            }
+          ],
+          "id": "0af62edf-67ce-430d-bb07-31a0a7f75a77",
+          "createdAt": "2026-07-28T03:23:04.000Z",
+          "updatedAt": "2026-07-28T03:23:04.000Z",
+          "uid": "35240-0af62edf-67ce-430d-bb07-31a0a7f75a77"
+        }
+      ],
+      "id": "57b500f9-b315-4f33-8b6e-fcbef8ab3cec",
+      "createdAt": "2026-07-28T03:23:04.000Z",
+      "updatedAt": "2026-07-28T03:23:04.000Z",
+      "uid": "35240-57b500f9-b315-4f33-8b6e-fcbef8ab3cec"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

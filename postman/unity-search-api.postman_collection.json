@@ -1,0 +1,172 @@
+{
+  "info": {
+    "_postman_id": "a90aaaed-b5f2-424b-a665-b7b8880ba442",
+    "name": "Unity Analytics Allocations Search API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:55.000Z",
+    "updatedAt": "2026-07-28T03:23:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a90aaaed-b5f2-424b-a665-b7b8880ba442"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "lobbies",
+          "item": [
+            {
+              "name": "query",
+              "item": [
+                {
+                  "name": "Query Lobbies",
+                  "id": "65ab8726-b9e1-45a8-9dba-8886cb2af151",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"count\": 10,\n  \"continuationToken\": \"<string>\",\n  \"filter\": [\n    {\n      \"field\": \"N2\",\n      \"value\": \"<string>\",\n      \"op\": \"NE\"\n    },\n    {\n      \"field\": \"N3\",\n      \"value\": \"<string>\",\n      \"op\": \"NE\"\n    }\n  ],\n  \"order\": [\n    {\n      \"field\": \"<string>\",\n      \"asc\": \"<boolean>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"asc\": \"<boolean>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/lobbies/query",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "lobbies",
+                        "query"
+                      ]
+                    },
+                    "description": "Searches for available lobbies using filter and sort criteria. Only returns public lobbies."
+                  },
+                  "response": [
+                    {
+                      "id": "0bf672cb-e241-4d14-b82c-1fad43ff8841",
+                      "name": "List of matching lobbies",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"count\": 10,\n  \"continuationToken\": \"<string>\",\n  \"filter\": [\n    {\n      \"field\": \"N2\",\n      \"value\": \"<string>\",\n      \"op\": \"NE\"\n    },\n    {\n      \"field\": \"N3\",\n      \"value\": \"<string>\",\n      \"op\": \"NE\"\n    }\n  ],\n  \"order\": [\n    {\n      \"field\": \"<string>\",\n      \"asc\": \"<boolean>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"asc\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/lobbies/query",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "lobbies",
+                            "query"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lobbyCode\": \"<string>\",\n      \"isPrivate\": \"<boolean>\",\n      \"isLocked\": \"<boolean>\",\n      \"maxPlayers\": \"<integer>\",\n      \"availableSlots\": \"<integer>\",\n      \"hostId\": \"<string>\",\n      \"data\": {\n        \"dolord6\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Member\",\n          \"index\": \"<string>\"\n        },\n        \"in_4e\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"players\": [\n        {\n          \"id\": \"<string>\",\n          \"data\": {\n            \"et_ae\": {\n              \"value\": \"<string>\",\n              \"visibility\": \"Private\",\n              \"index\": \"<string>\"\n            }\n          },\n          \"joined\": \"<dateTime>\",\n          \"lastUpdated\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"data\": {\n            \"mollit_a3c\": {\n              \"value\": \"<string>\",\n              \"visibility\": \"Public\",\n              \"index\": \"<string>\"\n            },\n            \"in_3_1\": {\n              \"value\": \"<string>\",\n              \"visibility\": \"Public\",\n              \"index\": \"<string>\"\n            },\n            \"in_25\": {\n              \"value\": \"<string>\",\n              \"visibility\": \"Member\",\n              \"index\": \"<string>\"\n            }\n          },\n          \"joined\": \"<dateTime>\",\n          \"lastUpdated\": \"<dateTime>\"\n        }\n      ],\n      \"created\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lobbyCode\": \"<string>\",\n      \"isPrivate\": \"<boolean>\",\n      \"isLocked\": \"<boolean>\",\n      \"maxPlayers\": \"<integer>\",\n      \"availableSlots\": \"<integer>\",\n      \"hostId\": \"<string>\",\n      \"data\": {\n        \"minim44\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"players\": [\n        {\n          \"id\": \"<string>\",\n          \"data\": {\n            \"Ut6f\": {\n              \"value\": \"<string>\",\n              \"visibility\": \"Public\",\n              \"index\": \"<string>\"\n            }\n          },\n          \"joined\": \"<dateTime>\",\n          \"lastUpdated\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"data\": {\n            \"ut5\": {\n              \"value\": \"<string>\",\n              \"visibility\": \"Private\",\n              \"index\": \"<string>\"\n            }\n          },\n          \"joined\": \"<dateTime>\",\n          \"lastUpdated\": \"<dateTime>\"\n        }\n      ],\n      \"created\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    }\n  ],\n  \"continuationToken\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:23:55.000Z",
+                      "updatedAt": "2026-07-28T03:23:55.000Z",
+                      "uid": "35240-0bf672cb-e241-4d14-b82c-1fad43ff8841"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:23:55.000Z",
+                  "updatedAt": "2026-07-28T03:23:55.000Z",
+                  "uid": "35240-65ab8726-b9e1-45a8-9dba-8886cb2af151"
+                }
+              ],
+              "id": "543763d2-216c-4e69-8114-51da57b10283",
+              "createdAt": "2026-07-28T03:23:55.000Z",
+              "updatedAt": "2026-07-28T03:23:55.000Z",
+              "uid": "35240-543763d2-216c-4e69-8114-51da57b10283"
+            }
+          ],
+          "id": "0f1e3709-770c-455d-a888-5b244cff7d12",
+          "createdAt": "2026-07-28T03:23:55.000Z",
+          "updatedAt": "2026-07-28T03:23:55.000Z",
+          "uid": "35240-0f1e3709-770c-455d-a888-5b244cff7d12"
+        }
+      ],
+      "id": "b5cbd468-5f0c-48b2-af84-75967e26c93f",
+      "createdAt": "2026-07-28T03:23:55.000Z",
+      "updatedAt": "2026-07-28T03:23:55.000Z",
+      "uid": "35240-b5cbd468-5f0c-48b2-af84-75967e26c93f"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

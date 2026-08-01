@@ -1,0 +1,736 @@
+{
+  "info": {
+    "_postman_id": "4e3a6852-3dd7-4114-89ac-ff2ddd13e40b",
+    "name": "Unity Analytics Allocations Scripts API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:54.000Z",
+    "updatedAt": "2026-07-28T03:23:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4e3a6852-3dd7-4114-89ac-ff2ddd13e40b"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "scripts",
+                  "item": [
+                    {
+                      "name": "{scriptName}",
+                      "item": [
+                        {
+                          "name": "Get Script",
+                          "id": "b1e6c83e-4deb-44fc-bd78-b61cec8c6594",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "scripts",
+                                ":scriptName"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0c903488-a33a-4ead-ada6-e2377b3f1eba",
+                                  "key": "projectId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "adde9089-22d1-43ad-9015-c48e52920db2",
+                                  "key": "scriptName",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Returns the details and latest code for a specific Cloud Code script."
+                          },
+                          "response": [
+                            {
+                              "id": "97efeab2-4a10-4fd7-967b-ee7c16e2ff53",
+                              "name": "Script details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "scripts",
+                                    ":scriptName"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "projectId"
+                                    },
+                                    {
+                                      "key": "scriptName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"language\": \"JS\",\n  \"activeScript\": {\n    \"code\": \"<string>\",\n    \"datePublished\": \"<dateTime>\"\n  },\n  \"versions\": [\n    {\n      \"code\": \"<string>\",\n      \"datePublished\": \"<dateTime>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"datePublished\": \"<dateTime>\"\n    }\n  ],\n  \"params\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"BOOLEAN\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"NUMERIC\",\n      \"required\": \"<boolean>\"\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:23:54.000Z",
+                              "updatedAt": "2026-07-28T03:23:54.000Z",
+                              "uid": "35240-97efeab2-4a10-4fd7-967b-ee7c16e2ff53"
+                            },
+                            {
+                              "id": "f0fa77f6-e2b9-4cd5-931d-494431b5481c",
+                              "name": "Script not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "scripts",
+                                    ":scriptName"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "projectId"
+                                    },
+                                    {
+                                      "key": "scriptName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:23:54.000Z",
+                              "updatedAt": "2026-07-28T03:23:54.000Z",
+                              "uid": "35240-f0fa77f6-e2b9-4cd5-931d-494431b5481c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:54.000Z",
+                          "updatedAt": "2026-07-28T03:23:54.000Z",
+                          "uid": "35240-b1e6c83e-4deb-44fc-bd78-b61cec8c6594"
+                        },
+                        {
+                          "name": "Update Script",
+                          "id": "a032310c-eee5-4684-afb2-d0d0d4ab003c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"code\": \"<string>\",\n  \"params\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"JSON\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"BOOLEAN\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "scripts",
+                                ":scriptName"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "52018570-b4a0-47c4-889e-cd5be6bb7687",
+                                  "key": "projectId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "96ffe35b-c4dc-4d9f-b0cb-ca56117cb896",
+                                  "key": "scriptName",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Updates the code and configuration of an existing Cloud Code script."
+                          },
+                          "response": [
+                            {
+                              "id": "f99ddb46-1c5c-485a-b95b-4817835c1218",
+                              "name": "Script updated",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"code\": \"<string>\",\n  \"params\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"JSON\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"BOOLEAN\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "scripts",
+                                    ":scriptName"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "projectId"
+                                    },
+                                    {
+                                      "key": "scriptName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"language\": \"JS\",\n  \"activeScript\": {\n    \"code\": \"<string>\",\n    \"datePublished\": \"<dateTime>\"\n  },\n  \"versions\": [\n    {\n      \"code\": \"<string>\",\n      \"datePublished\": \"<dateTime>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"datePublished\": \"<dateTime>\"\n    }\n  ],\n  \"params\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"BOOLEAN\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"NUMERIC\",\n      \"required\": \"<boolean>\"\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:23:54.000Z",
+                              "updatedAt": "2026-07-28T03:23:54.000Z",
+                              "uid": "35240-f99ddb46-1c5c-485a-b95b-4817835c1218"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:54.000Z",
+                          "updatedAt": "2026-07-28T03:23:54.000Z",
+                          "uid": "35240-a032310c-eee5-4684-afb2-d0d0d4ab003c"
+                        },
+                        {
+                          "name": "Delete Script",
+                          "id": "96c60fed-75ea-4e34-84eb-f26d19d02c81",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "scripts",
+                                ":scriptName"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "68e36a06-9ced-48ba-acde-864cc057d8d5",
+                                  "key": "projectId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "78f06d46-efab-4fbc-a127-0658b00c4f94",
+                                  "key": "scriptName",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Deletes a Cloud Code script and all its versions."
+                          },
+                          "response": [
+                            {
+                              "id": "a49cbb4a-55c5-4e3b-8d4c-48bcd24fb3c0",
+                              "name": "Script deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "scripts",
+                                    ":scriptName"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "projectId"
+                                    },
+                                    {
+                                      "key": "scriptName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:23:54.000Z",
+                              "updatedAt": "2026-07-28T03:23:54.000Z",
+                              "uid": "35240-a49cbb4a-55c5-4e3b-8d4c-48bcd24fb3c0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:54.000Z",
+                          "updatedAt": "2026-07-28T03:23:54.000Z",
+                          "uid": "35240-96c60fed-75ea-4e34-84eb-f26d19d02c81"
+                        }
+                      ],
+                      "id": "4d09990e-d5d8-4798-84da-fc8f6267adca",
+                      "createdAt": "2026-07-28T03:23:54.000Z",
+                      "updatedAt": "2026-07-28T03:23:54.000Z",
+                      "uid": "35240-4d09990e-d5d8-4798-84da-fc8f6267adca"
+                    },
+                    {
+                      "name": "List Scripts",
+                      "id": "bc94674d-0edd-425d-8aa1-02ce128ff243",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:projectId/scripts?limit=10&after=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":projectId",
+                            "scripts"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b9820682-b0cf-4192-aef7-3d72847674ae",
+                              "key": "projectId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Returns all Cloud Code scripts for the project."
+                      },
+                      "response": [
+                        {
+                          "id": "12e3993e-c487-4f60-ba85-d516570e4854",
+                          "name": "List of scripts",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/scripts?limit=10&after=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "scripts"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "key": "after",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"results\": [\n    {\n      \"name\": \"<string>\",\n      \"language\": \"JS\",\n      \"activeScript\": {\n        \"code\": \"<string>\",\n        \"datePublished\": \"<dateTime>\"\n      },\n      \"versions\": [\n        {\n          \"code\": \"<string>\",\n          \"datePublished\": \"<dateTime>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"datePublished\": \"<dateTime>\"\n        }\n      ],\n      \"params\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"STRING\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"JSON\",\n          \"required\": \"<boolean>\"\n        }\n      ],\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"language\": \"JS\",\n      \"activeScript\": {\n        \"code\": \"<string>\",\n        \"datePublished\": \"<dateTime>\"\n      },\n      \"versions\": [\n        {\n          \"code\": \"<string>\",\n          \"datePublished\": \"<dateTime>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"datePublished\": \"<dateTime>\"\n        }\n      ],\n      \"params\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"JSON\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"NUMERIC\",\n          \"required\": \"<boolean>\"\n        }\n      ],\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T03:23:54.000Z",
+                          "updatedAt": "2026-07-28T03:23:54.000Z",
+                          "uid": "35240-12e3993e-c487-4f60-ba85-d516570e4854"
+                        },
+                        {
+                          "id": "3ac49f49-5f16-44e3-817f-43cfc730248a",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/scripts?limit=10&after=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "scripts"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "key": "after",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:54.000Z",
+                          "updatedAt": "2026-07-28T03:23:54.000Z",
+                          "uid": "35240-3ac49f49-5f16-44e3-817f-43cfc730248a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:54.000Z",
+                      "updatedAt": "2026-07-28T03:23:54.000Z",
+                      "uid": "35240-bc94674d-0edd-425d-8aa1-02ce128ff243"
+                    },
+                    {
+                      "name": "Create Script",
+                      "id": "cca5aa31-4a0f-4635-ac96-300dedba13f8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"language\": \"JS\",\n  \"code\": \"<string>\",\n  \"params\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"BOOLEAN\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"NUMERIC\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:projectId/scripts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":projectId",
+                            "scripts"
+                          ],
+                          "variable": [
+                            {
+                              "id": "98bc1683-6509-4658-bd05-8672ee164861",
+                              "key": "projectId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Creates a new Cloud Code JavaScript script."
+                      },
+                      "response": [
+                        {
+                          "id": "e61d3fb7-7633-460b-acbb-a6730706cf8d",
+                          "name": "Script created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"language\": \"JS\",\n  \"code\": \"<string>\",\n  \"params\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"BOOLEAN\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"NUMERIC\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/scripts",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "scripts"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"language\": \"JS\",\n  \"activeScript\": {\n    \"code\": \"<string>\",\n    \"datePublished\": \"<dateTime>\"\n  },\n  \"versions\": [\n    {\n      \"code\": \"<string>\",\n      \"datePublished\": \"<dateTime>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"datePublished\": \"<dateTime>\"\n    }\n  ],\n  \"params\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"BOOLEAN\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"NUMERIC\",\n      \"required\": \"<boolean>\"\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T03:23:54.000Z",
+                          "updatedAt": "2026-07-28T03:23:54.000Z",
+                          "uid": "35240-e61d3fb7-7633-460b-acbb-a6730706cf8d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:54.000Z",
+                      "updatedAt": "2026-07-28T03:23:54.000Z",
+                      "uid": "35240-cca5aa31-4a0f-4635-ac96-300dedba13f8"
+                    }
+                  ],
+                  "id": "27a06001-148f-43a4-aef7-589bd5e69584",
+                  "createdAt": "2026-07-28T03:23:54.000Z",
+                  "updatedAt": "2026-07-28T03:23:54.000Z",
+                  "uid": "35240-27a06001-148f-43a4-aef7-589bd5e69584"
+                }
+              ],
+              "id": "ab4ad27f-958a-4cd4-b42f-9d9f17ef7547",
+              "createdAt": "2026-07-28T03:23:54.000Z",
+              "updatedAt": "2026-07-28T03:23:54.000Z",
+              "uid": "35240-ab4ad27f-958a-4cd4-b42f-9d9f17ef7547"
+            }
+          ],
+          "id": "024cce99-0f89-4027-b3d3-769524471fb2",
+          "createdAt": "2026-07-28T03:23:54.000Z",
+          "updatedAt": "2026-07-28T03:23:54.000Z",
+          "uid": "35240-024cce99-0f89-4027-b3d3-769524471fb2"
+        }
+      ],
+      "id": "10da67a5-febb-4d98-83d9-1aa2db228562",
+      "createdAt": "2026-07-28T03:23:54.000Z",
+      "updatedAt": "2026-07-28T03:23:54.000Z",
+      "uid": "35240-10da67a5-febb-4d98-83d9-1aa2db228562"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

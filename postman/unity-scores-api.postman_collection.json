@@ -1,0 +1,622 @@
+{
+  "info": {
+    "_postman_id": "85a9e687-1fea-43ab-8516-3cfeb3f6134e",
+    "name": "Unity Analytics Allocations Scores API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:53.000Z",
+    "updatedAt": "2026-07-28T03:23:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-85a9e687-1fea-43ab-8516-3cfeb3f6134e"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "environments",
+                  "item": [
+                    {
+                      "name": "{environmentId}",
+                      "item": [
+                        {
+                          "name": "leaderboards",
+                          "item": [
+                            {
+                              "name": "{leaderboardId}",
+                              "item": [
+                                {
+                                  "name": "scores",
+                                  "item": [
+                                    {
+                                      "name": "players",
+                                      "item": [
+                                        {
+                                          "name": "{playerId}",
+                                          "item": [
+                                            {
+                                              "name": "Add Player Score",
+                                              "id": "31c60902-56af-44f1-a970-28f29f9bf6c7",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"score\": \"<number>\",\n  \"metadata\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores/players/:playerId",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "v1",
+                                                    "projects",
+                                                    ":projectId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "leaderboards",
+                                                    ":leaderboardId",
+                                                    "scores",
+                                                    "players",
+                                                    ":playerId"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "d214aafb-12eb-4f42-95d1-b2bedb875b84",
+                                                      "key": "projectId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "97ceeca0-349f-46f8-a35b-d48638e09ded",
+                                                      "key": "environmentId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "3f9bc2da-950f-4ddf-8985-478e30e46892",
+                                                      "key": "leaderboardId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "678251da-0914-4d37-863b-5e5e2b49aa17",
+                                                      "key": "playerId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "Submits or updates a player's score on a leaderboard."
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "f72a0b20-61dd-4bf9-be70-7283194c0b24",
+                                                  "name": "Score submitted",
+                                                  "originalRequest": {
+                                                    "method": "POST",
+                                                    "header": [
+                                                      {
+                                                        "key": "Content-Type",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "key": "Accept",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "description": "Added as a part of security scheme: apikey",
+                                                        "key": "x-api-key",
+                                                        "value": "<API Key>"
+                                                      }
+                                                    ],
+                                                    "body": {
+                                                      "mode": "raw",
+                                                      "raw": "{\n  \"score\": \"<number>\",\n  \"metadata\": \"<string>\"\n}",
+                                                      "options": {
+                                                        "raw": {
+                                                          "headerFamily": "json",
+                                                          "language": "json"
+                                                        }
+                                                      }
+                                                    },
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores/players/:playerId",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "v1",
+                                                        "projects",
+                                                        ":projectId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "leaderboards",
+                                                        ":leaderboardId",
+                                                        "scores",
+                                                        "players",
+                                                        ":playerId"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "projectId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "leaderboardId"
+                                                        },
+                                                        {
+                                                          "key": "playerId"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "OK",
+                                                  "code": 200,
+                                                  "_postman_previewlanguage": "json",
+                                                  "header": [
+                                                    {
+                                                      "key": "Content-Type",
+                                                      "value": "application/json"
+                                                    }
+                                                  ],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": "{\n  \"playerId\": \"<string>\",\n  \"playerName\": \"<string>\",\n  \"rank\": \"<integer>\",\n  \"score\": \"<number>\",\n  \"tier\": \"<string>\",\n  \"updatedTime\": \"<dateTime>\",\n  \"metadata\": \"<string>\"\n}",
+                                                  "createdAt": "2026-07-28T03:23:53.000Z",
+                                                  "updatedAt": "2026-07-28T03:23:53.000Z",
+                                                  "uid": "35240-f72a0b20-61dd-4bf9-be70-7283194c0b24"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T03:23:53.000Z",
+                                              "updatedAt": "2026-07-28T03:23:53.000Z",
+                                              "uid": "35240-31c60902-56af-44f1-a970-28f29f9bf6c7"
+                                            },
+                                            {
+                                              "name": "Get Player Score",
+                                              "id": "79188bcf-1c0a-4970-86e3-ef578a632582",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores/players/:playerId",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "v1",
+                                                    "projects",
+                                                    ":projectId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "leaderboards",
+                                                    ":leaderboardId",
+                                                    "scores",
+                                                    "players",
+                                                    ":playerId"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "f6c2baa0-01ae-4f89-b422-5af4d267fa6f",
+                                                      "key": "projectId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "81e16bd1-5583-4997-9901-0287fd9b7241",
+                                                      "key": "environmentId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "e95d09b3-1192-40ff-bd21-995c84a78edb",
+                                                      "key": "leaderboardId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "374392a7-4bb9-4a15-bb43-0ea5589ff764",
+                                                      "key": "playerId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "Retrieves a specific player's score and rank on a leaderboard."
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "9e1014c6-be46-47b1-8aa7-4c2e0dcbd02d",
+                                                  "name": "Player score and rank",
+                                                  "originalRequest": {
+                                                    "method": "GET",
+                                                    "header": [
+                                                      {
+                                                        "key": "Accept",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "description": "Added as a part of security scheme: apikey",
+                                                        "key": "x-api-key",
+                                                        "value": "<API Key>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores/players/:playerId",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "v1",
+                                                        "projects",
+                                                        ":projectId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "leaderboards",
+                                                        ":leaderboardId",
+                                                        "scores",
+                                                        "players",
+                                                        ":playerId"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "projectId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "leaderboardId"
+                                                        },
+                                                        {
+                                                          "key": "playerId"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "OK",
+                                                  "code": 200,
+                                                  "_postman_previewlanguage": "json",
+                                                  "header": [
+                                                    {
+                                                      "key": "Content-Type",
+                                                      "value": "application/json"
+                                                    }
+                                                  ],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": "{\n  \"playerId\": \"<string>\",\n  \"playerName\": \"<string>\",\n  \"rank\": \"<integer>\",\n  \"score\": \"<number>\",\n  \"tier\": \"<string>\",\n  \"updatedTime\": \"<dateTime>\",\n  \"metadata\": \"<string>\"\n}",
+                                                  "createdAt": "2026-07-28T03:23:53.000Z",
+                                                  "updatedAt": "2026-07-28T03:23:53.000Z",
+                                                  "uid": "35240-9e1014c6-be46-47b1-8aa7-4c2e0dcbd02d"
+                                                },
+                                                {
+                                                  "id": "e7760dee-cee8-4949-a042-35a6942f4c3c",
+                                                  "name": "Not Found",
+                                                  "originalRequest": {
+                                                    "method": "GET",
+                                                    "header": [
+                                                      {
+                                                        "description": "Added as a part of security scheme: apikey",
+                                                        "key": "x-api-key",
+                                                        "value": "<API Key>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores/players/:playerId",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "v1",
+                                                        "projects",
+                                                        ":projectId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "leaderboards",
+                                                        ":leaderboardId",
+                                                        "scores",
+                                                        "players",
+                                                        ":playerId"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "projectId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "leaderboardId"
+                                                        },
+                                                        {
+                                                          "key": "playerId"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Not Found",
+                                                  "code": 404,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T03:23:53.000Z",
+                                                  "updatedAt": "2026-07-28T03:23:53.000Z",
+                                                  "uid": "35240-e7760dee-cee8-4949-a042-35a6942f4c3c"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T03:23:53.000Z",
+                                              "updatedAt": "2026-07-28T03:23:53.000Z",
+                                              "uid": "35240-79188bcf-1c0a-4970-86e3-ef578a632582"
+                                            }
+                                          ],
+                                          "id": "8d39569d-ac4f-425c-8783-85eda79210f3",
+                                          "createdAt": "2026-07-28T03:23:53.000Z",
+                                          "updatedAt": "2026-07-28T03:23:53.000Z",
+                                          "uid": "35240-8d39569d-ac4f-425c-8783-85eda79210f3"
+                                        }
+                                      ],
+                                      "id": "a8e75dd6-fdd3-4c39-bcc8-4282aaee2aa0",
+                                      "createdAt": "2026-07-28T03:23:53.000Z",
+                                      "updatedAt": "2026-07-28T03:23:53.000Z",
+                                      "uid": "35240-a8e75dd6-fdd3-4c39-bcc8-4282aaee2aa0"
+                                    },
+                                    {
+                                      "name": "Get Leaderboard Scores",
+                                      "id": "8986a23a-9476-4aec-a4c9-fc29aeeff4bc",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores?offset=0&limit=10&includeMetadata=<boolean>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "leaderboards",
+                                            ":leaderboardId",
+                                            "scores"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "offset",
+                                              "value": "0"
+                                            },
+                                            {
+                                              "key": "limit",
+                                              "value": "10"
+                                            },
+                                            {
+                                              "key": "includeMetadata",
+                                              "value": "<boolean>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "49dc9405-89d5-475b-85ce-0e2c3006840a",
+                                              "key": "projectId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "3bc047c0-9543-4540-9a88-f96cba9237b7",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "250aa643-e3b0-4973-bd9e-7268df80214c",
+                                              "key": "leaderboardId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Retrieves the top scores for a leaderboard with optional pagination."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "4477e1a9-9d31-4e07-96a5-0727b3f819e2",
+                                          "name": "Leaderboard scores",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores?offset=0&limit=10&includeMetadata=<boolean>",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v1",
+                                                "projects",
+                                                ":projectId",
+                                                "environments",
+                                                ":environmentId",
+                                                "leaderboards",
+                                                ":leaderboardId",
+                                                "scores"
+                                              ],
+                                              "query": [
+                                                {
+                                                  "key": "offset",
+                                                  "value": "0"
+                                                },
+                                                {
+                                                  "key": "limit",
+                                                  "value": "10"
+                                                },
+                                                {
+                                                  "key": "includeMetadata",
+                                                  "value": "<boolean>"
+                                                }
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "leaderboardId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"total\": \"<integer>\",\n  \"results\": [\n    {\n      \"playerId\": \"<string>\",\n      \"playerName\": \"<string>\",\n      \"rank\": \"<integer>\",\n      \"score\": \"<number>\",\n      \"tier\": \"<string>\",\n      \"updatedTime\": \"<dateTime>\",\n      \"metadata\": \"<string>\"\n    },\n    {\n      \"playerId\": \"<string>\",\n      \"playerName\": \"<string>\",\n      \"rank\": \"<integer>\",\n      \"score\": \"<number>\",\n      \"tier\": \"<string>\",\n      \"updatedTime\": \"<dateTime>\",\n      \"metadata\": \"<string>\"\n    }\n  ]\n}",
+                                          "createdAt": "2026-07-28T03:23:53.000Z",
+                                          "updatedAt": "2026-07-28T03:23:53.000Z",
+                                          "uid": "35240-4477e1a9-9d31-4e07-96a5-0727b3f819e2"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:23:53.000Z",
+                                      "updatedAt": "2026-07-28T03:23:53.000Z",
+                                      "uid": "35240-8986a23a-9476-4aec-a4c9-fc29aeeff4bc"
+                                    }
+                                  ],
+                                  "id": "9f71aa2d-da24-47b0-a8bb-a1a68178b9f2",
+                                  "createdAt": "2026-07-28T03:23:53.000Z",
+                                  "updatedAt": "2026-07-28T03:23:53.000Z",
+                                  "uid": "35240-9f71aa2d-da24-47b0-a8bb-a1a68178b9f2"
+                                }
+                              ],
+                              "id": "2afb43be-8006-4450-88a5-181f5daa5bc6",
+                              "createdAt": "2026-07-28T03:23:53.000Z",
+                              "updatedAt": "2026-07-28T03:23:53.000Z",
+                              "uid": "35240-2afb43be-8006-4450-88a5-181f5daa5bc6"
+                            }
+                          ],
+                          "id": "83e71f05-dbca-4e4e-aa52-ea31031d5f67",
+                          "createdAt": "2026-07-28T03:23:53.000Z",
+                          "updatedAt": "2026-07-28T03:23:53.000Z",
+                          "uid": "35240-83e71f05-dbca-4e4e-aa52-ea31031d5f67"
+                        }
+                      ],
+                      "id": "68dbefd1-d3e7-4d4e-9971-a28d5834cf32",
+                      "createdAt": "2026-07-28T03:23:53.000Z",
+                      "updatedAt": "2026-07-28T03:23:53.000Z",
+                      "uid": "35240-68dbefd1-d3e7-4d4e-9971-a28d5834cf32"
+                    }
+                  ],
+                  "id": "42e32c61-66b4-4ae1-8e69-70c180625712",
+                  "createdAt": "2026-07-28T03:23:53.000Z",
+                  "updatedAt": "2026-07-28T03:23:53.000Z",
+                  "uid": "35240-42e32c61-66b4-4ae1-8e69-70c180625712"
+                }
+              ],
+              "id": "6d637310-83ff-4079-a5df-4352ad9d948c",
+              "createdAt": "2026-07-28T03:23:53.000Z",
+              "updatedAt": "2026-07-28T03:23:53.000Z",
+              "uid": "35240-6d637310-83ff-4079-a5df-4352ad9d948c"
+            }
+          ],
+          "id": "870b7dd9-2b3c-4ce1-8c91-cf48ecb7f242",
+          "createdAt": "2026-07-28T03:23:53.000Z",
+          "updatedAt": "2026-07-28T03:23:53.000Z",
+          "uid": "35240-870b7dd9-2b3c-4ce1-8c91-cf48ecb7f242"
+        }
+      ],
+      "id": "49105afe-f614-4ef8-8a50-1024739fe40e",
+      "createdAt": "2026-07-28T03:23:53.000Z",
+      "updatedAt": "2026-07-28T03:23:53.000Z",
+      "uid": "35240-49105afe-f614-4ef8-8a50-1024739fe40e"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

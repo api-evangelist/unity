@@ -1,0 +1,533 @@
+{
+  "info": {
+    "_postman_id": "8fa47e4a-2dbb-4f7e-b66f-026b36e21f05",
+    "name": "Unity Analytics Allocations Friend Requests API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:27.000Z",
+    "updatedAt": "2026-07-28T03:23:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8fa47e4a-2dbb-4f7e-b66f-026b36e21f05"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "me",
+          "item": [
+            {
+              "name": "relationships",
+              "item": [
+                {
+                  "name": "requests",
+                  "item": [
+                    {
+                      "name": "incoming",
+                      "item": [
+                        {
+                          "name": "List Incoming Friend Requests",
+                          "id": "3a67a11e-069f-4465-a2e9-2c301e8679aa",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/requests/incoming?limit=20&after=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                "requests",
+                                "incoming"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "after",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "description": "Returns all pending incoming friend requests for the current player."
+                          },
+                          "response": [
+                            {
+                              "id": "257b9dc1-67c0-414d-b0ca-0889a59aee8f",
+                              "name": "Incoming friend requests",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/me/relationships/requests/incoming?limit=20&after=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "me",
+                                    "relationships",
+                                    "requests",
+                                    "incoming"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "limit",
+                                      "value": "20"
+                                    },
+                                    {
+                                      "key": "after",
+                                      "value": "<string>"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"results\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"FRIEND\",\n      \"member\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"presence\": {\n          \"availability\": \"BUSY\",\n          \"activity\": {\n            \"status\": \"<string>\"\n          }\n        }\n      },\n      \"created\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"BLOCK\",\n      \"member\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"presence\": {\n          \"availability\": \"INVISIBLE\",\n          \"activity\": {\n            \"status\": \"<string>\"\n          }\n        }\n      },\n      \"created\": \"<dateTime>\"\n    }\n  ],\n  \"next\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:23:27.000Z",
+                              "updatedAt": "2026-07-28T03:23:27.000Z",
+                              "uid": "35240-257b9dc1-67c0-414d-b0ca-0889a59aee8f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:27.000Z",
+                          "updatedAt": "2026-07-28T03:23:27.000Z",
+                          "uid": "35240-3a67a11e-069f-4465-a2e9-2c301e8679aa"
+                        }
+                      ],
+                      "id": "566c2edd-958b-438f-b60b-27c1f8eb0e8e",
+                      "createdAt": "2026-07-28T03:23:27.000Z",
+                      "updatedAt": "2026-07-28T03:23:27.000Z",
+                      "uid": "35240-566c2edd-958b-438f-b60b-27c1f8eb0e8e"
+                    },
+                    {
+                      "name": "outgoing",
+                      "item": [
+                        {
+                          "name": "List Outgoing Friend Requests",
+                          "id": "ba192acb-7e36-4d6b-b6cf-5aed98718a1b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/requests/outgoing",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                "requests",
+                                "outgoing"
+                              ]
+                            },
+                            "description": "Returns all pending outgoing friend requests sent by the current player."
+                          },
+                          "response": [
+                            {
+                              "id": "ee3a8a27-c69a-4ea1-8fe6-5d86c70ae6d3",
+                              "name": "Outgoing friend requests",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/me/relationships/requests/outgoing",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "me",
+                                    "relationships",
+                                    "requests",
+                                    "outgoing"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"results\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"FRIEND\",\n      \"member\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"presence\": {\n          \"availability\": \"BUSY\",\n          \"activity\": {\n            \"status\": \"<string>\"\n          }\n        }\n      },\n      \"created\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"BLOCK\",\n      \"member\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"presence\": {\n          \"availability\": \"INVISIBLE\",\n          \"activity\": {\n            \"status\": \"<string>\"\n          }\n        }\n      },\n      \"created\": \"<dateTime>\"\n    }\n  ],\n  \"next\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:23:27.000Z",
+                              "updatedAt": "2026-07-28T03:23:27.000Z",
+                              "uid": "35240-ee3a8a27-c69a-4ea1-8fe6-5d86c70ae6d3"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:27.000Z",
+                          "updatedAt": "2026-07-28T03:23:27.000Z",
+                          "uid": "35240-ba192acb-7e36-4d6b-b6cf-5aed98718a1b"
+                        }
+                      ],
+                      "id": "4ebd5e10-dc5e-4d85-b663-5ebc7f65aab1",
+                      "createdAt": "2026-07-28T03:23:27.000Z",
+                      "updatedAt": "2026-07-28T03:23:27.000Z",
+                      "uid": "35240-4ebd5e10-dc5e-4d85-b663-5ebc7f65aab1"
+                    }
+                  ],
+                  "id": "a1ec8e9c-68a4-4491-87a0-94816e771244",
+                  "createdAt": "2026-07-28T03:23:27.000Z",
+                  "updatedAt": "2026-07-28T03:23:27.000Z",
+                  "uid": "35240-a1ec8e9c-68a4-4491-87a0-94816e771244"
+                },
+                {
+                  "name": "{memberId}",
+                  "item": [
+                    {
+                      "name": "request",
+                      "item": [
+                        {
+                          "name": "Send Friend Request",
+                          "id": "039deb2e-9ef8-4038-8484-290120115265",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/:memberId/request",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                ":memberId",
+                                "request"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3b759152-5d62-47d9-a234-3f87db9a8857",
+                                  "key": "memberId",
+                                  "value": "<string>",
+                                  "description": "(Required) The Unity player ID to send a request to"
+                                }
+                              ]
+                            },
+                            "description": "Sends a friend request to another player."
+                          },
+                          "response": [
+                            {
+                              "id": "e046d7b8-2119-45c4-a194-b6f412cc21d0",
+                              "name": "Friend request sent",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/me/relationships/:memberId/request",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "me",
+                                    "relationships",
+                                    ":memberId",
+                                    "request"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "memberId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"FRIEND\",\n  \"member\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"presence\": {\n      \"availability\": \"INVISIBLE\",\n      \"activity\": {\n        \"status\": \"<string>\"\n      }\n    }\n  },\n  \"created\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:23:27.000Z",
+                              "updatedAt": "2026-07-28T03:23:27.000Z",
+                              "uid": "35240-e046d7b8-2119-45c4-a194-b6f412cc21d0"
+                            },
+                            {
+                              "id": "d6dd1bd7-3ed7-42ca-9442-9065aec86d6e",
+                              "name": "Already friends or request already sent",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/me/relationships/:memberId/request",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "me",
+                                    "relationships",
+                                    ":memberId",
+                                    "request"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "memberId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:23:27.000Z",
+                              "updatedAt": "2026-07-28T03:23:27.000Z",
+                              "uid": "35240-d6dd1bd7-3ed7-42ca-9442-9065aec86d6e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:27.000Z",
+                          "updatedAt": "2026-07-28T03:23:27.000Z",
+                          "uid": "35240-039deb2e-9ef8-4038-8484-290120115265"
+                        }
+                      ],
+                      "id": "19528563-adeb-4afb-997a-7d2a12a18ecd",
+                      "createdAt": "2026-07-28T03:23:27.000Z",
+                      "updatedAt": "2026-07-28T03:23:27.000Z",
+                      "uid": "35240-19528563-adeb-4afb-997a-7d2a12a18ecd"
+                    },
+                    {
+                      "name": "accept",
+                      "item": [
+                        {
+                          "name": "Accept Friend Request",
+                          "id": "1ae0f151-eeac-4ce4-8080-4679784b5d0a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/:memberId/accept",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                ":memberId",
+                                "accept"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4514832c-6fe9-4cec-b38e-ce232bc2c8e3",
+                                  "key": "memberId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Accepts a pending incoming friend request."
+                          },
+                          "response": [
+                            {
+                              "id": "ac238a07-2cb6-482d-858a-d219661daaaf",
+                              "name": "Friend request accepted",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/me/relationships/:memberId/accept",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "me",
+                                    "relationships",
+                                    ":memberId",
+                                    "accept"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "memberId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"FRIEND\",\n  \"member\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"presence\": {\n      \"availability\": \"INVISIBLE\",\n      \"activity\": {\n        \"status\": \"<string>\"\n      }\n    }\n  },\n  \"created\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:23:27.000Z",
+                              "updatedAt": "2026-07-28T03:23:27.000Z",
+                              "uid": "35240-ac238a07-2cb6-482d-858a-d219661daaaf"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:27.000Z",
+                          "updatedAt": "2026-07-28T03:23:27.000Z",
+                          "uid": "35240-1ae0f151-eeac-4ce4-8080-4679784b5d0a"
+                        }
+                      ],
+                      "id": "21571f50-708a-4dc4-bd27-2c07a71556f2",
+                      "createdAt": "2026-07-28T03:23:27.000Z",
+                      "updatedAt": "2026-07-28T03:23:27.000Z",
+                      "uid": "35240-21571f50-708a-4dc4-bd27-2c07a71556f2"
+                    }
+                  ],
+                  "id": "0dac5e29-9397-40a5-b205-6b0c243ad448",
+                  "createdAt": "2026-07-28T03:23:27.000Z",
+                  "updatedAt": "2026-07-28T03:23:27.000Z",
+                  "uid": "35240-0dac5e29-9397-40a5-b205-6b0c243ad448"
+                }
+              ],
+              "id": "0afca1ec-e4f1-412a-bbb8-8e2721f86017",
+              "createdAt": "2026-07-28T03:23:27.000Z",
+              "updatedAt": "2026-07-28T03:23:27.000Z",
+              "uid": "35240-0afca1ec-e4f1-412a-bbb8-8e2721f86017"
+            }
+          ],
+          "id": "070afc5d-7783-4943-8876-212a638927f7",
+          "createdAt": "2026-07-28T03:23:27.000Z",
+          "updatedAt": "2026-07-28T03:23:27.000Z",
+          "uid": "35240-070afc5d-7783-4943-8876-212a638927f7"
+        }
+      ],
+      "id": "345af107-8519-4e4f-824d-c1a172c0cc45",
+      "createdAt": "2026-07-28T03:23:27.000Z",
+      "updatedAt": "2026-07-28T03:23:27.000Z",
+      "uid": "35240-345af107-8519-4e4f-824d-c1a172c0cc45"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

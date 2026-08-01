@@ -1,0 +1,349 @@
+{
+  "info": {
+    "_postman_id": "9ddfb20c-bbd4-4388-8434-f04028682586",
+    "name": "Unity Analytics Allocations Friends API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:28.000Z",
+    "updatedAt": "2026-07-28T03:23:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9ddfb20c-bbd4-4388-8434-f04028682586"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "me",
+          "item": [
+            {
+              "name": "relationships",
+              "item": [
+                {
+                  "name": "friends",
+                  "item": [
+                    {
+                      "name": "List Friends",
+                      "id": "6a8c2904-9e62-4a69-b213-6f33f22967df",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/me/relationships/friends?limit=20&after=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "me",
+                            "relationships",
+                            "friends"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Returns the current player's friend list with presence information."
+                      },
+                      "response": [
+                        {
+                          "id": "3fbbd829-d0a9-47c3-b49b-723fbb060db4",
+                          "name": "Friend list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/friends?limit=20&after=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                "friends"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "after",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"results\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"FRIEND\",\n      \"member\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"presence\": {\n          \"availability\": \"ONLINE\",\n          \"activity\": {\n            \"status\": \"<string>\"\n          }\n        }\n      },\n      \"created\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"FRIEND\",\n      \"member\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"presence\": {\n          \"availability\": \"BUSY\",\n          \"activity\": {\n            \"status\": \"<string>\"\n          }\n        }\n      },\n      \"created\": \"<dateTime>\"\n    }\n  ],\n  \"next\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:23:28.000Z",
+                          "updatedAt": "2026-07-28T03:23:28.000Z",
+                          "uid": "35240-3fbbd829-d0a9-47c3-b49b-723fbb060db4"
+                        },
+                        {
+                          "id": "8e56f2c2-cd9d-4da3-ae85-5d42ad0043ff",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/friends?limit=20&after=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                "friends"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "after",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:28.000Z",
+                          "updatedAt": "2026-07-28T03:23:28.000Z",
+                          "uid": "35240-8e56f2c2-cd9d-4da3-ae85-5d42ad0043ff"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:28.000Z",
+                      "updatedAt": "2026-07-28T03:23:28.000Z",
+                      "uid": "35240-6a8c2904-9e62-4a69-b213-6f33f22967df"
+                    }
+                  ],
+                  "id": "f921bf6d-352d-499c-a84e-3d7066ec0cfc",
+                  "createdAt": "2026-07-28T03:23:28.000Z",
+                  "updatedAt": "2026-07-28T03:23:28.000Z",
+                  "uid": "35240-f921bf6d-352d-499c-a84e-3d7066ec0cfc"
+                },
+                {
+                  "name": "{memberId}",
+                  "item": [
+                    {
+                      "name": "Remove Friend or Request",
+                      "id": "20ed4a21-59ee-401c-b970-4b5e23c8db83",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/me/relationships/:memberId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "me",
+                            "relationships",
+                            ":memberId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3f711c2e-8cc8-49fe-ad89-91f4ab5fa2cf",
+                              "key": "memberId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Removes a friend from the friend list or cancels/rejects a pending friend request."
+                      },
+                      "response": [
+                        {
+                          "id": "7a0636ab-9e21-484a-a077-1cf90b42f021",
+                          "name": "Relationship removed",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/:memberId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                ":memberId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "memberId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:28.000Z",
+                          "updatedAt": "2026-07-28T03:23:28.000Z",
+                          "uid": "35240-7a0636ab-9e21-484a-a077-1cf90b42f021"
+                        },
+                        {
+                          "id": "111c30f2-9760-4329-8d1c-f613ef17ce70",
+                          "name": "Relationship not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/:memberId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                ":memberId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "memberId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:28.000Z",
+                          "updatedAt": "2026-07-28T03:23:28.000Z",
+                          "uid": "35240-111c30f2-9760-4329-8d1c-f613ef17ce70"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:28.000Z",
+                      "updatedAt": "2026-07-28T03:23:28.000Z",
+                      "uid": "35240-20ed4a21-59ee-401c-b970-4b5e23c8db83"
+                    }
+                  ],
+                  "id": "f14a4637-9d6a-48f9-bca5-ec033a0476cd",
+                  "createdAt": "2026-07-28T03:23:28.000Z",
+                  "updatedAt": "2026-07-28T03:23:28.000Z",
+                  "uid": "35240-f14a4637-9d6a-48f9-bca5-ec033a0476cd"
+                }
+              ],
+              "id": "83f07d7b-b59d-40a0-8072-9e68d044dd87",
+              "createdAt": "2026-07-28T03:23:28.000Z",
+              "updatedAt": "2026-07-28T03:23:28.000Z",
+              "uid": "35240-83f07d7b-b59d-40a0-8072-9e68d044dd87"
+            }
+          ],
+          "id": "8ed0878c-07c0-4fb8-940d-0a8fed48840a",
+          "createdAt": "2026-07-28T03:23:28.000Z",
+          "updatedAt": "2026-07-28T03:23:28.000Z",
+          "uid": "35240-8ed0878c-07c0-4fb8-940d-0a8fed48840a"
+        }
+      ],
+      "id": "c2f00d2f-7f10-4d56-a950-74837e89224f",
+      "createdAt": "2026-07-28T03:23:28.000Z",
+      "updatedAt": "2026-07-28T03:23:28.000Z",
+      "uid": "35240-c2f00d2f-7f10-4d56-a950-74837e89224f"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

@@ -1,0 +1,535 @@
+{
+  "info": {
+    "_postman_id": "97f6b282-d5b0-4213-928d-45ffcff82f83",
+    "name": "Unity Analytics Allocations Modules API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:45.000Z",
+    "updatedAt": "2026-07-28T03:23:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-97f6b282-d5b0-4213-928d-45ffcff82f83"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "modules",
+                  "item": [
+                    {
+                      "name": "{moduleName}",
+                      "item": [
+                        {
+                          "name": "Get Module",
+                          "id": "df413d74-fca7-4cce-a70c-8169131702c5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/modules/:moduleName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "modules",
+                                ":moduleName"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1bc6f334-bc7e-4086-8ab5-296caa028e15",
+                                  "key": "projectId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "fd43a1b9-c6b8-4d37-98f4-d042ae15fee2",
+                                  "key": "moduleName",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Returns details about a specific Cloud Code C# module."
+                          },
+                          "response": [
+                            {
+                              "id": "e55d87e8-fbdc-471d-aed9-5a4cc396f158",
+                              "name": "Module details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/modules/:moduleName",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "modules",
+                                    ":moduleName"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "projectId"
+                                    },
+                                    {
+                                      "key": "moduleName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"signature\": \"<string>\",\n  \"size\": \"<integer>\",\n  \"endpoints\": [\n    {\n      \"name\": \"<string>\",\n      \"returnType\": \"<string>\",\n      \"params\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"returnType\": \"<string>\",\n      \"params\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:23:46.000Z",
+                              "updatedAt": "2026-07-28T03:23:46.000Z",
+                              "uid": "35240-e55d87e8-fbdc-471d-aed9-5a4cc396f158"
+                            },
+                            {
+                              "id": "a42149d2-88e3-4e3d-8257-014f784a8680",
+                              "name": "Module not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/modules/:moduleName",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "modules",
+                                    ":moduleName"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "projectId"
+                                    },
+                                    {
+                                      "key": "moduleName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:23:46.000Z",
+                              "updatedAt": "2026-07-28T03:23:46.000Z",
+                              "uid": "35240-a42149d2-88e3-4e3d-8257-014f784a8680"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:46.000Z",
+                          "updatedAt": "2026-07-28T03:23:46.000Z",
+                          "uid": "35240-df413d74-fca7-4cce-a70c-8169131702c5"
+                        },
+                        {
+                          "name": "Delete Module",
+                          "id": "7235e1d4-e059-40c4-9d48-7e51d737fde5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/modules/:moduleName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "modules",
+                                ":moduleName"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f9209b77-2b60-4895-b950-33ee1048d7b6",
+                                  "key": "projectId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "c59bfa2b-c9e1-4210-8903-8bca9bd0149c",
+                                  "key": "moduleName",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Deletes a Cloud Code C# module."
+                          },
+                          "response": [
+                            {
+                              "id": "8f104fff-b169-41b9-94cc-3f18e2b47801",
+                              "name": "Module deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/modules/:moduleName",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "modules",
+                                    ":moduleName"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "projectId"
+                                    },
+                                    {
+                                      "key": "moduleName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:23:46.000Z",
+                              "updatedAt": "2026-07-28T03:23:46.000Z",
+                              "uid": "35240-8f104fff-b169-41b9-94cc-3f18e2b47801"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:46.000Z",
+                          "updatedAt": "2026-07-28T03:23:46.000Z",
+                          "uid": "35240-7235e1d4-e059-40c4-9d48-7e51d737fde5"
+                        }
+                      ],
+                      "id": "52d6d294-9d4d-4f6e-87e5-ddbb0f379e68",
+                      "createdAt": "2026-07-28T03:23:46.000Z",
+                      "updatedAt": "2026-07-28T03:23:46.000Z",
+                      "uid": "35240-52d6d294-9d4d-4f6e-87e5-ddbb0f379e68"
+                    },
+                    {
+                      "name": "List Modules",
+                      "id": "bcced64b-d749-4014-acb3-89b06a5c1961",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:projectId/modules",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":projectId",
+                            "modules"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e7b38316-1c68-4b02-8f0f-7288d091e382",
+                              "key": "projectId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Returns all Cloud Code C# modules for the project."
+                      },
+                      "response": [
+                        {
+                          "id": "1f103d36-1a47-4740-870f-e8e869bab2c6",
+                          "name": "List of modules",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/modules",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "modules"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"results\": [\n    {\n      \"name\": \"<string>\",\n      \"signature\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"endpoints\": [\n        {\n          \"name\": \"<string>\",\n          \"returnType\": \"<string>\",\n          \"params\": [\n            {\n              \"name\": \"<string>\",\n              \"type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"type\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"name\": \"<string>\",\n          \"returnType\": \"<string>\",\n          \"params\": [\n            {\n              \"name\": \"<string>\",\n              \"type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"type\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"signature\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"endpoints\": [\n        {\n          \"name\": \"<string>\",\n          \"returnType\": \"<string>\",\n          \"params\": [\n            {\n              \"name\": \"<string>\",\n              \"type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"type\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"name\": \"<string>\",\n          \"returnType\": \"<string>\",\n          \"params\": [\n            {\n              \"name\": \"<string>\",\n              \"type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"type\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:23:46.000Z",
+                          "updatedAt": "2026-07-28T03:23:46.000Z",
+                          "uid": "35240-1f103d36-1a47-4740-870f-e8e869bab2c6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:46.000Z",
+                      "updatedAt": "2026-07-28T03:23:46.000Z",
+                      "uid": "35240-bcced64b-d749-4014-acb3-89b06a5c1961"
+                    },
+                    {
+                      "name": "Upload Module",
+                      "id": "0f134a1a-0c9d-4314-8d23-6d025cd71180",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "The compiled .ccm module file",
+                              "key": "file",
+                              "type": "file",
+                              "value": null
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:projectId/modules",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":projectId",
+                            "modules"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2c3eebc5-9da9-47ed-8022-1c742a1aa128",
+                              "key": "projectId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Uploads a compiled C# Cloud Code module (.ccm file)."
+                      },
+                      "response": [
+                        {
+                          "id": "317289a2-6465-46e4-bbdb-182422462f0c",
+                          "name": "Module uploaded",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "formdata",
+                              "formdata": [
+                                {
+                                  "description": "The compiled .ccm module file",
+                                  "key": "file",
+                                  "type": "file"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/modules",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "modules"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"signature\": \"<string>\",\n  \"size\": \"<integer>\",\n  \"endpoints\": [\n    {\n      \"name\": \"<string>\",\n      \"returnType\": \"<string>\",\n      \"params\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"returnType\": \"<string>\",\n      \"params\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T03:23:46.000Z",
+                          "updatedAt": "2026-07-28T03:23:46.000Z",
+                          "uid": "35240-317289a2-6465-46e4-bbdb-182422462f0c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:46.000Z",
+                      "updatedAt": "2026-07-28T03:23:46.000Z",
+                      "uid": "35240-0f134a1a-0c9d-4314-8d23-6d025cd71180"
+                    }
+                  ],
+                  "id": "ad627527-8bcd-4b88-b7e1-7bc4fd7c454c",
+                  "createdAt": "2026-07-28T03:23:46.000Z",
+                  "updatedAt": "2026-07-28T03:23:46.000Z",
+                  "uid": "35240-ad627527-8bcd-4b88-b7e1-7bc4fd7c454c"
+                }
+              ],
+              "id": "2e0b3d24-4cb7-48df-8ccd-40f9c1b82eb5",
+              "createdAt": "2026-07-28T03:23:46.000Z",
+              "updatedAt": "2026-07-28T03:23:46.000Z",
+              "uid": "35240-2e0b3d24-4cb7-48df-8ccd-40f9c1b82eb5"
+            }
+          ],
+          "id": "90006220-f82c-4c69-8236-404dc4777faf",
+          "createdAt": "2026-07-28T03:23:46.000Z",
+          "updatedAt": "2026-07-28T03:23:46.000Z",
+          "uid": "35240-90006220-f82c-4c69-8236-404dc4777faf"
+        }
+      ],
+      "id": "4f77470e-8cc2-4f20-a9aa-2a41644d872b",
+      "createdAt": "2026-07-28T03:23:46.000Z",
+      "updatedAt": "2026-07-28T03:23:46.000Z",
+      "uid": "35240-4f77470e-8cc2-4f20-a9aa-2a41644d872b"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

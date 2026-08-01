@@ -1,0 +1,1045 @@
+{
+  "info": {
+    "_postman_id": "e46d3d68-f6c9-449e-bde0-f5cb537c3c59",
+    "name": "Unity Analytics Allocations Authentication API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:22:59.000Z",
+    "updatedAt": "2026-07-28T03:22:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e46d3d68-f6c9-449e-bde0-f5cb537c3c59"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "authentication",
+          "item": [
+            {
+              "name": "anonymous",
+              "item": [
+                {
+                  "name": "Sign In Anonymously",
+                  "id": "4669eb67-d69c-4f8f-ad64-8aed55e25203",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sessionTokens\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/authentication/anonymous",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "authentication",
+                        "anonymous"
+                      ]
+                    },
+                    "description": "Signs in a player anonymously and returns an access token. Creates a new player account if the session ID does not match any existing player."
+                  },
+                  "response": [
+                    {
+                      "id": "77a73b62-c981-4d3a-895c-84848fc302f6",
+                      "name": "Authentication successful",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sessionTokens\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/anonymous",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "anonymous"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"idToken\": \"<string>\",\n  \"sessionToken\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"userId\": \"<string>\",\n  \"isNew\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T03:23:00.000Z",
+                      "updatedAt": "2026-07-28T03:23:00.000Z",
+                      "uid": "35240-77a73b62-c981-4d3a-895c-84848fc302f6"
+                    },
+                    {
+                      "id": "28addf55-d728-4a46-a231-45d83d2e85ae",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sessionTokens\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/anonymous",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "anonymous"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:23:00.000Z",
+                      "updatedAt": "2026-07-28T03:23:00.000Z",
+                      "uid": "35240-28addf55-d728-4a46-a231-45d83d2e85ae"
+                    },
+                    {
+                      "id": "0b338f61-dde6-474e-83c1-9cb941769862",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sessionTokens\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/anonymous",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "anonymous"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:23:00.000Z",
+                      "updatedAt": "2026-07-28T03:23:00.000Z",
+                      "uid": "35240-0b338f61-dde6-474e-83c1-9cb941769862"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:23:00.000Z",
+                  "updatedAt": "2026-07-28T03:23:00.000Z",
+                  "uid": "35240-4669eb67-d69c-4f8f-ad64-8aed55e25203"
+                }
+              ],
+              "id": "c9bc64c1-f6e1-4af7-9bb6-09e1fd6a1e62",
+              "createdAt": "2026-07-28T03:23:00.000Z",
+              "updatedAt": "2026-07-28T03:23:00.000Z",
+              "uid": "35240-c9bc64c1-f6e1-4af7-9bb6-09e1fd6a1e62"
+            },
+            {
+              "name": "usernamepassword",
+              "item": [
+                {
+                  "name": "sign-in",
+                  "item": [
+                    {
+                      "name": "Sign In With Username and Password",
+                      "id": "3d9d223f-d191-4717-8cc7-1e318b9be0cf",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/usernamepassword/sign-in",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "usernamepassword",
+                            "sign-in"
+                          ]
+                        },
+                        "description": "Authenticates a player using their username and password credentials."
+                      },
+                      "response": [
+                        {
+                          "id": "e3c1307b-0a08-492f-9bf6-e5fe81e77d4d",
+                          "name": "Authentication successful",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/authentication/usernamepassword/sign-in",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "authentication",
+                                "usernamepassword",
+                                "sign-in"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"idToken\": \"<string>\",\n  \"sessionToken\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"userId\": \"<string>\",\n  \"isNew\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T03:23:00.000Z",
+                          "updatedAt": "2026-07-28T03:23:00.000Z",
+                          "uid": "35240-e3c1307b-0a08-492f-9bf6-e5fe81e77d4d"
+                        },
+                        {
+                          "id": "a026db2f-5dfa-48ed-8965-6d928f07ed31",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/authentication/usernamepassword/sign-in",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "authentication",
+                                "usernamepassword",
+                                "sign-in"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:00.000Z",
+                          "updatedAt": "2026-07-28T03:23:00.000Z",
+                          "uid": "35240-a026db2f-5dfa-48ed-8965-6d928f07ed31"
+                        },
+                        {
+                          "id": "20b856ba-d97a-46bf-9351-3a30707ac441",
+                          "name": "Invalid credentials",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/authentication/usernamepassword/sign-in",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "authentication",
+                                "usernamepassword",
+                                "sign-in"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:00.000Z",
+                          "updatedAt": "2026-07-28T03:23:00.000Z",
+                          "uid": "35240-20b856ba-d97a-46bf-9351-3a30707ac441"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:00.000Z",
+                      "updatedAt": "2026-07-28T03:23:00.000Z",
+                      "uid": "35240-3d9d223f-d191-4717-8cc7-1e318b9be0cf"
+                    }
+                  ],
+                  "id": "d3f4a901-255c-4228-a4ae-1a868ef66882",
+                  "createdAt": "2026-07-28T03:23:00.000Z",
+                  "updatedAt": "2026-07-28T03:23:00.000Z",
+                  "uid": "35240-d3f4a901-255c-4228-a4ae-1a868ef66882"
+                },
+                {
+                  "name": "sign-up",
+                  "item": [
+                    {
+                      "name": "Sign Up With Username and Password",
+                      "id": "563ccad9-e978-43b5-9664-6f397674b747",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/usernamepassword/sign-up",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "usernamepassword",
+                            "sign-up"
+                          ]
+                        },
+                        "description": "Creates a new player account with username and password credentials."
+                      },
+                      "response": [
+                        {
+                          "id": "33a98459-a258-41f5-9bb8-9595b4c13d19",
+                          "name": "Account created and signed in",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/authentication/usernamepassword/sign-up",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "authentication",
+                                "usernamepassword",
+                                "sign-up"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"idToken\": \"<string>\",\n  \"sessionToken\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"userId\": \"<string>\",\n  \"isNew\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T03:23:00.000Z",
+                          "updatedAt": "2026-07-28T03:23:00.000Z",
+                          "uid": "35240-33a98459-a258-41f5-9bb8-9595b4c13d19"
+                        },
+                        {
+                          "id": "bce8e077-0413-45f6-b2ae-c2d4f2217aad",
+                          "name": "Bad Request - invalid or duplicate username",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/authentication/usernamepassword/sign-up",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "authentication",
+                                "usernamepassword",
+                                "sign-up"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:00.000Z",
+                          "updatedAt": "2026-07-28T03:23:00.000Z",
+                          "uid": "35240-bce8e077-0413-45f6-b2ae-c2d4f2217aad"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:00.000Z",
+                      "updatedAt": "2026-07-28T03:23:00.000Z",
+                      "uid": "35240-563ccad9-e978-43b5-9664-6f397674b747"
+                    }
+                  ],
+                  "id": "07d99410-fe0c-43c3-82cd-8c043e96d95a",
+                  "createdAt": "2026-07-28T03:23:00.000Z",
+                  "updatedAt": "2026-07-28T03:23:00.000Z",
+                  "uid": "35240-07d99410-fe0c-43c3-82cd-8c043e96d95a"
+                }
+              ],
+              "id": "de3db0c3-24a7-4e1c-b87c-6e4f826fef2f",
+              "createdAt": "2026-07-28T03:23:00.000Z",
+              "updatedAt": "2026-07-28T03:23:00.000Z",
+              "uid": "35240-de3db0c3-24a7-4e1c-b87c-6e4f826fef2f"
+            },
+            {
+              "name": "external-token",
+              "item": [
+                {
+                  "name": "Sign In With External Token",
+                  "id": "b48afa58-a20f-4fbf-ba95-6f3569da97ce",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"idProvider\": \"google\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/authentication/external-token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "authentication",
+                        "external-token"
+                      ]
+                    },
+                    "description": "Authenticates a player using a token from an external identity provider such as Google, Apple, Steam, Facebook, or a custom provider."
+                  },
+                  "response": [
+                    {
+                      "id": "0f88cab3-1327-439c-b68f-bc96599ee2c4",
+                      "name": "Authentication successful",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"idProvider\": \"google\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/external-token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "external-token"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"idToken\": \"<string>\",\n  \"sessionToken\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"userId\": \"<string>\",\n  \"isNew\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T03:23:00.000Z",
+                      "updatedAt": "2026-07-28T03:23:00.000Z",
+                      "uid": "35240-0f88cab3-1327-439c-b68f-bc96599ee2c4"
+                    },
+                    {
+                      "id": "3b27e6aa-27d4-4ccd-ae95-b5a54a7658e9",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"idProvider\": \"google\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/external-token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "external-token"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:23:00.000Z",
+                      "updatedAt": "2026-07-28T03:23:00.000Z",
+                      "uid": "35240-3b27e6aa-27d4-4ccd-ae95-b5a54a7658e9"
+                    },
+                    {
+                      "id": "1cf268af-eb3e-459f-a5e9-409ee9a3e02d",
+                      "name": "Invalid external token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"idProvider\": \"google\",\n  \"token\": \"<string>\",\n  \"signInOnly\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/authentication/external-token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "authentication",
+                            "external-token"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:23:00.000Z",
+                      "updatedAt": "2026-07-28T03:23:00.000Z",
+                      "uid": "35240-1cf268af-eb3e-459f-a5e9-409ee9a3e02d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:23:00.000Z",
+                  "updatedAt": "2026-07-28T03:23:00.000Z",
+                  "uid": "35240-b48afa58-a20f-4fbf-ba95-6f3569da97ce"
+                }
+              ],
+              "id": "751a644f-5162-47b4-b2ae-3e784c6440d4",
+              "createdAt": "2026-07-28T03:23:00.000Z",
+              "updatedAt": "2026-07-28T03:23:00.000Z",
+              "uid": "35240-751a644f-5162-47b4-b2ae-3e784c6440d4"
+            }
+          ],
+          "id": "487644a0-2b26-430c-8d89-f4cdbf6604d5",
+          "createdAt": "2026-07-28T03:23:00.000Z",
+          "updatedAt": "2026-07-28T03:23:00.000Z",
+          "uid": "35240-487644a0-2b26-430c-8d89-f4cdbf6604d5"
+        },
+        {
+          "name": "token",
+          "item": [
+            {
+              "name": "refresh",
+              "item": [
+                {
+                  "name": "Refresh Authentication Token",
+                  "id": "0287a26c-12c1-4018-99e4-4844d87100d5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/token/refresh",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "token",
+                        "refresh"
+                      ]
+                    },
+                    "description": "Exchanges a refresh token for a new access token without requiring the player to re-authenticate."
+                  },
+                  "response": [
+                    {
+                      "id": "1c301bea-936a-42d8-bbc4-13c9e8dfbd3e",
+                      "name": "New access token issued",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/token/refresh",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "token",
+                            "refresh"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"idToken\": \"<string>\",\n  \"sessionToken\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"userId\": \"<string>\",\n  \"isNew\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T03:23:00.000Z",
+                      "updatedAt": "2026-07-28T03:23:00.000Z",
+                      "uid": "35240-1c301bea-936a-42d8-bbc4-13c9e8dfbd3e"
+                    },
+                    {
+                      "id": "3ed73c1a-6d3b-4f71-ac99-7b1da390f163",
+                      "name": "Invalid or expired refresh token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/token/refresh",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "token",
+                            "refresh"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:23:00.000Z",
+                      "updatedAt": "2026-07-28T03:23:00.000Z",
+                      "uid": "35240-3ed73c1a-6d3b-4f71-ac99-7b1da390f163"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:23:00.000Z",
+                  "updatedAt": "2026-07-28T03:23:00.000Z",
+                  "uid": "35240-0287a26c-12c1-4018-99e4-4844d87100d5"
+                }
+              ],
+              "id": "3af2100d-70e0-4a50-ad3f-2006cd29b33a",
+              "createdAt": "2026-07-28T03:23:00.000Z",
+              "updatedAt": "2026-07-28T03:23:00.000Z",
+              "uid": "35240-3af2100d-70e0-4a50-ad3f-2006cd29b33a"
+            }
+          ],
+          "id": "ef6744f1-a816-4163-a691-97847ed72f40",
+          "createdAt": "2026-07-28T03:23:00.000Z",
+          "updatedAt": "2026-07-28T03:23:00.000Z",
+          "uid": "35240-ef6744f1-a816-4163-a691-97847ed72f40"
+        }
+      ],
+      "id": "12e370b5-1127-4ca6-8bbf-988abe491cff",
+      "createdAt": "2026-07-28T03:23:00.000Z",
+      "updatedAt": "2026-07-28T03:23:00.000Z",
+      "uid": "35240-12e370b5-1127-4ca6-8bbf-988abe491cff"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

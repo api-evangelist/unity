@@ -1,0 +1,575 @@
+{
+  "info": {
+    "_postman_id": "4745f71f-d128-4e7e-ad26-daa4fc7e1273",
+    "name": "Unity Analytics Allocations Currencies API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:05.000Z",
+    "updatedAt": "2026-07-28T03:23:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4745f71f-d128-4e7e-ad26-daa4fc7e1273"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "environments",
+                  "item": [
+                    {
+                      "name": "{environmentId}",
+                      "item": [
+                        {
+                          "name": "players",
+                          "item": [
+                            {
+                              "name": "{playerId}",
+                              "item": [
+                                {
+                                  "name": "currencies",
+                                  "item": [
+                                    {
+                                      "name": "{currencyId}",
+                                      "item": [
+                                        {
+                                          "name": "increment",
+                                          "item": [
+                                            {
+                                              "name": "Increment Player Currency Balance",
+                                              "id": "e75e4afc-8dde-4793-848c-88bb1fbec8a9",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"writeLock\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies/:currencyId/increment",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "v2",
+                                                    "projects",
+                                                    ":projectId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "players",
+                                                    ":playerId",
+                                                    "currencies",
+                                                    ":currencyId",
+                                                    "increment"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "43ea1b23-b888-4eb5-8177-81858ff90fc3",
+                                                      "key": "projectId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "8ee6bc7d-4df8-4bfc-a26d-1d962b75dbf7",
+                                                      "key": "environmentId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "10bc6e6f-48b0-4257-9a19-c62dc3e5b4bb",
+                                                      "key": "playerId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "86692621-ea27-4b15-89b1-3c0257122bcf",
+                                                      "key": "currencyId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "Increases a player's currency balance by the specified amount."
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "d9956222-034d-41ce-9661-61b68711e04a",
+                                                  "name": "Updated currency balance",
+                                                  "originalRequest": {
+                                                    "method": "POST",
+                                                    "header": [
+                                                      {
+                                                        "key": "Content-Type",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "key": "Accept",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "description": "Added as a part of security scheme: apikey",
+                                                        "key": "x-api-key",
+                                                        "value": "<API Key>"
+                                                      }
+                                                    ],
+                                                    "body": {
+                                                      "mode": "raw",
+                                                      "raw": "{\n  \"amount\": \"<integer>\",\n  \"writeLock\": \"<string>\"\n}",
+                                                      "options": {
+                                                        "raw": {
+                                                          "headerFamily": "json",
+                                                          "language": "json"
+                                                        }
+                                                      }
+                                                    },
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies/:currencyId/increment",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "v2",
+                                                        "projects",
+                                                        ":projectId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "players",
+                                                        ":playerId",
+                                                        "currencies",
+                                                        ":currencyId",
+                                                        "increment"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "projectId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "playerId"
+                                                        },
+                                                        {
+                                                          "key": "currencyId"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "OK",
+                                                  "code": 200,
+                                                  "_postman_previewlanguage": "json",
+                                                  "header": [
+                                                    {
+                                                      "key": "Content-Type",
+                                                      "value": "application/json"
+                                                    }
+                                                  ],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": "{\n  \"currencyId\": \"<string>\",\n  \"balance\": \"<integer>\",\n  \"writeLock\": \"<string>\",\n  \"created\": {\n    \"date\": \"<dateTime>\"\n  },\n  \"modified\": {\n    \"date\": \"<dateTime>\"\n  }\n}",
+                                                  "createdAt": "2026-07-28T03:23:05.000Z",
+                                                  "updatedAt": "2026-07-28T03:23:05.000Z",
+                                                  "uid": "35240-d9956222-034d-41ce-9661-61b68711e04a"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T03:23:05.000Z",
+                                              "updatedAt": "2026-07-28T03:23:05.000Z",
+                                              "uid": "35240-e75e4afc-8dde-4793-848c-88bb1fbec8a9"
+                                            }
+                                          ],
+                                          "id": "8bc5d4ed-24b4-49dd-8bd7-d4dd14415384",
+                                          "createdAt": "2026-07-28T03:23:05.000Z",
+                                          "updatedAt": "2026-07-28T03:23:05.000Z",
+                                          "uid": "35240-8bc5d4ed-24b4-49dd-8bd7-d4dd14415384"
+                                        },
+                                        {
+                                          "name": "decrement",
+                                          "item": [
+                                            {
+                                              "name": "Decrement Player Currency Balance",
+                                              "id": "2eb8c756-6a6e-4f96-b029-c88a36e1db4e",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"writeLock\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies/:currencyId/decrement",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "v2",
+                                                    "projects",
+                                                    ":projectId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "players",
+                                                    ":playerId",
+                                                    "currencies",
+                                                    ":currencyId",
+                                                    "decrement"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "41ecb16f-75fa-4ed5-9e1b-1ffb54436769",
+                                                      "key": "projectId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "57fbd834-54f4-464a-9c17-e15da2354852",
+                                                      "key": "environmentId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "dab6f65d-e4cc-4d51-a5af-412617bdd9d5",
+                                                      "key": "playerId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "3dabbf46-096b-425b-a51b-343d439b2485",
+                                                      "key": "currencyId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "Decreases a player's currency balance by the specified amount."
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "043bcd15-f9fe-4bc2-855e-fe30d254090b",
+                                                  "name": "Updated currency balance",
+                                                  "originalRequest": {
+                                                    "method": "POST",
+                                                    "header": [
+                                                      {
+                                                        "key": "Content-Type",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "key": "Accept",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "description": "Added as a part of security scheme: apikey",
+                                                        "key": "x-api-key",
+                                                        "value": "<API Key>"
+                                                      }
+                                                    ],
+                                                    "body": {
+                                                      "mode": "raw",
+                                                      "raw": "{\n  \"amount\": \"<integer>\",\n  \"writeLock\": \"<string>\"\n}",
+                                                      "options": {
+                                                        "raw": {
+                                                          "headerFamily": "json",
+                                                          "language": "json"
+                                                        }
+                                                      }
+                                                    },
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies/:currencyId/decrement",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "v2",
+                                                        "projects",
+                                                        ":projectId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "players",
+                                                        ":playerId",
+                                                        "currencies",
+                                                        ":currencyId",
+                                                        "decrement"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "projectId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "playerId"
+                                                        },
+                                                        {
+                                                          "key": "currencyId"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "OK",
+                                                  "code": 200,
+                                                  "_postman_previewlanguage": "json",
+                                                  "header": [
+                                                    {
+                                                      "key": "Content-Type",
+                                                      "value": "application/json"
+                                                    }
+                                                  ],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": "{\n  \"currencyId\": \"<string>\",\n  \"balance\": \"<integer>\",\n  \"writeLock\": \"<string>\",\n  \"created\": {\n    \"date\": \"<dateTime>\"\n  },\n  \"modified\": {\n    \"date\": \"<dateTime>\"\n  }\n}",
+                                                  "createdAt": "2026-07-28T03:23:05.000Z",
+                                                  "updatedAt": "2026-07-28T03:23:05.000Z",
+                                                  "uid": "35240-043bcd15-f9fe-4bc2-855e-fe30d254090b"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T03:23:05.000Z",
+                                              "updatedAt": "2026-07-28T03:23:05.000Z",
+                                              "uid": "35240-2eb8c756-6a6e-4f96-b029-c88a36e1db4e"
+                                            }
+                                          ],
+                                          "id": "ab8d8f51-638d-44aa-94f0-e36b9bb59803",
+                                          "createdAt": "2026-07-28T03:23:05.000Z",
+                                          "updatedAt": "2026-07-28T03:23:05.000Z",
+                                          "uid": "35240-ab8d8f51-638d-44aa-94f0-e36b9bb59803"
+                                        }
+                                      ],
+                                      "id": "4e85bd2f-c64f-4207-8e6f-622e393789fc",
+                                      "createdAt": "2026-07-28T03:23:05.000Z",
+                                      "updatedAt": "2026-07-28T03:23:05.000Z",
+                                      "uid": "35240-4e85bd2f-c64f-4207-8e6f-622e393789fc"
+                                    },
+                                    {
+                                      "name": "Get Player Currency Balances",
+                                      "id": "9704b0b7-48ae-4f5c-aa63-bc614a969bf4",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v2",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "players",
+                                            ":playerId",
+                                            "currencies"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "f295be58-ef35-46af-9e42-c956fd316756",
+                                              "key": "projectId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "10c4356e-79b4-49d5-97f9-2297b27ac8bc",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "73538991-c24a-417c-b12b-58d1c6b2e47e",
+                                              "key": "playerId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Returns all currency balances for the specified player."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "7483ad38-d9e5-457a-8384-665737df04b6",
+                                          "name": "Player currency balances",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v2",
+                                                "projects",
+                                                ":projectId",
+                                                "environments",
+                                                ":environmentId",
+                                                "players",
+                                                ":playerId",
+                                                "currencies"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "playerId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"results\": [\n    {\n      \"currencyId\": \"<string>\",\n      \"balance\": \"<integer>\",\n      \"writeLock\": \"<string>\",\n      \"created\": {\n        \"date\": \"<dateTime>\"\n      },\n      \"modified\": {\n        \"date\": \"<dateTime>\"\n      }\n    },\n    {\n      \"currencyId\": \"<string>\",\n      \"balance\": \"<integer>\",\n      \"writeLock\": \"<string>\",\n      \"created\": {\n        \"date\": \"<dateTime>\"\n      },\n      \"modified\": {\n        \"date\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+                                          "createdAt": "2026-07-28T03:23:05.000Z",
+                                          "updatedAt": "2026-07-28T03:23:05.000Z",
+                                          "uid": "35240-7483ad38-d9e5-457a-8384-665737df04b6"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:23:05.000Z",
+                                      "updatedAt": "2026-07-28T03:23:05.000Z",
+                                      "uid": "35240-9704b0b7-48ae-4f5c-aa63-bc614a969bf4"
+                                    }
+                                  ],
+                                  "id": "ba15836f-8aec-4e04-804e-c3145b6cc24f",
+                                  "createdAt": "2026-07-28T03:23:05.000Z",
+                                  "updatedAt": "2026-07-28T03:23:05.000Z",
+                                  "uid": "35240-ba15836f-8aec-4e04-804e-c3145b6cc24f"
+                                }
+                              ],
+                              "id": "014972f9-876d-40c7-8b49-1a858522f127",
+                              "createdAt": "2026-07-28T03:23:05.000Z",
+                              "updatedAt": "2026-07-28T03:23:05.000Z",
+                              "uid": "35240-014972f9-876d-40c7-8b49-1a858522f127"
+                            }
+                          ],
+                          "id": "8dc0af42-1da4-4ca6-80b2-35bdb01cb57c",
+                          "createdAt": "2026-07-28T03:23:05.000Z",
+                          "updatedAt": "2026-07-28T03:23:05.000Z",
+                          "uid": "35240-8dc0af42-1da4-4ca6-80b2-35bdb01cb57c"
+                        }
+                      ],
+                      "id": "0f59193f-94e6-47d2-8cfe-22a7c8c7cb86",
+                      "createdAt": "2026-07-28T03:23:05.000Z",
+                      "updatedAt": "2026-07-28T03:23:05.000Z",
+                      "uid": "35240-0f59193f-94e6-47d2-8cfe-22a7c8c7cb86"
+                    }
+                  ],
+                  "id": "44c3dc44-f14e-4c2f-847d-66e0fe410cce",
+                  "createdAt": "2026-07-28T03:23:05.000Z",
+                  "updatedAt": "2026-07-28T03:23:05.000Z",
+                  "uid": "35240-44c3dc44-f14e-4c2f-847d-66e0fe410cce"
+                }
+              ],
+              "id": "abe4e8b1-82d9-4a86-b25a-4c3aa929de73",
+              "createdAt": "2026-07-28T03:23:05.000Z",
+              "updatedAt": "2026-07-28T03:23:05.000Z",
+              "uid": "35240-abe4e8b1-82d9-4a86-b25a-4c3aa929de73"
+            }
+          ],
+          "id": "cfb3fe38-9024-477c-b358-dd14c775c84d",
+          "createdAt": "2026-07-28T03:23:05.000Z",
+          "updatedAt": "2026-07-28T03:23:05.000Z",
+          "uid": "35240-cfb3fe38-9024-477c-b358-dd14c775c84d"
+        }
+      ],
+      "id": "a51dfaba-3846-4fff-96be-ab3c5b24557d",
+      "createdAt": "2026-07-28T03:23:05.000Z",
+      "updatedAt": "2026-07-28T03:23:05.000Z",
+      "uid": "35240-a51dfaba-3846-4fff-96be-ab3c5b24557d"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

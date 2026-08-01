@@ -1,0 +1,376 @@
+{
+  "info": {
+    "_postman_id": "65381e17-3dd9-4c39-86dc-b21253889e33",
+    "name": "Unity Analytics Allocations Settings API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:56.000Z",
+    "updatedAt": "2026-07-28T03:23:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-65381e17-3dd9-4c39-86dc-b21253889e33"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "environments",
+                  "item": [
+                    {
+                      "name": "{environmentId}",
+                      "item": [
+                        {
+                          "name": "configs",
+                          "item": [
+                            {
+                              "name": "{configId}",
+                              "item": [
+                                {
+                                  "name": "settings",
+                                  "item": [
+                                    {
+                                      "name": "List Config Settings",
+                                      "id": "fab7f3ce-d436-4e3f-8786-e6f6e9a85fa2",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/configs/:configId/settings",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "configs",
+                                            ":configId",
+                                            "settings"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "83582b50-c0e8-43c6-b442-b114fbedcb00",
+                                              "key": "projectId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "2892a5d7-ec56-4f98-ab99-d3bc780efd48",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "829e3bdc-7892-4816-8152-f5139126adab",
+                                              "key": "configId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Returns all settings (key-value pairs) in the configuration."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "d6dbdda7-0f1f-4af3-9007-e1ebb5a717ed",
+                                          "name": "Configuration settings",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/configs/:configId/settings",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v1",
+                                                "projects",
+                                                ":projectId",
+                                                "environments",
+                                                ":environmentId",
+                                                "configs",
+                                                ":configId",
+                                                "settings"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "configId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"items\": [\n    {\n      \"key\": \"<string>\",\n      \"type\": \"float\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"type\": \"json\",\n      \"value\": {},\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                                          "createdAt": "2026-07-28T03:23:57.000Z",
+                                          "updatedAt": "2026-07-28T03:23:57.000Z",
+                                          "uid": "35240-d6dbdda7-0f1f-4af3-9007-e1ebb5a717ed"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:23:57.000Z",
+                                      "updatedAt": "2026-07-28T03:23:57.000Z",
+                                      "uid": "35240-fab7f3ce-d436-4e3f-8786-e6f6e9a85fa2"
+                                    },
+                                    {
+                                      "name": "Add Config Setting",
+                                      "id": "b504ed65-8752-451a-bb87-2e8c44f76666",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"key\": \"<string>\",\n  \"type\": \"int\",\n  \"value\": {},\n  \"description\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/configs/:configId/settings",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "configs",
+                                            ":configId",
+                                            "settings"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "d03950a7-1b5d-4482-8866-80f996d82d97",
+                                              "key": "projectId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "156a037a-a0a9-403a-8d03-074ada7e062b",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "612c3660-37cc-43c9-a7c5-083c595c70e7",
+                                              "key": "configId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Adds a new key-value setting to the configuration."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "9be7529e-901d-445f-a8a3-f3bf6789c2ae",
+                                          "name": "Setting added",
+                                          "originalRequest": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"key\": \"<string>\",\n  \"type\": \"int\",\n  \"value\": {},\n  \"description\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/configs/:configId/settings",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v1",
+                                                "projects",
+                                                ":projectId",
+                                                "environments",
+                                                ":environmentId",
+                                                "configs",
+                                                ":configId",
+                                                "settings"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "configId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"key\": \"<string>\",\n  \"type\": \"int\",\n  \"value\": {},\n  \"description\": \"<string>\"\n}",
+                                          "createdAt": "2026-07-28T03:23:57.000Z",
+                                          "updatedAt": "2026-07-28T03:23:57.000Z",
+                                          "uid": "35240-9be7529e-901d-445f-a8a3-f3bf6789c2ae"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:23:57.000Z",
+                                      "updatedAt": "2026-07-28T03:23:57.000Z",
+                                      "uid": "35240-b504ed65-8752-451a-bb87-2e8c44f76666"
+                                    }
+                                  ],
+                                  "id": "da39dc97-140b-4903-9804-9538975fbeb8",
+                                  "createdAt": "2026-07-28T03:23:57.000Z",
+                                  "updatedAt": "2026-07-28T03:23:57.000Z",
+                                  "uid": "35240-da39dc97-140b-4903-9804-9538975fbeb8"
+                                }
+                              ],
+                              "id": "f9454db9-ee8a-4172-b32f-eeb0c44c6e21",
+                              "createdAt": "2026-07-28T03:23:57.000Z",
+                              "updatedAt": "2026-07-28T03:23:57.000Z",
+                              "uid": "35240-f9454db9-ee8a-4172-b32f-eeb0c44c6e21"
+                            }
+                          ],
+                          "id": "a180c12e-e8db-4a63-b79e-c848b1bcbe25",
+                          "createdAt": "2026-07-28T03:23:57.000Z",
+                          "updatedAt": "2026-07-28T03:23:57.000Z",
+                          "uid": "35240-a180c12e-e8db-4a63-b79e-c848b1bcbe25"
+                        }
+                      ],
+                      "id": "d5f5646e-e923-4ca8-af73-99c56cb4be1d",
+                      "createdAt": "2026-07-28T03:23:57.000Z",
+                      "updatedAt": "2026-07-28T03:23:57.000Z",
+                      "uid": "35240-d5f5646e-e923-4ca8-af73-99c56cb4be1d"
+                    }
+                  ],
+                  "id": "89aca4df-1e65-4827-ad59-39febbcd942a",
+                  "createdAt": "2026-07-28T03:23:57.000Z",
+                  "updatedAt": "2026-07-28T03:23:57.000Z",
+                  "uid": "35240-89aca4df-1e65-4827-ad59-39febbcd942a"
+                }
+              ],
+              "id": "665dc1b7-52b1-4ee9-bb7c-e987d4c68dad",
+              "createdAt": "2026-07-28T03:23:57.000Z",
+              "updatedAt": "2026-07-28T03:23:57.000Z",
+              "uid": "35240-665dc1b7-52b1-4ee9-bb7c-e987d4c68dad"
+            }
+          ],
+          "id": "9f1427a1-53aa-40bc-a0a6-771d542f0429",
+          "createdAt": "2026-07-28T03:23:57.000Z",
+          "updatedAt": "2026-07-28T03:23:57.000Z",
+          "uid": "35240-9f1427a1-53aa-40bc-a0a6-771d542f0429"
+        }
+      ],
+      "id": "e2f2ed63-37ab-44f3-9c7e-094cd0410afb",
+      "createdAt": "2026-07-28T03:23:57.000Z",
+      "updatedAt": "2026-07-28T03:23:57.000Z",
+      "uid": "35240-e2f2ed63-37ab-44f3-9c7e-094cd0410afb"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

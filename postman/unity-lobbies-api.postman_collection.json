@@ -1,0 +1,1109 @@
+{
+  "info": {
+    "_postman_id": "1deb8af2-2ab4-4eda-968b-07278e9ab0b4",
+    "name": "Unity Analytics Allocations Lobbies API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:44.000Z",
+    "updatedAt": "2026-07-28T03:23:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1deb8af2-2ab4-4eda-968b-07278e9ab0b4"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "lobbies",
+          "item": [
+            {
+              "name": "{lobbyId}",
+              "item": [
+                {
+                  "name": "join",
+                  "item": [
+                    {
+                      "name": "Join Lobby By ID",
+                      "id": "87be778e-454c-46c5-a73a-04750c2c4b1b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"ametb_8\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/lobbies/:lobbyId/join",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "lobbies",
+                            ":lobbyId",
+                            "join"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d37d55d7-5bc0-48fd-b3c8-bc1e09288272",
+                              "key": "lobbyId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Joins an existing lobby by its unique identifier."
+                      },
+                      "response": [
+                        {
+                          "id": "a11cf048-338b-496f-9705-6b942dda3412",
+                          "name": "Joined lobby successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"ametb_8\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/lobbies/:lobbyId/join",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "lobbies",
+                                ":lobbyId",
+                                "join"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "lobbyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"lobbyCode\": \"<string>\",\n  \"isPrivate\": \"<boolean>\",\n  \"isLocked\": \"<boolean>\",\n  \"maxPlayers\": \"<integer>\",\n  \"availableSlots\": \"<integer>\",\n  \"hostId\": \"<string>\",\n  \"data\": {\n    \"non_97d\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Public\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"data\": {\n        \"culpa_fb\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        },\n        \"dolore_f2\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        },\n        \"eiusmod889\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Public\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"data\": {\n        \"adipisicingc\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Member\",\n          \"index\": \"<string>\"\n        },\n        \"incididunt6b6\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Public\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T03:23:45.000Z",
+                          "updatedAt": "2026-07-28T03:23:45.000Z",
+                          "uid": "35240-a11cf048-338b-496f-9705-6b942dda3412"
+                        },
+                        {
+                          "id": "244ef1bb-2092-413c-9aa6-0a6fab632e61",
+                          "name": "Lobby not found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"ametb_8\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/lobbies/:lobbyId/join",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "lobbies",
+                                ":lobbyId",
+                                "join"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "lobbyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:45.000Z",
+                          "updatedAt": "2026-07-28T03:23:45.000Z",
+                          "uid": "35240-244ef1bb-2092-413c-9aa6-0a6fab632e61"
+                        },
+                        {
+                          "id": "dbe04638-3186-41ba-9c0b-492b1ca9e8d6",
+                          "name": "Lobby is full or not joinable",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"ametb_8\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/lobbies/:lobbyId/join",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "lobbies",
+                                ":lobbyId",
+                                "join"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "lobbyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:45.000Z",
+                          "updatedAt": "2026-07-28T03:23:45.000Z",
+                          "uid": "35240-dbe04638-3186-41ba-9c0b-492b1ca9e8d6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:45.000Z",
+                      "updatedAt": "2026-07-28T03:23:45.000Z",
+                      "uid": "35240-87be778e-454c-46c5-a73a-04750c2c4b1b"
+                    }
+                  ],
+                  "id": "20dd1a9e-6700-4374-a66a-09cfdd9c7d36",
+                  "createdAt": "2026-07-28T03:23:45.000Z",
+                  "updatedAt": "2026-07-28T03:23:45.000Z",
+                  "uid": "35240-20dd1a9e-6700-4374-a66a-09cfdd9c7d36"
+                },
+                {
+                  "name": "heartbeat",
+                  "item": [
+                    {
+                      "name": "Heartbeat Lobby",
+                      "id": "24db3bad-390d-45d2-baf5-030d42f1f5a8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/lobbies/:lobbyId/heartbeat",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "lobbies",
+                            ":lobbyId",
+                            "heartbeat"
+                          ],
+                          "variable": [
+                            {
+                              "id": "18b142dc-aae2-4ed7-a1db-eeead29cca80",
+                              "key": "lobbyId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Sends a heartbeat to keep the lobby active. Lobbies without recent heartbeats are automatically deleted."
+                      },
+                      "response": [
+                        {
+                          "id": "b7cee28a-139e-4cfc-aa36-24570ca24bf0",
+                          "name": "Heartbeat received",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/lobbies/:lobbyId/heartbeat",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "lobbies",
+                                ":lobbyId",
+                                "heartbeat"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "lobbyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:45.000Z",
+                          "updatedAt": "2026-07-28T03:23:45.000Z",
+                          "uid": "35240-b7cee28a-139e-4cfc-aa36-24570ca24bf0"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:45.000Z",
+                      "updatedAt": "2026-07-28T03:23:45.000Z",
+                      "uid": "35240-24db3bad-390d-45d2-baf5-030d42f1f5a8"
+                    }
+                  ],
+                  "id": "92af0827-4ccd-4c58-9fc8-206e0d5aaa30",
+                  "createdAt": "2026-07-28T03:23:45.000Z",
+                  "updatedAt": "2026-07-28T03:23:45.000Z",
+                  "uid": "35240-92af0827-4ccd-4c58-9fc8-206e0d5aaa30"
+                },
+                {
+                  "name": "Get Lobby",
+                  "id": "a6feee9e-066f-4d3e-98ca-51730a8346b7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/lobbies/:lobbyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "lobbies",
+                        ":lobbyId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1d7ffb9d-a854-40d8-bf8b-ede984336611",
+                          "key": "lobbyId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns the current state and configuration of a lobby."
+                  },
+                  "response": [
+                    {
+                      "id": "159da564-846c-4515-8723-51a4bd9129df",
+                      "name": "Lobby details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/lobbies/:lobbyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "lobbies",
+                            ":lobbyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "lobbyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"lobbyCode\": \"<string>\",\n  \"isPrivate\": \"<boolean>\",\n  \"isLocked\": \"<boolean>\",\n  \"maxPlayers\": \"<integer>\",\n  \"availableSlots\": \"<integer>\",\n  \"hostId\": \"<string>\",\n  \"data\": {\n    \"non_97d\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Public\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"data\": {\n        \"culpa_fb\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        },\n        \"dolore_f2\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        },\n        \"eiusmod889\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Public\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"data\": {\n        \"adipisicingc\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Member\",\n          \"index\": \"<string>\"\n        },\n        \"incididunt6b6\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Public\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:23:45.000Z",
+                      "updatedAt": "2026-07-28T03:23:45.000Z",
+                      "uid": "35240-159da564-846c-4515-8723-51a4bd9129df"
+                    },
+                    {
+                      "id": "5f4c7902-d60c-4fe2-a7c4-184427121be9",
+                      "name": "Lobby not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/lobbies/:lobbyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "lobbies",
+                            ":lobbyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "lobbyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:23:45.000Z",
+                      "updatedAt": "2026-07-28T03:23:45.000Z",
+                      "uid": "35240-5f4c7902-d60c-4fe2-a7c4-184427121be9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:23:45.000Z",
+                  "updatedAt": "2026-07-28T03:23:45.000Z",
+                  "uid": "35240-a6feee9e-066f-4d3e-98ca-51730a8346b7"
+                },
+                {
+                  "name": "Update Lobby",
+                  "id": "865e5159-4df2-42da-bf8f-009b62908eaf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": \"<boolean>\",\n  \"isLocked\": \"<boolean>\",\n  \"data\": {\n    \"ad3e\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Member\",\n      \"index\": \"<string>\"\n    },\n    \"sit_7c\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Member\",\n      \"index\": \"<string>\"\n    },\n    \"culpa_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Private\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"hostId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/lobbies/:lobbyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "lobbies",
+                        ":lobbyId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5dc0d917-9e21-4382-94d4-2fed890074d8",
+                          "key": "lobbyId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates lobby configuration and data. Only the lobby host can update the lobby."
+                  },
+                  "response": [
+                    {
+                      "id": "f6c1f0fb-2480-481c-b161-0ee344ffe4e9",
+                      "name": "Lobby updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": \"<boolean>\",\n  \"isLocked\": \"<boolean>\",\n  \"data\": {\n    \"ad3e\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Member\",\n      \"index\": \"<string>\"\n    },\n    \"sit_7c\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Member\",\n      \"index\": \"<string>\"\n    },\n    \"culpa_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Private\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"hostId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/lobbies/:lobbyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "lobbies",
+                            ":lobbyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "lobbyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"lobbyCode\": \"<string>\",\n  \"isPrivate\": \"<boolean>\",\n  \"isLocked\": \"<boolean>\",\n  \"maxPlayers\": \"<integer>\",\n  \"availableSlots\": \"<integer>\",\n  \"hostId\": \"<string>\",\n  \"data\": {\n    \"non_97d\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Public\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"data\": {\n        \"culpa_fb\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        },\n        \"dolore_f2\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        },\n        \"eiusmod889\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Public\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"data\": {\n        \"adipisicingc\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Member\",\n          \"index\": \"<string>\"\n        },\n        \"incididunt6b6\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Public\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:23:45.000Z",
+                      "updatedAt": "2026-07-28T03:23:45.000Z",
+                      "uid": "35240-f6c1f0fb-2480-481c-b161-0ee344ffe4e9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:23:45.000Z",
+                  "updatedAt": "2026-07-28T03:23:45.000Z",
+                  "uid": "35240-865e5159-4df2-42da-bf8f-009b62908eaf"
+                },
+                {
+                  "name": "Delete Lobby",
+                  "id": "2ac94aa8-7096-46c0-b140-10cfcaca92f4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/lobbies/:lobbyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "lobbies",
+                        ":lobbyId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e065256b-7099-4b51-9094-18e5efb1c035",
+                          "key": "lobbyId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Deletes a lobby. Only the host can delete the lobby."
+                  },
+                  "response": [
+                    {
+                      "id": "d457ff6f-43e6-4bba-a608-3b315bb7fce6",
+                      "name": "Lobby deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/lobbies/:lobbyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "lobbies",
+                            ":lobbyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "lobbyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:23:45.000Z",
+                      "updatedAt": "2026-07-28T03:23:45.000Z",
+                      "uid": "35240-d457ff6f-43e6-4bba-a608-3b315bb7fce6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:23:45.000Z",
+                  "updatedAt": "2026-07-28T03:23:45.000Z",
+                  "uid": "35240-2ac94aa8-7096-46c0-b140-10cfcaca92f4"
+                }
+              ],
+              "id": "f15467d1-8beb-4321-b4e4-4b73de48ca27",
+              "createdAt": "2026-07-28T03:23:45.000Z",
+              "updatedAt": "2026-07-28T03:23:45.000Z",
+              "uid": "35240-f15467d1-8beb-4321-b4e4-4b73de48ca27"
+            },
+            {
+              "name": "code",
+              "item": [
+                {
+                  "name": "{lobbyCode}",
+                  "item": [
+                    {
+                      "name": "Join Lobby By Code",
+                      "id": "e01b3478-c56a-446f-be70-d1c1bb789c65",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"ametb_8\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/lobbies/code/:lobbyCode",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "lobbies",
+                            "code",
+                            ":lobbyCode"
+                          ],
+                          "variable": [
+                            {
+                              "id": "595d5f5e-1909-4c4c-8df4-d4572515096f",
+                              "key": "lobbyCode",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Joins a private lobby using a lobby join code shared by the host."
+                      },
+                      "response": [
+                        {
+                          "id": "b7cc5bd6-5ef7-4eac-b0b9-7c979b52da45",
+                          "name": "Joined lobby successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"ametb_8\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/lobbies/code/:lobbyCode",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "lobbies",
+                                "code",
+                                ":lobbyCode"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "lobbyCode"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"lobbyCode\": \"<string>\",\n  \"isPrivate\": \"<boolean>\",\n  \"isLocked\": \"<boolean>\",\n  \"maxPlayers\": \"<integer>\",\n  \"availableSlots\": \"<integer>\",\n  \"hostId\": \"<string>\",\n  \"data\": {\n    \"non_97d\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Public\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"data\": {\n        \"culpa_fb\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        },\n        \"dolore_f2\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        },\n        \"eiusmod889\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Public\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"data\": {\n        \"adipisicingc\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Member\",\n          \"index\": \"<string>\"\n        },\n        \"incididunt6b6\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Public\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T03:23:45.000Z",
+                          "updatedAt": "2026-07-28T03:23:45.000Z",
+                          "uid": "35240-b7cc5bd6-5ef7-4eac-b0b9-7c979b52da45"
+                        },
+                        {
+                          "id": "3f506cfe-dde2-4fa6-8f23-2a75ed506b35",
+                          "name": "Invalid lobby code",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"ametb_8\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/lobbies/code/:lobbyCode",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "lobbies",
+                                "code",
+                                ":lobbyCode"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "lobbyCode"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:45.000Z",
+                          "updatedAt": "2026-07-28T03:23:45.000Z",
+                          "uid": "35240-3f506cfe-dde2-4fa6-8f23-2a75ed506b35"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:45.000Z",
+                      "updatedAt": "2026-07-28T03:23:45.000Z",
+                      "uid": "35240-e01b3478-c56a-446f-be70-d1c1bb789c65"
+                    }
+                  ],
+                  "id": "8755a24d-861a-4db6-b246-3b6307c4d556",
+                  "createdAt": "2026-07-28T03:23:45.000Z",
+                  "updatedAt": "2026-07-28T03:23:45.000Z",
+                  "uid": "35240-8755a24d-861a-4db6-b246-3b6307c4d556"
+                }
+              ],
+              "id": "97751f77-dcab-4b91-8e60-17fc6a360a2a",
+              "createdAt": "2026-07-28T03:23:45.000Z",
+              "updatedAt": "2026-07-28T03:23:45.000Z",
+              "uid": "35240-97751f77-dcab-4b91-8e60-17fc6a360a2a"
+            },
+            {
+              "name": "Create Lobby",
+              "id": "8bceaf85-e9bc-466b-bd79-b96ee2264a40",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": false,\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"amet_c1\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  },\n  \"data\": {\n    \"ut_382\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Private\",\n      \"index\": \"<string>\"\n    },\n    \"esse6\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Public\",\n      \"index\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/lobbies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "lobbies"
+                  ]
+                },
+                "description": "Creates a new lobby with the specified configuration. The requesting player becomes the lobby host."
+              },
+              "response": [
+                {
+                  "id": "98ff7400-faf8-40cd-b5c6-6386a4cee930",
+                  "name": "Lobby created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": false,\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"amet_c1\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  },\n  \"data\": {\n    \"ut_382\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Private\",\n      \"index\": \"<string>\"\n    },\n    \"esse6\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Public\",\n      \"index\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/lobbies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "lobbies"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"lobbyCode\": \"<string>\",\n  \"isPrivate\": \"<boolean>\",\n  \"isLocked\": \"<boolean>\",\n  \"maxPlayers\": \"<integer>\",\n  \"availableSlots\": \"<integer>\",\n  \"hostId\": \"<string>\",\n  \"data\": {\n    \"non_97d\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Public\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"<string>\",\n      \"data\": {\n        \"culpa_fb\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        },\n        \"dolore_f2\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Private\",\n          \"index\": \"<string>\"\n        },\n        \"eiusmod889\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Public\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"data\": {\n        \"adipisicingc\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Member\",\n          \"index\": \"<string>\"\n        },\n        \"incididunt6b6\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"Public\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"<dateTime>\",\n      \"lastUpdated\": \"<dateTime>\"\n    }\n  ],\n  \"created\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:23:45.000Z",
+                  "updatedAt": "2026-07-28T03:23:45.000Z",
+                  "uid": "35240-98ff7400-faf8-40cd-b5c6-6386a4cee930"
+                },
+                {
+                  "id": "642f57e1-6f43-4636-9d99-d3c68bd364f6",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": false,\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"amet_c1\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  },\n  \"data\": {\n    \"ut_382\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Private\",\n      \"index\": \"<string>\"\n    },\n    \"esse6\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Public\",\n      \"index\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/lobbies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "lobbies"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:23:45.000Z",
+                  "updatedAt": "2026-07-28T03:23:45.000Z",
+                  "uid": "35240-642f57e1-6f43-4636-9d99-d3c68bd364f6"
+                },
+                {
+                  "id": "3631599d-e32b-44c1-baab-4454f149b64d",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": false,\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"amet_c1\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"Public\",\n        \"index\": \"<string>\"\n      }\n    }\n  },\n  \"data\": {\n    \"ut_382\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Private\",\n      \"index\": \"<string>\"\n    },\n    \"esse6\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"Public\",\n      \"index\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/lobbies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "lobbies"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:23:45.000Z",
+                  "updatedAt": "2026-07-28T03:23:45.000Z",
+                  "uid": "35240-3631599d-e32b-44c1-baab-4454f149b64d"
+                }
+              ],
+              "createdAt": "2026-07-28T03:23:45.000Z",
+              "updatedAt": "2026-07-28T03:23:45.000Z",
+              "uid": "35240-8bceaf85-e9bc-466b-bd79-b96ee2264a40"
+            }
+          ],
+          "id": "1595652f-72a0-4018-9661-8c7047d12474",
+          "createdAt": "2026-07-28T03:23:45.000Z",
+          "updatedAt": "2026-07-28T03:23:45.000Z",
+          "uid": "35240-1595652f-72a0-4018-9661-8c7047d12474"
+        }
+      ],
+      "id": "44f46808-3478-4386-ad18-2b615f081a6c",
+      "createdAt": "2026-07-28T03:23:45.000Z",
+      "updatedAt": "2026-07-28T03:23:45.000Z",
+      "uid": "35240-44f46808-3478-4386-ad18-2b615f081a6c"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

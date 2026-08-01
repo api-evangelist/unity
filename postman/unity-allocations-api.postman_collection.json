@@ -1,0 +1,323 @@
+{
+  "info": {
+    "_postman_id": "b2971ae1-b169-4033-9270-97d3e560243a",
+    "name": "Unity Analytics Allocations API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:22:58.000Z",
+    "updatedAt": "2026-07-28T03:22:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b2971ae1-b169-4033-9270-97d3e560243a"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "regions",
+                  "item": [
+                    {
+                      "name": "{regionId}",
+                      "item": [
+                        {
+                          "name": "fleets",
+                          "item": [
+                            {
+                              "name": "{fleetId}",
+                              "item": [
+                                {
+                                  "name": "allocations",
+                                  "item": [
+                                    {
+                                      "name": "Allocate Server",
+                                      "id": "8fc33b68-2c8f-44c1-b087-c7ab94ce31f0",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"allocationContext\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/regions/:regionId/fleets/:fleetId/allocations",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "regions",
+                                            ":regionId",
+                                            "fleets",
+                                            ":fleetId",
+                                            "allocations"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "6c5f0fb1-6575-47c8-aec2-18e23c84a0b4",
+                                              "key": "projectId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "a5162fa5-968b-4bd0-8fcf-1328396d4cf8",
+                                              "key": "regionId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "5c6b4f8a-fe59-4d10-b8fb-40da7706d376",
+                                              "key": "fleetId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Allocates an available server from the fleet for a new game session."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "29bcace2-9861-422b-866d-24645f365484",
+                                          "name": "Server allocated",
+                                          "originalRequest": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"allocationContext\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v1/projects/:projectId/regions/:regionId/fleets/:fleetId/allocations",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v1",
+                                                "projects",
+                                                ":projectId",
+                                                "regions",
+                                                ":regionId",
+                                                "fleets",
+                                                ":fleetId",
+                                                "allocations"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "regionId"
+                                                },
+                                                {
+                                                  "key": "fleetId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"allocationID\": \"<uuid>\",\n  \"serverID\": \"<integer>\",\n  \"ip\": \"<string>\",\n  \"port\": \"<integer>\",\n  \"queryPort\": \"<integer>\"\n}",
+                                          "createdAt": "2026-07-28T03:22:59.000Z",
+                                          "updatedAt": "2026-07-28T03:22:59.000Z",
+                                          "uid": "35240-29bcace2-9861-422b-866d-24645f365484"
+                                        },
+                                        {
+                                          "id": "7d2c0055-6d6b-4bdb-bb01-995241701fb9",
+                                          "name": "No servers available",
+                                          "originalRequest": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"allocationContext\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v1/projects/:projectId/regions/:regionId/fleets/:fleetId/allocations",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v1",
+                                                "projects",
+                                                ":projectId",
+                                                "regions",
+                                                ":regionId",
+                                                "fleets",
+                                                ":fleetId",
+                                                "allocations"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "regionId"
+                                                },
+                                                {
+                                                  "key": "fleetId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:22:59.000Z",
+                                          "updatedAt": "2026-07-28T03:22:59.000Z",
+                                          "uid": "35240-7d2c0055-6d6b-4bdb-bb01-995241701fb9"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:22:59.000Z",
+                                      "updatedAt": "2026-07-28T03:22:59.000Z",
+                                      "uid": "35240-8fc33b68-2c8f-44c1-b087-c7ab94ce31f0"
+                                    }
+                                  ],
+                                  "id": "9038dfe6-234d-40f4-834f-dbcccded06a6",
+                                  "createdAt": "2026-07-28T03:22:59.000Z",
+                                  "updatedAt": "2026-07-28T03:22:59.000Z",
+                                  "uid": "35240-9038dfe6-234d-40f4-834f-dbcccded06a6"
+                                }
+                              ],
+                              "id": "caf5cfd8-e0fb-4492-acb0-dabe2aec0836",
+                              "createdAt": "2026-07-28T03:22:59.000Z",
+                              "updatedAt": "2026-07-28T03:22:59.000Z",
+                              "uid": "35240-caf5cfd8-e0fb-4492-acb0-dabe2aec0836"
+                            }
+                          ],
+                          "id": "674d21ff-17a2-468c-9231-26c76f52d839",
+                          "createdAt": "2026-07-28T03:22:59.000Z",
+                          "updatedAt": "2026-07-28T03:22:59.000Z",
+                          "uid": "35240-674d21ff-17a2-468c-9231-26c76f52d839"
+                        }
+                      ],
+                      "id": "c200c6fe-b97f-441d-b8c2-1e63185dd49a",
+                      "createdAt": "2026-07-28T03:22:59.000Z",
+                      "updatedAt": "2026-07-28T03:22:59.000Z",
+                      "uid": "35240-c200c6fe-b97f-441d-b8c2-1e63185dd49a"
+                    }
+                  ],
+                  "id": "599e5ce1-e9fd-47b0-9ff3-d31d08390daf",
+                  "createdAt": "2026-07-28T03:22:59.000Z",
+                  "updatedAt": "2026-07-28T03:22:59.000Z",
+                  "uid": "35240-599e5ce1-e9fd-47b0-9ff3-d31d08390daf"
+                }
+              ],
+              "id": "8a3ae03d-e53a-49de-9d99-63365098d16d",
+              "createdAt": "2026-07-28T03:22:59.000Z",
+              "updatedAt": "2026-07-28T03:22:59.000Z",
+              "uid": "35240-8a3ae03d-e53a-49de-9d99-63365098d16d"
+            }
+          ],
+          "id": "98f66034-2782-4679-81f8-fbff9acb69fb",
+          "createdAt": "2026-07-28T03:22:59.000Z",
+          "updatedAt": "2026-07-28T03:22:59.000Z",
+          "uid": "35240-98f66034-2782-4679-81f8-fbff9acb69fb"
+        }
+      ],
+      "id": "7a9b1f76-9995-47e6-ae61-45ba9c7b8659",
+      "createdAt": "2026-07-28T03:22:59.000Z",
+      "updatedAt": "2026-07-28T03:22:59.000Z",
+      "uid": "35240-7a9b1f76-9995-47e6-ae61-45ba9c7b8659"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

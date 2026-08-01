@@ -1,0 +1,356 @@
+{
+  "info": {
+    "_postman_id": "499f3ffa-d01d-43a5-80a8-8757b8b39adb",
+    "name": "Unity Analytics Allocations Blocks API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:00.000Z",
+    "updatedAt": "2026-07-28T03:23:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-499f3ffa-d01d-43a5-80a8-8757b8b39adb"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "me",
+          "item": [
+            {
+              "name": "relationships",
+              "item": [
+                {
+                  "name": "blocks",
+                  "item": [
+                    {
+                      "name": "List Blocked Players",
+                      "id": "20ac34a0-78e9-4563-b772-18588f95fbdb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/me/relationships/blocks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "me",
+                            "relationships",
+                            "blocks"
+                          ]
+                        },
+                        "description": "Returns all players that the current player has blocked."
+                      },
+                      "response": [
+                        {
+                          "id": "bdb4585c-0b8a-4956-af95-be956f40f33e",
+                          "name": "Blocked players list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/blocks",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                "blocks"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"results\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"FRIEND_REQUEST\",\n      \"member\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"presence\": {\n          \"availability\": \"ONLINE\",\n          \"activity\": {\n            \"status\": \"<string>\"\n          }\n        }\n      },\n      \"created\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"BLOCK\",\n      \"member\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"presence\": {\n          \"availability\": \"BUSY\",\n          \"activity\": {\n            \"status\": \"<string>\"\n          }\n        }\n      },\n      \"created\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:23:01.000Z",
+                          "updatedAt": "2026-07-28T03:23:01.000Z",
+                          "uid": "35240-bdb4585c-0b8a-4956-af95-be956f40f33e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:01.000Z",
+                      "updatedAt": "2026-07-28T03:23:01.000Z",
+                      "uid": "35240-20ac34a0-78e9-4563-b772-18588f95fbdb"
+                    }
+                  ],
+                  "id": "a9fa496d-19dd-408b-898a-00fa7ad55087",
+                  "createdAt": "2026-07-28T03:23:01.000Z",
+                  "updatedAt": "2026-07-28T03:23:01.000Z",
+                  "uid": "35240-a9fa496d-19dd-408b-898a-00fa7ad55087"
+                },
+                {
+                  "name": "{memberId}",
+                  "item": [
+                    {
+                      "name": "block",
+                      "item": [
+                        {
+                          "name": "Block Player",
+                          "id": "4867ef2e-356b-4095-827a-71e67794f18d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/:memberId/block",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                ":memberId",
+                                "block"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d43f4371-9d93-4ad1-a23f-f2d556520010",
+                                  "key": "memberId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Blocks a player, preventing them from sending friend requests or messages."
+                          },
+                          "response": [
+                            {
+                              "id": "a7eba405-c7fc-4e4e-98fd-9ecc4fb788b8",
+                              "name": "Player blocked",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/me/relationships/:memberId/block",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "me",
+                                    "relationships",
+                                    ":memberId",
+                                    "block"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "memberId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"FRIEND_REQUEST\",\n  \"member\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"presence\": {\n      \"availability\": \"OFFLINE\",\n      \"activity\": {\n        \"status\": \"<string>\"\n      }\n    }\n  },\n  \"created\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:23:01.000Z",
+                              "updatedAt": "2026-07-28T03:23:01.000Z",
+                              "uid": "35240-a7eba405-c7fc-4e4e-98fd-9ecc4fb788b8"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:01.000Z",
+                          "updatedAt": "2026-07-28T03:23:01.000Z",
+                          "uid": "35240-4867ef2e-356b-4095-827a-71e67794f18d"
+                        }
+                      ],
+                      "id": "8c4b79ff-cdfd-4ed2-9729-f9dd93bcde77",
+                      "createdAt": "2026-07-28T03:23:01.000Z",
+                      "updatedAt": "2026-07-28T03:23:01.000Z",
+                      "uid": "35240-8c4b79ff-cdfd-4ed2-9729-f9dd93bcde77"
+                    },
+                    {
+                      "name": "unblock",
+                      "item": [
+                        {
+                          "name": "Unblock Player",
+                          "id": "d9856dff-5d1e-402d-9c71-c5f9f3976198",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/me/relationships/:memberId/unblock",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "me",
+                                "relationships",
+                                ":memberId",
+                                "unblock"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f6cc6f7d-c73f-48b9-bf40-3cdb0856c1de",
+                                  "key": "memberId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Unblocks a previously blocked player."
+                          },
+                          "response": [
+                            {
+                              "id": "82d69f49-ee7f-48cc-9262-a72e917449ad",
+                              "name": "Player unblocked",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/me/relationships/:memberId/unblock",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "me",
+                                    "relationships",
+                                    ":memberId",
+                                    "unblock"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "memberId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:23:01.000Z",
+                              "updatedAt": "2026-07-28T03:23:01.000Z",
+                              "uid": "35240-82d69f49-ee7f-48cc-9262-a72e917449ad"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:23:01.000Z",
+                          "updatedAt": "2026-07-28T03:23:01.000Z",
+                          "uid": "35240-d9856dff-5d1e-402d-9c71-c5f9f3976198"
+                        }
+                      ],
+                      "id": "8eae928b-a0c4-4ffa-8e18-c89dfe325cf2",
+                      "createdAt": "2026-07-28T03:23:01.000Z",
+                      "updatedAt": "2026-07-28T03:23:01.000Z",
+                      "uid": "35240-8eae928b-a0c4-4ffa-8e18-c89dfe325cf2"
+                    }
+                  ],
+                  "id": "d589d51a-6cf2-4635-9a18-528df77a57a2",
+                  "createdAt": "2026-07-28T03:23:01.000Z",
+                  "updatedAt": "2026-07-28T03:23:01.000Z",
+                  "uid": "35240-d589d51a-6cf2-4635-9a18-528df77a57a2"
+                }
+              ],
+              "id": "a570e05f-f70e-4add-aca1-72965ea7079d",
+              "createdAt": "2026-07-28T03:23:01.000Z",
+              "updatedAt": "2026-07-28T03:23:01.000Z",
+              "uid": "35240-a570e05f-f70e-4add-aca1-72965ea7079d"
+            }
+          ],
+          "id": "eb356713-4f5a-4a42-912a-2c1d4593465a",
+          "createdAt": "2026-07-28T03:23:01.000Z",
+          "updatedAt": "2026-07-28T03:23:01.000Z",
+          "uid": "35240-eb356713-4f5a-4a42-912a-2c1d4593465a"
+        }
+      ],
+      "id": "b7184b79-eb4f-4782-95d4-18395030e350",
+      "createdAt": "2026-07-28T03:23:01.000Z",
+      "updatedAt": "2026-07-28T03:23:01.000Z",
+      "uid": "35240-b7184b79-eb4f-4782-95d4-18395030e350"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

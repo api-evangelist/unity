@@ -1,0 +1,166 @@
+openapi: 3.0.1
+info:
+  title: Unity Analytics API
+  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Analytics Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+servers:
+  - url: https://analytics.services.api.unity.com
+    description: Unity Analytics Production Server
+tags:
+  - name: Events
+    description: Ingest analytics events
+  - name: Data Export
+    description: Export raw analytics data
+paths:
+  /v1/projects/{projectId}/events:
+    post:
+      operationId: recordEvents
+      summary: Record Analytics Events
+      description: Records one or more analytics events from a game client or server. Events are batched and sent together for efficiency.
+      tags:
+        - Events
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordEventsRequest'
+      responses:
+        '204':
+          description: Events recorded successfully
+        '400':
+          description: Bad Request - malformed events
+        '401':
+          description: Unauthorized
+        '413':
+          description: Payload Too Large
+  /v1/projects/{projectId}/events:validate:
+    post:
+      operationId: validateEvents
+      summary: Validate Analytics Events
+      description: Validates analytics events without recording them. Used to test event schemas before publishing to production.
+      tags:
+        - Events
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordEventsRequest'
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResult'
+components:
+  schemas:
+    RecordEventsRequest:
+      type: object
+      required:
+        - events
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsEvent'
+    AnalyticsEvent:
+      type: object
+      required:
+        - name
+        - eventVersion
+        - eventTimestamp
+        - eventUuid
+        - installationUuid
+        - sessionUuid
+      properties:
+        name:
+          type: string
+          description: Custom event name (e.g., "game_started", "level_completed")
+        eventVersion:
+          type: string
+          description: Version of the event schema
+        eventTimestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the event occurred
+        eventUuid:
+          type: string
+          format: uuid
+          description: Unique event identifier for deduplication
+        installationUuid:
+          type: string
+          format: uuid
+          description: Unique installation identifier
+        sessionUuid:
+          type: string
+          format: uuid
+          description: Unique session identifier
+        parameters:
+          type: object
+          description: Custom event parameters as key-value pairs
+        userProperties:
+          type: object
+          description: User-level properties for segmentation
+        gameStoreVersion:
+          type: string
+        storeType:
+          type: string
+        osVersion:
+          type: string
+        sdkVersion:
+          type: string
+        userId:
+          type: string
+          description: Unity player ID if authenticated
+    ValidationResult:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              eventUuid:
+                type: string
+              valid:
+                type: boolean
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+security:
+  - apiKeyAuth: []

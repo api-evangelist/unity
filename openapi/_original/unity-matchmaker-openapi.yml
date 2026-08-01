@@ -1,0 +1,420 @@
+openapi: 3.0.1
+info:
+  title: Unity Matchmaker API
+  description: The Unity Matchmaker REST API provides endpoints for creating and managing matchmaking tickets, defining matchmaking rules, and configuring match pools and queues. It enables skill-based and attribute-based player matching with low latency for games of all sizes.
+  version: v3.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Matchmaker Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/matchmaker/manual/matchmaker-api
+servers:
+  - url: https://matchmaker.services.api.unity.com
+    description: Unity Matchmaker Production Server
+tags:
+  - name: Tickets
+    description: Create and manage matchmaking tickets
+  - name: Queues
+    description: Configure matchmaking queues and pools
+  - name: Environments
+    description: Manage matchmaker environments
+paths:
+  /v3/projects/{projectId}/environments/{environmentId}/tickets:
+    post:
+      operationId: createTicket
+      summary: Create Matchmaking Ticket
+      description: Creates a matchmaking ticket for a player or group of players. The ticket enters the matchmaking queue and is matched with other players based on configured rules.
+      tags:
+        - Tickets
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTicketRequest'
+      responses:
+        '200':
+          description: Ticket created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketCreated'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+  /v3/projects/{projectId}/environments/{environmentId}/tickets/{ticketId}:
+    get:
+      operationId: getTicket
+      summary: Get Matchmaking Ticket
+      description: Retrieves the current status of a matchmaking ticket. Polls this endpoint to check if a match has been found.
+      tags:
+        - Tickets
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ticket status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketStatus'
+        '404':
+          description: Ticket not found
+    delete:
+      operationId: deleteTicket
+      summary: Delete Matchmaking Ticket
+      description: Cancels and deletes a matchmaking ticket. Used when a player exits the matchmaking queue.
+      tags:
+        - Tickets
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ticket deleted
+        '404':
+          description: Ticket not found
+  /v3/projects/{projectId}/environments/{environmentId}/queues:
+    get:
+      operationId: listQueues
+      summary: List Matchmaking Queues
+      description: Returns all configured matchmaking queues for the environment.
+      tags:
+        - Queues
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of queues
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueList'
+    post:
+      operationId: createQueue
+      summary: Create Matchmaking Queue
+      description: Creates a new matchmaking queue with specified rules and pool configuration.
+      tags:
+        - Queues
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateQueueRequest'
+      responses:
+        '200':
+          description: Queue created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+  /v3/projects/{projectId}/environments/{environmentId}/queues/{queueName}:
+    get:
+      operationId: getQueue
+      summary: Get Matchmaking Queue
+      description: Returns configuration and status for a specific matchmaking queue.
+      tags:
+        - Queues
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: queueName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Queue details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+        '404':
+          description: Queue not found
+    put:
+      operationId: updateQueue
+      summary: Update Matchmaking Queue
+      description: Updates the configuration of an existing matchmaking queue.
+      tags:
+        - Queues
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: queueName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateQueueRequest'
+      responses:
+        '200':
+          description: Queue updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+    delete:
+      operationId: deleteQueue
+      summary: Delete Matchmaking Queue
+      description: Deletes a matchmaking queue and all its configuration.
+      tags:
+        - Queues
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: queueName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Queue deleted
+components:
+  schemas:
+    CreateTicketRequest:
+      type: object
+      required:
+        - players
+        - queueName
+      properties:
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+          description: Players to include in the matchmaking ticket
+        queueName:
+          type: string
+          description: Name of the matchmaking queue to enter
+        attributes:
+          $ref: '#/components/schemas/TicketAttributes'
+    Player:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Unity player ID
+        attributes:
+          type: object
+          description: Player-specific attributes for matchmaking
+    TicketAttributes:
+      type: object
+      properties:
+        skill:
+          type: number
+          description: Player skill rating for skill-based matchmaking
+        attributes:
+          type: object
+          additionalProperties: {}
+    TicketCreated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ticket identifier
+    TicketStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+            - InProgress
+            - Found
+            - Failed
+          description: Current ticket status
+        assignment:
+          $ref: '#/components/schemas/MatchAssignment'
+    MatchAssignment:
+      type: object
+      properties:
+        connection:
+          type: string
+          description: Server connection string for the matched game
+        payload:
+          type: object
+          description: Additional match data
+    Queue:
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    QueueList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Queue'
+    CreateQueueRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+          default: true
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+    UpdateQueueRequest:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+    EscalationRules:
+      type: object
+      properties:
+        timeoutSeconds:
+          type: integer
+        backfillEnabled:
+          type: boolean
+    Pool:
+      type: object
+      properties:
+        name:
+          type: string
+        maximumPlayerCount:
+          type: integer
+        minimumPlayerCount:
+          type: integer
+        matchLogic:
+          $ref: '#/components/schemas/MatchLogic'
+    MatchLogic:
+      type: object
+      properties:
+        name:
+          type: string
+        script:
+          type: string
+          description: MMScript for match rules
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

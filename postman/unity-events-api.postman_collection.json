@@ -1,0 +1,477 @@
+{
+  "info": {
+    "_postman_id": "3c5b76fd-528e-4cdf-b5b6-4b8cf33ebeb9",
+    "name": "Unity Analytics Allocations Events API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:24.000Z",
+    "updatedAt": "2026-07-28T03:23:24.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3c5b76fd-528e-4cdf-b5b6-4b8cf33ebeb9"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "events",
+                  "item": [
+                    {
+                      "name": "Record Analytics Events",
+                      "id": "5805d17c-c3be-4e8d-a651-c04bd3a4437d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"events\": [\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:projectId/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":projectId",
+                            "events"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4a56d5fe-fc63-4960-a052-25ef1ad3435e",
+                              "key": "projectId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Records one or more analytics events from a game client or server. Events are batched and sent together for efficiency."
+                      },
+                      "response": [
+                        {
+                          "id": "287cb360-7ffe-4dad-9931-17c7496c640a",
+                          "name": "Events recorded successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"events\": [\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/events",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "events"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:24.000Z",
+                          "updatedAt": "2026-07-28T03:23:24.000Z",
+                          "uid": "35240-287cb360-7ffe-4dad-9931-17c7496c640a"
+                        },
+                        {
+                          "id": "a9e6c559-f4cd-4cfa-9b08-f83c8fa29d46",
+                          "name": "Bad Request - malformed events",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"events\": [\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/events",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "events"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:24.000Z",
+                          "updatedAt": "2026-07-28T03:23:24.000Z",
+                          "uid": "35240-a9e6c559-f4cd-4cfa-9b08-f83c8fa29d46"
+                        },
+                        {
+                          "id": "edd0fb35-2677-4f3b-a470-7fb182b6e788",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"events\": [\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/events",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "events"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:24.000Z",
+                          "updatedAt": "2026-07-28T03:23:24.000Z",
+                          "uid": "35240-edd0fb35-2677-4f3b-a470-7fb182b6e788"
+                        },
+                        {
+                          "id": "8d522421-596d-4d63-87ef-cd425e52a8e4",
+                          "name": "Payload Too Large",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"events\": [\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/events",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "events"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Request Entity Too Large",
+                          "code": 413,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:23:24.000Z",
+                          "updatedAt": "2026-07-28T03:23:24.000Z",
+                          "uid": "35240-8d522421-596d-4d63-87ef-cd425e52a8e4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:24.000Z",
+                      "updatedAt": "2026-07-28T03:23:24.000Z",
+                      "uid": "35240-5805d17c-c3be-4e8d-a651-c04bd3a4437d"
+                    }
+                  ],
+                  "id": "d938373a-ddb3-4607-9bb1-981429d951c5",
+                  "createdAt": "2026-07-28T03:23:24.000Z",
+                  "updatedAt": "2026-07-28T03:23:24.000Z",
+                  "uid": "35240-d938373a-ddb3-4607-9bb1-981429d951c5"
+                },
+                {
+                  "name": "events:validate",
+                  "item": [
+                    {
+                      "name": "Validate Analytics Events",
+                      "id": "cd3a3c83-b61c-4923-a298-9d47f0b181f6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"events\": [\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:projectId/events:validate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":projectId",
+                            "events:validate"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2fd5199a-049f-40ba-a958-56f80d9bd969",
+                              "key": "projectId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Validates analytics events without recording them. Used to test event schemas before publishing to production."
+                      },
+                      "response": [
+                        {
+                          "id": "55c99491-46d9-4757-8edf-92126b67682f",
+                          "name": "Validation result",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"events\": [\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"eventVersion\": \"<string>\",\n      \"eventTimestamp\": \"<dateTime>\",\n      \"eventUuid\": \"<uuid>\",\n      \"installationUuid\": \"<uuid>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"parameters\": {},\n      \"userProperties\": {},\n      \"gameStoreVersion\": \"<string>\",\n      \"storeType\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"sdkVersion\": \"<string>\",\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:projectId/events:validate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":projectId",
+                                "events:validate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "projectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"events\": [\n    {\n      \"eventUuid\": \"<string>\",\n      \"valid\": \"<boolean>\",\n      \"errors\": [\n        {\n          \"field\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"message\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"eventUuid\": \"<string>\",\n      \"valid\": \"<boolean>\",\n      \"errors\": [\n        {\n          \"field\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"message\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:23:24.000Z",
+                          "updatedAt": "2026-07-28T03:23:24.000Z",
+                          "uid": "35240-55c99491-46d9-4757-8edf-92126b67682f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:23:24.000Z",
+                      "updatedAt": "2026-07-28T03:23:24.000Z",
+                      "uid": "35240-cd3a3c83-b61c-4923-a298-9d47f0b181f6"
+                    }
+                  ],
+                  "id": "fdf6aaf7-29c7-4fcb-80d1-38e497cce726",
+                  "createdAt": "2026-07-28T03:23:24.000Z",
+                  "updatedAt": "2026-07-28T03:23:24.000Z",
+                  "uid": "35240-fdf6aaf7-29c7-4fcb-80d1-38e497cce726"
+                }
+              ],
+              "id": "026e0800-232d-4324-99cd-52fa0eef174c",
+              "createdAt": "2026-07-28T03:23:24.000Z",
+              "updatedAt": "2026-07-28T03:23:24.000Z",
+              "uid": "35240-026e0800-232d-4324-99cd-52fa0eef174c"
+            }
+          ],
+          "id": "f9fc62d0-450b-4b06-83c6-91406d964340",
+          "createdAt": "2026-07-28T03:23:24.000Z",
+          "updatedAt": "2026-07-28T03:23:24.000Z",
+          "uid": "35240-f9fc62d0-450b-4b06-83c6-91406d964340"
+        }
+      ],
+      "id": "c9f03b6f-ce32-41ad-8c38-3a461c3ddbc3",
+      "createdAt": "2026-07-28T03:23:24.000Z",
+      "updatedAt": "2026-07-28T03:23:24.000Z",
+      "uid": "35240-c9f03b6f-ce32-41ad-8c38-3a461c3ddbc3"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

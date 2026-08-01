@@ -1,0 +1,389 @@
+openapi: 3.0.1
+info:
+  title: Unity Player Authentication API
+  description: The Unity Player Authentication REST API verifies player identity and manages authentication workflows. It provides endpoints for anonymous sign-in, platform-specific authentication (Google, Apple, Steam, Facebook), custom identity provider integration, token refresh, and account linking. Supports both the player-facing authentication flow and admin operations for player management.
+  version: v1.0.0
+  termsOfService: https://unity.com/legal/terms-of-service
+  contact:
+    name: Unity Support
+    url: https://support.unity.com
+  license:
+    name: Unity Terms of Service
+    url: https://unity.com/legal/terms-of-service
+externalDocs:
+  description: Unity Player Authentication Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
+servers:
+  - url: https://player-auth.services.api.unity.com
+    description: Unity Player Authentication Production Server
+tags:
+  - name: Authentication
+    description: Player sign-in and token management
+  - name: Players
+    description: Player account management
+  - name: Identity Providers
+    description: External identity provider linking
+paths:
+  /v1/authentication/anonymous:
+    post:
+      operationId: signInAnonymously
+      summary: Sign In Anonymously
+      description: Signs in a player anonymously and returns an access token. Creates a new player account if the session ID does not match any existing player.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnonymousSignInRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+  /v1/authentication/usernamepassword/sign-in:
+    post:
+      operationId: signInWithUsernamePassword
+      summary: Sign In With Username and Password
+      description: Authenticates a player using their username and password credentials.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernamePasswordSignInRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Invalid credentials
+  /v1/authentication/usernamepassword/sign-up:
+    post:
+      operationId: signUpWithUsernamePassword
+      summary: Sign Up With Username and Password
+      description: Creates a new player account with username and password credentials.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernamePasswordSignUpRequest'
+      responses:
+        '200':
+          description: Account created and signed in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Bad Request - invalid or duplicate username
+  /v1/authentication/external-token:
+    post:
+      operationId: signInWithExternalToken
+      summary: Sign In With External Token
+      description: Authenticates a player using a token from an external identity provider such as Google, Apple, Steam, Facebook, or a custom provider.
+      tags:
+        - Authentication
+        - Identity Providers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalTokenSignInRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Invalid external token
+  /v1/token/refresh:
+    post:
+      operationId: refreshToken
+      summary: Refresh Authentication Token
+      description: Exchanges a refresh token for a new access token without requiring the player to re-authenticate.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: New access token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Invalid or expired refresh token
+  /v1/players:
+    get:
+      operationId: listPlayers
+      summary: List Players
+      description: Returns a paginated list of all players for the project. Admin operation.
+      tags:
+        - Players
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+        - name: after
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of players
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerList'
+        '401':
+          description: Unauthorized
+  /v1/players/{playerId}:
+    get:
+      operationId: getPlayer
+      summary: Get Player
+      description: Returns information about a specific player.
+      tags:
+        - Players
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Player details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '404':
+          description: Player not found
+    delete:
+      operationId: deletePlayer
+      summary: Delete Player
+      description: Deletes a player account and all associated data.
+      tags:
+        - Players
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Player deleted
+        '404':
+          description: Player not found
+  /v1/players/{playerId}/link/external-token:
+    post:
+      operationId: linkExternalIdentity
+      summary: Link External Identity
+      description: Links an external identity provider to an existing player account.
+      tags:
+        - Identity Providers
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalTokenSignInRequest'
+      responses:
+        '200':
+          description: Identity linked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '409':
+          description: Identity already linked to another account
+  /v1/players/{playerId}/unlink/external-token:
+    post:
+      operationId: unlinkExternalIdentity
+      summary: Unlink External Identity
+      description: Removes a linked external identity provider from a player account.
+      tags:
+        - Identity Providers
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnlinkIdentityRequest'
+      responses:
+        '200':
+          description: Identity unlinked
+        '404':
+          description: Identity not found
+components:
+  schemas:
+    AnonymousSignInRequest:
+      type: object
+      required:
+        - sessionTokens
+      properties:
+        sessionTokens:
+          type: array
+          items:
+            type: string
+          description: List of session tokens for anonymous sign-in continuity
+    UsernamePasswordSignInRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    UsernamePasswordSignUpRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          minLength: 3
+          maxLength: 20
+        password:
+          type: string
+          minLength: 8
+    ExternalTokenSignInRequest:
+      type: object
+      required:
+        - idProvider
+        - token
+      properties:
+        idProvider:
+          type: string
+          enum:
+            - google
+            - apple
+            - steam
+            - facebook
+            - custom
+          description: The external identity provider
+        token:
+          type: string
+          description: The identity token from the external provider
+        signInOnly:
+          type: boolean
+          description: If true, only sign in and do not create a new account
+    RefreshTokenRequest:
+      type: object
+      required:
+        - refreshToken
+      properties:
+        refreshToken:
+          type: string
+    AuthResponse:
+      type: object
+      properties:
+        idToken:
+          type: string
+          description: JWT access token
+        sessionToken:
+          type: string
+        expiresIn:
+          type: integer
+          description: Token expiry in seconds
+        userId:
+          type: string
+        isNew:
+          type: boolean
+          description: True if a new account was created
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          type: array
+          items:
+            type: object
+            properties:
+              providerId:
+                type: string
+              externalId:
+                type: string
+        disabled:
+          type: boolean
+        lastLoginDate:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+    PlayerList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+        next:
+          type: string
+    UnlinkIdentityRequest:
+      type: object
+      required:
+        - idProvider
+      properties:
+        idProvider:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    serviceAccountAuth:
+      type: http
+      scheme: basic
+security:
+  - bearerAuth: []

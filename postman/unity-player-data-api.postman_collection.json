@@ -1,0 +1,640 @@
+{
+  "info": {
+    "_postman_id": "2f4651fb-f123-4a6a-b54f-014d23ff22c4",
+    "name": "Unity Analytics Allocations Player Data API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:48.000Z",
+    "updatedAt": "2026-07-28T03:23:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2f4651fb-f123-4a6a-b54f-014d23ff22c4"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "data",
+          "item": [
+            {
+              "name": "projects",
+              "item": [
+                {
+                  "name": "{projectId}",
+                  "item": [
+                    {
+                      "name": "players",
+                      "item": [
+                        {
+                          "name": "{playerId}",
+                          "item": [
+                            {
+                              "name": "items",
+                              "item": [
+                                {
+                                  "name": "{key}",
+                                  "item": [
+                                    {
+                                      "name": "Delete Player Data Item",
+                                      "id": "264898a5-aefb-4071-b84f-22fd71d845cc",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/data/projects/:projectId/players/:playerId/items/:key",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "data",
+                                            "projects",
+                                            ":projectId",
+                                            "players",
+                                            ":playerId",
+                                            "items",
+                                            ":key"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "05cc1d7a-654d-466f-ba00-fae4b641c72d",
+                                              "key": "projectId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "03afd0d7-d4f3-45cb-ba9f-8ee985b3a238",
+                                              "key": "playerId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "8a63145c-4dd5-43ba-90b9-801933f72ce9",
+                                              "key": "key",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Deletes a specific data item by key for a player."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "b5081adb-3fb4-44ac-8416-a48bdcc679b5",
+                                          "name": "Item deleted",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v1/data/projects/:projectId/players/:playerId/items/:key",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v1",
+                                                "data",
+                                                "projects",
+                                                ":projectId",
+                                                "players",
+                                                ":playerId",
+                                                "items",
+                                                ":key"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "playerId"
+                                                },
+                                                {
+                                                  "key": "key"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "No Content",
+                                          "code": 204,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:23:48.000Z",
+                                          "updatedAt": "2026-07-28T03:23:48.000Z",
+                                          "uid": "35240-b5081adb-3fb4-44ac-8416-a48bdcc679b5"
+                                        },
+                                        {
+                                          "id": "1bc3c6f2-808b-481c-b728-21dd9a85c864",
+                                          "name": "Item not found",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "x-api-key",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/v1/data/projects/:projectId/players/:playerId/items/:key",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "v1",
+                                                "data",
+                                                "projects",
+                                                ":projectId",
+                                                "players",
+                                                ":playerId",
+                                                "items",
+                                                ":key"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "projectId"
+                                                },
+                                                {
+                                                  "key": "playerId"
+                                                },
+                                                {
+                                                  "key": "key"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:23:48.000Z",
+                                          "updatedAt": "2026-07-28T03:23:48.000Z",
+                                          "uid": "35240-1bc3c6f2-808b-481c-b728-21dd9a85c864"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:23:48.000Z",
+                                      "updatedAt": "2026-07-28T03:23:48.000Z",
+                                      "uid": "35240-264898a5-aefb-4071-b84f-22fd71d845cc"
+                                    }
+                                  ],
+                                  "id": "8cb1f6af-e47a-4678-ac3f-b1aacf14f6e5",
+                                  "createdAt": "2026-07-28T03:23:48.000Z",
+                                  "updatedAt": "2026-07-28T03:23:48.000Z",
+                                  "uid": "35240-8cb1f6af-e47a-4678-ac3f-b1aacf14f6e5"
+                                },
+                                {
+                                  "name": "Set Player Data Items",
+                                  "id": "7bf9b185-deba-4b8b-aa9b-c8861fd243de",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"data\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"writeLock\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"writeLock\": \"<string>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/data/projects/:projectId/players/:playerId/items",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "data",
+                                        "projects",
+                                        ":projectId",
+                                        "players",
+                                        ":playerId",
+                                        "items"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "199b3af6-25cb-4ab0-b753-055dd1715f66",
+                                          "key": "projectId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "9c87444f-a288-47f6-8860-58f8cef8e015",
+                                          "key": "playerId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Creates or updates one or more key-value data items for a player. Supports optimistic concurrency via write locks."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "82eaed68-cafb-4bbd-8421-5ffbe86e646c",
+                                      "name": "Data items saved",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"data\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"writeLock\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"writeLock\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/data/projects/:projectId/players/:playerId/items",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "data",
+                                            "projects",
+                                            ":projectId",
+                                            "players",
+                                            ":playerId",
+                                            "items"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "playerId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"results\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {\n        \"description\": \"Data value (any JSON-serializable value)\"\n      },\n      \"writeLock\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {\n        \"description\": \"Data value (any JSON-serializable value)\"\n      },\n      \"writeLock\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"<string>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:23:48.000Z",
+                                      "updatedAt": "2026-07-28T03:23:48.000Z",
+                                      "uid": "35240-82eaed68-cafb-4bbd-8421-5ffbe86e646c"
+                                    },
+                                    {
+                                      "id": "9bed8cc4-0984-4168-a239-51c24aaef754",
+                                      "name": "Bad Request",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"data\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"writeLock\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"writeLock\": \"<string>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/data/projects/:projectId/players/:playerId/items",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "data",
+                                            "projects",
+                                            ":projectId",
+                                            "players",
+                                            ":playerId",
+                                            "items"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "playerId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:23:48.000Z",
+                                      "updatedAt": "2026-07-28T03:23:48.000Z",
+                                      "uid": "35240-9bed8cc4-0984-4168-a239-51c24aaef754"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:48.000Z",
+                                  "updatedAt": "2026-07-28T03:23:48.000Z",
+                                  "uid": "35240-7bf9b185-deba-4b8b-aa9b-c8861fd243de"
+                                }
+                              ],
+                              "id": "66f849b7-fac3-41f4-a17e-52e4d669b11d",
+                              "createdAt": "2026-07-28T03:23:48.000Z",
+                              "updatedAt": "2026-07-28T03:23:48.000Z",
+                              "uid": "35240-66f849b7-fac3-41f4-a17e-52e4d669b11d"
+                            },
+                            {
+                              "name": "Get Player Data",
+                              "id": "c9d010bd-007d-4384-a340-c849fb704732",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/data/projects/:projectId/players/:playerId?keys=<string>&keys=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "data",
+                                    "projects",
+                                    ":projectId",
+                                    "players",
+                                    ":playerId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter by specific keys",
+                                      "key": "keys",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Filter by specific keys",
+                                      "key": "keys",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "a0170045-2753-433c-8b62-d011826723db",
+                                      "key": "projectId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "94f0afa3-e2a9-47b3-9610-462011fefe7d",
+                                      "key": "playerId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Returns all data items stored for the specified player."
+                              },
+                              "response": [
+                                {
+                                  "id": "d857163f-3e4b-486e-9ed9-45a8f2b67f1e",
+                                  "name": "Player data items",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/data/projects/:projectId/players/:playerId?keys=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "data",
+                                        "projects",
+                                        ":projectId",
+                                        "players",
+                                        ":playerId"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Filter by specific keys",
+                                          "key": "keys",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "playerId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"results\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {\n        \"description\": \"Data value (any JSON-serializable value)\"\n      },\n      \"writeLock\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {\n        \"description\": \"Data value (any JSON-serializable value)\"\n      },\n      \"writeLock\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"modified\": \"<dateTime>\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:23:48.000Z",
+                                  "updatedAt": "2026-07-28T03:23:48.000Z",
+                                  "uid": "35240-d857163f-3e4b-486e-9ed9-45a8f2b67f1e"
+                                },
+                                {
+                                  "id": "40ec0ade-8bb7-4678-8c7a-f48121cbcedd",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/data/projects/:projectId/players/:playerId?keys=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "data",
+                                        "projects",
+                                        ":projectId",
+                                        "players",
+                                        ":playerId"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Filter by specific keys",
+                                          "key": "keys",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "playerId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:23:48.000Z",
+                                  "updatedAt": "2026-07-28T03:23:48.000Z",
+                                  "uid": "35240-40ec0ade-8bb7-4678-8c7a-f48121cbcedd"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:23:48.000Z",
+                              "updatedAt": "2026-07-28T03:23:48.000Z",
+                              "uid": "35240-c9d010bd-007d-4384-a340-c849fb704732"
+                            }
+                          ],
+                          "id": "46c95735-13c0-4912-bd61-4f9fc7533b0e",
+                          "createdAt": "2026-07-28T03:23:48.000Z",
+                          "updatedAt": "2026-07-28T03:23:48.000Z",
+                          "uid": "35240-46c95735-13c0-4912-bd61-4f9fc7533b0e"
+                        }
+                      ],
+                      "id": "263c0df1-78e0-4b8e-be40-ee4fa95161c4",
+                      "createdAt": "2026-07-28T03:23:48.000Z",
+                      "updatedAt": "2026-07-28T03:23:48.000Z",
+                      "uid": "35240-263c0df1-78e0-4b8e-be40-ee4fa95161c4"
+                    }
+                  ],
+                  "id": "7f01f627-88ef-4421-9994-6c3357022571",
+                  "createdAt": "2026-07-28T03:23:48.000Z",
+                  "updatedAt": "2026-07-28T03:23:48.000Z",
+                  "uid": "35240-7f01f627-88ef-4421-9994-6c3357022571"
+                }
+              ],
+              "id": "cd33e5c8-0936-437c-b3e5-856718b995ce",
+              "createdAt": "2026-07-28T03:23:48.000Z",
+              "updatedAt": "2026-07-28T03:23:48.000Z",
+              "uid": "35240-cd33e5c8-0936-437c-b3e5-856718b995ce"
+            }
+          ],
+          "id": "87dac916-19e8-4795-b789-7891ce9ed673",
+          "createdAt": "2026-07-28T03:23:48.000Z",
+          "updatedAt": "2026-07-28T03:23:48.000Z",
+          "uid": "35240-87dac916-19e8-4795-b789-7891ce9ed673"
+        }
+      ],
+      "id": "042e7fc4-1c31-4913-905e-d55670b2029f",
+      "createdAt": "2026-07-28T03:23:48.000Z",
+      "updatedAt": "2026-07-28T03:23:48.000Z",
+      "uid": "35240-042e7fc4-1c31-4913-905e-d55670b2029f"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

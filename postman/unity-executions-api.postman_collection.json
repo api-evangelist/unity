@@ -1,0 +1,347 @@
+{
+  "info": {
+    "_postman_id": "6eb1f10d-e223-4bd4-b422-9ee15556c8af",
+    "name": "Unity Analytics Allocations Executions API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:25.000Z",
+    "updatedAt": "2026-07-28T03:23:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6eb1f10d-e223-4bd4-b422-9ee15556c8af"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "scripts",
+                  "item": [
+                    {
+                      "name": "{scriptName}",
+                      "item": [
+                        {
+                          "name": "run",
+                          "item": [
+                            {
+                              "name": "Run Script",
+                              "id": "71b93a78-8952-4e58-88f2-8b2f2bb738de",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"params\": {}\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName/run",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "scripts",
+                                    ":scriptName",
+                                    "run"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "4fda9001-59fa-4315-a6a3-7db487df3739",
+                                      "key": "projectId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "4af4701b-7e90-4079-ae2a-fb1748c50182",
+                                      "key": "scriptName",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Executes a Cloud Code script with the provided parameters. The script runs asynchronously and returns the result."
+                              },
+                              "response": [
+                                {
+                                  "id": "f2d34cfe-e3cd-43df-8993-45616d0bd520",
+                                  "name": "Script execution result",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"params\": {}\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName/run",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "scripts",
+                                        ":scriptName",
+                                        "run"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "scriptName"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"output\": {\n    \"description\": \"The return value from the script\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:23:25.000Z",
+                                  "updatedAt": "2026-07-28T03:23:25.000Z",
+                                  "uid": "35240-f2d34cfe-e3cd-43df-8993-45616d0bd520"
+                                },
+                                {
+                                  "id": "88afae2f-35c5-4498-8449-d8a7869463c6",
+                                  "name": "Bad Request",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"params\": {}\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName/run",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "scripts",
+                                        ":scriptName",
+                                        "run"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "scriptName"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:23:25.000Z",
+                                  "updatedAt": "2026-07-28T03:23:25.000Z",
+                                  "uid": "35240-88afae2f-35c5-4498-8449-d8a7869463c6"
+                                },
+                                {
+                                  "id": "1c8b96f3-7c5b-456f-8cd1-5d9a403475ab",
+                                  "name": "Script not found",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"params\": {}\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/scripts/:scriptName/run",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "scripts",
+                                        ":scriptName",
+                                        "run"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "scriptName"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:23:25.000Z",
+                                  "updatedAt": "2026-07-28T03:23:25.000Z",
+                                  "uid": "35240-1c8b96f3-7c5b-456f-8cd1-5d9a403475ab"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:23:25.000Z",
+                              "updatedAt": "2026-07-28T03:23:25.000Z",
+                              "uid": "35240-71b93a78-8952-4e58-88f2-8b2f2bb738de"
+                            }
+                          ],
+                          "id": "62307149-d364-41ab-95e6-eb413cec2fb5",
+                          "createdAt": "2026-07-28T03:23:25.000Z",
+                          "updatedAt": "2026-07-28T03:23:25.000Z",
+                          "uid": "35240-62307149-d364-41ab-95e6-eb413cec2fb5"
+                        }
+                      ],
+                      "id": "4ff48c6c-de7a-46ea-beae-4a165da2e9b9",
+                      "createdAt": "2026-07-28T03:23:25.000Z",
+                      "updatedAt": "2026-07-28T03:23:25.000Z",
+                      "uid": "35240-4ff48c6c-de7a-46ea-beae-4a165da2e9b9"
+                    }
+                  ],
+                  "id": "4fe1e7d2-20f0-4154-8319-cdd08447d492",
+                  "createdAt": "2026-07-28T03:23:25.000Z",
+                  "updatedAt": "2026-07-28T03:23:25.000Z",
+                  "uid": "35240-4fe1e7d2-20f0-4154-8319-cdd08447d492"
+                }
+              ],
+              "id": "87203ea2-4309-45b6-acd2-4abbdcd30745",
+              "createdAt": "2026-07-28T03:23:25.000Z",
+              "updatedAt": "2026-07-28T03:23:25.000Z",
+              "uid": "35240-87203ea2-4309-45b6-acd2-4abbdcd30745"
+            }
+          ],
+          "id": "1a1398d5-7c1e-45d1-9f98-458663d8b00d",
+          "createdAt": "2026-07-28T03:23:25.000Z",
+          "updatedAt": "2026-07-28T03:23:25.000Z",
+          "uid": "35240-1a1398d5-7c1e-45d1-9f98-458663d8b00d"
+        }
+      ],
+      "id": "2bfa5c39-c11e-4b98-8290-465e29b1bfca",
+      "createdAt": "2026-07-28T03:23:25.000Z",
+      "updatedAt": "2026-07-28T03:23:25.000Z",
+      "uid": "35240-2bfa5c39-c11e-4b98-8290-465e29b1bfca"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}

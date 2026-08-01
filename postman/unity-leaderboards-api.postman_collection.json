@@ -1,0 +1,1063 @@
+{
+  "info": {
+    "_postman_id": "58461b54-c2cf-4025-ad82-90592e16424e",
+    "name": "Unity Analytics Allocations Leaderboards API",
+    "description": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:23:43.000Z",
+    "updatedAt": "2026-07-28T03:23:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-58461b54-c2cf-4025-ad82-90592e16424e"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{projectId}",
+              "item": [
+                {
+                  "name": "environments",
+                  "item": [
+                    {
+                      "name": "{environmentId}",
+                      "item": [
+                        {
+                          "name": "leaderboards",
+                          "item": [
+                            {
+                              "name": "{leaderboardId}",
+                              "item": [
+                                {
+                                  "name": "Get Leaderboard",
+                                  "id": "eb917620-e4ba-49f6-9e58-6ce8f042304a",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "leaderboards",
+                                        ":leaderboardId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "007f0666-1f3d-4614-bb35-688fe7108aed",
+                                          "key": "projectId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "d9d91eb1-bbea-405b-b750-1b14d2575fc1",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "eb5d6eae-4cf0-425d-ac6e-518396a727a8",
+                                          "key": "leaderboardId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Returns configuration details for a specific leaderboard."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "66d0b4b7-5d3f-4624-9bb9-dfa9077ba6fb",
+                                      "name": "Leaderboard details",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "leaderboards",
+                                            ":leaderboardId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "leaderboardId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"sortOrder\": \"asc\",\n  \"bucketSize\": \"<number>\",\n  \"resetConfig\": {\n    \"start\": \"<dateTime>\",\n    \"schedule\": \"<string>\",\n    \"archive\": \"<boolean>\"\n  },\n  \"tieringConfig\": {\n    \"strategy\": \"score\",\n    \"tiers\": [\n      {\n        \"id\": \"<string>\",\n        \"cutoff\": \"<number>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"cutoff\": \"<number>\"\n      }\n    ]\n  },\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T03:23:44.000Z",
+                                      "updatedAt": "2026-07-28T03:23:44.000Z",
+                                      "uid": "35240-66d0b4b7-5d3f-4624-9bb9-dfa9077ba6fb"
+                                    },
+                                    {
+                                      "id": "dc007ab9-fd91-4c77-8eee-bb1f6eb33d8c",
+                                      "name": "Not Found",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "leaderboards",
+                                            ":leaderboardId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "leaderboardId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:23:44.000Z",
+                                      "updatedAt": "2026-07-28T03:23:44.000Z",
+                                      "uid": "35240-dc007ab9-fd91-4c77-8eee-bb1f6eb33d8c"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:44.000Z",
+                                  "updatedAt": "2026-07-28T03:23:44.000Z",
+                                  "uid": "35240-eb917620-e4ba-49f6-9e58-6ce8f042304a"
+                                },
+                                {
+                                  "name": "Update Leaderboard",
+                                  "id": "414a97c7-88d1-4683-8842-661c8d7b4e18",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\",\n  \"sortOrder\": \"desc\",\n  \"resetConfig\": {\n    \"start\": \"<dateTime>\",\n    \"schedule\": \"<string>\",\n    \"archive\": \"<boolean>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "leaderboards",
+                                        ":leaderboardId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "80e2aa43-236c-4ffe-81a1-904a3a104523",
+                                          "key": "projectId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "11d95052-255e-40d2-9eb8-3e7a0169355c",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "725cc483-e090-4c0b-8ec0-fa021a788dff",
+                                          "key": "leaderboardId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Updates the configuration of an existing leaderboard."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "1aff7dfe-b0b5-4951-909c-7c9651c07a9a",
+                                      "name": "Leaderboard updated",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"name\": \"<string>\",\n  \"sortOrder\": \"desc\",\n  \"resetConfig\": {\n    \"start\": \"<dateTime>\",\n    \"schedule\": \"<string>\",\n    \"archive\": \"<boolean>\"\n  }\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "leaderboards",
+                                            ":leaderboardId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "leaderboardId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"sortOrder\": \"asc\",\n  \"bucketSize\": \"<number>\",\n  \"resetConfig\": {\n    \"start\": \"<dateTime>\",\n    \"schedule\": \"<string>\",\n    \"archive\": \"<boolean>\"\n  },\n  \"tieringConfig\": {\n    \"strategy\": \"score\",\n    \"tiers\": [\n      {\n        \"id\": \"<string>\",\n        \"cutoff\": \"<number>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"cutoff\": \"<number>\"\n      }\n    ]\n  },\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T03:23:44.000Z",
+                                      "updatedAt": "2026-07-28T03:23:44.000Z",
+                                      "uid": "35240-1aff7dfe-b0b5-4951-909c-7c9651c07a9a"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:44.000Z",
+                                  "updatedAt": "2026-07-28T03:23:44.000Z",
+                                  "uid": "35240-414a97c7-88d1-4683-8842-661c8d7b4e18"
+                                },
+                                {
+                                  "name": "Delete Leaderboard",
+                                  "id": "ee9493b6-bce4-4d40-baf7-fa1de068e258",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "DELETE",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "leaderboards",
+                                        ":leaderboardId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "ed57f61a-9a8a-4dda-92c1-9b16e23df2e2",
+                                          "key": "projectId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "9cb8646c-4479-4a9c-92ee-4a1592f31d71",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "c282d148-361b-4194-a274-28668be4c752",
+                                          "key": "leaderboardId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Deletes a leaderboard and all associated scores."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "82284026-7210-4b5f-a763-6c144f3f0e53",
+                                      "name": "Leaderboard deleted",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "leaderboards",
+                                            ":leaderboardId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "leaderboardId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:23:44.000Z",
+                                      "updatedAt": "2026-07-28T03:23:44.000Z",
+                                      "uid": "35240-82284026-7210-4b5f-a763-6c144f3f0e53"
+                                    },
+                                    {
+                                      "id": "9d17491d-5190-48a1-bee0-0789bd024e3c",
+                                      "name": "Not Found",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "projects",
+                                            ":projectId",
+                                            "environments",
+                                            ":environmentId",
+                                            "leaderboards",
+                                            ":leaderboardId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "leaderboardId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:23:44.000Z",
+                                      "updatedAt": "2026-07-28T03:23:44.000Z",
+                                      "uid": "35240-9d17491d-5190-48a1-bee0-0789bd024e3c"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:23:44.000Z",
+                                  "updatedAt": "2026-07-28T03:23:44.000Z",
+                                  "uid": "35240-ee9493b6-bce4-4d40-baf7-fa1de068e258"
+                                }
+                              ],
+                              "id": "6ef29617-fbb2-47f3-9fda-c5a3797fac08",
+                              "createdAt": "2026-07-28T03:23:44.000Z",
+                              "updatedAt": "2026-07-28T03:23:44.000Z",
+                              "uid": "35240-6ef29617-fbb2-47f3-9fda-c5a3797fac08"
+                            },
+                            {
+                              "name": "List Leaderboards",
+                              "id": "cffe5ad4-01b7-4124-a53d-8ac88c9de028",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards?limit=10&cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "environments",
+                                    ":environmentId",
+                                    "leaderboards"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of leaderboards to return",
+                                      "key": "limit",
+                                      "value": "10"
+                                    },
+                                    {
+                                      "description": "Cursor for pagination",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "32fa0746-4f53-46b1-9fe2-6d1dc8e4ddaa",
+                                      "key": "projectId",
+                                      "value": "<string>",
+                                      "description": "(Required) The Unity project identifier"
+                                    },
+                                    {
+                                      "id": "357c1001-4090-4910-9bf1-793b3fb665a9",
+                                      "key": "environmentId",
+                                      "value": "<string>",
+                                      "description": "(Required) The environment identifier"
+                                    }
+                                  ]
+                                },
+                                "description": "Returns a list of all leaderboard definitions for the specified project and environment."
+                              },
+                              "response": [
+                                {
+                                  "id": "63e8c1eb-419c-4e99-ba27-bf5225502cad",
+                                  "name": "List of leaderboards",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards?limit=10&cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "leaderboards"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Maximum number of leaderboards to return",
+                                          "key": "limit",
+                                          "value": "10"
+                                        },
+                                        {
+                                          "description": "Cursor for pagination",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"results\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"sortOrder\": \"desc\",\n      \"bucketSize\": \"<number>\",\n      \"resetConfig\": {\n        \"start\": \"<dateTime>\",\n        \"schedule\": \"<string>\",\n        \"archive\": \"<boolean>\"\n      },\n      \"tieringConfig\": {\n        \"strategy\": \"percentile\",\n        \"tiers\": [\n          {\n            \"id\": \"<string>\",\n            \"cutoff\": \"<number>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"cutoff\": \"<number>\"\n          }\n        ]\n      },\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"sortOrder\": \"asc\",\n      \"bucketSize\": \"<number>\",\n      \"resetConfig\": {\n        \"start\": \"<dateTime>\",\n        \"schedule\": \"<string>\",\n        \"archive\": \"<boolean>\"\n      },\n      \"tieringConfig\": {\n        \"strategy\": \"score\",\n        \"tiers\": [\n          {\n            \"id\": \"<string>\",\n            \"cutoff\": \"<number>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"cutoff\": \"<number>\"\n          }\n        ]\n      },\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\"\n    }\n  ],\n  \"next\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T03:23:44.000Z",
+                                  "updatedAt": "2026-07-28T03:23:44.000Z",
+                                  "uid": "35240-63e8c1eb-419c-4e99-ba27-bf5225502cad"
+                                },
+                                {
+                                  "id": "31213d06-2774-466b-bf03-5ec912e83e69",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards?limit=10&cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "leaderboards"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Maximum number of leaderboards to return",
+                                          "key": "limit",
+                                          "value": "10"
+                                        },
+                                        {
+                                          "description": "Cursor for pagination",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:23:44.000Z",
+                                  "updatedAt": "2026-07-28T03:23:44.000Z",
+                                  "uid": "35240-31213d06-2774-466b-bf03-5ec912e83e69"
+                                },
+                                {
+                                  "id": "fa5e598f-c32d-448a-8a0a-cc8a6ecd514e",
+                                  "name": "Forbidden",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards?limit=10&cursor=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "leaderboards"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Maximum number of leaderboards to return",
+                                          "key": "limit",
+                                          "value": "10"
+                                        },
+                                        {
+                                          "description": "Cursor for pagination",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:23:44.000Z",
+                                  "updatedAt": "2026-07-28T03:23:44.000Z",
+                                  "uid": "35240-fa5e598f-c32d-448a-8a0a-cc8a6ecd514e"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:23:44.000Z",
+                              "updatedAt": "2026-07-28T03:23:44.000Z",
+                              "uid": "35240-cffe5ad4-01b7-4124-a53d-8ac88c9de028"
+                            },
+                            {
+                              "name": "Create Leaderboard",
+                              "id": "d880a7bc-0a8c-4020-a61a-91f8ec71269d",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"id\": \"<string>\",\n  \"sortOrder\": \"desc\",\n  \"name\": \"<string>\",\n  \"bucketSize\": \"<number>\",\n  \"resetConfig\": {\n    \"start\": \"<dateTime>\",\n    \"schedule\": \"<string>\",\n    \"archive\": \"<boolean>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":projectId",
+                                    "environments",
+                                    ":environmentId",
+                                    "leaderboards"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "1f7681a5-95a5-4821-a97c-50c02770d320",
+                                      "key": "projectId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "a491a8d2-ddb5-4c34-b719-f4d3d35ba53f",
+                                      "key": "environmentId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Creates a new leaderboard definition for the specified project and environment."
+                              },
+                              "response": [
+                                {
+                                  "id": "76e71303-7e35-43f2-bbcc-7a8c4ac6b86f",
+                                  "name": "Leaderboard created",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"id\": \"<string>\",\n  \"sortOrder\": \"desc\",\n  \"name\": \"<string>\",\n  \"bucketSize\": \"<number>\",\n  \"resetConfig\": {\n    \"start\": \"<dateTime>\",\n    \"schedule\": \"<string>\",\n    \"archive\": \"<boolean>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "leaderboards"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"sortOrder\": \"asc\",\n  \"bucketSize\": \"<number>\",\n  \"resetConfig\": {\n    \"start\": \"<dateTime>\",\n    \"schedule\": \"<string>\",\n    \"archive\": \"<boolean>\"\n  },\n  \"tieringConfig\": {\n    \"strategy\": \"score\",\n    \"tiers\": [\n      {\n        \"id\": \"<string>\",\n        \"cutoff\": \"<number>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"cutoff\": \"<number>\"\n      }\n    ]\n  },\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+                                  "createdAt": "2026-07-28T03:23:44.000Z",
+                                  "updatedAt": "2026-07-28T03:23:44.000Z",
+                                  "uid": "35240-76e71303-7e35-43f2-bbcc-7a8c4ac6b86f"
+                                },
+                                {
+                                  "id": "239d050c-9803-49da-ac29-7707be1a88c3",
+                                  "name": "Bad Request",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"id\": \"<string>\",\n  \"sortOrder\": \"desc\",\n  \"name\": \"<string>\",\n  \"bucketSize\": \"<number>\",\n  \"resetConfig\": {\n    \"start\": \"<dateTime>\",\n    \"schedule\": \"<string>\",\n    \"archive\": \"<boolean>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "leaderboards"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:23:44.000Z",
+                                  "updatedAt": "2026-07-28T03:23:44.000Z",
+                                  "uid": "35240-239d050c-9803-49da-ac29-7707be1a88c3"
+                                },
+                                {
+                                  "id": "88cabc51-66c2-4eef-8377-099c286c8d4f",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"id\": \"<string>\",\n  \"sortOrder\": \"desc\",\n  \"name\": \"<string>\",\n  \"bucketSize\": \"<number>\",\n  \"resetConfig\": {\n    \"start\": \"<dateTime>\",\n    \"schedule\": \"<string>\",\n    \"archive\": \"<boolean>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:projectId/environments/:environmentId/leaderboards",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":projectId",
+                                        "environments",
+                                        ":environmentId",
+                                        "leaderboards"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:23:44.000Z",
+                                  "updatedAt": "2026-07-28T03:23:44.000Z",
+                                  "uid": "35240-88cabc51-66c2-4eef-8377-099c286c8d4f"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:23:44.000Z",
+                              "updatedAt": "2026-07-28T03:23:44.000Z",
+                              "uid": "35240-d880a7bc-0a8c-4020-a61a-91f8ec71269d"
+                            }
+                          ],
+                          "id": "2edcae2a-59c7-48ea-a050-bb14ee1f564a",
+                          "createdAt": "2026-07-28T03:23:44.000Z",
+                          "updatedAt": "2026-07-28T03:23:44.000Z",
+                          "uid": "35240-2edcae2a-59c7-48ea-a050-bb14ee1f564a"
+                        }
+                      ],
+                      "id": "53e48e52-4d00-4e4e-98a5-a799673c86cb",
+                      "createdAt": "2026-07-28T03:23:44.000Z",
+                      "updatedAt": "2026-07-28T03:23:44.000Z",
+                      "uid": "35240-53e48e52-4d00-4e4e-98a5-a799673c86cb"
+                    }
+                  ],
+                  "id": "b57620da-b7e2-4c3a-9627-42a517921641",
+                  "createdAt": "2026-07-28T03:23:44.000Z",
+                  "updatedAt": "2026-07-28T03:23:44.000Z",
+                  "uid": "35240-b57620da-b7e2-4c3a-9627-42a517921641"
+                }
+              ],
+              "id": "f61d4c8f-9867-4817-b31c-71a12071b6f8",
+              "createdAt": "2026-07-28T03:23:44.000Z",
+              "updatedAt": "2026-07-28T03:23:44.000Z",
+              "uid": "35240-f61d4c8f-9867-4817-b31c-71a12071b6f8"
+            }
+          ],
+          "id": "7a275e21-3a7c-402d-8983-ad5d6fc603ec",
+          "createdAt": "2026-07-28T03:23:44.000Z",
+          "updatedAt": "2026-07-28T03:23:44.000Z",
+          "uid": "35240-7a275e21-3a7c-402d-8983-ad5d6fc603ec"
+        }
+      ],
+      "id": "f0137f3b-18f5-4f86-945d-9cc904691e31",
+      "createdAt": "2026-07-28T03:23:44.000Z",
+      "updatedAt": "2026-07-28T03:23:44.000Z",
+      "uid": "35240-f0137f3b-18f5-4f86-945d-9cc904691e31"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.services.api.unity.com"
+    }
+  ]
+}
