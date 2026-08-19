@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Analytics Allocations Fleets API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fleets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Fleets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all configured server fleets for the specified project region."
+        },
+        {
+          "info": {
+            "name": "Create Fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new server fleet with specified configuration and build version."
+        },
+        {
+          "info": {
+            "name": "Get Fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets/:fleetId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the configuration and status of a specific fleet."
+        },
+        {
+          "info": {
+            "name": "Update Fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets/:fleetId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates fleet configuration including scaling settings and build version."
+        },
+        {
+          "info": {
+            "name": "Delete Fleet",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/regions/:regionId/fleets/:fleetId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fleetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a server fleet and terminates all associated servers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,845 @@
+{
+  "item": [
+    {
+      "id": "5141da64-1afe-4415-9338-d49931c5e070",
+      "name": "Fleets",
+      "description": {
+        "content": "Manage server fleets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03de720e-7f45-4660-aaa6-d7d10c030671",
+          "name": "List Fleets",
+          "request": {
+            "name": "List Fleets",
+            "description": {
+              "content": "Returns all configured server fleets for the specified project region.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectId",
+                "regions",
+                ":regionId",
+                "fleets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "regionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c447870-af52-44b7-80b1-d36f67c7005c",
+              "name": "List of fleets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "regions",
+                    ":regionId",
+                    "fleets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "regionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fleets\": [\n    {\n      \"id\": \"8340c661-3d81-d0ae-cf8e-f20f2c4c4483\",\n      \"name\": \"string\",\n      \"buildConfiguration\": {\n        \"buildId\": 6163,\n        \"commandLine\": \"string\",\n        \"queryType\": \"SQPQUERYTYPE\",\n        \"binaryPath\": \"string\",\n        \"cores\": 9129,\n        \"speedMhz\": 3148,\n        \"memory\": 9696\n      },\n      \"scalingSettings\": {\n        \"minFreeServers\": 5550,\n        \"maxFreeServers\": 9211\n      },\n      \"status\": \"DELETED\",\n      \"serverCount\": 5711,\n      \"freeServerCount\": 5352,\n      \"allocationCount\": 2735,\n      \"created\": \"1956-08-12T15:47:29.786Z\",\n      \"modified\": \"1971-01-25T02:47:15.425Z\"\n    },\n    {\n      \"id\": \"dc9c40e2-a16f-2965-b1f3-1c3f908a9961\",\n      \"name\": \"string\",\n      \"buildConfiguration\": {\n        \"buildId\": 9668,\n        \"commandLine\": \"string\",\n        \"queryType\": \"SQPQUERYTYPE\",\n        \"binaryPath\": \"string\",\n        \"cores\": 8860,\n        \"speedMhz\": 6798,\n        \"memory\": 3581\n      },\n      \"scalingSettings\": {\n        \"minFreeServers\": 2863,\n        \"maxFreeServers\": 5022\n      },\n      \"status\": \"DELETED\",\n      \"serverCount\": 3862,\n      \"freeServerCount\": 8235,\n      \"allocationCount\": 726,\n      \"created\": \"1978-09-08T05:55:14.237Z\",\n      \"modified\": \"2015-02-08T19:04:48.496Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30c1d400-06a0-4a99-919b-1e928ec02caa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "regions",
+                    ":regionId",
+                    "fleets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "regionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44eece58-6dd4-47be-be80-8bf2cbdffff2",
+          "name": "Create Fleet",
+          "request": {
+            "name": "Create Fleet",
+            "description": {
+              "content": "Creates a new server fleet with specified configuration and build version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectId",
+                "regions",
+                ":regionId",
+                "fleets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "regionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"buildConfiguration\": {\n    \"buildId\": \"<integer>\",\n    \"commandLine\": \"<string>\",\n    \"queryType\": \"<string>\",\n    \"binaryPath\": \"<string>\",\n    \"cores\": \"<integer>\",\n    \"speedMhz\": \"<integer>\",\n    \"memory\": \"<integer>\"\n  },\n  \"scalingSettings\": {\n    \"minFreeServers\": \"<integer>\",\n    \"maxFreeServers\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b37e6a7-9183-4281-a2ea-80ede759fc79",
+              "name": "Fleet created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "regions",
+                    ":regionId",
+                    "fleets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "regionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"buildConfiguration\": {\n    \"buildId\": \"<integer>\",\n    \"commandLine\": \"<string>\",\n    \"queryType\": \"<string>\",\n    \"binaryPath\": \"<string>\",\n    \"cores\": \"<integer>\",\n    \"speedMhz\": \"<integer>\",\n    \"memory\": \"<integer>\"\n  },\n  \"scalingSettings\": {\n    \"minFreeServers\": \"<integer>\",\n    \"maxFreeServers\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"35bf6c01-f0d9-9482-0a3d-6f2600316b00\",\n  \"name\": \"string\",\n  \"buildConfiguration\": {\n    \"buildId\": \"<integer>\",\n    \"commandLine\": \"<string>\",\n    \"queryType\": \"<string>\",\n    \"binaryPath\": \"<string>\",\n    \"cores\": \"<integer>\",\n    \"speedMhz\": \"<integer>\",\n    \"memory\": \"<integer>\"\n  },\n  \"scalingSettings\": {\n    \"minFreeServers\": \"<integer>\",\n    \"maxFreeServers\": \"<integer>\"\n  },\n  \"status\": \"DELETED\",\n  \"serverCount\": 5190,\n  \"freeServerCount\": 6989,\n  \"allocationCount\": 2583,\n  \"created\": \"1955-02-07T05:33:23.224Z\",\n  \"modified\": \"2007-07-20T01:34:40.529Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da0ce012-a27f-4c41-8d5c-f77a6bdafcc8",
+          "name": "Get Fleet",
+          "request": {
+            "name": "Get Fleet",
+            "description": {
+              "content": "Returns the configuration and status of a specific fleet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectId",
+                "regions",
+                ":regionId",
+                "fleets",
+                ":fleetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "regionId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d43ef474-d503-42d4-bd47-38aa75d60a89",
+              "name": "Fleet details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "regions",
+                    ":regionId",
+                    "fleets",
+                    ":fleetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "regionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"35bf6c01-f0d9-9482-0a3d-6f2600316b00\",\n  \"name\": \"string\",\n  \"buildConfiguration\": {\n    \"buildId\": \"<integer>\",\n    \"commandLine\": \"<string>\",\n    \"queryType\": \"<string>\",\n    \"binaryPath\": \"<string>\",\n    \"cores\": \"<integer>\",\n    \"speedMhz\": \"<integer>\",\n    \"memory\": \"<integer>\"\n  },\n  \"scalingSettings\": {\n    \"minFreeServers\": \"<integer>\",\n    \"maxFreeServers\": \"<integer>\"\n  },\n  \"status\": \"DELETED\",\n  \"serverCount\": 5190,\n  \"freeServerCount\": 6989,\n  \"allocationCount\": 2583,\n  \"created\": \"1955-02-07T05:33:23.224Z\",\n  \"modified\": \"2007-07-20T01:34:40.529Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52f32fb9-e498-46a8-942e-a9602dc2a136",
+              "name": "Fleet not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "regions",
+                    ":regionId",
+                    "fleets",
+                    ":fleetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "regionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49f097ba-661b-428a-87f1-2d636ee99a90",
+          "name": "Update Fleet",
+          "request": {
+            "name": "Update Fleet",
+            "description": {
+              "content": "Updates fleet configuration including scaling settings and build version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectId",
+                "regions",
+                ":regionId",
+                "fleets",
+                ":fleetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "regionId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"buildConfiguration\": {\n    \"buildId\": \"<integer>\",\n    \"commandLine\": \"<string>\",\n    \"queryType\": \"<string>\",\n    \"binaryPath\": \"<string>\",\n    \"cores\": \"<integer>\",\n    \"speedMhz\": \"<integer>\",\n    \"memory\": \"<integer>\"\n  },\n  \"scalingSettings\": {\n    \"minFreeServers\": \"<integer>\",\n    \"maxFreeServers\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8224cf90-c3cb-4c50-9414-6d8e5ce66ec9",
+              "name": "Fleet updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "regions",
+                    ":regionId",
+                    "fleets",
+                    ":fleetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "regionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"buildConfiguration\": {\n    \"buildId\": \"<integer>\",\n    \"commandLine\": \"<string>\",\n    \"queryType\": \"<string>\",\n    \"binaryPath\": \"<string>\",\n    \"cores\": \"<integer>\",\n    \"speedMhz\": \"<integer>\",\n    \"memory\": \"<integer>\"\n  },\n  \"scalingSettings\": {\n    \"minFreeServers\": \"<integer>\",\n    \"maxFreeServers\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"35bf6c01-f0d9-9482-0a3d-6f2600316b00\",\n  \"name\": \"string\",\n  \"buildConfiguration\": {\n    \"buildId\": \"<integer>\",\n    \"commandLine\": \"<string>\",\n    \"queryType\": \"<string>\",\n    \"binaryPath\": \"<string>\",\n    \"cores\": \"<integer>\",\n    \"speedMhz\": \"<integer>\",\n    \"memory\": \"<integer>\"\n  },\n  \"scalingSettings\": {\n    \"minFreeServers\": \"<integer>\",\n    \"maxFreeServers\": \"<integer>\"\n  },\n  \"status\": \"DELETED\",\n  \"serverCount\": 5190,\n  \"freeServerCount\": 6989,\n  \"allocationCount\": 2583,\n  \"created\": \"1955-02-07T05:33:23.224Z\",\n  \"modified\": \"2007-07-20T01:34:40.529Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f4f8974-8edb-424d-a11b-4b2494685d87",
+          "name": "Delete Fleet",
+          "request": {
+            "name": "Delete Fleet",
+            "description": {
+              "content": "Deletes a server fleet and terminates all associated servers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectId",
+                "regions",
+                ":regionId",
+                "fleets",
+                ":fleetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "regionId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aca1f8c2-c044-4323-9a2c-e8a4ffc6a278",
+              "name": "Fleet deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "regions",
+                    ":regionId",
+                    "fleets",
+                    ":fleetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "regionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "811000e3-f0b6-4023-a24e-c433ce720d48",
+    "name": "Unity Analytics Allocations Fleets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

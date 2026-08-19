@@ -6,5 +6,14 @@
     "source_type": "Portal",
     "file": "unity-2026-06-20T200106.png",
     "bytes": 45220
+  },
+  {
+    "repo": "unity",
+    "captured_at": "2026-08-17T130408",
+    "source_url": "https://docs.unity.com/ugs/en-us/manual/overview/manual/getting-started",
+    "source_type": "GettingStarted",
+    "file": "unity-2026-08-17T130408.png",
+    "bytes": 131814,
+    "capture": "playwright-local"
   }
 ]

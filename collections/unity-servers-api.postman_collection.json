@@ -1,0 +1,185 @@
+{
+  "item": [
+    {
+      "id": "8ea47712-22f4-4b5f-bdd6-55d071312f5a",
+      "name": "Servers",
+      "description": {
+        "content": "Manage individual server instances",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b8639520-e983-4a14-a578-37db264065e8",
+          "name": "List Servers",
+          "request": {
+            "name": "List Servers",
+            "description": {
+              "content": "Returns all server instances in the specified fleet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectId",
+                "regions",
+                ":regionId",
+                "fleets",
+                ":fleetId",
+                "servers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "regionId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fleetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4fd6e2b-7dc9-4dcb-94f8-b1e468554226",
+              "name": "List of servers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectId",
+                    "regions",
+                    ":regionId",
+                    "fleets",
+                    ":fleetId",
+                    "servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "regionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fleetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"servers\": [\n    {\n      \"id\": 6065,\n      \"ip\": \"string\",\n      \"port\": 2756,\n      \"queryPort\": 3920,\n      \"status\": \"ALLOCATED\",\n      \"machineID\": 6901,\n      \"created\": \"1962-08-18T22:05:49.004Z\"\n    },\n    {\n      \"id\": 3013,\n      \"ip\": \"string\",\n      \"port\": 1640,\n      \"queryPort\": 4065,\n      \"status\": \"ALLOCATED\",\n      \"machineID\": 6660,\n      \"created\": \"2016-05-22T10:37:39.636Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "688ad0c7-3b59-40f9-8733-7d8c662d21b9",
+    "name": "Unity Analytics Allocations Servers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

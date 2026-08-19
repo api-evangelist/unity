@@ -1,0 +1,225 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Analytics Allocations Builds API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Builds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Builds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds",
+            "params": [
+              {
+                "name": "orgid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "buildtargetid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the build history for a build target."
+        },
+        {
+          "info": {
+            "name": "Start Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds",
+            "params": [
+              {
+                "name": "orgid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "buildtargetid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a new build for the specified build target."
+        },
+        {
+          "info": {
+            "name": "Get Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds/:number",
+            "params": [
+              {
+                "name": "orgid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "buildtargetid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "number",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns details for a specific build including status, artifacts, and logs."
+        },
+        {
+          "info": {
+            "name": "Cancel Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.services.api.unity.com/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid/builds/:number",
+            "params": [
+              {
+                "name": "orgid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "buildtargetid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "number",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels an in-progress build."
+        },
+        {
+          "info": {
+            "name": "List Builds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/builds",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all game server builds for the project."
+        },
+        {
+          "info": {
+            "name": "Create Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/builds",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new game server build configuration."
+        },
+        {
+          "info": {
+            "name": "Get Build",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/builds/:buildId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific game server build."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

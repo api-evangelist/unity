@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Analytics Allocations Scripts API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scripts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Scripts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/scripts",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all Cloud Code scripts for the project."
+        },
+        {
+          "info": {
+            "name": "Create Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/scripts",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Cloud Code JavaScript script."
+        },
+        {
+          "info": {
+            "name": "Get Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/scripts/:scriptName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scriptName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the details and latest code for a specific Cloud Code script."
+        },
+        {
+          "info": {
+            "name": "Update Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/scripts/:scriptName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scriptName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the code and configuration of an existing Cloud Code script."
+        },
+        {
+          "info": {
+            "name": "Delete Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/scripts/:scriptName",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scriptName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a Cloud Code script and all its versions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

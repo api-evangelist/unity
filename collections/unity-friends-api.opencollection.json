@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Analytics Allocations Friends API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Friends",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Friends",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/me/relationships/friends",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the current player's friend list with presence information."
+        },
+        {
+          "info": {
+            "name": "Remove Friend or Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.services.api.unity.com/v1/me/relationships/:memberId",
+            "params": [
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a friend from the friend list or cancels/rejects a pending friend request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

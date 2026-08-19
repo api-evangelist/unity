@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Analytics Allocations Settings API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Config Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/configs/:configId/settings",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "configId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all settings (key-value pairs) in the configuration."
+        },
+        {
+          "info": {
+            "name": "Add Config Setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/configs/:configId/settings",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "configId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new key-value setting to the configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

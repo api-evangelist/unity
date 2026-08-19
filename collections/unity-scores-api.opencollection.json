@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Analytics Allocations Scores API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Player Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores/players/:playerId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "leaderboardId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific player's score and rank on a leaderboard."
+        },
+        {
+          "info": {
+            "name": "Add Player Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores/players/:playerId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "leaderboardId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits or updates a player's score on a leaderboard."
+        },
+        {
+          "info": {
+            "name": "Get Leaderboard Scores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/projects/:projectId/environments/:environmentId/leaderboards/:leaderboardId/scores",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "leaderboardId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeMetadata",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the top scores for a leaderboard with optional pagination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

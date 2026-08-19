@@ -1,0 +1,786 @@
+{
+  "item": [
+    {
+      "id": "4a8933b8-ba32-4c76-bdf4-959ef89ac24c",
+      "name": "Queues",
+      "description": {
+        "content": "Configure matchmaking queues and pools",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6667afb6-7f9e-4f89-b174-58cb0984bfbd",
+          "name": "List Matchmaking Queues",
+          "request": {
+            "name": "List Matchmaking Queues",
+            "description": {
+              "content": "Returns all configured matchmaking queues for the environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "queues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32eec72f-53f0-4abb-b957-16ab3bf5ce7e",
+              "name": "List of queues",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"name\": \"string\",\n      \"enabled\": true,\n      \"defaultEscalationRules\": {\n        \"timeoutSeconds\": 1922,\n        \"backfillEnabled\": false\n      },\n      \"pools\": [\n        {\n          \"name\": \"string\",\n          \"maximumPlayerCount\": 9468,\n          \"minimumPlayerCount\": 1832,\n          \"matchLogic\": {\n            \"name\": \"string\",\n            \"script\": \"string\"\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"maximumPlayerCount\": 2241,\n          \"minimumPlayerCount\": 5324,\n          \"matchLogic\": {\n            \"name\": \"string\",\n            \"script\": \"string\"\n          }\n        }\n      ],\n      \"created\": \"1966-06-02T18:19:59.772Z\",\n      \"modified\": \"1978-06-26T19:38:42.772Z\"\n    },\n    {\n      \"name\": \"string\",\n      \"enabled\": true,\n      \"defaultEscalationRules\": {\n        \"timeoutSeconds\": 1863,\n        \"backfillEnabled\": false\n      },\n      \"pools\": [\n        {\n          \"name\": \"string\",\n          \"maximumPlayerCount\": 2590,\n          \"minimumPlayerCount\": 9034,\n          \"matchLogic\": {\n            \"name\": \"string\",\n            \"script\": \"string\"\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"maximumPlayerCount\": 1495,\n          \"minimumPlayerCount\": 4686,\n          \"matchLogic\": {\n            \"name\": \"string\",\n            \"script\": \"string\"\n          }\n        }\n      ],\n      \"created\": \"2014-02-21T06:54:35.727Z\",\n      \"modified\": \"1988-03-17T07:38:12.397Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6d4281e-5779-4df2-bce4-13de60f44aa3",
+          "name": "Create Matchmaking Queue",
+          "request": {
+            "name": "Create Matchmaking Queue",
+            "description": {
+              "content": "Creates a new matchmaking queue with specified rules and pool configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "queues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": true,\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d691a680-9c77-476e-bfb4-cc15e61fa647",
+              "name": "Queue created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": true,\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"enabled\": true,\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ],\n  \"created\": \"1946-11-10T12:55:01.039Z\",\n  \"modified\": \"1952-01-21T06:02:02.216Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0bbd40d-46cc-4a63-9132-8c6be72199cb",
+          "name": "Get Matchmaking Queue",
+          "request": {
+            "name": "Get Matchmaking Queue",
+            "description": {
+              "content": "Returns configuration and status for a specific matchmaking queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "queues",
+                ":queueName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "queueName",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec736a02-cce8-4ecc-bb1f-08c407567b53",
+              "name": "Queue details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues",
+                    ":queueName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"enabled\": true,\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ],\n  \"created\": \"1946-11-10T12:55:01.039Z\",\n  \"modified\": \"1952-01-21T06:02:02.216Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68d35a20-42f9-430a-9ff6-79358d706b39",
+              "name": "Queue not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues",
+                    ":queueName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53bb4b40-9623-4251-a92d-6dc3a10d6850",
+          "name": "Update Matchmaking Queue",
+          "request": {
+            "name": "Update Matchmaking Queue",
+            "description": {
+              "content": "Updates the configuration of an existing matchmaking queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "queues",
+                ":queueName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "queueName",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d605ba6-379f-4718-bea2-32beb5a10c18",
+              "name": "Queue updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues",
+                    ":queueName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"enabled\": true,\n  \"defaultEscalationRules\": {\n    \"timeoutSeconds\": \"<integer>\",\n    \"backfillEnabled\": \"<boolean>\"\n  },\n  \"pools\": [\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"maximumPlayerCount\": \"<integer>\",\n      \"minimumPlayerCount\": \"<integer>\",\n      \"matchLogic\": {\n        \"name\": \"<string>\",\n        \"script\": \"<string>\"\n      }\n    }\n  ],\n  \"created\": \"1946-11-10T12:55:01.039Z\",\n  \"modified\": \"1952-01-21T06:02:02.216Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ed85170-350f-4344-a346-fb5b9031f973",
+          "name": "Delete Matchmaking Queue",
+          "request": {
+            "name": "Delete Matchmaking Queue",
+            "description": {
+              "content": "Deletes a matchmaking queue and all its configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "queues",
+                ":queueName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "queueName",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ccff948-d42d-453a-a71b-c1eae28cf22c",
+              "name": "Queue deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "queues",
+                    ":queueName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "45e6d399-da93-419e-8244-e3e61d687572",
+    "name": "Unity Analytics Allocations Queues API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

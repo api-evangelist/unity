@@ -1,0 +1,331 @@
+{
+  "item": [
+    {
+      "id": "3dfb0e6b-5020-46e5-bd94-b69e2faec4f5",
+      "name": "Custom Data",
+      "description": {
+        "content": "Manage custom data with access class controls",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c934899d-7268-4871-8a49-64cea995d0cb",
+          "name": "Set Protected Player Data",
+          "request": {
+            "name": "Set Protected Player Data",
+            "description": {
+              "content": "Creates or updates protected data items that can only be written by the server but read by the player.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data",
+                "projects",
+                ":projectId",
+                "players",
+                ":playerId",
+                "protected-items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"writeLock\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"writeLock\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f564017-53e5-4cc3-99a0-60168a6ce1a4",
+              "name": "Protected data items saved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "projects",
+                    ":projectId",
+                    "players",
+                    ":playerId",
+                    "protected-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"writeLock\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"writeLock\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"writeLock\": \"string\",\n      \"created\": \"2017-08-31T14:16:22.906Z\",\n      \"modified\": \"1996-11-25T09:04:04.786Z\"\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"writeLock\": \"string\",\n      \"created\": \"2017-10-02T21:40:27.506Z\",\n      \"modified\": \"1979-11-11T02:04:02.850Z\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fc99d99-ddee-49eb-846a-0ffe61247a83",
+          "name": "Set Public Player Data",
+          "request": {
+            "name": "Set Public Player Data",
+            "description": {
+              "content": "Creates or updates public data items visible to all players in the game.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data",
+                "projects",
+                ":projectId",
+                "players",
+                ":playerId",
+                "public-items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"writeLock\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"writeLock\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9fdb4a44-282b-47e5-9507-01e96df3c496",
+              "name": "Public data items saved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "projects",
+                    ":projectId",
+                    "players",
+                    ":playerId",
+                    "public-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"writeLock\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"writeLock\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"writeLock\": \"string\",\n      \"created\": \"1990-11-08T13:08:50.245Z\",\n      \"modified\": \"1975-05-29T04:15:59.298Z\"\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"writeLock\": \"string\",\n      \"created\": \"2000-09-29T12:22:10.628Z\",\n      \"modified\": \"1982-06-05T10:45:18.676Z\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6e782e6b-bffa-403b-849d-c3e0f722b54f",
+    "name": "Unity Analytics Allocations Custom Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

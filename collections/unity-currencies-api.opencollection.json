@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Analytics Allocations Currencies API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Currencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Player Currency Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all currency balances for the specified player."
+        },
+        {
+          "info": {
+            "name": "Increment Player Currency Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies/:currencyId/increment",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "currencyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Increases a player's currency balance by the specified amount."
+        },
+        {
+          "info": {
+            "name": "Decrement Player Currency Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/v2/projects/:projectId/environments/:environmentId/players/:playerId/currencies/:currencyId/decrement",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "currencyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Decreases a player's currency balance by the specified amount."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

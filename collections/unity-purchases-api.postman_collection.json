@@ -1,0 +1,285 @@
+{
+  "item": [
+    {
+      "id": "14c24565-d576-4728-aead-8f59ad631189",
+      "name": "Purchases",
+      "description": {
+        "content": "Process virtual and real-money purchases",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "616e3f26-0213-45c9-bb64-ed8aa4f570d5",
+          "name": "Make Virtual Purchase",
+          "request": {
+            "name": "Make Virtual Purchase",
+            "description": {
+              "content": "Processes a virtual purchase using the player's in-game currency or items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "players",
+                ":playerId",
+                "purchases",
+                "virtual"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b0f31c53-0dab-471d-ac21-11171ecf7b63",
+              "name": "Purchase successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "players",
+                    ":playerId",
+                    "purchases",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"purchased\": {\n    \"currencies\": [\n      {\n        \"currencyId\": \"string\",\n        \"balance\": 3508,\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1997-09-17T04:26:12.924Z\"\n        },\n        \"modified\": {\n          \"date\": \"1993-01-03T20:36:38.124Z\"\n        }\n      },\n      {\n        \"currencyId\": \"string\",\n        \"balance\": 1347,\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1995-04-14T06:36:09.662Z\"\n        },\n        \"modified\": {\n          \"date\": \"1994-06-28T18:53:03.929Z\"\n        }\n      }\n    ],\n    \"inventory\": [\n      {\n        \"playersItemId\": \"string\",\n        \"inventoryItemId\": \"string\",\n        \"quantity\": 7760,\n        \"instanceData\": {},\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"2001-08-06T18:11:02.038Z\"\n        },\n        \"modified\": {\n          \"date\": \"1986-08-04T05:13:48.653Z\"\n        }\n      },\n      {\n        \"playersItemId\": \"string\",\n        \"inventoryItemId\": \"string\",\n        \"quantity\": 8723,\n        \"instanceData\": {},\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1975-07-18T10:49:40.309Z\"\n        },\n        \"modified\": {\n          \"date\": \"2018-09-02T19:47:31.690Z\"\n        }\n      }\n    ]\n  },\n  \"costs\": {\n    \"currencies\": [\n      {\n        \"currencyId\": \"string\",\n        \"balance\": 8636,\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1992-07-06T10:54:04.463Z\"\n        },\n        \"modified\": {\n          \"date\": \"1981-05-25T02:25:25.138Z\"\n        }\n      },\n      {\n        \"currencyId\": \"string\",\n        \"balance\": 7604,\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1970-05-18T14:08:10.695Z\"\n        },\n        \"modified\": {\n          \"date\": \"1998-12-09T18:31:36.605Z\"\n        }\n      }\n    ],\n    \"inventory\": [\n      {\n        \"playersItemId\": \"string\",\n        \"inventoryItemId\": \"string\",\n        \"quantity\": 8126,\n        \"instanceData\": {},\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"1948-08-19T13:35:54.307Z\"\n        },\n        \"modified\": {\n          \"date\": \"1968-02-22T12:29:12.383Z\"\n        }\n      },\n      {\n        \"playersItemId\": \"string\",\n        \"inventoryItemId\": \"string\",\n        \"quantity\": 279,\n        \"instanceData\": {},\n        \"writeLock\": \"string\",\n        \"created\": {\n          \"date\": \"2019-07-22T12:44:26.025Z\"\n        },\n        \"modified\": {\n          \"date\": \"1965-08-12T21:39:43.686Z\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dd0077f-fc13-4ce9-9d26-e71cba283edd",
+              "name": "Insufficient funds",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "players",
+                    ":playerId",
+                    "purchases",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d98541e7-a001-44f3-b4ce-50dd42daaf13",
+    "name": "Unity Analytics Allocations Purchases API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

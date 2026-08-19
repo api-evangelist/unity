@@ -1,0 +1,190 @@
+{
+  "item": [
+    {
+      "id": "03305227-721e-483e-a56d-d208190a0a42",
+      "name": "Queries",
+      "description": {
+        "content": "Query stored data using indexes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "92d44272-0413-41ea-8048-959bfe5e247e",
+          "name": "Query Player Data",
+          "request": {
+            "name": "Query Player Data",
+            "description": {
+              "content": "Query player data items using field-based filters. Requires indexed fields to be defined in the project configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data",
+                "projects",
+                ":projectId",
+                "players",
+                ":playerId",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returnKeys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"op\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"op\": \"<string>\"\n    }\n  ],\n  \"offset\": 0,\n  \"limit\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21f8e9f4-f1a6-4049-9ea8-5ddd5ce5c39a",
+              "name": "Query results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "projects",
+                    ":projectId",
+                    "players",
+                    ":playerId",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returnKeys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"op\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"\",\n      \"op\": \"<string>\"\n    }\n  ],\n  \"offset\": 0,\n  \"limit\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"playerId\": \"string\",\n      \"data\": [\n        {\n          \"key\": \"string\",\n          \"value\": {},\n          \"writeLock\": \"string\",\n          \"created\": \"1947-12-24T06:47:14.242Z\",\n          \"modified\": \"1959-12-26T07:57:29.308Z\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": {},\n          \"writeLock\": \"string\",\n          \"created\": \"1966-05-11T16:19:42.055Z\",\n          \"modified\": \"1982-11-15T09:41:19.430Z\"\n        }\n      ]\n    },\n    {\n      \"playerId\": \"string\",\n      \"data\": [\n        {\n          \"key\": \"string\",\n          \"value\": {},\n          \"writeLock\": \"string\",\n          \"created\": \"1963-11-05T04:28:42.609Z\",\n          \"modified\": \"1968-08-03T20:00:08.925Z\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": {},\n          \"writeLock\": \"string\",\n          \"created\": \"1990-12-12T20:38:07.088Z\",\n          \"modified\": \"2003-07-20T07:58:56.858Z\"\n        }\n      ]\n    }\n  ],\n  \"total\": 4203,\n  \"offset\": 6866,\n  \"limit\": 7806\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cfaee866-f559-4bed-9d54-e46d795278d3",
+    "name": "Unity Analytics Allocations Queries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

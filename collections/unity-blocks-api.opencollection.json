@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Analytics Allocations Blocks API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Blocked Players",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/me/relationships/blocks"
+          },
+          "docs": "Returns all players that the current player has blocked."
+        },
+        {
+          "info": {
+            "name": "Block Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/v1/me/relationships/:memberId/block",
+            "params": [
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Blocks a player, preventing them from sending friend requests or messages."
+        },
+        {
+          "info": {
+            "name": "Unblock Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/v1/me/relationships/:memberId/unblock",
+            "params": [
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unblocks a previously blocked player."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

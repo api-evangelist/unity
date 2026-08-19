@@ -1,0 +1,223 @@
+{
+  "item": [
+    {
+      "id": "41dfb889-342a-4893-b11f-ae9e61756a0a",
+      "name": "Inventory",
+      "description": {
+        "content": "Manage inventory items and player inventory",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8c09221a-2b4a-4392-8da3-34f9315a8438",
+          "name": "Get Player Inventory",
+          "request": {
+            "name": "Get Player Inventory",
+            "description": {
+              "content": "Returns all inventory items currently held by the player.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "projects",
+                ":projectId",
+                "environments",
+                ":environmentId",
+                "players",
+                ":playerId",
+                "inventory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "playersItemIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "playersItemIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemIds",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16d3af7c-c6bc-45d5-af30-e672f3a9ce5a",
+              "name": "Player inventory items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "projects",
+                    ":projectId",
+                    "environments",
+                    ":environmentId",
+                    "players",
+                    ":playerId",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "playersItemIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "playersItemIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"playersItemId\": \"string\",\n      \"inventoryItemId\": \"string\",\n      \"quantity\": 253,\n      \"instanceData\": {},\n      \"writeLock\": \"string\",\n      \"created\": {\n        \"date\": \"1970-01-31T17:06:54.696Z\"\n      },\n      \"modified\": {\n        \"date\": \"1976-11-02T21:33:59.056Z\"\n      }\n    },\n    {\n      \"playersItemId\": \"string\",\n      \"inventoryItemId\": \"string\",\n      \"quantity\": 7332,\n      \"instanceData\": {},\n      \"writeLock\": \"string\",\n      \"created\": {\n        \"date\": \"1978-02-22T14:51:42.123Z\"\n      },\n      \"modified\": {\n        \"date\": \"1956-05-03T23:18:37.572Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c2d6c58c-a24e-4e77-a675-e1a5b55b1fe9",
+    "name": "Unity Analytics Allocations Inventory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

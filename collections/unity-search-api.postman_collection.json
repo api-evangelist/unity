@@ -1,0 +1,152 @@
+{
+  "item": [
+    {
+      "id": "a9f8f128-f268-4957-9e4f-bab9602452ed",
+      "name": "Search",
+      "description": {
+        "content": "Discover and join lobbies",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c8765ea-e453-4926-b132-6e81fe15830b",
+          "name": "Query Lobbies",
+          "request": {
+            "name": "Query Lobbies",
+            "description": {
+              "content": "Searches for available lobbies using filter and sort criteria. Only returns public lobbies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lobbies",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"count\": 10,\n  \"continuationToken\": \"<string>\",\n  \"filter\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\",\n      \"op\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\",\n      \"op\": \"<string>\"\n    }\n  ],\n  \"order\": [\n    {\n      \"field\": \"<string>\",\n      \"asc\": \"<boolean>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"asc\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9388a10e-9106-463e-a38a-195518f58cd8",
+              "name": "List of matching lobbies",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"count\": 10,\n  \"continuationToken\": \"<string>\",\n  \"filter\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\",\n      \"op\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\",\n      \"op\": \"<string>\"\n    }\n  ],\n  \"order\": [\n    {\n      \"field\": \"<string>\",\n      \"asc\": \"<boolean>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"asc\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"lobbyCode\": \"string\",\n      \"isPrivate\": false,\n      \"isLocked\": false,\n      \"maxPlayers\": 131,\n      \"availableSlots\": 794,\n      \"hostId\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"string\",\n          \"visibility\": \"Member\",\n          \"index\": \"string\"\n        },\n        \"key_1\": {\n          \"value\": \"string\",\n          \"visibility\": \"Public\",\n          \"index\": \"string\"\n        }\n      },\n      \"players\": [\n        {\n          \"id\": \"string\",\n          \"data\": {\n            \"key_0\": {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"visibility\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"index\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"joined\": \"1948-11-12T22:47:30.398Z\",\n          \"lastUpdated\": \"2009-08-17T15:27:03.940Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"data\": {\n            \"key_0\": {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"visibility\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"index\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"key_1\": {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"visibility\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"index\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"joined\": \"1988-04-12T11:09:31.799Z\",\n          \"lastUpdated\": \"1955-08-31T03:36:57.138Z\"\n        }\n      ],\n      \"created\": \"1957-10-24T17:39:50.260Z\",\n      \"lastUpdated\": \"2006-03-25T05:58:38.418Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"lobbyCode\": \"string\",\n      \"isPrivate\": true,\n      \"isLocked\": false,\n      \"maxPlayers\": 9168,\n      \"availableSlots\": 8837,\n      \"hostId\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"string\",\n          \"visibility\": \"Member\",\n          \"index\": \"string\"\n        }\n      },\n      \"players\": [\n        {\n          \"id\": \"string\",\n          \"data\": {\n            \"key_0\": {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"visibility\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"index\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"key_1\": {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"visibility\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"index\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"joined\": \"2024-02-10T12:45:53.922Z\",\n          \"lastUpdated\": \"1985-01-06T00:45:06.150Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"data\": {\n            \"key_0\": {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"visibility\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"index\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"key_1\": {\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"visibility\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"index\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"joined\": \"2001-02-01T19:50:43.154Z\",\n          \"lastUpdated\": \"1996-11-22T03:33:36.578Z\"\n        }\n      ],\n      \"created\": \"1980-05-12T04:55:09.547Z\",\n      \"lastUpdated\": \"2001-05-06T23:33:42.771Z\"\n    }\n  ],\n  \"continuationToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "df7a5bbd-8ee1-42ca-a1f9-a004444ec262",
+    "name": "Unity Analytics Allocations Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

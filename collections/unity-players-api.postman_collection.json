@@ -1,0 +1,725 @@
+{
+  "item": [
+    {
+      "id": "f0c9ad0a-3b4a-4c54-9e46-226aa86249b6",
+      "name": "Players",
+      "description": {
+        "content": "Manage players within a lobby",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "327a916e-fc90-4368-8bac-55f9c720ab63",
+          "name": "Remove Player From Lobby",
+          "request": {
+            "name": "Remove Player From Lobby",
+            "description": {
+              "content": "Removes a player from the lobby. Host can remove any player; players can remove themselves.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lobbies",
+                ":lobbyId",
+                "players",
+                ":playerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lobbyId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5bbfa159-6dbb-4a3f-8d05-c468650f107f",
+              "name": "Player removed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    ":lobbyId",
+                    "players",
+                    ":playerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e0e30f6-4c31-4835-a97c-4852e2d0f565",
+          "name": "Update Player Data In Lobby",
+          "request": {
+            "name": "Update Player Data In Lobby",
+            "description": {
+              "content": "Updates a player's custom data within the lobby.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lobbies",
+                ":lobbyId",
+                "players",
+                ":playerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lobbyId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc5b3bf1-60f6-4685-8d35-32af5f1d86b1",
+              "name": "Player data updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    ":lobbyId",
+                    "players",
+                    ":playerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_2\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"lobbyCode\": \"string\",\n  \"isPrivate\": false,\n  \"isLocked\": false,\n  \"maxPlayers\": 7927,\n  \"availableSlots\": 4268,\n  \"hostId\": \"string\",\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_1\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_2\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1975-06-01T14:46:40.410Z\",\n      \"lastUpdated\": \"2013-09-23T12:02:30.331Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_1\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1976-10-06T17:21:04.589Z\",\n      \"lastUpdated\": \"2005-09-24T03:50:20.238Z\"\n    }\n  ],\n  \"created\": \"2018-11-21T09:24:18.656Z\",\n  \"lastUpdated\": \"1979-02-10T21:32:16.106Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "744e5b6c-4c8a-41d9-a980-08a98761ef15",
+          "name": "List Players",
+          "request": {
+            "name": "List Players",
+            "description": {
+              "content": "Returns a paginated list of all players for the project. Admin operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "players"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c20e9053-d195-4a30-a135-96ce59087ced",
+              "name": "List of players",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "players"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"externalIds\": [\n        {\n          \"providerId\": \"string\",\n          \"externalId\": \"string\"\n        },\n        {\n          \"providerId\": \"string\",\n          \"externalId\": \"string\"\n        }\n      ],\n      \"disabled\": false,\n      \"lastLoginDate\": \"1980-12-19T21:03:35.432Z\",\n      \"createdAt\": \"2001-01-21T18:29:03.539Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"externalIds\": [\n        {\n          \"providerId\": \"string\",\n          \"externalId\": \"string\"\n        },\n        {\n          \"providerId\": \"string\",\n          \"externalId\": \"string\"\n        }\n      ],\n      \"disabled\": false,\n      \"lastLoginDate\": \"1972-11-21T18:00:47.648Z\",\n      \"createdAt\": \"1990-04-20T10:23:07.134Z\"\n    }\n  ],\n  \"next\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bab43d8e-850d-495b-8dfc-a9f3fe5d6d88",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "players"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c731451-c353-4334-88d7-30a55dbd56ce",
+          "name": "Get Player",
+          "request": {
+            "name": "Get Player",
+            "description": {
+              "content": "Returns information about a specific player.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "players",
+                ":playerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a89275e-114e-48c0-9ea3-0004ad7b1647",
+              "name": "Player details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "players",
+                    ":playerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"externalIds\": [\n    {\n      \"providerId\": \"string\",\n      \"externalId\": \"string\"\n    },\n    {\n      \"providerId\": \"string\",\n      \"externalId\": \"string\"\n    }\n  ],\n  \"disabled\": true,\n  \"lastLoginDate\": \"2017-11-23T13:43:19.261Z\",\n  \"createdAt\": \"2020-10-06T15:33:22.480Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a190fa8-bfd8-4d72-831c-a10f021cf322",
+              "name": "Player not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "players",
+                    ":playerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49526b38-a64a-4342-8215-817944772fc0",
+          "name": "Delete Player",
+          "request": {
+            "name": "Delete Player",
+            "description": {
+              "content": "Deletes a player account and all associated data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "players",
+                ":playerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c04f19d-ceae-4cb7-b01f-de0cb03e06f2",
+              "name": "Player deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "players",
+                    ":playerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "97699251-8f61-44e7-9285-6d5ef947039e",
+              "name": "Player not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "players",
+                    ":playerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "99477bca-ceb3-4606-a6ba-d43199b06bbf",
+    "name": "Unity Analytics Allocations Players API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

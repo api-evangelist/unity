@@ -1,0 +1,1106 @@
+{
+  "item": [
+    {
+      "id": "8a50375b-0116-4fb4-8a85-73fe369dfb2d",
+      "name": "Lobbies",
+      "description": {
+        "content": "Create and manage game lobbies",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3ed6186c-112d-4828-bdf4-ee5cfd352c47",
+          "name": "Create Lobby",
+          "request": {
+            "name": "Create Lobby",
+            "description": {
+              "content": "Creates a new lobby with the specified configuration. The requesting player becomes the lobby host.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lobbies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": false,\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      },\n      \"key_1\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      },\n      \"key_2\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  },\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25fbae2b-c06d-437c-b1cb-75b1ce8dce07",
+              "name": "Lobby created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": false,\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      },\n      \"key_1\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  },\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_2\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_3\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"lobbyCode\": \"string\",\n  \"isPrivate\": true,\n  \"isLocked\": true,\n  \"maxPlayers\": 7967,\n  \"availableSlots\": 269,\n  \"hostId\": \"string\",\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"2002-06-15T07:24:56.019Z\",\n      \"lastUpdated\": \"1997-09-01T22:39:43.640Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1967-07-06T06:38:18.229Z\",\n      \"lastUpdated\": \"1963-10-08T08:37:29.853Z\"\n    }\n  ],\n  \"created\": \"2021-01-13T16:24:14.710Z\",\n  \"lastUpdated\": \"1959-06-05T02:49:05.546Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b05f062e-903c-4a46-8644-39948960be41",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": false,\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      },\n      \"key_1\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  },\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_2\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_3\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "522c97a3-9b48-49ce-9306-44c44ff45c30",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": false,\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      },\n      \"key_1\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  },\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_2\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_3\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "441b5fb1-55ae-4be9-b4c3-1d43de63ad70",
+          "name": "Get Lobby",
+          "request": {
+            "name": "Get Lobby",
+            "description": {
+              "content": "Returns the current state and configuration of a lobby.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lobbies",
+                ":lobbyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lobbyId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a119a794-e231-4ecd-a9fb-79b431f1c6d0",
+              "name": "Lobby details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    ":lobbyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"lobbyCode\": \"string\",\n  \"isPrivate\": true,\n  \"isLocked\": true,\n  \"maxPlayers\": 1543,\n  \"availableSlots\": 2312,\n  \"hostId\": \"string\",\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_1\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_2\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1976-06-18T08:40:48.202Z\",\n      \"lastUpdated\": \"1975-02-08T08:29:40.026Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1993-04-30T12:39:55.138Z\",\n      \"lastUpdated\": \"1986-02-03T23:45:12.724Z\"\n    }\n  ],\n  \"created\": \"1996-04-26T13:28:15.643Z\",\n  \"lastUpdated\": \"1952-04-30T15:19:28.699Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b918a20-54b4-4858-bbf6-3c374e41dd56",
+              "name": "Lobby not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    ":lobbyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31456cd1-7579-4540-b733-2ae205ce8554",
+          "name": "Update Lobby",
+          "request": {
+            "name": "Update Lobby",
+            "description": {
+              "content": "Updates lobby configuration and data. Only the lobby host can update the lobby.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lobbies",
+                ":lobbyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lobbyId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": \"<boolean>\",\n  \"isLocked\": \"<boolean>\",\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"hostId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "75fe7d26-1330-41a4-9de4-e4ad776b569d",
+              "name": "Lobby updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    ":lobbyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"maxPlayers\": \"<integer>\",\n  \"isPrivate\": \"<boolean>\",\n  \"isLocked\": \"<boolean>\",\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"hostId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"lobbyCode\": \"string\",\n  \"isPrivate\": true,\n  \"isLocked\": true,\n  \"maxPlayers\": 1543,\n  \"availableSlots\": 2312,\n  \"hostId\": \"string\",\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_1\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_2\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1976-06-18T08:40:48.202Z\",\n      \"lastUpdated\": \"1975-02-08T08:29:40.026Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1993-04-30T12:39:55.138Z\",\n      \"lastUpdated\": \"1986-02-03T23:45:12.724Z\"\n    }\n  ],\n  \"created\": \"1996-04-26T13:28:15.643Z\",\n  \"lastUpdated\": \"1952-04-30T15:19:28.699Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75cef5f2-820e-4821-baa1-c8e78a567f82",
+          "name": "Delete Lobby",
+          "request": {
+            "name": "Delete Lobby",
+            "description": {
+              "content": "Deletes a lobby. Only the host can delete the lobby.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lobbies",
+                ":lobbyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lobbyId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0e8af33-0fd9-48c3-8b7c-1719cce43740",
+              "name": "Lobby deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    ":lobbyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e46e81d-0572-400c-b4eb-48b15212df97",
+          "name": "Join Lobby By ID",
+          "request": {
+            "name": "Join Lobby By ID",
+            "description": {
+              "content": "Joins an existing lobby by its unique identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lobbies",
+                ":lobbyId",
+                "join"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lobbyId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      },\n      \"key_1\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      },\n      \"key_2\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec489209-cd0e-46aa-abbd-6bd519b09471",
+              "name": "Joined lobby successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    ":lobbyId",
+                    "join"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"lobbyCode\": \"string\",\n  \"isPrivate\": true,\n  \"isLocked\": true,\n  \"maxPlayers\": 1543,\n  \"availableSlots\": 2312,\n  \"hostId\": \"string\",\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_1\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_2\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1976-06-18T08:40:48.202Z\",\n      \"lastUpdated\": \"1975-02-08T08:29:40.026Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1993-04-30T12:39:55.138Z\",\n      \"lastUpdated\": \"1986-02-03T23:45:12.724Z\"\n    }\n  ],\n  \"created\": \"1996-04-26T13:28:15.643Z\",\n  \"lastUpdated\": \"1952-04-30T15:19:28.699Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49d586c6-5bc7-4034-b49d-e6b73c8f6c4b",
+              "name": "Lobby not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    ":lobbyId",
+                    "join"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2d689ed9-3b4b-410d-b3fc-0f5b164d39ef",
+              "name": "Lobby is full or not joinable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    ":lobbyId",
+                    "join"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1649362c-931d-482d-ae2d-d837900a803c",
+          "name": "Join Lobby By Code",
+          "request": {
+            "name": "Join Lobby By Code",
+            "description": {
+              "content": "Joins a private lobby using a lobby join code shared by the host.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lobbies",
+                "code",
+                ":lobbyCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lobbyCode",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      },\n      \"key_1\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      },\n      \"key_2\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "04e549d6-15a6-4c4a-9ce0-95236188703a",
+              "name": "Joined lobby successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    "code",
+                    ":lobbyCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyCode",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"lobbyCode\": \"string\",\n  \"isPrivate\": true,\n  \"isLocked\": true,\n  \"maxPlayers\": 1543,\n  \"availableSlots\": 2312,\n  \"hostId\": \"string\",\n  \"data\": {\n    \"key_0\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    },\n    \"key_1\": {\n      \"value\": \"<string>\",\n      \"visibility\": \"<string>\",\n      \"index\": \"<string>\"\n    }\n  },\n  \"players\": [\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_1\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        },\n        \"key_2\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1976-06-18T08:40:48.202Z\",\n      \"lastUpdated\": \"1975-02-08T08:29:40.026Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"data\": {\n        \"key_0\": {\n          \"value\": \"<string>\",\n          \"visibility\": \"<string>\",\n          \"index\": \"<string>\"\n        }\n      },\n      \"joined\": \"1993-04-30T12:39:55.138Z\",\n      \"lastUpdated\": \"1986-02-03T23:45:12.724Z\"\n    }\n  ],\n  \"created\": \"1996-04-26T13:28:15.643Z\",\n  \"lastUpdated\": \"1952-04-30T15:19:28.699Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85287802-1ee5-4fe1-af86-539b69ccff11",
+              "name": "Invalid lobby code",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    "code",
+                    ":lobbyCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyCode",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"playerId\": \"<string>\",\n  \"player\": {\n    \"id\": \"<string>\",\n    \"data\": {\n      \"key_0\": {\n        \"value\": \"<string>\",\n        \"visibility\": \"<string>\",\n        \"index\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3ae000c-9e8a-407b-a9f3-e05b80999e73",
+          "name": "Heartbeat Lobby",
+          "request": {
+            "name": "Heartbeat Lobby",
+            "description": {
+              "content": "Sends a heartbeat to keep the lobby active. Lobbies without recent heartbeats are automatically deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lobbies",
+                ":lobbyId",
+                "heartbeat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lobbyId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "957fd4c4-4a36-4927-8cc5-c0ab30d582a6",
+              "name": "Heartbeat received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lobbies",
+                    ":lobbyId",
+                    "heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lobbyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.services.api.unity.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "40007c69-187b-4d16-a27e-99ff83bfb85d",
+    "name": "Unity Analytics Allocations Lobbies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.\n\nContact Support:\n Name: Unity Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Analytics Allocations Build Targets API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Build Targets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Build Targets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/orgs/:orgid/projects/:projectid/buildtargets",
+            "params": [
+              {
+                "name": "orgid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all configured build targets for the specified project."
+        },
+        {
+          "info": {
+            "name": "Create Build Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.services.api.unity.com/orgs/:orgid/projects/:projectid/buildtargets",
+            "params": [
+              {
+                "name": "orgid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new build target for a specific platform and configuration."
+        },
+        {
+          "info": {
+            "name": "Get Build Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid",
+            "params": [
+              {
+                "name": "orgid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "buildtargetid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the configuration for a specific build target."
+        },
+        {
+          "info": {
+            "name": "Update Build Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://analytics.services.api.unity.com/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid",
+            "params": [
+              {
+                "name": "orgid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "buildtargetid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing build target."
+        },
+        {
+          "info": {
+            "name": "Delete Build Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.services.api.unity.com/orgs/:orgid/projects/:projectid/buildtargets/:buildtargetid",
+            "params": [
+              {
+                "name": "orgid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "buildtargetid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a build target configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

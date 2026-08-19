@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unity Analytics Allocations Players API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Players",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Player Data In Lobby",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://analytics.services.api.unity.com/v1/lobbies/:lobbyId/players/:playerId",
+            "params": [
+              {
+                "name": "lobbyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a player's custom data within the lobby."
+        },
+        {
+          "info": {
+            "name": "Remove Player From Lobby",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.services.api.unity.com/v1/lobbies/:lobbyId/players/:playerId",
+            "params": [
+              {
+                "name": "lobbyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a player from the lobby. Host can remove any player; players can remove themselves."
+        },
+        {
+          "info": {
+            "name": "List Players",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/players",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all players for the project. Admin operation."
+        },
+        {
+          "info": {
+            "name": "Get Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.services.api.unity.com/v1/players/:playerId",
+            "params": [
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns information about a specific player."
+        },
+        {
+          "info": {
+            "name": "Delete Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.services.api.unity.com/v1/players/:playerId",
+            "params": [
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a player account and all associated data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
