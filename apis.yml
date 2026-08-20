@@ -39,6 +39,11 @@ apis:
     participants, and communication sessions across platforms. Supports 2D and 3D positional audio.
   humanURL: https://docs.unity.com/ugs/en-us/manual/vivox-unity/manual/Unity/Unity
   tags:
+  - Communications
+  - Text Chat
+  - Voice Chat
+  - Real-Time Audio
+  tags_raw:
   - Communication
   - Text Chat
   - Voice Chat
@@ -803,6 +808,8 @@ apis:
   description: Manage virtual currencies and player balances
   humanURL: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   tags:
+  - Currency
+  tags_raw:
   - Currencies
   properties:
   - type: OpenAPI
@@ -1013,6 +1020,8 @@ apis:
   description: Ingest analytics events
   humanURL: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -1118,6 +1127,8 @@ apis:
   description: Execute cloud code scripts
   humanURL: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   tags:
+  - Execution
+  tags_raw:
   - Executions
   properties:
   - type: OpenAPI
@@ -2483,6 +2494,8 @@ apis:
   description: Query stored data using indexes
   humanURL: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   tags:
+  - Query
+  tags_raw:
   - Queries
   properties:
   - type: OpenAPI
