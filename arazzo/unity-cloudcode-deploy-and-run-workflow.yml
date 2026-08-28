@@ -11,8 +11,11 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: cloudCodeApi
-  url: ../openapi/unity-cloud-code-openapi.yml
+- name: executionsApi
+  url: ../openapi/unity-executions-api-openapi.yml
+  type: openapi
+- name: scriptsApi
+  url: ../openapi/unity-scripts-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: cloudcode-deploy-and-run

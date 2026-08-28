@@ -11,8 +11,11 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: lobbyApi
-  url: ../openapi/unity-lobby-openapi.yml
+- name: lobbiesApi
+  url: ../openapi/unity-lobbies-api-openapi.yml
+  type: openapi
+- name: searchApi
+  url: ../openapi/unity-search-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: lobby-host-and-query

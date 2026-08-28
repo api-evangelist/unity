@@ -12,8 +12,11 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: economyApi
-  url: ../openapi/unity-economy-openapi.yml
+- name: configurationApi
+  url: ../openapi/unity-configuration-api-openapi.yml
+  type: openapi
+- name: currenciesApi
+  url: ../openapi/unity-currencies-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: economy-grant-currency

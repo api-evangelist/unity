@@ -12,8 +12,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: remoteConfigApi
-  url: ../openapi/unity-remote-config-openapi.yml
+- name: overrideRulesApi
+  url: ../openapi/unity-override-rules-api-openapi.yml
+  type: openapi
+- name: settingsApi
+  url: ../openapi/unity-settings-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: remote-config-rollout

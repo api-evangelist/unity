@@ -13,8 +13,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: buildAutomationApi
-  url: ../openapi/unity-build-automation-openapi.yml
+- name: buildTargetsApi
+  url: ../openapi/unity-build-targets-api-openapi.yml
+  type: openapi
+- name: buildsApi
+  url: ../openapi/unity-builds-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: build-trigger-and-poll

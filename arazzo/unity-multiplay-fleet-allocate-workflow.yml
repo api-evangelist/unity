@@ -11,8 +11,14 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: multiplayApi
-  url: ../openapi/unity-multiplay-openapi.yml
+- name: allocationsApi
+  url: ../openapi/unity-allocations-api-openapi.yml
+  type: openapi
+- name: buildsApi
+  url: ../openapi/unity-builds-api-openapi.yml
+  type: openapi
+- name: fleetsApi
+  url: ../openapi/unity-fleets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: multiplay-fleet-allocate

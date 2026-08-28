@@ -12,8 +12,8 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: matchmakerApi
-  url: ../openapi/unity-matchmaker-openapi.yml
+- name: ticketsApi
+  url: ../openapi/unity-tickets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: matchmaking-ticket-poll

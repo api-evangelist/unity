@@ -11,8 +11,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: cloudSaveApi
-  url: ../openapi/unity-cloud-save-openapi.yml
+- name: playerDataApi
+  url: ../openapi/unity-player-data-api-openapi.yml
+  type: openapi
+- name: queriesApi
+  url: ../openapi/unity-queries-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: cloudsave-set-and-query

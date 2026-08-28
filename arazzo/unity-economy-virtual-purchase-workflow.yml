@@ -11,8 +11,14 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: economyApi
-  url: ../openapi/unity-economy-openapi.yml
+- name: currenciesApi
+  url: ../openapi/unity-currencies-api-openapi.yml
+  type: openapi
+- name: inventoryApi
+  url: ../openapi/unity-inventory-api-openapi.yml
+  type: openapi
+- name: purchasesApi
+  url: ../openapi/unity-purchases-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: economy-virtual-purchase

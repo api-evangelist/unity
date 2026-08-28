@@ -12,8 +12,8 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsApi
-  url: ../openapi/unity-analytics-openapi.yml
+- name: eventsApi
+  url: ../openapi/unity-events-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: analytics-validate-and-record

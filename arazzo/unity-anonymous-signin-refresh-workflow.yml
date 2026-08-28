@@ -11,8 +11,8 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: playerAuthApi
-  url: ../openapi/unity-player-authentication-openapi.yml
+- name: authenticationApi
+  url: ../openapi/unity-authentication-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: anonymous-signin-refresh

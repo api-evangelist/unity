@@ -11,8 +11,8 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: matchmakerApi
-  url: ../openapi/unity-matchmaker-openapi.yml
+- name: queuesApi
+  url: ../openapi/unity-queues-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: matchmaker-queue-provision

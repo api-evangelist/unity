@@ -13,11 +13,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: matchmakerApi
-  url: ../openapi/unity-matchmaker-openapi.yml
+- name: allocationsApi
+  url: ../openapi/unity-allocations-api-openapi.yml
   type: openapi
-- name: multiplayApi
-  url: ../openapi/unity-multiplay-openapi.yml
+- name: ticketsApi
+  url: ../openapi/unity-tickets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: matchmaking-allocate-server
@@ -61,7 +61,7 @@ workflows:
   - stepId: createTicket
     description: >-
       Create a matchmaking ticket placing the player into the named queue.
-    operationId: $sourceDescriptions.matchmakerApi.createTicket
+    operationId: $sourceDescriptions.ticketsApi.createTicket
     parameters:
     - name: Authorization
       in: header
@@ -86,7 +86,7 @@ workflows:
     description: >-
       Poll the ticket status, retrying while InProgress and continuing once a
       match is Found.
-    operationId: $sourceDescriptions.matchmakerApi.getTicket
+    operationId: $sourceDescriptions.ticketsApi.getTicket
     parameters:
     - name: Authorization
       in: header
@@ -124,7 +124,7 @@ workflows:
     description: >-
       Allocate an available game server from the Multiplay fleet for the matched
       session.
-    operationId: $sourceDescriptions.multiplayApi.allocateServer
+    operationId: $sourceDescriptions.allocationsApi.allocateServer
     parameters:
     - name: Authorization
       in: header

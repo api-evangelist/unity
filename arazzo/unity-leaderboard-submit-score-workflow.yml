@@ -12,7 +12,10 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: leaderboardsApi
-  url: ../openapi/unity-leaderboards-openapi.yml
+  url: ../openapi/unity-leaderboards-api-openapi.yml
+  type: openapi
+- name: scoresApi
+  url: ../openapi/unity-scores-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: leaderboard-submit-score
