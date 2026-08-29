@@ -1,0 +1,77 @@
+slug: unity
+provider: Unity
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Builds
+  spec_file: unity-builds-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.85
+  evidence: POST /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}/builds startBuild 'Start
+    Build'; schema BuildArtifact
+  reason: Starting, cancelling and retrieving CI builds and artefacts — continuous integration build pipeline
+    management.
+- tag: Build Targets
+  spec_file: unity-build-targets-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.82
+  evidence: 'POST /orgs/{orgid}/projects/{projectid}/buildtargets createBuildTarget; description: ''automating
+    and integrating continuous integration builds into custom workflows'''
+  reason: Configuration of CI build targets per platform — continuous integration pipeline management.
+- tag: Authentication
+  spec_file: unity-authentication-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST /v1/authentication/anonymous signInAnonymously; POST /v1/token/refresh refreshToken 'Refresh
+    Authentication Token'
+  reason: Player sign-in, external identity provider tokens and token refresh — identity and access management
+    plumbing for end users of the game.
+- tag: Events
+  spec_file: unity-events-api-openapi.yml
+  capability_id: BC-4280.10
+  capability_id_l1: BC-4280
+  capability_name: Product Telemetry Instrumentation
+  confidence: 0.75
+  evidence: '"endpoints for ingesting custom analytics events from game clients and servers. Events are
+    used to track player behavior, game performance, and feature adoption"; operations "Record Analytics
+    Events", "Validate Analytics Events"'
+  reason: The operations ingest and validate product usage/telemetry events emitted by client and server
+    runtimes against event schemas, which is product telemetry instrumentation rather than any media or
+    content capability.
+- tag: Override Rules
+  spec_file: unity-override-rules-api-openapi.yml
+  capability_id: BC-4210.50
+  capability_id_l1: BC-4210
+  capability_name: Feature Flag Management
+  confidence: 0.72
+  evidence: '"enables launching new features, testing functionality, and modifying game configurations
+    without requiring app updates. The Admin API manages settings, schemas, and override rules"; operations
+    "Create Override Rule", "Update Override Rule"'
+  reason: Remote Config override rules that target configuration/feature values to segments without shipping
+    an app update are functionally feature-flag lifecycle and runtime targeting control.
+- tag: Config
+  spec_file: unity-config-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.7
+  evidence: '''modifying game configurations without requiring app updates''; PUT .../configs/{configId}
+    updateRemoteConfig'
+  reason: Runtime configuration values delivered to clients without redeploy — runtime configuration management;
+    adjacent to feature flagging but the operations are generic config settings.
