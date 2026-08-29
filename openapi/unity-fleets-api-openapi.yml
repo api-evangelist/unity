@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Fleets API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Multiplay Game Server Hosting Fleets API
+  description: The Unity Multiplay Game Server Hosting REST API provides Admin endpoints for configuring and managing dedicated game server infrastructure. Supports fleet management, server allocation, build configuration, and server lifecycle management in cloud, bare metal, and hybrid hosting environments.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://multiplay.services.api.unity.com
+  description: Unity Multiplay Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Fleets
   description: Manage server fleets
@@ -170,46 +170,6 @@ paths:
           description: Fleet deleted
 components:
   schemas:
-    FleetList:
-      type: object
-      properties:
-        fleets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Fleet'
-    CreateFleetRequest:
-      type: object
-      required:
-      - name
-      - buildConfiguration
-      properties:
-        name:
-          type: string
-        buildConfiguration:
-          $ref: '#/components/schemas/BuildConfiguration'
-        scalingSettings:
-          $ref: '#/components/schemas/ScalingSettings'
-    BuildConfiguration:
-      type: object
-      properties:
-        buildId:
-          type: integer
-        commandLine:
-          type: string
-        queryType:
-          type: string
-          enum:
-          - SQPQUERYTYPE
-          - A2SQUERYTYPE
-          - NONE
-        binaryPath:
-          type: string
-        cores:
-          type: integer
-        speedMhz:
-          type: integer
-        memory:
-          type: integer
     Fleet:
       type: object
       properties:
@@ -240,8 +200,48 @@ components:
         modified:
           type: string
           format: date-time
+    FleetList:
+      type: object
+      properties:
+        fleets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fleet'
     UpdateFleetRequest:
       type: object
+      properties:
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
+    BuildConfiguration:
+      type: object
+      properties:
+        buildId:
+          type: integer
+        commandLine:
+          type: string
+        queryType:
+          type: string
+          enum:
+          - SQPQUERYTYPE
+          - A2SQUERYTYPE
+          - NONE
+        binaryPath:
+          type: string
+        cores:
+          type: integer
+        speedMhz:
+          type: integer
+        memory:
+          type: integer
+    CreateFleetRequest:
+      type: object
+      required:
+      - name
+      - buildConfiguration
       properties:
         name:
           type: string
@@ -257,10 +257,10 @@ components:
         maxFreeServers:
           type: integer
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Multiplay Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/game-server-hosting/manual/api/rest-api

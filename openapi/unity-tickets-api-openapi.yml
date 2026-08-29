@@ -1,8 +1,8 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Tickets API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
-  version: v1.0.0
+  title: Unity Matchmaker Tickets API
+  description: The Unity Matchmaker REST API provides endpoints for creating and managing matchmaking tickets, defining matchmaking rules, and configuring match pools and queues. It enables skill-based and attribute-based player matching with low latency for games of all sizes.
+  version: v3.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
     name: Unity Support
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://matchmaker.services.api.unity.com
+  description: Unity Matchmaker Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Tickets
   description: Create and manage matchmaking tickets
@@ -115,37 +115,6 @@ paths:
           description: Ticket not found
 components:
   schemas:
-    CreateTicketRequest:
-      type: object
-      required:
-      - players
-      - queueName
-      properties:
-        players:
-          type: array
-          items:
-            $ref: '#/components/schemas/Player'
-          description: Players to include in the matchmaking ticket
-        queueName:
-          type: string
-          description: Name of the matchmaking queue to enter
-        attributes:
-          $ref: '#/components/schemas/TicketAttributes'
-    TicketCreated:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique ticket identifier
-    MatchAssignment:
-      type: object
-      properties:
-        connection:
-          type: string
-          description: Server connection string for the matched game
-        payload:
-          type: object
-          description: Additional match data
     TicketStatus:
       type: object
       properties:
@@ -160,6 +129,12 @@ components:
           description: Current ticket status
         assignment:
           $ref: '#/components/schemas/MatchAssignment'
+    TicketCreated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ticket identifier
     TicketAttributes:
       type: object
       properties:
@@ -180,11 +155,36 @@ components:
         attributes:
           type: object
           description: Player-specific attributes for matchmaking
+    CreateTicketRequest:
+      type: object
+      required:
+      - players
+      - queueName
+      properties:
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+          description: Players to include in the matchmaking ticket
+        queueName:
+          type: string
+          description: Name of the matchmaking queue to enter
+        attributes:
+          $ref: '#/components/schemas/TicketAttributes'
+    MatchAssignment:
+      type: object
+      properties:
+        connection:
+          type: string
+          description: Server connection string for the matched game
+        payload:
+          type: object
+          description: Additional match data
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Matchmaker Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/matchmaker/manual/matchmaker-api

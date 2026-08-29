@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Identity Providers API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Player Authentication Identity Providers API
+  description: The Unity Player Authentication REST API verifies player identity and manages authentication workflows. It provides endpoints for anonymous sign-in, platform-specific authentication (Google, Apple, Steam, Facebook), custom identity provider integration, token refresh, and account linking. Supports both the player-facing authentication flow and admin operations for player management.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://player-auth.services.api.unity.com
+  description: Unity Player Authentication Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Identity Providers
   description: External identity provider linking
@@ -97,6 +97,34 @@ paths:
           description: Identity not found
 components:
   schemas:
+    UnlinkIdentityRequest:
+      type: object
+      required:
+      - idProvider
+      properties:
+        idProvider:
+          type: string
+    ExternalTokenSignInRequest:
+      type: object
+      required:
+      - idProvider
+      - token
+      properties:
+        idProvider:
+          type: string
+          enum:
+          - google
+          - apple
+          - steam
+          - facebook
+          - custom
+          description: The external identity provider
+        token:
+          type: string
+          description: The identity token from the external provider
+        signInOnly:
+          type: boolean
+          description: If true, only sign in and do not create a new account
     Player:
       type: object
       properties:
@@ -119,34 +147,6 @@ components:
         createdAt:
           type: string
           format: date-time
-    ExternalTokenSignInRequest:
-      type: object
-      required:
-      - idProvider
-      - token
-      properties:
-        idProvider:
-          type: string
-          enum:
-          - google
-          - apple
-          - steam
-          - facebook
-          - custom
-          description: The external identity provider
-        token:
-          type: string
-          description: The identity token from the external provider
-        signInOnly:
-          type: boolean
-          description: If true, only sign in and do not create a new account
-    UnlinkIdentityRequest:
-      type: object
-      required:
-      - idProvider
-      properties:
-        idProvider:
-          type: string
     AuthResponse:
       type: object
       properties:
@@ -164,10 +164,13 @@ components:
           type: boolean
           description: True if a new account was created
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    serviceAccountAuth:
+      type: http
+      scheme: basic
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Player Authentication Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api

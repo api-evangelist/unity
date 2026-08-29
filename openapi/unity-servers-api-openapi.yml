@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Servers API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Multiplay Game Server Hosting Servers API
+  description: The Unity Multiplay Game Server Hosting REST API provides Admin endpoints for configuring and managing dedicated game server infrastructure. Supports fleet management, server allocation, build configuration, and server lifecycle management in cloud, bare metal, and hybrid hosting environments.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://multiplay.services.api.unity.com
+  description: Unity Multiplay Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Servers
   description: Manage individual server instances
@@ -51,6 +51,13 @@ paths:
                 $ref: '#/components/schemas/ServerList'
 components:
   schemas:
+    ServerList:
+      type: object
+      properties:
+        servers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Server'
     Server:
       type: object
       properties:
@@ -73,18 +80,11 @@ components:
         created:
           type: string
           format: date-time
-    ServerList:
-      type: object
-      properties:
-        servers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Server'
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Multiplay Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/game-server-hosting/manual/api/rest-api

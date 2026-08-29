@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Scores API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Leaderboards Scores API
+  description: The Unity Leaderboards REST API provides Player and Admin endpoints for managing competitive leaderboards in Unity games. Player endpoints allow submitting and retrieving scores, while Admin endpoints manage leaderboard configuration, bucket definitions, and score archive policies.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://leaderboards.services.api.unity.com
+  description: Unity Leaderboards Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Scores
   description: Submit and retrieve leaderboard scores
@@ -189,10 +189,10 @@ components:
           type: string
           description: Optional metadata to store with the score (up to 255 characters)
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Leaderboards Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/leaderboards/manual/write-configuration/rest-api

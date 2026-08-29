@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Build Targets API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Build Automation Build Targets API
+  description: The Unity Build Automation REST API enables automating and integrating continuous integration builds into custom workflows. It provides access to build history, build status, build artifacts, and supports webhook callbacks for build lifecycle events. Supports cloud builds for iOS, Android, WebGL, Windows, Mac, Linux, and console platforms.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://build-api.cloud.unity3d.com/api/v1
+  description: Unity Build Automation API Server
 security:
-- apiKeyAuth: []
+- basicAuth: []
 tags:
 - name: Build Targets
   description: Configure build targets and platforms
@@ -233,10 +233,9 @@ components:
         settings:
           type: object
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    basicAuth:
+      type: http
+      scheme: basic
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Build Automation Documentation
+  url: https://docs.unity.com/ugs/manual/devops/manual/build-automation/build-automation-api

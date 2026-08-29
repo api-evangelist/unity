@@ -1,8 +1,8 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Configuration API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
-  version: v1.0.0
+  title: Unity Economy Configuration API
+  description: The Unity Economy REST API allows you to manage in-game economies including virtual currencies, inventory items, purchases, and player balances. It provides both Admin endpoints for configuring economy resources and Player endpoints for runtime player interactions such as making purchases and checking balances.
+  version: v2.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
     name: Unity Support
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://economy.services.api.unity.com
+  description: Unity Economy Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Configuration
   description: Admin endpoints for managing economy resources
@@ -91,18 +91,6 @@ paths:
           description: Not Found
 components:
   schemas:
-    EconomyConfigList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/EconomyConfig'
-        links:
-          type: object
-          properties:
-            next:
-              type: string
     EconomyConfig:
       type: object
       properties:
@@ -131,11 +119,23 @@ components:
         modified:
           type: string
           format: date-time
+    EconomyConfigList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EconomyConfig'
+        links:
+          type: object
+          properties:
+            next:
+              type: string
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Economy Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/economy/manual/write-configuration/rest-api

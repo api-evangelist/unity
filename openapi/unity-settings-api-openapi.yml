@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Settings API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Remote Config Settings API
+  description: The Unity Remote Config REST API enables launching new features, testing functionality, and modifying game configurations without requiring app updates. The Admin API manages settings, schemas, and override rules. The Runtime API delivers configuration values to game clients at runtime.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,12 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://remote-config.services.api.unity.com
+  description: Unity Remote Config Admin Server
+- url: https://config.unity3d.com
+  description: Unity Remote Config Runtime Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Settings
   description: Manage configuration settings and schemas
@@ -116,10 +118,10 @@ components:
         description:
           type: string
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Remote Config Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/remote-config/manual/write-configuration/rest-api

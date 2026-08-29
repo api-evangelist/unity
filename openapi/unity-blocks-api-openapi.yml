@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Blocks API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Friends Blocks API
+  description: The Unity Friends API helps players connect with others to add a social experience to games. It provides endpoints for managing friend lists, sending and receiving friend requests, blocking players, and managing player presence and activity status.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://social.services.api.unity.com
+  description: Unity Social Services Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Blocks
   description: Manage blocked players
@@ -80,6 +80,13 @@ components:
           type: string
         presence:
           $ref: '#/components/schemas/Presence'
+    RelationshipList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
     Presence:
       type: object
       properties:
@@ -111,18 +118,11 @@ components:
         created:
           type: string
           format: date-time
-    RelationshipList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relationship'
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Friends Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/friends/manual/overview

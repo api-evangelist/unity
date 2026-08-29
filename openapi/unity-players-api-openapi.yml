@@ -1,20 +1,22 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Players API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Players API
   version: v1.0.0
-  termsOfService: https://unity.com/legal/terms-of-service
   contact:
     name: Unity Support
     url: https://support.unity.com
   license:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
+  termsOfService: https://unity.com/legal/terms-of-service
+  description: 'Operations tagged Players across 2 of this provider''s published API definitions: unity-lobby-openapi.yml, unity-player-authentication-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://lobby.services.api.unity.com
+  description: Unity Lobby Production Server
+- url: https://player-auth.services.api.unity.com
+  description: Unity Player Authentication Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Players
   description: Manage players within a lobby
@@ -70,6 +72,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Lobby'
+    servers:
+    - url: https://lobby.services.api.unity.com
+      description: Unity Lobby Production Server
   /v1/players:
     get:
       operationId: listPlayers
@@ -98,6 +103,9 @@ paths:
                 $ref: '#/components/schemas/PlayerList'
         '401':
           description: Unauthorized
+    servers:
+    - url: https://player-auth.services.api.unity.com
+      description: Unity Player Authentication Production Server
   /v1/players/{playerId}:
     get:
       operationId: getPlayer
@@ -137,6 +145,9 @@ paths:
           description: Player deleted
         '404':
           description: Player not found
+    servers:
+    - url: https://player-auth.services.api.unity.com
+      description: Unity Player Authentication Production Server
 components:
   schemas:
     LobbyPlayer:
@@ -167,6 +178,13 @@ components:
           - Private
         index:
           type: string
+    UpdatePlayerRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
     Lobby:
       type: object
       properties:
@@ -201,22 +219,6 @@ components:
         lastUpdated:
           type: string
           format: date-time
-    PlayerList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Player'
-        next:
-          type: string
-    UpdatePlayerRequest:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
     Player:
       type: object
       properties:
@@ -239,11 +241,23 @@ components:
         createdAt:
           type: string
           format: date-time
+    PlayerList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+        next:
+          type: string
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
-externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    serviceAccountAuth:
+      type: http
+      scheme: basic
+x-refined-from:
+- unity-lobby-openapi.yml
+- unity-player-authentication-openapi.yml

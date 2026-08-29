@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Scripts API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Cloud Code Scripts API
+  description: The Unity Cloud Code Admin API enables creating, deploying, and managing serverless scripts and modules in the cloud. Cloud Code scripts run game logic on Unity's infrastructure, supporting both JavaScript functions and C# modules. Scripts can interact with other Unity Gaming Services including Economy, Cloud Save, and Remote Config.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://cloud-code.services.api.unity.com
+  description: Unity Cloud Code Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Scripts
   description: Manage JavaScript cloud code scripts
@@ -156,20 +156,6 @@ paths:
           description: Script deleted
 components:
   schemas:
-    ScriptParameter:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - STRING
-          - NUMERIC
-          - BOOLEAN
-          - JSON
-        required:
-          type: boolean
     CreateScriptRequest:
       type: object
       required:
@@ -191,6 +177,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ScriptParameter'
+    ScriptVersion:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The JavaScript code
+        datePublished:
+          type: string
+          format: date-time
     Script:
       type: object
       properties:
@@ -216,24 +211,6 @@ components:
         modified:
           type: string
           format: date-time
-    UpdateScriptRequest:
-      type: object
-      properties:
-        code:
-          type: string
-        params:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScriptParameter'
-    ScriptVersion:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The JavaScript code
-        datePublished:
-          type: string
-          format: date-time
     ScriptList:
       type: object
       properties:
@@ -246,11 +223,34 @@ components:
           properties:
             next:
               type: string
+    UpdateScriptRequest:
+      type: object
+      properties:
+        code:
+          type: string
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptParameter'
+    ScriptParameter:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - STRING
+          - NUMERIC
+          - BOOLEAN
+          - JSON
+        required:
+          type: boolean
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Cloud Code Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual

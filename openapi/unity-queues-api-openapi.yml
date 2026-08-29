@@ -1,8 +1,8 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Queues API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
-  version: v1.0.0
+  title: Unity Matchmaker Queues API
+  description: The Unity Matchmaker REST API provides endpoints for creating and managing matchmaking tickets, defining matchmaking rules, and configuring match pools and queues. It enables skill-based and attribute-based player matching with low latency for games of all sizes.
+  version: v3.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
     name: Unity Support
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://matchmaker.services.api.unity.com
+  description: Unity Matchmaker Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Queues
   description: Configure matchmaking queues and pools
@@ -168,39 +168,6 @@ paths:
           description: Queue deleted
 components:
   schemas:
-    EscalationRules:
-      type: object
-      properties:
-        timeoutSeconds:
-          type: integer
-        backfillEnabled:
-          type: boolean
-    QueueList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Queue'
-    Queue:
-      type: object
-      properties:
-        name:
-          type: string
-        enabled:
-          type: boolean
-        defaultEscalationRules:
-          $ref: '#/components/schemas/EscalationRules'
-        pools:
-          type: array
-          items:
-            $ref: '#/components/schemas/Pool'
-        created:
-          type: string
-          format: date-time
-        modified:
-          type: string
-          format: date-time
     CreateQueueRequest:
       type: object
       required:
@@ -217,14 +184,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Pool'
-    MatchLogic:
+    EscalationRules:
       type: object
       properties:
-        name:
-          type: string
-        script:
-          type: string
-          description: MMScript for match rules
+        timeoutSeconds:
+          type: integer
+        backfillEnabled:
+          type: boolean
     Pool:
       type: object
       properties:
@@ -247,11 +213,45 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Pool'
+    Queue:
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+    MatchLogic:
+      type: object
+      properties:
+        name:
+          type: string
+        script:
+          type: string
+          description: MMScript for match rules
+    QueueList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Queue'
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Matchmaker Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/matchmaker/manual/matchmaker-api

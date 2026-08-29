@@ -1,20 +1,20 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Builds API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Builds API
   version: v1.0.0
-  termsOfService: https://unity.com/legal/terms-of-service
   contact:
     name: Unity Support
     url: https://support.unity.com
   license:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
+  termsOfService: https://unity.com/legal/terms-of-service
+  description: 'Operations tagged Builds across 2 of this provider''s published API definitions: unity-build-automation-openapi.yml, unity-multiplay-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
-security:
-- apiKeyAuth: []
+- url: https://build-api.cloud.unity3d.com/api/v1
+  description: Unity Build Automation API Server
+- url: https://multiplay.services.api.unity.com
+  description: Unity Multiplay Production Server
 tags:
 - name: Builds
   description: Manage and trigger builds
@@ -63,6 +63,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Build'
+      security:
+      - basicAuth: []
     post:
       operationId: startBuild
       summary: Start Build
@@ -100,6 +102,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Build'
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://build-api.cloud.unity3d.com/api/v1
+      description: Unity Build Automation API Server
   /orgs/{orgid}/projects/{projectid}/buildtargets/{buildtargetid}/builds/{number}:
     get:
       operationId: getBuild
@@ -135,6 +142,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Build'
+      security:
+      - basicAuth: []
     delete:
       operationId: cancelBuild
       summary: Cancel Build
@@ -165,6 +174,11 @@ paths:
       responses:
         '204':
           description: Build cancelled
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://build-api.cloud.unity3d.com/api/v1
+      description: Unity Build Automation API Server
   /v1/projects/{projectId}/builds:
     get:
       operationId: listBuilds
@@ -185,6 +199,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BuildList'
+      security:
+      - bearerAuth: []
     post:
       operationId: createBuild
       summary: Create Build
@@ -210,6 +226,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Build_2'
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://multiplay.services.api.unity.com
+      description: Unity Multiplay Production Server
   /v1/projects/{projectId}/builds/{buildId}:
     get:
       operationId: getBuild
@@ -235,6 +256,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Build_2'
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://multiplay.services.api.unity.com
+      description: Unity Multiplay Production Server
 components:
   schemas:
     Build:
@@ -283,13 +309,6 @@ components:
           format: date-time
         duration:
           type: integer
-    BuildList:
-      type: object
-      properties:
-        builds:
-          type: array
-          items:
-            $ref: '#/components/schemas/Build_2'
     StartBuildRequest:
       type: object
       properties:
@@ -299,6 +318,22 @@ components:
         delay:
           type: integer
           description: Seconds to delay before starting
+    BuildArtifact:
+      type: object
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        primary:
+          type: boolean
+        show_download:
+          type: boolean
+        links:
+          type: object
+          properties:
+            href:
+              type: string
     Build_2:
       type: object
       properties:
@@ -319,6 +354,13 @@ components:
         modified:
           type: string
           format: date-time
+    BuildList:
+      type: object
+      properties:
+        builds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Build_2'
     CreateBuildRequest:
       type: object
       required:
@@ -332,27 +374,14 @@ components:
           enum:
           - LINUX
           - WINDOWS
-    BuildArtifact:
-      type: object
-      properties:
-        key:
-          type: string
-        name:
-          type: string
-        primary:
-          type: boolean
-        show_download:
-          type: boolean
-        links:
-          type: object
-          properties:
-            href:
-              type: string
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
-externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-refined-from:
+- unity-build-automation-openapi.yml
+- unity-multiplay-openapi.yml

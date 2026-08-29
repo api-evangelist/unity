@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Events API
+  title: Unity Analytics Events API
   description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
@@ -75,6 +75,15 @@ paths:
                 $ref: '#/components/schemas/ValidationResult'
 components:
   schemas:
+    RecordEventsRequest:
+      type: object
+      required:
+      - events
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsEvent'
     AnalyticsEvent:
       type: object
       required:
@@ -124,15 +133,6 @@ components:
         userId:
           type: string
           description: Unity player ID if authenticated
-    RecordEventsRequest:
-      type: object
-      required:
-      - events
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsEvent'
     ValidationResult:
       type: object
       properties:

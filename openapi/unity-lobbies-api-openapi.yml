@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Lobbies API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Lobby Lobbies API
+  description: The Unity Lobby REST API provides endpoints for creating, managing, and querying multiplayer game lobbies. Lobbies allow players to group together before starting a game session. Supports public lobbies with search/filter, private lobbies with join codes, lobby data for game configuration, and player data for per-player attributes.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://lobby.services.api.unity.com
+  description: Unity Lobby Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Lobbies
   description: Create and manage game lobbies
@@ -181,52 +181,6 @@ paths:
           description: Heartbeat received
 components:
   schemas:
-    CreatePlayerRequest:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-    LobbyPlayer:
-      type: object
-      properties:
-        id:
-          type: string
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-        joined:
-          type: string
-          format: date-time
-        lastUpdated:
-          type: string
-          format: date-time
-    CreateLobbyRequest:
-      type: object
-      required:
-      - name
-      - maxPlayers
-      properties:
-        name:
-          type: string
-        maxPlayers:
-          type: integer
-          minimum: 1
-        isPrivate:
-          type: boolean
-          default: false
-        player:
-          $ref: '#/components/schemas/CreatePlayerRequest'
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
     DataObject:
       type: object
       properties:
@@ -292,6 +246,52 @@ components:
         hostId:
           type: string
           description: Transfer host to this player ID
+    CreatePlayerRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+    CreateLobbyRequest:
+      type: object
+      required:
+      - name
+      - maxPlayers
+      properties:
+        name:
+          type: string
+        maxPlayers:
+          type: integer
+          minimum: 1
+        isPrivate:
+          type: boolean
+          default: false
+        player:
+          $ref: '#/components/schemas/CreatePlayerRequest'
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+    LobbyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
     JoinLobbyRequest:
       type: object
       required:
@@ -302,10 +302,10 @@ components:
         player:
           $ref: '#/components/schemas/CreatePlayerRequest'
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Lobby Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/lobby/manual/lobby-apis

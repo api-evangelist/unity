@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Authentication API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Player Authentication API
+  description: The Unity Player Authentication REST API verifies player identity and manages authentication workflows. It provides endpoints for anonymous sign-in, platform-specific authentication (Google, Apple, Steam, Facebook), custom identity provider integration, token refresh, and account linking. Supports both the player-facing authentication flow and admin operations for player management.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://player-auth.services.api.unity.com
+  description: Unity Player Authentication Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Authentication
   description: Player sign-in and token management
@@ -137,39 +137,6 @@ paths:
           description: Invalid or expired refresh token
 components:
   schemas:
-    UsernamePasswordSignInRequest:
-      type: object
-      required:
-      - username
-      - password
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-    AuthResponse:
-      type: object
-      properties:
-        idToken:
-          type: string
-          description: JWT access token
-        sessionToken:
-          type: string
-        expiresIn:
-          type: integer
-          description: Token expiry in seconds
-        userId:
-          type: string
-        isNew:
-          type: boolean
-          description: True if a new account was created
-    RefreshTokenRequest:
-      type: object
-      required:
-      - refreshToken
-      properties:
-        refreshToken:
-          type: string
     AnonymousSignInRequest:
       type: object
       required:
@@ -180,19 +147,6 @@ components:
           items:
             type: string
           description: List of session tokens for anonymous sign-in continuity
-    UsernamePasswordSignUpRequest:
-      type: object
-      required:
-      - username
-      - password
-      properties:
-        username:
-          type: string
-          minLength: 3
-          maxLength: 20
-        password:
-          type: string
-          minLength: 8
     ExternalTokenSignInRequest:
       type: object
       required:
@@ -214,11 +168,60 @@ components:
         signInOnly:
           type: boolean
           description: If true, only sign in and do not create a new account
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
+          type: string
+    UsernamePasswordSignInRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    UsernamePasswordSignUpRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+          minLength: 3
+          maxLength: 20
+        password:
+          type: string
+          minLength: 8
+    AuthResponse:
+      type: object
+      properties:
+        idToken:
+          type: string
+          description: JWT access token
+        sessionToken:
+          type: string
+        expiresIn:
+          type: integer
+          description: Token expiry in seconds
+        userId:
+          type: string
+        isNew:
+          type: boolean
+          description: True if a new account was created
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    serviceAccountAuth:
+      type: http
+      scheme: basic
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Player Authentication Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api

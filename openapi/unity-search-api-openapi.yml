@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Unity Analytics Allocations Search API
-  description: The Unity Analytics REST API provides endpoints for ingesting custom analytics events from game clients and servers. Events are used to track player behavior, game performance, and feature adoption. The API supports batched event ingestion with automatic retry and buffering for high-volume game telemetry.
+  title: Unity Lobby Search API
+  description: The Unity Lobby REST API provides endpoints for creating, managing, and querying multiplayer game lobbies. Lobbies allow players to group together before starting a game session. Supports public lobbies with search/filter, private lobbies with join codes, lobby data for game configuration, and player data for per-player attributes.
   version: v1.0.0
   termsOfService: https://unity.com/legal/terms-of-service
   contact:
@@ -11,10 +11,10 @@ info:
     name: Unity Terms of Service
     url: https://unity.com/legal/terms-of-service
 servers:
-- url: https://analytics.services.api.unity.com
-  description: Unity Analytics Production Server
+- url: https://lobby.services.api.unity.com
+  description: Unity Lobby Production Server
 security:
-- apiKeyAuth: []
+- bearerAuth: []
 tags:
 - name: Search
   description: Discover and join lobbies
@@ -41,21 +41,6 @@ paths:
                 $ref: '#/components/schemas/LobbyList'
 components:
   schemas:
-    LobbyPlayer:
-      type: object
-      properties:
-        id:
-          type: string
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-        joined:
-          type: string
-          format: date-time
-        lastUpdated:
-          type: string
-          format: date-time
     QueryFilter:
       type: object
       required:
@@ -106,22 +91,6 @@ components:
           - Private
         index:
           type: string
-    QueryLobbiesRequest:
-      type: object
-      properties:
-        count:
-          type: integer
-          default: 10
-        continuationToken:
-          type: string
-        filter:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryFilter'
-        order:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryOrder'
     Lobby:
       type: object
       properties:
@@ -156,13 +125,22 @@ components:
         lastUpdated:
           type: string
           format: date-time
-    QueryOrder:
+    QueryLobbiesRequest:
       type: object
       properties:
-        field:
+        count:
+          type: integer
+          default: 10
+        continuationToken:
           type: string
-        asc:
-          type: boolean
+        filter:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryFilter'
+        order:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryOrder'
     LobbyList:
       type: object
       properties:
@@ -172,11 +150,33 @@ components:
             $ref: '#/components/schemas/Lobby'
         continuationToken:
           type: string
+    QueryOrder:
+      type: object
+      properties:
+        field:
+          type: string
+        asc:
+          type: boolean
+    LobbyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
   securitySchemes:
-    apiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 externalDocs:
-  description: Unity Analytics Documentation
-  url: https://docs.unity.com/ugs/en-us/manual/analytics/manual/rest-api
+  description: Unity Lobby Documentation
+  url: https://docs.unity.com/ugs/en-us/manual/lobby/manual/lobby-apis
