@@ -5,6 +5,18 @@ description: Unity is a cross-platform real-time development platform that provi
   content creation, and live game operations including multiplayer, analytics, economy,
   authentication, and DevOps tooling.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
