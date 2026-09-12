@@ -3350,6 +3350,8 @@ maintainers:
   email: support@unity.com
   url: https://unity.com
 common:
+- type: Website
+  url: https://www.unity.com/
 - type: CapabilityMap
   url: capabilities/unity-capability-edges.yml
   name: Unity Business Capability Map
