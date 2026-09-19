@@ -1247,6 +1247,8 @@ apis:
   description: Manage server fleets
   humanURL: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   tags:
+  - Fleet
+  tags_raw:
   - Fleets
   properties:
   - type: OpenAPI
@@ -2297,6 +2299,8 @@ apis:
   description: Manage players within a lobby
   humanURL: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   tags:
+  - Player
+  tags_raw:
   - Players
   properties:
   - type: OpenAPI
