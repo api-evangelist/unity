@@ -1,66 +1,49 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Unity
-providerId: unity
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
-tags:
-  - Game Development
-  - Real-Time 3D
-  - Cloud Gaming
-description: Unity sells two distinct commercial surfaces - the Unity Engine subscription tiers (Personal,
-  Pro, Industry, Enterprise) gated by company revenue thresholds, and Unity Gaming Services (Cloud
-  Save, Authentication, Multiplay, Vivox, Lobby) on a pay-as-you-go model with free monthly tiers.
-  The unity.com pricing pages and store.unity.com block automated fetching at our origin, so concrete
-  per-seat and per-MAU pricing could not be reconciled from primary sources during this pass; reduce
-  to a Contact Sales scaffold until a successful WebFetch lands.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://unity.com/products
 sources:
-  - https://unity.com
-  - https://docs.unity.com/ugs/manual/overview
-notes: WebFetch returned 403 against unity.com/pricing, store.unity.com, and the UGS pricing-and-billing
-  page. Documented qualitative model from docs.unity.com/ugs - free tier with usage limits, blocks
-  access if exceeded without payment details - is preserved here, but numeric prices and MAU thresholds
-  could not be confirmed from primary sources.
+- https://unity.com/products
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T124425
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+note: Plan page with tiered subscriptions plus usage add-on rates (storage $0.10/GB 25-100GB, $0.06/GB
+  above 100GB, Premium Storage $0.30/GB, Egress $0.10/GB, compute per-minute rates, $38/seat on-prem Version
+  Control, $10 additional concurrency).
+plan_count: 5
+currency: USD
 plans:
-  - id: unity-contact-sales
-    name: Contact Sales / See Unity Pricing
-    type: enterprise
-    description: Unity Engine seats and Unity Gaming Services pricing must be reconciled from unity.com
-      directly. Engine sells Personal (revenue-gated free), Pro, Industry, and Enterprise tiers;
-      UGS uses pay-as-you-go with per-service free tiers.
-    entries:
-      - label: Engine subscription
-        name: engine_subscription
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: see https://unity.com/pricing
-        userMultiplied: true
-      - label: Gaming Services usage
-        name: ugs_usage
-        type: metered
-        metric: varies
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: see https://unity.com/solutions/gaming-services/pricing
-        userMultiplied: false
-    elements:
-      - name: Unity Engine
-      - name: Unity Cloud Save
-      - name: Unity Authentication
-      - name: Unity Multiplay Hosting
-      - name: Vivox Voice and Text Chat
-      - name: Unity Lobby
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- name: Personal
+  price_text: Free
+  period: none
+  included_quota: Publish to web, desktop, AR/VR, and mobile; Unity Cloud ecosystem; MCP access; CLI access;
+    1,000 Monthly credit allowance for Unity's AI tools
+- name: Pro
+  price_text: $210.00
+  price: 210
+  currency: USD
+  period: month
+  unit: per month
+  included_quota: Everything in Personal, consoles and Apple Vision Pro publishing, 2,000 Monthly credit
+    allowance for Unity's AI tools
+- name: Unity Pro (yearly)
+  price_text: from $2,310.00 /yr
+  price: 2310
+  currency: USD
+  period: year
+- name: Enterprise
+  price_text: Custom pricing
+  period: none
+  included_quota: Everything in Pro, build automation, source code access (read only), dedicated support,
+    3,000 Monthly credit allowance
+- name: Unity Industry
+  price_text: Custom pricing
+  period: none
+  included_quota: Industry-specific solutions toolkits
+rate_limit_statements:
+- Unity AI Concurrent MCP Connections Monthly subscription required 3 5 5
+- Included Unity Concurrency 2 2 2 2
