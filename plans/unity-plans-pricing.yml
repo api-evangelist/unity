@@ -10,6 +10,12 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: business-product
 pricing_basis: tiered-subscription
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-09-20'
+  evidence: Cloud and on-prem build automation
+  managed_tier: Pro
 published: true
 note: Plan page with tiered subscriptions plus usage add-on rates (storage $0.10/GB 25-100GB, $0.06/GB
   above 100GB, Premium Storage $0.30/GB, Egress $0.10/GB, compute per-minute rates, $38/seat on-prem Version
