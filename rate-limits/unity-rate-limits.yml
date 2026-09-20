@@ -1,45 +1,28 @@
-specification: API Commons Rate Limits
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: Unity
-providerId: unity
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
-tags:
-  - Game Development
-  - Cloud Gaming
-  - Rate Limiting
-description: Unity Gaming Services applies per-service free tiers as the primary throttling mechanism
-  - if free tier limits are exceeded without payment details on file, UGS access is blocked until
-  payment information is added. Numeric per-second / per-minute API limits per service are documented
-  in the per-service docs at docs.unity.com/ugs but were not reconcilable from primary sources due
-  to portal access restrictions during this pass.
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://docs.unity.com/en-us/oas-player-auth-admin/1.0.0
 sources:
-  - https://docs.unity.com/ugs/manual/overview
-notes: Primary unity.com pricing pages returned 403 during reconciliation. Capture qualitative behavior
-  here; numeric per-service limits should be filled from the per-service docs (Cloud Save, Auth,
-  Multiplay, Vivox, Lobby) when re-reconciled.
+- https://docs.unity.com/en-us/oas-player-auth-admin/1.0.0
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: true
+note: Rate Limits section states 10 req/s and 500 requests per 30 minutes, 429 with Retry-After header.
+limit_count: 2
 limits:
-  - name: UGS free-tier limits
-    scope: project
-    metric: varies
-    limit: see per-service Unity Gaming Services docs
-    notes: Each UGS service has its own free-tier limit (typically MAU- or request-based). Exceeding
-      it blocks UGS access until payment details are added.
-  - name: Per-service runtime limits
-    scope: project
-    metric: varies
-    limit: see service-specific UGS reference
-policies:
-  - name: Free Tier Enforcement
-    description: Unity Gaming Services blocks access to all UGS services if a project exceeds free
-      tier limits without payment details on file; access resumes once payment is configured.
-  - name: Pay-As-You-Go
-    description: Above the free tier, services are billed on a pay-as-you-go basis rather than hard-throttled.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- name: Per-second request limit
+  limit_text: 10 requests per second
+  limit: 10
+  window: second
+  scope: unclear
+  endpoint: Player Authentication Admin API
+- name: Per 30-minute request limit
+  limit_text: 500 requests per 30 minute period
+  limit: 500
+  scope: unclear
+  endpoint: Player Authentication Admin API
+headers:
+- Retry-After
+exceeded_status: 429
