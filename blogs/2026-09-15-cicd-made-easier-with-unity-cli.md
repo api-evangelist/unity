@@ -1,0 +1,7 @@
+---
+title: "CICD Made Easier with Unity CLI"
+url: "https://unity.com/blog/cicd-made-easier-with-unity-cli"
+date: "2026-09-15"
+feed_url: "https://blog.unity.com/feed/"
+---
+Discover how the new Unity CLI simplifies CI/CD for game development. Learn how to replace complex custom scripts with a unified command-line interface to easily manage Unity installations, run tests, and execute builds across any CI provider.
