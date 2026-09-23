@@ -65,6 +65,12 @@ paths:
                 $ref: '#/components/schemas/PlayerInventory'
 components:
   schemas:
+    Timestamp:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
     PlayerInventory:
       type: object
       properties:
@@ -72,12 +78,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InventoryItem'
-    Timestamp:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
     InventoryItem:
       type: object
       properties:

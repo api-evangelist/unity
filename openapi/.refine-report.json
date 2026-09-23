@@ -65,7 +65,8 @@
     "unity-player-authentication-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
     "unity-remote-config-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
     "tag 'Builds' spans 2 source specs (unity-build-automation-openapi.yml, unity-multiplay-openapi.yml): per-path servers applied",
-    "tag 'Players' spans 2 source specs (unity-lobby-openapi.yml, unity-player-authentication-openapi.yml): per-path servers applied"
+    "tag 'Players' spans 2 source specs (unity-lobby-openapi.yml, unity-player-authentication-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "unity-allocations-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -137,16 +137,6 @@ paths:
           description: Invalid or expired refresh token
 components:
   schemas:
-    AnonymousSignInRequest:
-      type: object
-      required:
-      - sessionTokens
-      properties:
-        sessionTokens:
-          type: array
-          items:
-            type: string
-          description: List of session tokens for anonymous sign-in continuity
     ExternalTokenSignInRequest:
       type: object
       required:
@@ -168,13 +158,6 @@ components:
         signInOnly:
           type: boolean
           description: If true, only sign in and do not create a new account
-    RefreshTokenRequest:
-      type: object
-      required:
-      - refreshToken
-      properties:
-        refreshToken:
-          type: string
     UsernamePasswordSignInRequest:
       type: object
       required:
@@ -185,19 +168,23 @@ components:
           type: string
         password:
           type: string
-    UsernamePasswordSignUpRequest:
+    AnonymousSignInRequest:
       type: object
       required:
-      - username
-      - password
+      - sessionTokens
       properties:
-        username:
+        sessionTokens:
+          type: array
+          items:
+            type: string
+          description: List of session tokens for anonymous sign-in continuity
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
           type: string
-          minLength: 3
-          maxLength: 20
-        password:
-          type: string
-          minLength: 8
     AuthResponse:
       type: object
       properties:
@@ -214,6 +201,19 @@ components:
         isNew:
           type: boolean
           description: True if a new account was created
+    UsernamePasswordSignUpRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+          minLength: 3
+          maxLength: 20
+        password:
+          type: string
+          minLength: 8
   securitySchemes:
     bearerAuth:
       type: http

@@ -115,6 +115,31 @@ paths:
           description: Ticket not found
 components:
   schemas:
+    MatchAssignment:
+      type: object
+      properties:
+        connection:
+          type: string
+          description: Server connection string for the matched game
+        payload:
+          type: object
+          description: Additional match data
+    CreateTicketRequest:
+      type: object
+      required:
+      - players
+      - queueName
+      properties:
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+          description: Players to include in the matchmaking ticket
+        queueName:
+          type: string
+          description: Name of the matchmaking queue to enter
+        attributes:
+          $ref: '#/components/schemas/TicketAttributes'
     TicketStatus:
       type: object
       properties:
@@ -129,12 +154,6 @@ components:
           description: Current ticket status
         assignment:
           $ref: '#/components/schemas/MatchAssignment'
-    TicketCreated:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique ticket identifier
     TicketAttributes:
       type: object
       properties:
@@ -155,31 +174,12 @@ components:
         attributes:
           type: object
           description: Player-specific attributes for matchmaking
-    CreateTicketRequest:
-      type: object
-      required:
-      - players
-      - queueName
-      properties:
-        players:
-          type: array
-          items:
-            $ref: '#/components/schemas/Player'
-          description: Players to include in the matchmaking ticket
-        queueName:
-          type: string
-          description: Name of the matchmaking queue to enter
-        attributes:
-          $ref: '#/components/schemas/TicketAttributes'
-    MatchAssignment:
+    TicketCreated:
       type: object
       properties:
-        connection:
+        id:
           type: string
-          description: Server connection string for the matched game
-        payload:
-          type: object
-          description: Additional match data
+          description: Unique ticket identifier
   securitySchemes:
     bearerAuth:
       type: http

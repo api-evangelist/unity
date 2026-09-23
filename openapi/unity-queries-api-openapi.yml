@@ -52,23 +52,6 @@ paths:
                 $ref: '#/components/schemas/QueryResult'
 components:
   schemas:
-    DataItem:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Data key (up to 255 characters)
-        value:
-          description: Data value (any JSON-serializable value)
-        writeLock:
-          type: string
-          description: Optimistic concurrency lock token
-        created:
-          type: string
-          format: date-time
-        modified:
-          type: string
-          format: date-time
     FieldFilter:
       type: object
       required:
@@ -88,24 +71,23 @@ components:
           - LE
           - GT
           - GE
-    QueryRequest:
+    DataItem:
       type: object
       properties:
-        returnKeys:
-          type: array
-          items:
-            type: string
-          description: Keys to return in the query results
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldFilter'
-        offset:
-          type: integer
-          default: 0
-        limit:
-          type: integer
-          default: 10
+        key:
+          type: string
+          description: Data key (up to 255 characters)
+        value:
+          description: Data value (any JSON-serializable value)
+        writeLock:
+          type: string
+          description: Optimistic concurrency lock token
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
     QueryResult:
       type: object
       properties:
@@ -126,6 +108,24 @@ components:
           type: integer
         limit:
           type: integer
+    QueryRequest:
+      type: object
+      properties:
+        returnKeys:
+          type: array
+          items:
+            type: string
+          description: Keys to return in the query results
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldFilter'
+        offset:
+          type: integer
+          default: 0
+        limit:
+          type: integer
+          default: 10
   securitySchemes:
     bearerAuth:
       type: http

@@ -139,13 +139,6 @@ paths:
           description: Rule deleted
 components:
   schemas:
-    RuleList:
-      type: object
-      properties:
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rule'
     UpdateRuleRequest:
       type: object
       properties:
@@ -191,34 +184,13 @@ components:
         value: {}
         description:
           type: string
-    Rule:
+    RuleList:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        enabled:
-          type: boolean
-        priority:
-          type: integer
-        condition:
-          type: string
-          description: Rule condition expression
-        rolloutPercentage:
-          type: integer
-          minimum: 0
-          maximum: 100
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        value:
+        rules:
           type: array
           items:
-            $ref: '#/components/schemas/Setting'
+            $ref: '#/components/schemas/Rule'
     CreateRuleRequest:
       type: object
       required:
@@ -239,6 +211,34 @@ components:
         rolloutPercentage:
           type: integer
           default: 100
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        enabled:
+          type: boolean
+        priority:
+          type: integer
+        condition:
+          type: string
+          description: Rule condition expression
+        rolloutPercentage:
+          type: integer
+          minimum: 0
+          maximum: 100
         startDate:
           type: string
           format: date-time

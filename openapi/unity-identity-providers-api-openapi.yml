@@ -97,13 +97,6 @@ paths:
           description: Identity not found
 components:
   schemas:
-    UnlinkIdentityRequest:
-      type: object
-      required:
-      - idProvider
-      properties:
-        idProvider:
-          type: string
     ExternalTokenSignInRequest:
       type: object
       required:
@@ -147,6 +140,13 @@ components:
         createdAt:
           type: string
           format: date-time
+    UnlinkIdentityRequest:
+      type: object
+      required:
+      - idProvider
+      properties:
+        idProvider:
+          type: string
     AuthResponse:
       type: object
       properties:

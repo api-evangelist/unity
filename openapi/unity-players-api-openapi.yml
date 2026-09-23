@@ -150,41 +150,6 @@ paths:
       description: Unity Player Authentication Production Server
 components:
   schemas:
-    LobbyPlayer:
-      type: object
-      properties:
-        id:
-          type: string
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-        joined:
-          type: string
-          format: date-time
-        lastUpdated:
-          type: string
-          format: date-time
-    DataObject:
-      type: object
-      properties:
-        value:
-          type: string
-        visibility:
-          type: string
-          enum:
-          - Public
-          - Member
-          - Private
-        index:
-          type: string
-    UpdatePlayerRequest:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
     Lobby:
       type: object
       properties:
@@ -219,6 +184,41 @@ components:
         lastUpdated:
           type: string
           format: date-time
+    LobbyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    UpdatePlayerRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+    DataObject:
+      type: object
+      properties:
+        value:
+          type: string
+        visibility:
+          type: string
+          enum:
+          - Public
+          - Member
+          - Private
+        index:
+          type: string
     Player:
       type: object
       properties:

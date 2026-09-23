@@ -168,51 +168,13 @@ paths:
           description: Queue deleted
 components:
   schemas:
-    CreateQueueRequest:
+    QueueList:
       type: object
-      required:
-      - name
       properties:
-        name:
-          type: string
-        enabled:
-          type: boolean
-          default: true
-        defaultEscalationRules:
-          $ref: '#/components/schemas/EscalationRules'
-        pools:
+        results:
           type: array
           items:
-            $ref: '#/components/schemas/Pool'
-    EscalationRules:
-      type: object
-      properties:
-        timeoutSeconds:
-          type: integer
-        backfillEnabled:
-          type: boolean
-    Pool:
-      type: object
-      properties:
-        name:
-          type: string
-        maximumPlayerCount:
-          type: integer
-        minimumPlayerCount:
-          type: integer
-        matchLogic:
-          $ref: '#/components/schemas/MatchLogic'
-    UpdateQueueRequest:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-        defaultEscalationRules:
-          $ref: '#/components/schemas/EscalationRules'
-        pools:
-          type: array
-          items:
-            $ref: '#/components/schemas/Pool'
+            $ref: '#/components/schemas/Queue'
     Queue:
       type: object
       properties:
@@ -232,6 +194,24 @@ components:
         modified:
           type: string
           format: date-time
+    EscalationRules:
+      type: object
+      properties:
+        timeoutSeconds:
+          type: integer
+        backfillEnabled:
+          type: boolean
+    Pool:
+      type: object
+      properties:
+        name:
+          type: string
+        maximumPlayerCount:
+          type: integer
+        minimumPlayerCount:
+          type: integer
+        matchLogic:
+          $ref: '#/components/schemas/MatchLogic'
     MatchLogic:
       type: object
       properties:
@@ -240,13 +220,33 @@ components:
         script:
           type: string
           description: MMScript for match rules
-    QueueList:
+    UpdateQueueRequest:
       type: object
       properties:
-        results:
+        enabled:
+          type: boolean
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
           type: array
           items:
-            $ref: '#/components/schemas/Queue'
+            $ref: '#/components/schemas/Pool'
+    CreateQueueRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+          default: true
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
   securitySchemes:
     bearerAuth:
       type: http

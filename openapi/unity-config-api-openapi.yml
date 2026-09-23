@@ -117,6 +117,13 @@ paths:
                 $ref: '#/components/schemas/Config'
 components:
   schemas:
+    ConfigList:
+      type: object
+      properties:
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Config'
     Config:
       type: object
       properties:
@@ -154,13 +161,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Setting'
-    ConfigList:
-      type: object
-      properties:
-        configs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Config'
     Setting:
       type: object
       required:

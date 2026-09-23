@@ -104,39 +104,6 @@ paths:
                 $ref: '#/components/schemas/Relationship'
 components:
   schemas:
-    PlayerProfile:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        presence:
-          $ref: '#/components/schemas/Presence'
-    FriendRequestList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relationship'
-        next:
-          type: string
-    Presence:
-      type: object
-      properties:
-        availability:
-          type: string
-          enum:
-          - ONLINE
-          - OFFLINE
-          - INVISIBLE
-          - BUSY
-        activity:
-          type: object
-          properties:
-            status:
-              type: string
     Relationship:
       type: object
       properties:
@@ -153,6 +120,39 @@ components:
         created:
           type: string
           format: date-time
+    Presence:
+      type: object
+      properties:
+        availability:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - INVISIBLE
+          - BUSY
+        activity:
+          type: object
+          properties:
+            status:
+              type: string
+    FriendRequestList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
+        next:
+          type: string
+    PlayerProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        presence:
+          $ref: '#/components/schemas/Presence'
   securitySchemes:
     bearerAuth:
       type: http

@@ -263,6 +263,15 @@ paths:
       description: Unity Multiplay Production Server
 components:
   schemas:
+    StartBuildRequest:
+      type: object
+      properties:
+        clean:
+          type: boolean
+          description: Whether to start a clean build
+        delay:
+          type: integer
+          description: Seconds to delay before starting
     Build:
       type: object
       properties:
@@ -309,15 +318,6 @@ components:
           format: date-time
         duration:
           type: integer
-    StartBuildRequest:
-      type: object
-      properties:
-        clean:
-          type: boolean
-          description: Whether to start a clean build
-        delay:
-          type: integer
-          description: Seconds to delay before starting
     BuildArtifact:
       type: object
       properties:
@@ -334,26 +334,6 @@ components:
           properties:
             href:
               type: string
-    Build_2:
-      type: object
-      properties:
-        id:
-          type: integer
-        buildID:
-          type: integer
-        buildName:
-          type: string
-        os:
-          type: string
-          enum:
-          - LINUX
-          - WINDOWS
-        created:
-          type: string
-          format: date-time
-        modified:
-          type: string
-          format: date-time
     BuildList:
       type: object
       properties:
@@ -374,6 +354,26 @@ components:
           enum:
           - LINUX
           - WINDOWS
+    Build_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        buildID:
+          type: integer
+        buildName:
+          type: string
+        os:
+          type: string
+          enum:
+          - LINUX
+          - WINDOWS
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
   securitySchemes:
     basicAuth:
       type: http
