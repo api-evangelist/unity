@@ -94,8 +94,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -199,8 +197,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -304,8 +300,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -409,8 +403,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -514,8 +506,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -619,8 +609,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -724,8 +712,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -831,8 +817,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -936,8 +920,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -1043,8 +1025,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -1150,8 +1130,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -1257,8 +1235,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -1362,8 +1338,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -1467,8 +1441,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -1572,8 +1544,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -1677,8 +1647,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -1782,8 +1750,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -1887,8 +1853,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -1992,8 +1956,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -2097,8 +2059,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -2202,8 +2162,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -2309,8 +2267,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -2414,8 +2370,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -2521,8 +2475,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -2626,8 +2578,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -2731,8 +2681,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -2836,8 +2784,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -2941,8 +2887,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -3046,8 +2990,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -3151,8 +3093,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
@@ -3256,8 +3196,6 @@ apis:
     url: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   - type: APIReference
     url: https://services.docs.unity.com/player-auth-admin/v1/
-  - type: GraphQL
-    url: graphql/unity-graphql.md
   - type: Documentation
     url: https://docs.unity.com/ugs/en-us/manual/cloud-code/manual
   - type: APIReference
