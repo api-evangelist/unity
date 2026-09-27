@@ -75,15 +75,6 @@ paths:
                 $ref: '#/components/schemas/ValidationResult'
 components:
   schemas:
-    RecordEventsRequest:
-      type: object
-      required:
-      - events
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsEvent'
     AnalyticsEvent:
       type: object
       required:
@@ -133,6 +124,15 @@ components:
         userId:
           type: string
           description: Unity player ID if authenticated
+    RecordEventsRequest:
+      type: object
+      required:
+      - events
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsEvent'
     ValidationResult:
       type: object
       properties:

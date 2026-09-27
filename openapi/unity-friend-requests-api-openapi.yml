@@ -120,6 +120,15 @@ components:
         created:
           type: string
           format: date-time
+    PlayerProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        presence:
+          $ref: '#/components/schemas/Presence'
     Presence:
       type: object
       properties:
@@ -144,15 +153,6 @@ components:
             $ref: '#/components/schemas/Relationship'
         next:
           type: string
-    PlayerProfile:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        presence:
-          $ref: '#/components/schemas/Presence'
   securitySchemes:
     bearerAuth:
       type: http

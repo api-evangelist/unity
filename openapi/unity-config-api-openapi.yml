@@ -117,13 +117,28 @@ paths:
                 $ref: '#/components/schemas/Config'
 components:
   schemas:
-    ConfigList:
+    Setting:
       type: object
+      required:
+      - key
+      - type
+      - value
       properties:
-        configs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Config'
+        key:
+          type: string
+          description: Configuration key name
+        type:
+          type: string
+          enum:
+          - string
+          - int
+          - bool
+          - float
+          - json
+          description: Data type of the setting
+        value: {}
+        description:
+          type: string
     Config:
       type: object
       properties:
@@ -161,28 +176,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Setting'
-    Setting:
+    ConfigList:
       type: object
-      required:
-      - key
-      - type
-      - value
       properties:
-        key:
-          type: string
-          description: Configuration key name
-        type:
-          type: string
-          enum:
-          - string
-          - int
-          - bool
-          - float
-          - json
-          description: Data type of the setting
-        value: {}
-        description:
-          type: string
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Config'
   securitySchemes:
     bearerAuth:
       type: http

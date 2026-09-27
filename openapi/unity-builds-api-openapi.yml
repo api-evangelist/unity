@@ -233,7 +233,7 @@ paths:
       description: Unity Multiplay Production Server
   /v1/projects/{projectId}/builds/{buildId}:
     get:
-      operationId: getBuild
+      operationId: getV1ProjectsByProjectIdBuildsByBuildId
       summary: Get Build
       description: Returns details of a specific game server build.
       tags:
@@ -258,6 +258,8 @@ paths:
                 $ref: '#/components/schemas/Build_2'
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: getBuild
     servers:
     - url: https://multiplay.services.api.unity.com
       description: Unity Multiplay Production Server
@@ -341,19 +343,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Build_2'
-    CreateBuildRequest:
-      type: object
-      required:
-      - buildName
-      - os
-      properties:
-        buildName:
-          type: string
-        os:
-          type: string
-          enum:
-          - LINUX
-          - WINDOWS
     Build_2:
       type: object
       properties:
@@ -374,6 +363,19 @@ components:
         modified:
           type: string
           format: date-time
+    CreateBuildRequest:
+      type: object
+      required:
+      - buildName
+      - os
+      properties:
+        buildName:
+          type: string
+        os:
+          type: string
+          enum:
+          - LINUX
+          - WINDOWS
   securitySchemes:
     basicAuth:
       type: http

@@ -51,13 +51,6 @@ paths:
                 $ref: '#/components/schemas/ServerList'
 components:
   schemas:
-    ServerList:
-      type: object
-      properties:
-        servers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Server'
     Server:
       type: object
       properties:
@@ -80,6 +73,13 @@ components:
         created:
           type: string
           format: date-time
+    ServerList:
+      type: object
+      properties:
+        servers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Server'
   securitySchemes:
     bearerAuth:
       type: http

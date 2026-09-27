@@ -83,21 +83,6 @@ components:
         created:
           type: string
           format: date-time
-    Presence:
-      type: object
-      properties:
-        availability:
-          type: string
-          enum:
-          - ONLINE
-          - OFFLINE
-          - INVISIBLE
-          - BUSY
-        activity:
-          type: object
-          properties:
-            status:
-              type: string
     FriendList:
       type: object
       properties:
@@ -116,6 +101,21 @@ components:
           type: string
         presence:
           $ref: '#/components/schemas/Presence'
+    Presence:
+      type: object
+      properties:
+        availability:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - INVISIBLE
+          - BUSY
+        activity:
+          type: object
+          properties:
+            status:
+              type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -3188,6 +3188,8 @@ apis:
   description: Create and manage matchmaking tickets
   humanURL: https://docs.unity.com/ugs/en-us/manual/authentication/manual/rest-api
   tags:
+  - Ticketing
+  tags_raw:
   - Tickets
   properties:
   - type: OpenAPI

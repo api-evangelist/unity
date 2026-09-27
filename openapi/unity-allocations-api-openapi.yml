@@ -59,6 +59,12 @@ paths:
           description: No servers available
 components:
   schemas:
+    AllocateServerRequest:
+      type: object
+      properties:
+        allocationContext:
+          type: string
+          description: Custom context data for the allocation
     Allocation:
       type: object
       properties:
@@ -73,12 +79,6 @@ components:
           type: integer
         queryPort:
           type: integer
-    AllocateServerRequest:
-      type: object
-      properties:
-        allocationContext:
-          type: string
-          description: Custom context data for the allocation
   securitySchemes:
     bearerAuth:
       type: http

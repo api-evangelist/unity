@@ -72,12 +72,6 @@ components:
           $ref: '#/components/schemas/Timestamp'
         modified:
           $ref: '#/components/schemas/Timestamp'
-    Timestamp:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
     InventoryItem:
       type: object
       properties:
@@ -95,6 +89,14 @@ components:
           $ref: '#/components/schemas/Timestamp'
         modified:
           $ref: '#/components/schemas/Timestamp'
+    VirtualPurchaseRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          description: The virtual purchase configuration ID
     VirtualPurchaseResult:
       type: object
       properties:
@@ -122,14 +124,12 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/InventoryItem'
-    VirtualPurchaseRequest:
+    Timestamp:
       type: object
-      required:
-      - id
       properties:
-        id:
+        date:
           type: string
-          description: The virtual purchase configuration ID
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

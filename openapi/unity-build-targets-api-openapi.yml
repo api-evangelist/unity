@@ -170,15 +170,6 @@ paths:
           description: Build target deleted
 components:
   schemas:
-    UpdateBuildTargetRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        enabled:
-          type: boolean
-        settings:
-          type: object
     CreateBuildTargetRequest:
       type: object
       required:
@@ -232,6 +223,15 @@ components:
         modified:
           type: string
           format: date-time
+    UpdateBuildTargetRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        settings:
+          type: object
   securitySchemes:
     basicAuth:
       type: http

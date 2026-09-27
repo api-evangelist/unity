@@ -146,6 +146,12 @@ components:
           $ref: '#/components/schemas/Timestamp'
         modified:
           $ref: '#/components/schemas/Timestamp'
+    Timestamp:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
     PlayerCurrencyBalances:
       type: object
       properties:
@@ -153,12 +159,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CurrencyBalance'
-    Timestamp:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
     CurrencyBalanceUpdate:
       type: object
       required:

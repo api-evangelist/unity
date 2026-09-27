@@ -170,18 +170,13 @@ paths:
           description: Fleet deleted
 components:
   schemas:
-    CreateFleetRequest:
+    ScalingSettings:
       type: object
-      required:
-      - name
-      - buildConfiguration
       properties:
-        name:
-          type: string
-        buildConfiguration:
-          $ref: '#/components/schemas/BuildConfiguration'
-        scalingSettings:
-          $ref: '#/components/schemas/ScalingSettings'
+        minFreeServers:
+          type: integer
+        maxFreeServers:
+          type: integer
     UpdateFleetRequest:
       type: object
       properties:
@@ -191,13 +186,6 @@ components:
           $ref: '#/components/schemas/BuildConfiguration'
         scalingSettings:
           $ref: '#/components/schemas/ScalingSettings'
-    ScalingSettings:
-      type: object
-      properties:
-        minFreeServers:
-          type: integer
-        maxFreeServers:
-          type: integer
     Fleet:
       type: object
       properties:
@@ -228,6 +216,13 @@ components:
         modified:
           type: string
           format: date-time
+    FleetList:
+      type: object
+      properties:
+        fleets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fleet'
     BuildConfiguration:
       type: object
       properties:
@@ -249,13 +244,18 @@ components:
           type: integer
         memory:
           type: integer
-    FleetList:
+    CreateFleetRequest:
       type: object
+      required:
+      - name
+      - buildConfiguration
       properties:
-        fleets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Fleet'
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
   securitySchemes:
     bearerAuth:
       type: http

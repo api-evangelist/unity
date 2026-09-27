@@ -52,25 +52,6 @@ paths:
                 $ref: '#/components/schemas/QueryResult'
 components:
   schemas:
-    FieldFilter:
-      type: object
-      required:
-      - key
-      - value
-      - op
-      properties:
-        key:
-          type: string
-        value: {}
-        op:
-          type: string
-          enum:
-          - EQ
-          - NE
-          - LT
-          - LE
-          - GT
-          - GE
     DataItem:
       type: object
       properties:
@@ -126,6 +107,25 @@ components:
         limit:
           type: integer
           default: 10
+    FieldFilter:
+      type: object
+      required:
+      - key
+      - value
+      - op
+      properties:
+        key:
+          type: string
+        value: {}
+        op:
+          type: string
+          enum:
+          - EQ
+          - NE
+          - LT
+          - LE
+          - GT
+          - GE
   securitySchemes:
     bearerAuth:
       type: http

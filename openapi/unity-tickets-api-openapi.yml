@@ -115,15 +115,6 @@ paths:
           description: Ticket not found
 components:
   schemas:
-    MatchAssignment:
-      type: object
-      properties:
-        connection:
-          type: string
-          description: Server connection string for the matched game
-        payload:
-          type: object
-          description: Additional match data
     CreateTicketRequest:
       type: object
       required:
@@ -140,6 +131,15 @@ components:
           description: Name of the matchmaking queue to enter
         attributes:
           $ref: '#/components/schemas/TicketAttributes'
+    MatchAssignment:
+      type: object
+      properties:
+        connection:
+          type: string
+          description: Server connection string for the matched game
+        payload:
+          type: object
+          description: Additional match data
     TicketStatus:
       type: object
       properties:
@@ -154,15 +154,6 @@ components:
           description: Current ticket status
         assignment:
           $ref: '#/components/schemas/MatchAssignment'
-    TicketAttributes:
-      type: object
-      properties:
-        skill:
-          type: number
-          description: Player skill rating for skill-based matchmaking
-        attributes:
-          type: object
-          additionalProperties: {}
     Player:
       type: object
       required:
@@ -174,6 +165,15 @@ components:
         attributes:
           type: object
           description: Player-specific attributes for matchmaking
+    TicketAttributes:
+      type: object
+      properties:
+        skill:
+          type: number
+          description: Player skill rating for skill-based matchmaking
+        attributes:
+          type: object
+          additionalProperties: {}
     TicketCreated:
       type: object
       properties:

@@ -97,27 +97,6 @@ paths:
           description: Identity not found
 components:
   schemas:
-    ExternalTokenSignInRequest:
-      type: object
-      required:
-      - idProvider
-      - token
-      properties:
-        idProvider:
-          type: string
-          enum:
-          - google
-          - apple
-          - steam
-          - facebook
-          - custom
-          description: The external identity provider
-        token:
-          type: string
-          description: The identity token from the external provider
-        signInOnly:
-          type: boolean
-          description: If true, only sign in and do not create a new account
     Player:
       type: object
       properties:
@@ -140,6 +119,27 @@ components:
         createdAt:
           type: string
           format: date-time
+    ExternalTokenSignInRequest:
+      type: object
+      required:
+      - idProvider
+      - token
+      properties:
+        idProvider:
+          type: string
+          enum:
+          - google
+          - apple
+          - steam
+          - facebook
+          - custom
+          description: The external identity provider
+        token:
+          type: string
+          description: The identity token from the external provider
+        signInOnly:
+          type: boolean
+          description: If true, only sign in and do not create a new account
     UnlinkIdentityRequest:
       type: object
       required:

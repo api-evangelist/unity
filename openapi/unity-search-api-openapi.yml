@@ -41,37 +41,19 @@ paths:
                 $ref: '#/components/schemas/LobbyList'
 components:
   schemas:
-    QueryOrder:
+    DataObject:
       type: object
       properties:
-        field:
+        value:
           type: string
-        asc:
-          type: boolean
-    LobbyList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Lobby'
-        continuationToken:
+        visibility:
           type: string
-    LobbyPlayer:
-      type: object
-      properties:
-        id:
+          enum:
+          - Public
+          - Member
+          - Private
+        index:
           type: string
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-        joined:
-          type: string
-          format: date-time
-        lastUpdated:
-          type: string
-          format: date-time
     Lobby:
       type: object
       properties:
@@ -106,6 +88,28 @@ components:
         lastUpdated:
           type: string
           format: date-time
+    LobbyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    QueryOrder:
+      type: object
+      properties:
+        field:
+          type: string
+        asc:
+          type: boolean
     QueryFilter:
       type: object
       required:
@@ -159,18 +163,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/QueryOrder'
-    DataObject:
+    LobbyList:
       type: object
       properties:
-        value:
-          type: string
-        visibility:
-          type: string
-          enum:
-          - Public
-          - Member
-          - Private
-        index:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lobby'
+        continuationToken:
           type: string
   securitySchemes:
     bearerAuth:

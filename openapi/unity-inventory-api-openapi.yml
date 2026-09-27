@@ -65,12 +65,6 @@ paths:
                 $ref: '#/components/schemas/PlayerInventory'
 components:
   schemas:
-    Timestamp:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
     PlayerInventory:
       type: object
       properties:
@@ -95,6 +89,12 @@ components:
           $ref: '#/components/schemas/Timestamp'
         modified:
           $ref: '#/components/schemas/Timestamp'
+    Timestamp:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

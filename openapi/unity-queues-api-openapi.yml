@@ -168,6 +168,17 @@ paths:
           description: Queue deleted
 components:
   schemas:
+    Pool:
+      type: object
+      properties:
+        name:
+          type: string
+        maximumPlayerCount:
+          type: integer
+        minimumPlayerCount:
+          type: integer
+        matchLogic:
+          $ref: '#/components/schemas/MatchLogic'
     QueueList:
       type: object
       properties:
@@ -175,6 +186,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Queue'
+    MatchLogic:
+      type: object
+      properties:
+        name:
+          type: string
+        script:
+          type: string
+          description: MMScript for match rules
     Queue:
       type: object
       properties:
@@ -194,32 +213,6 @@ components:
         modified:
           type: string
           format: date-time
-    EscalationRules:
-      type: object
-      properties:
-        timeoutSeconds:
-          type: integer
-        backfillEnabled:
-          type: boolean
-    Pool:
-      type: object
-      properties:
-        name:
-          type: string
-        maximumPlayerCount:
-          type: integer
-        minimumPlayerCount:
-          type: integer
-        matchLogic:
-          $ref: '#/components/schemas/MatchLogic'
-    MatchLogic:
-      type: object
-      properties:
-        name:
-          type: string
-        script:
-          type: string
-          description: MMScript for match rules
     UpdateQueueRequest:
       type: object
       properties:
@@ -247,6 +240,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Pool'
+    EscalationRules:
+      type: object
+      properties:
+        timeoutSeconds:
+          type: integer
+        backfillEnabled:
+          type: boolean
   securitySchemes:
     bearerAuth:
       type: http
