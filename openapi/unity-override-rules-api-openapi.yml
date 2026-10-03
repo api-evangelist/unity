@@ -139,36 +139,28 @@ paths:
           description: Rule deleted
 components:
   schemas:
-    UpdateRuleRequest:
+    Setting:
       type: object
+      required:
+      - key
+      - type
+      - value
       properties:
-        name:
+        key:
           type: string
-        enabled:
-          type: boolean
-        priority:
-          type: integer
-        condition:
+          description: Configuration key name
+        type:
           type: string
-        rolloutPercentage:
-          type: integer
-        startDate:
+          enum:
+          - string
+          - int
+          - bool
+          - float
+          - json
+          description: Data type of the setting
+        value: {}
+        description:
           type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Setting'
-    RuleList:
-      type: object
-      properties:
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rule'
     CreateRuleRequest:
       type: object
       required:
@@ -199,28 +191,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Setting'
-    Setting:
+    UpdateRuleRequest:
       type: object
-      required:
-      - key
-      - type
-      - value
       properties:
-        key:
+        name:
           type: string
-          description: Configuration key name
-        type:
+        enabled:
+          type: boolean
+        priority:
+          type: integer
+        condition:
           type: string
-          enum:
-          - string
-          - int
-          - bool
-          - float
-          - json
-          description: Data type of the setting
-        value: {}
-        description:
+        rolloutPercentage:
+          type: integer
+        startDate:
           type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    RuleList:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
     Rule:
       type: object
       properties:

@@ -210,6 +210,35 @@ components:
                 type: string
               cutoff:
                 type: number
+    LeaderboardList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Leaderboard'
+        next:
+          type: string
+          description: Cursor for next page
+    LeaderboardCreate:
+      type: object
+      required:
+      - id
+      - sortOrder
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        sortOrder:
+          type: string
+          enum:
+          - asc
+          - desc
+        bucketSize:
+          type: number
+        resetConfig:
+          $ref: '#/components/schemas/ResetConfig'
     Leaderboard:
       type: object
       properties:
@@ -238,16 +267,6 @@ components:
         updated:
           type: string
           format: date-time
-    LeaderboardList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Leaderboard'
-        next:
-          type: string
-          description: Cursor for next page
     LeaderboardUpdate:
       type: object
       properties:
@@ -258,25 +277,6 @@ components:
           enum:
           - asc
           - desc
-        resetConfig:
-          $ref: '#/components/schemas/ResetConfig'
-    LeaderboardCreate:
-      type: object
-      required:
-      - id
-      - sortOrder
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        sortOrder:
-          type: string
-          enum:
-          - asc
-          - desc
-        bucketSize:
-          type: number
         resetConfig:
           $ref: '#/components/schemas/ResetConfig'
     ResetConfig:

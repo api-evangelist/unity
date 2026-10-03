@@ -336,13 +336,6 @@ components:
           properties:
             href:
               type: string
-    BuildList:
-      type: object
-      properties:
-        builds:
-          type: array
-          items:
-            $ref: '#/components/schemas/Build_2'
     Build_2:
       type: object
       properties:
@@ -376,6 +369,13 @@ components:
           enum:
           - LINUX
           - WINDOWS
+    BuildList:
+      type: object
+      properties:
+        builds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Build_2'
   securitySchemes:
     basicAuth:
       type: http

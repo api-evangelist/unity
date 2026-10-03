@@ -194,6 +194,21 @@ components:
           - Private
         index:
           type: string
+    LobbyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
     Lobby:
       type: object
       properties:
@@ -228,21 +243,6 @@ components:
         lastUpdated:
           type: string
           format: date-time
-    LobbyPlayer:
-      type: object
-      properties:
-        id:
-          type: string
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-        joined:
-          type: string
-          format: date-time
-        lastUpdated:
-          type: string
-          format: date-time
     JoinLobbyRequest:
       type: object
       required:
@@ -252,24 +252,6 @@ components:
           type: string
         player:
           $ref: '#/components/schemas/CreatePlayerRequest'
-    UpdateLobbyRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        maxPlayers:
-          type: integer
-        isPrivate:
-          type: boolean
-        isLocked:
-          type: boolean
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-        hostId:
-          type: string
-          description: Transfer host to this player ID
     CreateLobbyRequest:
       type: object
       required:
@@ -290,6 +272,24 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/DataObject'
+    UpdateLobbyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        maxPlayers:
+          type: integer
+        isPrivate:
+          type: boolean
+        isLocked:
+          type: boolean
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        hostId:
+          type: string
+          description: Transfer host to this player ID
     CreatePlayerRequest:
       type: object
       required:

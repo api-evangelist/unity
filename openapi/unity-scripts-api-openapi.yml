@@ -156,6 +156,41 @@ paths:
           description: Script deleted
 components:
   schemas:
+    ScriptParameter:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - STRING
+          - NUMERIC
+          - BOOLEAN
+          - JSON
+        required:
+          type: boolean
+    UpdateScriptRequest:
+      type: object
+      properties:
+        code:
+          type: string
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptParameter'
+    ScriptList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Script'
+        links:
+          type: object
+          properties:
+            next:
+              type: string
     Script:
       type: object
       properties:
@@ -181,20 +216,6 @@ components:
         modified:
           type: string
           format: date-time
-    ScriptParameter:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - STRING
-          - NUMERIC
-          - BOOLEAN
-          - JSON
-        required:
-          type: boolean
     CreateScriptRequest:
       type: object
       required:
@@ -216,15 +237,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ScriptParameter'
-    UpdateScriptRequest:
-      type: object
-      properties:
-        code:
-          type: string
-        params:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScriptParameter'
     ScriptVersion:
       type: object
       properties:
@@ -234,18 +246,6 @@ components:
         datePublished:
           type: string
           format: date-time
-    ScriptList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Script'
-        links:
-          type: object
-          properties:
-            next:
-              type: string
   securitySchemes:
     bearerAuth:
       type: http

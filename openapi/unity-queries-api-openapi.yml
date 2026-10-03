@@ -69,6 +69,24 @@ components:
         modified:
           type: string
           format: date-time
+    QueryRequest:
+      type: object
+      properties:
+        returnKeys:
+          type: array
+          items:
+            type: string
+          description: Keys to return in the query results
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldFilter'
+        offset:
+          type: integer
+          default: 0
+        limit:
+          type: integer
+          default: 10
     QueryResult:
       type: object
       properties:
@@ -89,24 +107,6 @@ components:
           type: integer
         limit:
           type: integer
-    QueryRequest:
-      type: object
-      properties:
-        returnKeys:
-          type: array
-          items:
-            type: string
-          description: Keys to return in the query results
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldFilter'
-        offset:
-          type: integer
-          default: 0
-        limit:
-          type: integer
-          default: 10
     FieldFilter:
       type: object
       required:

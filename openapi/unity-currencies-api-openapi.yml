@@ -133,25 +133,6 @@ paths:
                 $ref: '#/components/schemas/CurrencyBalance'
 components:
   schemas:
-    CurrencyBalance:
-      type: object
-      properties:
-        currencyId:
-          type: string
-        balance:
-          type: integer
-        writeLock:
-          type: string
-        created:
-          $ref: '#/components/schemas/Timestamp'
-        modified:
-          $ref: '#/components/schemas/Timestamp'
-    Timestamp:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
     PlayerCurrencyBalances:
       type: object
       properties:
@@ -170,6 +151,25 @@ components:
         writeLock:
           type: string
           description: Optimistic lock token to prevent race conditions
+    Timestamp:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+    CurrencyBalance:
+      type: object
+      properties:
+        currencyId:
+          type: string
+        balance:
+          type: integer
+        writeLock:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestamp'
+        modified:
+          $ref: '#/components/schemas/Timestamp'
   securitySchemes:
     bearerAuth:
       type: http

@@ -41,6 +41,22 @@ paths:
                 $ref: '#/components/schemas/LobbyList'
 components:
   schemas:
+    QueryLobbiesRequest:
+      type: object
+      properties:
+        count:
+          type: integer
+          default: 10
+        continuationToken:
+          type: string
+        filter:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryFilter'
+        order:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryOrder'
     DataObject:
       type: object
       properties:
@@ -54,62 +70,6 @@ components:
           - Private
         index:
           type: string
-    Lobby:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        lobbyCode:
-          type: string
-          description: Join code for private lobbies
-        isPrivate:
-          type: boolean
-        isLocked:
-          type: boolean
-        maxPlayers:
-          type: integer
-        availableSlots:
-          type: integer
-        hostId:
-          type: string
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-        players:
-          type: array
-          items:
-            $ref: '#/components/schemas/LobbyPlayer'
-        created:
-          type: string
-          format: date-time
-        lastUpdated:
-          type: string
-          format: date-time
-    LobbyPlayer:
-      type: object
-      properties:
-        id:
-          type: string
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-        joined:
-          type: string
-          format: date-time
-        lastUpdated:
-          type: string
-          format: date-time
-    QueryOrder:
-      type: object
-      properties:
-        field:
-          type: string
-        asc:
-          type: boolean
     QueryFilter:
       type: object
       required:
@@ -147,22 +107,21 @@ components:
           - GE
           - CONTAINS
           - NOT_CONTAINS
-    QueryLobbiesRequest:
+    LobbyPlayer:
       type: object
       properties:
-        count:
-          type: integer
-          default: 10
-        continuationToken:
+        id:
           type: string
-        filter:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryFilter'
-        order:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryOrder'
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
     LobbyList:
       type: object
       properties:
@@ -172,6 +131,47 @@ components:
             $ref: '#/components/schemas/Lobby'
         continuationToken:
           type: string
+    Lobby:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        lobbyCode:
+          type: string
+          description: Join code for private lobbies
+        isPrivate:
+          type: boolean
+        isLocked:
+          type: boolean
+        maxPlayers:
+          type: integer
+        availableSlots:
+          type: integer
+        hostId:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/LobbyPlayer'
+        created:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    QueryOrder:
+      type: object
+      properties:
+        field:
+          type: string
+        asc:
+          type: boolean
   securitySchemes:
     bearerAuth:
       type: http

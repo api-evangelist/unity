@@ -117,6 +117,23 @@ paths:
           description: Item not found
 components:
   schemas:
+    DataItem:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Data key (up to 255 characters)
+        value:
+          description: Data value (any JSON-serializable value)
+        writeLock:
+          type: string
+          description: Optimistic concurrency lock token
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
     SetPlayerDataRequest:
       type: object
       required:
@@ -147,23 +164,6 @@ components:
           properties:
             next:
               type: string
-    DataItem:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Data key (up to 255 characters)
-        value:
-          description: Data value (any JSON-serializable value)
-        writeLock:
-          type: string
-          description: Optimistic concurrency lock token
-        created:
-          type: string
-          format: date-time
-        modified:
-          type: string
-          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

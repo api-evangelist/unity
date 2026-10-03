@@ -59,19 +59,6 @@ paths:
           description: Insufficient funds
 components:
   schemas:
-    CurrencyBalance:
-      type: object
-      properties:
-        currencyId:
-          type: string
-        balance:
-          type: integer
-        writeLock:
-          type: string
-        created:
-          $ref: '#/components/schemas/Timestamp'
-        modified:
-          $ref: '#/components/schemas/Timestamp'
     InventoryItem:
       type: object
       properties:
@@ -89,14 +76,6 @@ components:
           $ref: '#/components/schemas/Timestamp'
         modified:
           $ref: '#/components/schemas/Timestamp'
-    VirtualPurchaseRequest:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          description: The virtual purchase configuration ID
     VirtualPurchaseResult:
       type: object
       properties:
@@ -124,12 +103,33 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/InventoryItem'
+    VirtualPurchaseRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          description: The virtual purchase configuration ID
     Timestamp:
       type: object
       properties:
         date:
           type: string
           format: date-time
+    CurrencyBalance:
+      type: object
+      properties:
+        currencyId:
+          type: string
+        balance:
+          type: integer
+        writeLock:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestamp'
+        modified:
+          $ref: '#/components/schemas/Timestamp'
   securitySchemes:
     bearerAuth:
       type: http

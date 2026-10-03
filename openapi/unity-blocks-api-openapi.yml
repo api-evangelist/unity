@@ -71,6 +71,28 @@ paths:
           description: Player unblocked
 components:
   schemas:
+    Presence:
+      type: object
+      properties:
+        availability:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - INVISIBLE
+          - BUSY
+        activity:
+          type: object
+          properties:
+            status:
+              type: string
+    RelationshipList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
     Relationship:
       type: object
       properties:
@@ -96,28 +118,6 @@ components:
           type: string
         presence:
           $ref: '#/components/schemas/Presence'
-    Presence:
-      type: object
-      properties:
-        availability:
-          type: string
-          enum:
-          - ONLINE
-          - OFFLINE
-          - INVISIBLE
-          - BUSY
-        activity:
-          type: object
-          properties:
-            status:
-              type: string
-    RelationshipList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relationship'
   securitySchemes:
     bearerAuth:
       type: http

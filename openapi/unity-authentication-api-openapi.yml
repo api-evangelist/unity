@@ -158,26 +158,6 @@ components:
         signInOnly:
           type: boolean
           description: If true, only sign in and do not create a new account
-    RefreshTokenRequest:
-      type: object
-      required:
-      - refreshToken
-      properties:
-        refreshToken:
-          type: string
-    UsernamePasswordSignUpRequest:
-      type: object
-      required:
-      - username
-      - password
-      properties:
-        username:
-          type: string
-          minLength: 3
-          maxLength: 20
-        password:
-          type: string
-          minLength: 8
     AuthResponse:
       type: object
       properties:
@@ -204,6 +184,13 @@ components:
           type: string
         password:
           type: string
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
+          type: string
     AnonymousSignInRequest:
       type: object
       required:
@@ -214,6 +201,19 @@ components:
           items:
             type: string
           description: List of session tokens for anonymous sign-in continuity
+    UsernamePasswordSignUpRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+          minLength: 3
+          maxLength: 20
+        password:
+          type: string
+          minLength: 8
   securitySchemes:
     bearerAuth:
       type: http

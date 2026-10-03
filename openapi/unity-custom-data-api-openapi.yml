@@ -83,18 +83,6 @@ paths:
                 $ref: '#/components/schemas/PlayerDataList'
 components:
   schemas:
-    PlayerDataList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataItem'
-        links:
-          type: object
-          properties:
-            next:
-              type: string
     DataItem:
       type: object
       properties:
@@ -112,6 +100,18 @@ components:
         modified:
           type: string
           format: date-time
+    PlayerDataList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataItem'
+        links:
+          type: object
+          properties:
+            next:
+              type: string
     SetPlayerDataRequest:
       type: object
       required:

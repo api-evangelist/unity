@@ -170,13 +170,18 @@ paths:
           description: Fleet deleted
 components:
   schemas:
-    ScalingSettings:
+    CreateFleetRequest:
       type: object
+      required:
+      - name
+      - buildConfiguration
       properties:
-        minFreeServers:
-          type: integer
-        maxFreeServers:
-          type: integer
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
     UpdateFleetRequest:
       type: object
       properties:
@@ -186,6 +191,34 @@ components:
           $ref: '#/components/schemas/BuildConfiguration'
         scalingSettings:
           $ref: '#/components/schemas/ScalingSettings'
+    FleetList:
+      type: object
+      properties:
+        fleets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fleet'
+    BuildConfiguration:
+      type: object
+      properties:
+        buildId:
+          type: integer
+        commandLine:
+          type: string
+        queryType:
+          type: string
+          enum:
+          - SQPQUERYTYPE
+          - A2SQUERYTYPE
+          - NONE
+        binaryPath:
+          type: string
+        cores:
+          type: integer
+        speedMhz:
+          type: integer
+        memory:
+          type: integer
     Fleet:
       type: object
       properties:
@@ -216,46 +249,13 @@ components:
         modified:
           type: string
           format: date-time
-    FleetList:
+    ScalingSettings:
       type: object
       properties:
-        fleets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Fleet'
-    BuildConfiguration:
-      type: object
-      properties:
-        buildId:
+        minFreeServers:
           type: integer
-        commandLine:
-          type: string
-        queryType:
-          type: string
-          enum:
-          - SQPQUERYTYPE
-          - A2SQUERYTYPE
-          - NONE
-        binaryPath:
-          type: string
-        cores:
+        maxFreeServers:
           type: integer
-        speedMhz:
-          type: integer
-        memory:
-          type: integer
-    CreateFleetRequest:
-      type: object
-      required:
-      - name
-      - buildConfiguration
-      properties:
-        name:
-          type: string
-        buildConfiguration:
-          $ref: '#/components/schemas/BuildConfiguration'
-        scalingSettings:
-          $ref: '#/components/schemas/ScalingSettings'
   securitySchemes:
     bearerAuth:
       type: http
