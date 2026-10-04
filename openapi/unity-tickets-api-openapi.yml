@@ -133,26 +133,6 @@ components:
         payload:
           type: object
           description: Additional match data
-    TicketStatus:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-          enum:
-          - InProgress
-          - Found
-          - Failed
-          description: Current ticket status
-        assignment:
-          $ref: '#/components/schemas/MatchAssignment'
-    TicketCreated:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique ticket identifier
     CreateTicketRequest:
       type: object
       required:
@@ -180,6 +160,26 @@ components:
         attributes:
           type: object
           description: Player-specific attributes for matchmaking
+    TicketCreated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ticket identifier
+    TicketStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+          - InProgress
+          - Found
+          - Failed
+          description: Current ticket status
+        assignment:
+          $ref: '#/components/schemas/MatchAssignment'
   securitySchemes:
     bearerAuth:
       type: http

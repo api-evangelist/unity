@@ -69,24 +69,25 @@ components:
         modified:
           type: string
           format: date-time
-    QueryRequest:
+    FieldFilter:
       type: object
+      required:
+      - key
+      - value
+      - op
       properties:
-        returnKeys:
-          type: array
-          items:
-            type: string
-          description: Keys to return in the query results
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldFilter'
-        offset:
-          type: integer
-          default: 0
-        limit:
-          type: integer
-          default: 10
+        key:
+          type: string
+        value: {}
+        op:
+          type: string
+          enum:
+          - EQ
+          - NE
+          - LT
+          - LE
+          - GT
+          - GE
     QueryResult:
       type: object
       properties:
@@ -107,25 +108,24 @@ components:
           type: integer
         limit:
           type: integer
-    FieldFilter:
+    QueryRequest:
       type: object
-      required:
-      - key
-      - value
-      - op
       properties:
-        key:
-          type: string
-        value: {}
-        op:
-          type: string
-          enum:
-          - EQ
-          - NE
-          - LT
-          - LE
-          - GT
-          - GE
+        returnKeys:
+          type: array
+          items:
+            type: string
+          description: Keys to return in the query results
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldFilter'
+        offset:
+          type: integer
+          default: 0
+        limit:
+          type: integer
+          default: 10
   securitySchemes:
     bearerAuth:
       type: http

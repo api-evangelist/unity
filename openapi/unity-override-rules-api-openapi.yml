@@ -191,29 +191,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Setting'
-    UpdateRuleRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        enabled:
-          type: boolean
-        priority:
-          type: integer
-        condition:
-          type: string
-        rolloutPercentage:
-          type: integer
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Setting'
     RuleList:
       type: object
       properties:
@@ -239,6 +216,29 @@ components:
           type: integer
           minimum: 0
           maximum: 100
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    UpdateRuleRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+        priority:
+          type: integer
+        condition:
+          type: string
+        rolloutPercentage:
+          type: integer
         startDate:
           type: string
           format: date-time

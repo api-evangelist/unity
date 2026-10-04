@@ -56,17 +56,17 @@ paths:
           description: Script not found
 components:
   schemas:
+    ScriptRunResult:
+      type: object
+      properties:
+        output:
+          description: The return value from the script
     RunScriptRequest:
       type: object
       properties:
         params:
           type: object
           description: Parameters to pass to the script
-    ScriptRunResult:
-      type: object
-      properties:
-        output:
-          description: The return value from the script
   securitySchemes:
     bearerAuth:
       type: http

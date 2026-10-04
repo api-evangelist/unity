@@ -265,15 +265,6 @@ paths:
       description: Unity Multiplay Production Server
 components:
   schemas:
-    StartBuildRequest:
-      type: object
-      properties:
-        clean:
-          type: boolean
-          description: Whether to start a clean build
-        delay:
-          type: integer
-          description: Seconds to delay before starting
     Build:
       type: object
       properties:
@@ -336,6 +327,15 @@ components:
           properties:
             href:
               type: string
+    StartBuildRequest:
+      type: object
+      properties:
+        clean:
+          type: boolean
+          description: Whether to start a clean build
+        delay:
+          type: integer
+          description: Seconds to delay before starting
     Build_2:
       type: object
       properties:

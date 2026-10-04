@@ -91,6 +91,18 @@ paths:
           description: Not Found
 components:
   schemas:
+    EconomyConfigList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EconomyConfig'
+        links:
+          type: object
+          properties:
+            next:
+              type: string
     EconomyConfig:
       type: object
       properties:
@@ -119,18 +131,6 @@ components:
         modified:
           type: string
           format: date-time
-    EconomyConfigList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/EconomyConfig'
-        links:
-          type: object
-          properties:
-            next:
-              type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -193,6 +193,39 @@ paths:
           description: Not Found
 components:
   schemas:
+    LeaderboardList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Leaderboard'
+        next:
+          type: string
+          description: Cursor for next page
+    ResetConfig:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date-time
+        schedule:
+          type: string
+          description: Cron expression for reset schedule
+        archive:
+          type: boolean
+    LeaderboardUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        sortOrder:
+          type: string
+          enum:
+          - asc
+          - desc
+        resetConfig:
+          $ref: '#/components/schemas/ResetConfig'
     TieringConfig:
       type: object
       properties:
@@ -210,35 +243,6 @@ components:
                 type: string
               cutoff:
                 type: number
-    LeaderboardList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Leaderboard'
-        next:
-          type: string
-          description: Cursor for next page
-    LeaderboardCreate:
-      type: object
-      required:
-      - id
-      - sortOrder
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        sortOrder:
-          type: string
-          enum:
-          - asc
-          - desc
-        bucketSize:
-          type: number
-        resetConfig:
-          $ref: '#/components/schemas/ResetConfig'
     Leaderboard:
       type: object
       properties:
@@ -267,9 +271,14 @@ components:
         updated:
           type: string
           format: date-time
-    LeaderboardUpdate:
+    LeaderboardCreate:
       type: object
+      required:
+      - id
+      - sortOrder
       properties:
+        id:
+          type: string
         name:
           type: string
         sortOrder:
@@ -277,19 +286,10 @@ components:
           enum:
           - asc
           - desc
+        bucketSize:
+          type: number
         resetConfig:
           $ref: '#/components/schemas/ResetConfig'
-    ResetConfig:
-      type: object
-      properties:
-        start:
-          type: string
-          format: date-time
-        schedule:
-          type: string
-          description: Cron expression for reset schedule
-        archive:
-          type: boolean
   securitySchemes:
     bearerAuth:
       type: http

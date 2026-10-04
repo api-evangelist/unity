@@ -117,6 +117,42 @@ paths:
                 $ref: '#/components/schemas/Config'
 components:
   schemas:
+    UpdateConfigRequest:
+      type: object
+      required:
+      - type
+      - value
+      properties:
+        type:
+          type: string
+          enum:
+          - settings
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    Setting:
+      type: object
+      required:
+      - key
+      - type
+      - value
+      properties:
+        key:
+          type: string
+          description: Configuration key name
+        type:
+          type: string
+          enum:
+          - string
+          - int
+          - bool
+          - float
+          - json
+          description: Data type of the setting
+        value: {}
+        description:
+          type: string
     Config:
       type: object
       properties:
@@ -147,42 +183,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Config'
-    Setting:
-      type: object
-      required:
-      - key
-      - type
-      - value
-      properties:
-        key:
-          type: string
-          description: Configuration key name
-        type:
-          type: string
-          enum:
-          - string
-          - int
-          - bool
-          - float
-          - json
-          description: Data type of the setting
-        value: {}
-        description:
-          type: string
-    UpdateConfigRequest:
-      type: object
-      required:
-      - type
-      - value
-      properties:
-        type:
-          type: string
-          enum:
-          - settings
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Setting'
   securitySchemes:
     bearerAuth:
       type: http

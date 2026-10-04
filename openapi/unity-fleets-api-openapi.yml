@@ -170,27 +170,6 @@ paths:
           description: Fleet deleted
 components:
   schemas:
-    CreateFleetRequest:
-      type: object
-      required:
-      - name
-      - buildConfiguration
-      properties:
-        name:
-          type: string
-        buildConfiguration:
-          $ref: '#/components/schemas/BuildConfiguration'
-        scalingSettings:
-          $ref: '#/components/schemas/ScalingSettings'
-    UpdateFleetRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        buildConfiguration:
-          $ref: '#/components/schemas/BuildConfiguration'
-        scalingSettings:
-          $ref: '#/components/schemas/ScalingSettings'
     FleetList:
       type: object
       properties:
@@ -198,27 +177,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Fleet'
-    BuildConfiguration:
-      type: object
-      properties:
-        buildId:
-          type: integer
-        commandLine:
-          type: string
-        queryType:
-          type: string
-          enum:
-          - SQPQUERYTYPE
-          - A2SQUERYTYPE
-          - NONE
-        binaryPath:
-          type: string
-        cores:
-          type: integer
-        speedMhz:
-          type: integer
-        memory:
-          type: integer
     Fleet:
       type: object
       properties:
@@ -249,12 +207,54 @@ components:
         modified:
           type: string
           format: date-time
+    CreateFleetRequest:
+      type: object
+      required:
+      - name
+      - buildConfiguration
+      properties:
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
     ScalingSettings:
       type: object
       properties:
         minFreeServers:
           type: integer
         maxFreeServers:
+          type: integer
+    UpdateFleetRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        buildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        scalingSettings:
+          $ref: '#/components/schemas/ScalingSettings'
+    BuildConfiguration:
+      type: object
+      properties:
+        buildId:
+          type: integer
+        commandLine:
+          type: string
+        queryType:
+          type: string
+          enum:
+          - SQPQUERYTYPE
+          - A2SQUERYTYPE
+          - NONE
+        binaryPath:
+          type: string
+        cores:
+          type: integer
+        speedMhz:
+          type: integer
+        memory:
           type: integer
   securitySchemes:
     bearerAuth:

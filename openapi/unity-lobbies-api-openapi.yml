@@ -181,34 +181,6 @@ paths:
           description: Heartbeat received
 components:
   schemas:
-    DataObject:
-      type: object
-      properties:
-        value:
-          type: string
-        visibility:
-          type: string
-          enum:
-          - Public
-          - Member
-          - Private
-        index:
-          type: string
-    LobbyPlayer:
-      type: object
-      properties:
-        id:
-          type: string
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-        joined:
-          type: string
-          format: date-time
-        lastUpdated:
-          type: string
-          format: date-time
     Lobby:
       type: object
       properties:
@@ -243,35 +215,6 @@ components:
         lastUpdated:
           type: string
           format: date-time
-    JoinLobbyRequest:
-      type: object
-      required:
-      - playerId
-      properties:
-        playerId:
-          type: string
-        player:
-          $ref: '#/components/schemas/CreatePlayerRequest'
-    CreateLobbyRequest:
-      type: object
-      required:
-      - name
-      - maxPlayers
-      properties:
-        name:
-          type: string
-        maxPlayers:
-          type: integer
-          minimum: 1
-        isPrivate:
-          type: boolean
-          default: false
-        player:
-          $ref: '#/components/schemas/CreatePlayerRequest'
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
     UpdateLobbyRequest:
       type: object
       properties:
@@ -297,6 +240,63 @@ components:
       properties:
         id:
           type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+    DataObject:
+      type: object
+      properties:
+        value:
+          type: string
+        visibility:
+          type: string
+          enum:
+          - Public
+          - Member
+          - Private
+        index:
+          type: string
+    LobbyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
+        joined:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+    JoinLobbyRequest:
+      type: object
+      required:
+      - playerId
+      properties:
+        playerId:
+          type: string
+        player:
+          $ref: '#/components/schemas/CreatePlayerRequest'
+    CreateLobbyRequest:
+      type: object
+      required:
+      - name
+      - maxPlayers
+      properties:
+        name:
+          type: string
+        maxPlayers:
+          type: integer
+          minimum: 1
+        isPrivate:
+          type: boolean
+          default: false
+        player:
+          $ref: '#/components/schemas/CreatePlayerRequest'
         data:
           type: object
           additionalProperties:

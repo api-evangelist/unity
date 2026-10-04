@@ -76,33 +76,6 @@ components:
           $ref: '#/components/schemas/Timestamp'
         modified:
           $ref: '#/components/schemas/Timestamp'
-    VirtualPurchaseResult:
-      type: object
-      properties:
-        id:
-          type: string
-        purchased:
-          type: object
-          properties:
-            currencies:
-              type: array
-              items:
-                $ref: '#/components/schemas/CurrencyBalance'
-            inventory:
-              type: array
-              items:
-                $ref: '#/components/schemas/InventoryItem'
-        costs:
-          type: object
-          properties:
-            currencies:
-              type: array
-              items:
-                $ref: '#/components/schemas/CurrencyBalance'
-            inventory:
-              type: array
-              items:
-                $ref: '#/components/schemas/InventoryItem'
     VirtualPurchaseRequest:
       type: object
       required:
@@ -130,6 +103,33 @@ components:
           $ref: '#/components/schemas/Timestamp'
         modified:
           $ref: '#/components/schemas/Timestamp'
+    VirtualPurchaseResult:
+      type: object
+      properties:
+        id:
+          type: string
+        purchased:
+          type: object
+          properties:
+            currencies:
+              type: array
+              items:
+                $ref: '#/components/schemas/CurrencyBalance'
+            inventory:
+              type: array
+              items:
+                $ref: '#/components/schemas/InventoryItem'
+        costs:
+          type: object
+          properties:
+            currencies:
+              type: array
+              items:
+                $ref: '#/components/schemas/CurrencyBalance'
+            inventory:
+              type: array
+              items:
+                $ref: '#/components/schemas/InventoryItem'
   securitySchemes:
     bearerAuth:
       type: http

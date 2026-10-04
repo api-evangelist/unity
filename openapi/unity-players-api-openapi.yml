@@ -150,6 +150,19 @@ paths:
       description: Unity Player Authentication Production Server
 components:
   schemas:
+    DataObject:
+      type: object
+      properties:
+        value:
+          type: string
+        visibility:
+          type: string
+          enum:
+          - Public
+          - Member
+          - Private
+        index:
+          type: string
     LobbyPlayer:
       type: object
       properties:
@@ -165,6 +178,13 @@ components:
         lastUpdated:
           type: string
           format: date-time
+    UpdatePlayerRequest:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/DataObject'
     Lobby:
       type: object
       properties:
@@ -199,35 +219,6 @@ components:
         lastUpdated:
           type: string
           format: date-time
-    UpdatePlayerRequest:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/DataObject'
-    DataObject:
-      type: object
-      properties:
-        value:
-          type: string
-        visibility:
-          type: string
-          enum:
-          - Public
-          - Member
-          - Private
-        index:
-          type: string
-    PlayerList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Player'
-        next:
-          type: string
     Player:
       type: object
       properties:
@@ -250,6 +241,15 @@ components:
         createdAt:
           type: string
           format: date-time
+    PlayerList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+        next:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

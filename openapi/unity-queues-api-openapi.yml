@@ -168,14 +168,24 @@ paths:
           description: Queue deleted
 components:
   schemas:
-    MatchLogic:
+    UpdateQueueRequest:
       type: object
       properties:
-        name:
-          type: string
-        script:
-          type: string
-          description: MMScript for match rules
+        enabled:
+          type: boolean
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+    QueueList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Queue'
     Pool:
       type: object
       properties:
@@ -194,13 +204,6 @@ components:
           type: integer
         backfillEnabled:
           type: boolean
-    QueueList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Queue'
     CreateQueueRequest:
       type: object
       required:
@@ -217,17 +220,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Pool'
-    UpdateQueueRequest:
+    MatchLogic:
       type: object
       properties:
-        enabled:
-          type: boolean
-        defaultEscalationRules:
-          $ref: '#/components/schemas/EscalationRules'
-        pools:
-          type: array
-          items:
-            $ref: '#/components/schemas/Pool'
+        name:
+          type: string
+        script:
+          type: string
+          description: MMScript for match rules
     Queue:
       type: object
       properties:

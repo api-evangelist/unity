@@ -133,13 +133,6 @@ paths:
                 $ref: '#/components/schemas/CurrencyBalance'
 components:
   schemas:
-    PlayerCurrencyBalances:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrencyBalance'
     CurrencyBalanceUpdate:
       type: object
       required:
@@ -151,12 +144,13 @@ components:
         writeLock:
           type: string
           description: Optimistic lock token to prevent race conditions
-    Timestamp:
+    PlayerCurrencyBalances:
       type: object
       properties:
-        date:
-          type: string
-          format: date-time
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyBalance'
     CurrencyBalance:
       type: object
       properties:
@@ -170,6 +164,12 @@ components:
           $ref: '#/components/schemas/Timestamp'
         modified:
           $ref: '#/components/schemas/Timestamp'
+    Timestamp:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

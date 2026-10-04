@@ -159,17 +159,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PlayerScore'
-    ScoreSubmission:
-      type: object
-      required:
-      - score
-      properties:
-        score:
-          type: number
-          description: The player's score value
-        metadata:
-          type: string
-          description: Optional metadata to store with the score (up to 255 characters)
     PlayerScore:
       type: object
       properties:
@@ -188,6 +177,17 @@ components:
           format: date-time
         metadata:
           type: string
+    ScoreSubmission:
+      type: object
+      required:
+      - score
+      properties:
+        score:
+          type: number
+          description: The player's score value
+        metadata:
+          type: string
+          description: Optional metadata to store with the score (up to 255 characters)
   securitySchemes:
     bearerAuth:
       type: http

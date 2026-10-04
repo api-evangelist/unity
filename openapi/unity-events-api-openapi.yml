@@ -75,36 +75,6 @@ paths:
                 $ref: '#/components/schemas/ValidationResult'
 components:
   schemas:
-    ValidationResult:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            type: object
-            properties:
-              eventUuid:
-                type: string
-              valid:
-                type: boolean
-              errors:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    field:
-                      type: string
-                    message:
-                      type: string
-    RecordEventsRequest:
-      type: object
-      required:
-      - events
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsEvent'
     AnalyticsEvent:
       type: object
       required:
@@ -154,6 +124,36 @@ components:
         userId:
           type: string
           description: Unity player ID if authenticated
+    RecordEventsRequest:
+      type: object
+      required:
+      - events
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsEvent'
+    ValidationResult:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              eventUuid:
+                type: string
+              valid:
+                type: boolean
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
   securitySchemes:
     apiKeyAuth:
       type: apiKey

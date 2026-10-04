@@ -83,6 +83,24 @@ paths:
                 $ref: '#/components/schemas/PlayerDataList'
 components:
   schemas:
+    SetPlayerDataRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - key
+            - value
+            properties:
+              key:
+                type: string
+              value: {}
+              writeLock:
+                type: string
     DataItem:
       type: object
       properties:
@@ -112,24 +130,6 @@ components:
           properties:
             next:
               type: string
-    SetPlayerDataRequest:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - key
-            - value
-            properties:
-              key:
-                type: string
-              value: {}
-              writeLock:
-                type: string
   securitySchemes:
     bearerAuth:
       type: http

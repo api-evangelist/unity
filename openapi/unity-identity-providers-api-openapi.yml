@@ -97,13 +97,6 @@ paths:
           description: Identity not found
 components:
   schemas:
-    UnlinkIdentityRequest:
-      type: object
-      required:
-      - idProvider
-      properties:
-        idProvider:
-          type: string
     AuthResponse:
       type: object
       properties:
@@ -120,6 +113,13 @@ components:
         isNew:
           type: boolean
           description: True if a new account was created
+    UnlinkIdentityRequest:
+      type: object
+      required:
+      - idProvider
+      properties:
+        idProvider:
+          type: string
     ExternalTokenSignInRequest:
       type: object
       required:

@@ -82,6 +82,15 @@ components:
           properties:
             status:
               type: string
+    PlayerProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        presence:
+          $ref: '#/components/schemas/Presence'
     FriendList:
       type: object
       properties:
@@ -107,15 +116,6 @@ components:
         created:
           type: string
           format: date-time
-    PlayerProfile:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        presence:
-          $ref: '#/components/schemas/Presence'
   securitySchemes:
     bearerAuth:
       type: http
