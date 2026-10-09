@@ -53,3 +53,46 @@ plans:
 rate_limit_statements:
 - Unity AI Concurrent MCP Connections Monthly subscription required 3 5 5
 - Included Unity Concurrency 2 2 2 2
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units: []
+  plans:
+  - name: Personal
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Pro
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Unity Pro (yearly)
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - year
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Unity Industry
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none

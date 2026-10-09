@@ -110,7 +110,7 @@ workflows:
     description: >-
       Poll the build status. Retry while the build is queued, sent to the
       builder, started or restarted; end when it reaches success or failure.
-    operationId: getBuild
+    operationId: getV1ProjectsByProjectIdBuildsByBuildId
     parameters:
     - name: Authorization
       in: header
