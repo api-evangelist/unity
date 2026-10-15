@@ -1,10 +1,21 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- https://assetstore.unity.com/sitemap.xml
 - https://azuremarketplace.microsoft.com/
 - https://storage.googleapis.com/tcfac/additional-consent-providers.csv
+- https://unity.com/partners/verified-solutions
 - https://vendor-list.consensu.org/v3/vendor-list.json
-marketplace_apps: []
+marketplace_apps:
+- marketplace: own
+  channel: partner-built
+  app: unity
+  url: https://assetstore.unity.com/
+  app_count: 126707
+  adapter: sweep-gaming.py:verified-solutions+asset-store-sdk-categories
+  listed: 12
+  note: Unity Verified Solutions (31 cards) + Asset Store SDK categories (1454 packages, 788 publishers read); only
+    domain-linked publishers are written
 edges:
 - partner_name: Microsoft Azure Marketplace
   partner: microsoft-azure
@@ -78,3 +89,338 @@ edges:
     detected: '2026-10-14'
   detected_by: sweep-adtech.py
   detected: '2026-10-14'
+- partner_name: bHaptics Inc.
+  app: bHaptics Haptic Plugin
+  partner: bhaptics
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/integration/bhaptics-haptic-plugin-76647
+  category: tools/integration
+  partner_url: https://www.bhaptics.com
+  contract_reference:
+    register: Unity Asset Store (assetstore.unity.com, SDK categories)
+    spec_file: null
+    role: asset-store-publisher
+    registered_name: bHaptics Inc.
+    publisher_id: '22791'
+    matched_domain: bhaptics.com
+    matched_by: domain
+    asset_store_listings: 1
+    sample_apps:
+    - bHaptics Haptic Plugin
+    signal_note: one edge per publisher; listings are context, never read
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: Convai
+  app: Convai
+  partner: convai-com
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/ai/npc-ai-dialog-actions-and-general-intelligence-by-convai-235621
+  category: Unity Verified Solutions
+  partner_url: https://convai.com
+  publisher_verified:
+  - Unity Verified Solution
+  contract_reference:
+    register: Unity Verified Solutions (unity.com/partners/verified-solutions)
+    spec_file: null
+    role: unity-verified-solution
+    registered_name: Convai
+    matched_domain: convai.com
+    matched_by: domain
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: Embrace
+  app: Embrace
+  partner: embrace
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/integration/embrace-276810
+  category: Unity Verified Solutions
+  partner_url: https://embrace.io/
+  publisher_verified:
+  - Unity Verified Solution
+  contract_reference:
+    register: Unity Verified Solutions (unity.com/partners/verified-solutions)
+    spec_file: null
+    role: unity-verified-solution
+    registered_name: Embrace
+    matched_domain: embrace.io
+    matched_by: domain
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: Esri
+  app: ArcGIS Maps SDK for Unity
+  partner: esri
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/integration/arcgis-maps-sdk-for-unity-258537
+  category: tools/integration
+  partner_url: https://www.esri.com
+  contract_reference:
+    register: Unity Asset Store (assetstore.unity.com, SDK categories)
+    spec_file: null
+    role: asset-store-publisher
+    registered_name: Esri
+    publisher_id: '77588'
+    matched_domain: esri.com
+    matched_by: domain
+    asset_store_listings: 1
+    sample_apps:
+    - ArcGIS Maps SDK for Unity
+    signal_note: one edge per publisher; listings are context, never read
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: Genies
+  app: Genies
+  partner: genies
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/game-toolkits/genies-avatar-sdk-336166
+  category: Unity Verified Solutions
+  partner_url: https://genies.com/
+  publisher_verified:
+  - Unity Verified Solution
+  contract_reference:
+    register: Unity Verified Solutions (unity.com/partners/verified-solutions)
+    spec_file: null
+    role: unity-verified-solution
+    registered_name: Genies
+    matched_domain: genies.com
+    matched_by: domain
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+    asset_store_listings: 1
+    sample_apps:
+    - Genies Art Forge SDK
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: Heroic Labs
+  app: Heroic labs
+  partner: heroiclabs
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/network/nakama-81338
+  category: Unity Verified Solutions
+  partner_url: https://heroiclabs.com
+  publisher_verified:
+  - Unity Verified Solution
+  contract_reference:
+    register: Unity Verified Solutions (unity.com/partners/verified-solutions)
+    spec_file: null
+    role: unity-verified-solution
+    registered_name: Heroic Labs
+    matched_domain: heroiclabs.com
+    matched_by: domain+name-among-holders
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+    asset_store_listings: 6
+    sample_apps:
+    - Cloud Save, powered by Nakama
+    - Friends, powered by Nakama
+    - Groups, powered by Nakama
+    - Leaderboards, powered by Nakama
+    - Nakama
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: JetBrains
+  app: RiderFlow by JetBrains
+  partner: jetbrains
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/level-design/riderflow-218574
+  category: Unity Verified Solutions
+  partner_url: https://www.jetbrains.com/
+  publisher_verified:
+  - Unity Verified Solution
+  contract_reference:
+    register: Unity Verified Solutions (unity.com/partners/verified-solutions)
+    spec_file: null
+    role: unity-verified-solution
+    registered_name: JetBrains
+    matched_domain: jetbrains.com
+    matched_by: domain+name-among-holders
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: Magic Leap
+  app: Magic Leap Setup Tool
+  partner: magic-leap
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/integration/magic-leap-setup-tool-194780
+  category: tools/integration
+  partner_url: http://www.magicleap.com
+  contract_reference:
+    register: Unity Asset Store (assetstore.unity.com, SDK categories)
+    spec_file: null
+    role: asset-store-publisher
+    registered_name: Magic Leap
+    publisher_id: '53835'
+    matched_domain: magicleap.com
+    matched_by: domain
+    asset_store_listings: 1
+    sample_apps:
+    - Magic Leap Setup Tool
+    signal_note: one edge per publisher; listings are context, never read
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: OneSignal
+  app: OneSignal
+  partner: onesignal
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/slug/193316
+  category: Unity Verified Solutions
+  partner_url: https://onesignal.com
+  publisher_verified:
+  - Unity Verified Solution
+  contract_reference:
+    register: Unity Verified Solutions (unity.com/partners/verified-solutions)
+    spec_file: null
+    role: unity-verified-solution
+    registered_name: OneSignal
+    matched_domain: onesignal.com
+    matched_by: domain
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+    asset_store_listings: 1
+    sample_apps:
+    - OneSignal SDK
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: Photon Engine
+  app: Photon Fusion
+  partner: photonengine
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/network/photon-fusion-267958
+  category: Unity Verified Solutions
+  partner_url: https://photonengine.com/
+  publisher_verified:
+  - Unity Verified Solution
+  contract_reference:
+    register: Unity Verified Solutions (unity.com/partners/verified-solutions)
+    spec_file: null
+    role: unity-verified-solution
+    registered_name: Photon Engine
+    matched_domain: photonengine.com
+    matched_by: domain
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+    asset_store_listings: 26
+    sample_apps:
+    - Dissonance For PUN2
+    - Dissonance For Photon Fusion
+    - Fusion (Game Creator 2)
+    - MULTIPLAYER FPS PRO
+    - Multiplayer Car Shooter
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: Phrase Localization Platform
+  app: Phrase
+  partner: phrase
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/localization/phrase-a-better-way-to-localize-games-294442
+  category: Unity Verified Solutions
+  partner_url: https://phrase.com
+  publisher_verified:
+  - Unity Verified Solution
+  contract_reference:
+    register: Unity Verified Solutions (unity.com/partners/verified-solutions)
+    spec_file: null
+    role: unity-verified-solution
+    registered_name: Phrase Localization Platform
+    matched_domain: phrase.com
+    matched_by: domain
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+- partner_name: Sentry
+  app: Sentry
+  partner: sentry-system
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://assetstore.unity.com/packages/tools/integration/sentry-127333
+  category: Unity Verified Solutions
+  partner_url: https://sentry.io
+  publisher_verified:
+  - Unity Verified Solution
+  contract_reference:
+    register: Unity Verified Solutions (unity.com/partners/verified-solutions)
+    spec_file: null
+    role: unity-verified-solution
+    registered_name: Sentry
+    matched_domain: sentry.io
+    matched_by: domain
+    detected_by: sweep-gaming.py
+    detected: '2026-10-15'
+    asset_store_listings: 1
+    sample_apps:
+    - Sentry - Crash Monitoring
+  detected_by: sweep-gaming.py
+  detected: '2026-10-15'
+source:
+- https://unity.com/partners/verified-solutions
+- https://assetstore.unity.com/sitemap.xml
