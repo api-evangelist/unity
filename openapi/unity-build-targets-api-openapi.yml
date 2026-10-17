@@ -170,15 +170,10 @@ paths:
           description: Build target deleted
 components:
   schemas:
-    CreateBuildTargetRequest:
+    UpdateBuildTargetRequest:
       type: object
-      required:
-      - name
-      - platform
       properties:
         name:
-          type: string
-        platform:
           type: string
         enabled:
           type: boolean
@@ -223,10 +218,15 @@ components:
         modified:
           type: string
           format: date-time
-    UpdateBuildTargetRequest:
+    CreateBuildTargetRequest:
       type: object
+      required:
+      - name
+      - platform
       properties:
         name:
+          type: string
+        platform:
           type: string
         enabled:
           type: boolean

@@ -71,6 +71,22 @@ paths:
           description: Player unblocked
 components:
   schemas:
+    Relationship:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - FRIEND
+          - FRIEND_REQUEST
+          - BLOCK
+        member:
+          $ref: '#/components/schemas/PlayerProfile'
+        created:
+          type: string
+          format: date-time
     Presence:
       type: object
       properties:
@@ -95,22 +111,6 @@ components:
           type: string
         presence:
           $ref: '#/components/schemas/Presence'
-    Relationship:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - FRIEND
-          - FRIEND_REQUEST
-          - BLOCK
-        member:
-          $ref: '#/components/schemas/PlayerProfile'
-        created:
-          type: string
-          format: date-time
     RelationshipList:
       type: object
       properties:

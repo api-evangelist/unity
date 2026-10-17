@@ -139,28 +139,6 @@ paths:
           description: Rule deleted
 components:
   schemas:
-    Setting:
-      type: object
-      required:
-      - key
-      - type
-      - value
-      properties:
-        key:
-          type: string
-          description: Configuration key name
-        type:
-          type: string
-          enum:
-          - string
-          - int
-          - bool
-          - float
-          - json
-          description: Data type of the setting
-        value: {}
-        description:
-          type: string
     CreateRuleRequest:
       type: object
       required:
@@ -191,13 +169,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Setting'
-    RuleList:
-      type: object
-      properties:
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rule'
     Rule:
       type: object
       properties:
@@ -226,6 +197,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Setting'
+    Setting:
+      type: object
+      required:
+      - key
+      - type
+      - value
+      properties:
+        key:
+          type: string
+          description: Configuration key name
+        type:
+          type: string
+          enum:
+          - string
+          - int
+          - bool
+          - float
+          - json
+          description: Data type of the setting
+        value: {}
+        description:
+          type: string
+    RuleList:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
     UpdateRuleRequest:
       type: object
       properties:

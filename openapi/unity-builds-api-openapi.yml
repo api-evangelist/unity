@@ -265,6 +265,31 @@ paths:
       description: Unity Multiplay Production Server
 components:
   schemas:
+    StartBuildRequest:
+      type: object
+      properties:
+        clean:
+          type: boolean
+          description: Whether to start a clean build
+        delay:
+          type: integer
+          description: Seconds to delay before starting
+    BuildArtifact:
+      type: object
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        primary:
+          type: boolean
+        show_download:
+          type: boolean
+        links:
+          type: object
+          properties:
+            href:
+              type: string
     Build:
       type: object
       properties:
@@ -311,31 +336,26 @@ components:
           format: date-time
         duration:
           type: integer
-    BuildArtifact:
+    BuildList:
       type: object
       properties:
-        key:
-          type: string
-        name:
-          type: string
-        primary:
-          type: boolean
-        show_download:
-          type: boolean
-        links:
-          type: object
-          properties:
-            href:
-              type: string
-    StartBuildRequest:
+        builds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Build_2'
+    CreateBuildRequest:
       type: object
+      required:
+      - buildName
+      - os
       properties:
-        clean:
-          type: boolean
-          description: Whether to start a clean build
-        delay:
-          type: integer
-          description: Seconds to delay before starting
+        buildName:
+          type: string
+        os:
+          type: string
+          enum:
+          - LINUX
+          - WINDOWS
     Build_2:
       type: object
       properties:
@@ -356,26 +376,6 @@ components:
         modified:
           type: string
           format: date-time
-    CreateBuildRequest:
-      type: object
-      required:
-      - buildName
-      - os
-      properties:
-        buildName:
-          type: string
-        os:
-          type: string
-          enum:
-          - LINUX
-          - WINDOWS
-    BuildList:
-      type: object
-      properties:
-        builds:
-          type: array
-          items:
-            $ref: '#/components/schemas/Build_2'
   securitySchemes:
     basicAuth:
       type: http

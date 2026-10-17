@@ -156,6 +156,39 @@ paths:
           description: Script deleted
 components:
   schemas:
+    CreateScriptRequest:
+      type: object
+      required:
+      - name
+      - language
+      - code
+      properties:
+        name:
+          type: string
+          description: Unique script name within the project
+        language:
+          type: string
+          enum:
+          - JS
+        code:
+          type: string
+          description: JavaScript code for the script
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptParameter'
+    ScriptList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Script'
+        links:
+          type: object
+          properties:
+            next:
+              type: string
     Script:
       type: object
       properties:
@@ -181,36 +214,6 @@ components:
         modified:
           type: string
           format: date-time
-    ScriptList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Script'
-        links:
-          type: object
-          properties:
-            next:
-              type: string
-    ScriptVersion:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The JavaScript code
-        datePublished:
-          type: string
-          format: date-time
-    UpdateScriptRequest:
-      type: object
-      properties:
-        code:
-          type: string
-        params:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScriptParameter'
     ScriptParameter:
       type: object
       properties:
@@ -225,23 +228,20 @@ components:
           - JSON
         required:
           type: boolean
-    CreateScriptRequest:
+    ScriptVersion:
       type: object
-      required:
-      - name
-      - language
-      - code
       properties:
-        name:
-          type: string
-          description: Unique script name within the project
-        language:
-          type: string
-          enum:
-          - JS
         code:
           type: string
-          description: JavaScript code for the script
+          description: The JavaScript code
+        datePublished:
+          type: string
+          format: date-time
+    UpdateScriptRequest:
+      type: object
+      properties:
+        code:
+          type: string
         params:
           type: array
           items:

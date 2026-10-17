@@ -118,13 +118,6 @@ paths:
           description: Module deleted
 components:
   schemas:
-    ModuleList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Module'
     Module:
       type: object
       properties:
@@ -158,6 +151,13 @@ components:
         modified:
           type: string
           format: date-time
+    ModuleList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Module'
   securitySchemes:
     bearerAuth:
       type: http

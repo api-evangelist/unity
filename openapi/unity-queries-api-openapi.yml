@@ -52,42 +52,6 @@ paths:
                 $ref: '#/components/schemas/QueryResult'
 components:
   schemas:
-    DataItem:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Data key (up to 255 characters)
-        value:
-          description: Data value (any JSON-serializable value)
-        writeLock:
-          type: string
-          description: Optimistic concurrency lock token
-        created:
-          type: string
-          format: date-time
-        modified:
-          type: string
-          format: date-time
-    FieldFilter:
-      type: object
-      required:
-      - key
-      - value
-      - op
-      properties:
-        key:
-          type: string
-        value: {}
-        op:
-          type: string
-          enum:
-          - EQ
-          - NE
-          - LT
-          - LE
-          - GT
-          - GE
     QueryResult:
       type: object
       properties:
@@ -108,6 +72,23 @@ components:
           type: integer
         limit:
           type: integer
+    DataItem:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Data key (up to 255 characters)
+        value:
+          description: Data value (any JSON-serializable value)
+        writeLock:
+          type: string
+          description: Optimistic concurrency lock token
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
     QueryRequest:
       type: object
       properties:
@@ -126,6 +107,25 @@ components:
         limit:
           type: integer
           default: 10
+    FieldFilter:
+      type: object
+      required:
+      - key
+      - value
+      - op
+      properties:
+        key:
+          type: string
+        value: {}
+        op:
+          type: string
+          enum:
+          - EQ
+          - NE
+          - LT
+          - LE
+          - GT
+          - GE
   securitySchemes:
     bearerAuth:
       type: http

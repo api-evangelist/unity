@@ -115,6 +115,53 @@ paths:
           description: Ticket not found
 components:
   schemas:
+    Player:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          description: Unity player ID
+        attributes:
+          type: object
+          description: Player-specific attributes for matchmaking
+    TicketStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+          - InProgress
+          - Found
+          - Failed
+          description: Current ticket status
+        assignment:
+          $ref: '#/components/schemas/MatchAssignment'
+    CreateTicketRequest:
+      type: object
+      required:
+      - players
+      - queueName
+      properties:
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+          description: Players to include in the matchmaking ticket
+        queueName:
+          type: string
+          description: Name of the matchmaking queue to enter
+        attributes:
+          $ref: '#/components/schemas/TicketAttributes'
+    TicketCreated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ticket identifier
     TicketAttributes:
       type: object
       properties:
@@ -133,53 +180,6 @@ components:
         payload:
           type: object
           description: Additional match data
-    CreateTicketRequest:
-      type: object
-      required:
-      - players
-      - queueName
-      properties:
-        players:
-          type: array
-          items:
-            $ref: '#/components/schemas/Player'
-          description: Players to include in the matchmaking ticket
-        queueName:
-          type: string
-          description: Name of the matchmaking queue to enter
-        attributes:
-          $ref: '#/components/schemas/TicketAttributes'
-    Player:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          description: Unity player ID
-        attributes:
-          type: object
-          description: Player-specific attributes for matchmaking
-    TicketCreated:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique ticket identifier
-    TicketStatus:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-          enum:
-          - InProgress
-          - Found
-          - Failed
-          description: Current ticket status
-        assignment:
-          $ref: '#/components/schemas/MatchAssignment'
   securitySchemes:
     bearerAuth:
       type: http

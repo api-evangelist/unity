@@ -67,6 +67,15 @@ paths:
           description: Relationship not found
 components:
   schemas:
+    FriendList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
+        next:
+          type: string
     Presence:
       type: object
       properties:
@@ -91,15 +100,6 @@ components:
           type: string
         presence:
           $ref: '#/components/schemas/Presence'
-    FriendList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relationship'
-        next:
-          type: string
     Relationship:
       type: object
       properties:

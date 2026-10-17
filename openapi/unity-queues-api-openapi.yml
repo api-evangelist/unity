@@ -168,24 +168,14 @@ paths:
           description: Queue deleted
 components:
   schemas:
-    UpdateQueueRequest:
+    MatchLogic:
       type: object
       properties:
-        enabled:
-          type: boolean
-        defaultEscalationRules:
-          $ref: '#/components/schemas/EscalationRules'
-        pools:
-          type: array
-          items:
-            $ref: '#/components/schemas/Pool'
-    QueueList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Queue'
+        name:
+          type: string
+        script:
+          type: string
+          description: MMScript for match rules
     Pool:
       type: object
       properties:
@@ -197,37 +187,6 @@ components:
           type: integer
         matchLogic:
           $ref: '#/components/schemas/MatchLogic'
-    EscalationRules:
-      type: object
-      properties:
-        timeoutSeconds:
-          type: integer
-        backfillEnabled:
-          type: boolean
-    CreateQueueRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        enabled:
-          type: boolean
-          default: true
-        defaultEscalationRules:
-          $ref: '#/components/schemas/EscalationRules'
-        pools:
-          type: array
-          items:
-            $ref: '#/components/schemas/Pool'
-    MatchLogic:
-      type: object
-      properties:
-        name:
-          type: string
-        script:
-          type: string
-          description: MMScript for match rules
     Queue:
       type: object
       properties:
@@ -247,6 +206,47 @@ components:
         modified:
           type: string
           format: date-time
+    UpdateQueueRequest:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+    EscalationRules:
+      type: object
+      properties:
+        timeoutSeconds:
+          type: integer
+        backfillEnabled:
+          type: boolean
+    QueueList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Queue'
+    CreateQueueRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+          default: true
+        defaultEscalationRules:
+          $ref: '#/components/schemas/EscalationRules'
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
   securitySchemes:
     bearerAuth:
       type: http

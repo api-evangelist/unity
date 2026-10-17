@@ -104,15 +104,6 @@ paths:
                 $ref: '#/components/schemas/Relationship'
 components:
   schemas:
-    FriendRequestList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relationship'
-        next:
-          type: string
     PlayerProfile:
       type: object
       properties:
@@ -153,6 +144,15 @@ components:
           properties:
             status:
               type: string
+    FriendRequestList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relationship'
+        next:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

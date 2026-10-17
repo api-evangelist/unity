@@ -97,22 +97,6 @@ paths:
           description: Identity not found
 components:
   schemas:
-    AuthResponse:
-      type: object
-      properties:
-        idToken:
-          type: string
-          description: JWT access token
-        sessionToken:
-          type: string
-        expiresIn:
-          type: integer
-          description: Token expiry in seconds
-        userId:
-          type: string
-        isNew:
-          type: boolean
-          description: True if a new account was created
     UnlinkIdentityRequest:
       type: object
       required:
@@ -120,27 +104,6 @@ components:
       properties:
         idProvider:
           type: string
-    ExternalTokenSignInRequest:
-      type: object
-      required:
-      - idProvider
-      - token
-      properties:
-        idProvider:
-          type: string
-          enum:
-          - google
-          - apple
-          - steam
-          - facebook
-          - custom
-          description: The external identity provider
-        token:
-          type: string
-          description: The identity token from the external provider
-        signInOnly:
-          type: boolean
-          description: If true, only sign in and do not create a new account
     Player:
       type: object
       properties:
@@ -163,6 +126,43 @@ components:
         createdAt:
           type: string
           format: date-time
+    AuthResponse:
+      type: object
+      properties:
+        idToken:
+          type: string
+          description: JWT access token
+        sessionToken:
+          type: string
+        expiresIn:
+          type: integer
+          description: Token expiry in seconds
+        userId:
+          type: string
+        isNew:
+          type: boolean
+          description: True if a new account was created
+    ExternalTokenSignInRequest:
+      type: object
+      required:
+      - idProvider
+      - token
+      properties:
+        idProvider:
+          type: string
+          enum:
+          - google
+          - apple
+          - steam
+          - facebook
+          - custom
+          description: The external identity provider
+        token:
+          type: string
+          description: The identity token from the external provider
+        signInOnly:
+          type: boolean
+          description: If true, only sign in and do not create a new account
   securitySchemes:
     bearerAuth:
       type: http

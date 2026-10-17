@@ -59,50 +59,6 @@ paths:
           description: Insufficient funds
 components:
   schemas:
-    InventoryItem:
-      type: object
-      properties:
-        playersItemId:
-          type: string
-        inventoryItemId:
-          type: string
-        quantity:
-          type: integer
-        instanceData:
-          type: object
-        writeLock:
-          type: string
-        created:
-          $ref: '#/components/schemas/Timestamp'
-        modified:
-          $ref: '#/components/schemas/Timestamp'
-    VirtualPurchaseRequest:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          description: The virtual purchase configuration ID
-    Timestamp:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
-    CurrencyBalance:
-      type: object
-      properties:
-        currencyId:
-          type: string
-        balance:
-          type: integer
-        writeLock:
-          type: string
-        created:
-          $ref: '#/components/schemas/Timestamp'
-        modified:
-          $ref: '#/components/schemas/Timestamp'
     VirtualPurchaseResult:
       type: object
       properties:
@@ -130,6 +86,50 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/InventoryItem'
+    Timestamp:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+    InventoryItem:
+      type: object
+      properties:
+        playersItemId:
+          type: string
+        inventoryItemId:
+          type: string
+        quantity:
+          type: integer
+        instanceData:
+          type: object
+        writeLock:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestamp'
+        modified:
+          $ref: '#/components/schemas/Timestamp'
+    CurrencyBalance:
+      type: object
+      properties:
+        currencyId:
+          type: string
+        balance:
+          type: integer
+        writeLock:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestamp'
+        modified:
+          $ref: '#/components/schemas/Timestamp'
+    VirtualPurchaseRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          description: The virtual purchase configuration ID
   securitySchemes:
     bearerAuth:
       type: http

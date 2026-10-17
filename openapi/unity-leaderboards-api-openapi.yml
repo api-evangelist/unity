@@ -203,20 +203,14 @@ components:
         next:
           type: string
           description: Cursor for next page
-    ResetConfig:
+    LeaderboardCreate:
       type: object
+      required:
+      - id
+      - sortOrder
       properties:
-        start:
+        id:
           type: string
-          format: date-time
-        schedule:
-          type: string
-          description: Cron expression for reset schedule
-        archive:
-          type: boolean
-    LeaderboardUpdate:
-      type: object
-      properties:
         name:
           type: string
         sortOrder:
@@ -224,6 +218,8 @@ components:
           enum:
           - asc
           - desc
+        bucketSize:
+          type: number
         resetConfig:
           $ref: '#/components/schemas/ResetConfig'
     TieringConfig:
@@ -271,14 +267,20 @@ components:
         updated:
           type: string
           format: date-time
-    LeaderboardCreate:
+    ResetConfig:
       type: object
-      required:
-      - id
-      - sortOrder
       properties:
-        id:
+        start:
           type: string
+          format: date-time
+        schedule:
+          type: string
+          description: Cron expression for reset schedule
+        archive:
+          type: boolean
+    LeaderboardUpdate:
+      type: object
+      properties:
         name:
           type: string
         sortOrder:
@@ -286,8 +288,6 @@ components:
           enum:
           - asc
           - desc
-        bucketSize:
-          type: number
         resetConfig:
           $ref: '#/components/schemas/ResetConfig'
   securitySchemes:
