@@ -398,5 +398,5 @@
     - connectors/applications/aura-from-unity
     vendor_link: https://unity.com/products/aura
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
