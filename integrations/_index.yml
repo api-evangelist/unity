@@ -400,3 +400,16 @@
     builder: Fivetran
   status: not-a-workflow
   arazzo: null
+- slug: unity-autodesk-own
+  label: Autodesk (own)
+  partner: autodesk
+  partner_name: Autodesk (own)
+  category: ACCBD5K/BIM360/BM36DP
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.autodesk.com/apps/b5f2036a-4745-4801-a4ae-838318454c53
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

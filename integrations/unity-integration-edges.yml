@@ -5,6 +5,7 @@ checked:
 - https://azuremarketplace.microsoft.com/
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
+- https://marketplace.autodesk.com/sitemap.xml
 - https://storage.googleapis.com/tcfac/additional-consent-providers.csv
 - https://unity.com/partners/verified-solutions
 - https://vendor-list.consensu.org/v3/vendor-list.json
@@ -449,6 +450,23 @@ edges:
     builder: Fivetran
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
+- partner_name: Autodesk (own)
+  partner: autodesk
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.autodesk.com/apps/b5f2036a-4745-4801-a4ae-838318454c53
+  mirror_of: autodesk/integrations/autodesk-integration-edges.yml
+  apps:
+  - Unity Reflect
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: ACCBD5K/BIM360/BM36DP
 source:
 - https://unity.com/partners/verified-solutions
 - https://assetstore.unity.com/sitemap.xml
