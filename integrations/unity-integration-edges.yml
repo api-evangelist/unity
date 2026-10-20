@@ -1,6 +1,7 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- autodesk/integrations/autodesk-integration-edges.yml
 - https://assetstore.unity.com/sitemap.xml
 - https://azuremarketplace.microsoft.com/
 - https://fivetran.com/docs-sitemap.xml
@@ -9,6 +10,17 @@ checked:
 - https://storage.googleapis.com/tcfac/additional-consent-providers.csv
 - https://unity.com/partners/verified-solutions
 - https://vendor-list.consensu.org/v3/vendor-list.json
+- https://landscape.aousd.org/data/full.json
+- https://www.khronos.org/conformance/adopters/conformant-companies
+- https://www.khronos.org/conformance/adopters/conformant-products
+- https://www.khronos.org/conformance/adopters/file-format-adopters
+- https://www.khronos.org/members/list
+- https://api.github.com
+- https://claude-plugins.dev/sitemap.xml
+- https://github.com/VoltAgent/awesome-agent-skills
+- https://officialskills.sh/sitemap.xml
+- https://skillsmp.com/sitemap.xml
+- https://www.skills.sh/sitemap.xml
 marketplace_apps:
 - marketplace: own
   channel: partner-built
@@ -16,7 +28,7 @@ marketplace_apps:
   url: https://assetstore.unity.com/
   app_count: 126707
   adapter: sweep-gaming.py:verified-solutions+asset-store-sdk-categories
-  listed: 12
+  listed: 13
   note: Unity Verified Solutions (31 cards) + Asset Store SDK categories (1454 packages, 788 publishers read); only
     domain-linked publishers are written
 edges:
@@ -92,6 +104,49 @@ edges:
     detected: '2026-10-14'
   detected_by: sweep-adtech.py
   detected: '2026-10-14'
+- partner_name: Autodesk (own)
+  partner: autodesk
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.autodesk.com/apps/b5f2036a-4745-4801-a4ae-838318454c53
+  mirror_of: autodesk/integrations/autodesk-integration-edges.yml
+  apps:
+  - Unity Reflect
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: ACCBD5K/BIM360/BM36DP
+- partner_name: Fivetran
+  partner: fivetran
+  partner_match: aggregator
+  type: marketplace
+  marketplace: fivetran-connectors
+  channel: elt-connector
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://fivetran.com/docs/connectors/applications/aura-from-unity
+  category: null
+  contract_reference:
+    register: Fivetran connectors (fivetran.com/docs/connectors, docs-sitemap.xml + Partner-Built program)
+    spec_file: null
+    role: elt-connector:fivetran
+    registered_name: Aura from Unity
+    matched_domain: unity.com
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    connector_paths:
+    - connectors/applications/aura-from-unity
+    vendor_link: https://unity.com/products/aura
+    builder: Fivetran
+  detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
 - partner_name: bHaptics Inc.
   app: bHaptics Haptic Plugin
   partner: bhaptics
@@ -117,7 +172,7 @@ edges:
     - bHaptics Haptic Plugin
     signal_note: one edge per publisher; listings are context, never read
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-gaming.py
   detected: '2026-10-15'
 - partner_name: Convai
@@ -142,7 +197,7 @@ edges:
     matched_domain: convai.com
     matched_by: domain
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-gaming.py
   detected: '2026-10-15'
 - partner_name: Embrace
@@ -167,7 +222,7 @@ edges:
     matched_domain: embrace.io
     matched_by: domain
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-gaming.py
   detected: '2026-10-15'
 - partner_name: Esri
@@ -195,7 +250,7 @@ edges:
     - ArcGIS Maps SDK for Unity
     signal_note: one edge per publisher; listings are context, never read
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-gaming.py
   detected: '2026-10-15'
 - partner_name: Genies
@@ -220,7 +275,7 @@ edges:
     matched_domain: genies.com
     matched_by: domain
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
     asset_store_listings: 1
     sample_apps:
     - Genies Art Forge SDK
@@ -248,7 +303,7 @@ edges:
     matched_domain: heroiclabs.com
     matched_by: domain+name-among-holders
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
     asset_store_listings: 6
     sample_apps:
     - Cloud Save, powered by Nakama
@@ -280,7 +335,7 @@ edges:
     matched_domain: jetbrains.com
     matched_by: domain+name-among-holders
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-gaming.py
   detected: '2026-10-15'
 - partner_name: Magic Leap
@@ -308,7 +363,7 @@ edges:
     - Magic Leap Setup Tool
     signal_note: one edge per publisher; listings are context, never read
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-gaming.py
   detected: '2026-10-15'
 - partner_name: OneSignal
@@ -333,12 +388,43 @@ edges:
     matched_domain: onesignal.com
     matched_by: domain
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
     asset_store_listings: 1
     sample_apps:
     - OneSignal SDK
   detected_by: sweep-gaming.py
   detected: '2026-10-15'
+- partner_name: Opsive
+  app: Behavior Designer Pro
+  partner: opsive
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: 'https://assetstore.unity.com/packages/tools/visual-scripting/behavior-designer-pro-3-dots-powered-behavior-trees-368344 '
+  category: Unity Verified Solutions
+  partner_url: https://www.opsive.com
+  publisher_verified:
+  - Unity Verified Solution
+  contract_reference:
+    register: Unity Verified Solutions (unity.com/partners/verified-solutions)
+    spec_file: null
+    role: unity-verified-solution
+    registered_name: Opsive
+    matched_domain: opsive.com
+    matched_by: domain
+    detected_by: sweep-gaming.py
+    detected: '2026-10-19'
+    asset_store_listings: 5
+    sample_apps:
+    - Behavior Designer for Space RTS
+    - Crystal Save
+    - Helicopter System for Ultimate Seating Controller
+    - Ultimate Seating Controller
+  detected_by: sweep-gaming.py
+  detected: '2026-10-19'
 - partner_name: Photon Engine
   app: Photon Fusion
   partner: photonengine
@@ -361,7 +447,7 @@ edges:
     matched_domain: photonengine.com
     matched_by: domain
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
     asset_store_listings: 26
     sample_apps:
     - Dissonance For PUN2
@@ -393,7 +479,7 @@ edges:
     matched_domain: phrase.com
     matched_by: domain
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-gaming.py
   detected: '2026-10-15'
 - partner_name: Sentry
@@ -418,55 +504,135 @@ edges:
     matched_domain: sentry.io
     matched_by: domain
     detected_by: sweep-gaming.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
     asset_store_listings: 1
     sample_apps:
     - Sentry - Crash Monitoring
   detected_by: sweep-gaming.py
   detected: '2026-10-15'
-- partner_name: Fivetran
-  partner: fivetran
-  partner_match: aggregator
-  type: marketplace
-  marketplace: fivetran-connectors
-  channel: elt-connector
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://fivetran.com/docs/connectors/applications/aura-from-unity
-  category: null
+- partner_name: Alliance for OpenUSD (AOUSD)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://aousd.org/members/
+  category: OpenUSD standards body
+  partner_tier: general
   contract_reference:
-    register: Fivetran connectors (fivetran.com/docs/connectors, docs-sitemap.xml + Partner-Built program)
+    register: Alliance for OpenUSD members (aousd.org/members; landscape.aousd.org/data/full.json)
+    standard: OpenUSD
     spec_file: null
-    role: elt-connector:fivetran
-    registered_name: Aura from Unity
+    role: aousd-member
+    registered_name: Unity Technologies SF
+    register_id: aousd-members--general--unity-technologies-sf
     matched_domain: unity.com
     matched_by: domain
-    detected_by: sweep-data-integration.py
-    detected: '2026-10-18'
-    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
-    connector_paths:
-    - connectors/applications/aura-from-unity
-    vendor_link: https://unity.com/products/aura
-    builder: Fivetran
-  detected_by: sweep-data-integration.py
-  first_seen: '2026-10-18'
-- partner_name: Autodesk (own)
-  partner: autodesk
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.autodesk.com/apps/b5f2036a-4745-4801-a4ae-838318454c53
-  mirror_of: autodesk/integrations/autodesk-integration-edges.yml
-  apps:
-  - Unity Reflect
-  listing_count: 1
-  detected: '2026-10-19'
-  detected_by: mirror-platform-listings.py
-  category: ACCBD5K/BIM360/BM36DP
+    signal_note: 'participation only: steering / general is partner_tier, never counted'
+    detected_by: sweep-xr-graphics.py
+    detected: '2026-10-20'
+  detected_by: sweep-xr-graphics.py
+  first_seen: '2026-10-20'
+- partner_name: Agent Skills (own GitHub org)
+  partner: null
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: Agent Skills package
+  evidence: https://github.com/Unity-Technologies/skills
+  channel: provider-built
+  relationship: compatible
+  shape: agent-skills
+  evidence_kind: own-repo
+  degree: skill-repo
+  report_only: true
+  agent_skills:
+    org: unity-technologies
+    current: true
+    repos:
+    - repo: Unity-Technologies/skills
+      archived: false
+      lapsed: false
+      pushed: '2026-10-20'
+  contract_reference:
+    register: 'provider''s own GitHub org (GitHub REST API: repo + git tree holds SKILL.md)'
+    spec_file: null
+    standard: Agent Skills (agentskills.io)
+    role: agent-skills-repo
+    matched_org: unity-technologies
+    matched_by: org-profile-domain:unity.com
+    detected_by: sweep-agent-skills.py
+    detected: '2026-10-20'
+  detected_by: sweep-agent-skills.py
+  first_seen: '2026-10-20'
+- partner_name: skills.sh
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  category: Agent Skills register
+  evidence: https://www.skills.sh/unity-technologies/skills
+  channel: standard-directory
+  relationship: compatible
+  shape: agent-skills
+  evidence_kind: register-listing
+  degree: listed
+  report_only: true
+  agent_skills_register:
+    repos:
+    - unity-technologies/skills
+    repo_verified: true
+    signal_note: the provider's own-org repos the register lists; skill / install counts never read
+  contract_reference:
+    register: skills.sh (public sitemap / list)
+    spec_file: null
+    standard: Agent Skills (agentskills.io)
+    role: agent-skills-listing
+    matched_org: unity-technologies
+    matched_by: org-profile-domain:unity.com
+    sample_skills:
+    - 2d-pixel-perfect
+    - asset-transformer-toolkit
+    - audio-setup-mixers
+    - build-gtk
+    - build-live-game
+    detected_by: sweep-agent-skills.py
+    detected: '2026-10-20'
+  detected_by: sweep-agent-skills.py
+  first_seen: '2026-10-20'
+- partner_name: SkillsMP (skillsmp.com)
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  category: Agent Skills register
+  evidence: https://skillsmp.com/creators/unity-technologies/skills
+  channel: standard-directory
+  relationship: compatible
+  shape: agent-skills
+  evidence_kind: register-listing
+  degree: listed
+  report_only: true
+  agent_skills_register:
+    repos:
+    - unity-technologies
+    - unity-technologies/skills
+    repo_verified: true
+    signal_note: the provider's own-org repos the register lists; skill / install counts never read
+  contract_reference:
+    register: SkillsMP (skillsmp.com) (public sitemap / list)
+    spec_file: null
+    standard: Agent Skills (agentskills.io)
+    role: agent-skills-listing
+    matched_org: unity-technologies
+    matched_by: org-profile-domain:unity.com
+    sample_skills:
+    - skills-ui-uitk
+    detected_by: sweep-agent-skills.py
+    detected: '2026-10-20'
+  detected_by: sweep-agent-skills.py
+  first_seen: '2026-10-20'
 source:
 - https://unity.com/partners/verified-solutions
 - https://assetstore.unity.com/sitemap.xml
