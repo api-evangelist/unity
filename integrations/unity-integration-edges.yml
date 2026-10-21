@@ -21,6 +21,7 @@ checked:
 - https://officialskills.sh/sitemap.xml
 - https://skillsmp.com/sitemap.xml
 - https://www.skills.sh/sitemap.xml
+- google-play/integrations/google-play-integration-edges.yml
 marketplace_apps:
 - marketplace: own
   channel: partner-built
@@ -104,23 +105,6 @@ edges:
     detected: '2026-10-14'
   detected_by: sweep-adtech.py
   detected: '2026-10-14'
-- partner_name: Autodesk (own)
-  partner: autodesk
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.autodesk.com/apps/b5f2036a-4745-4801-a4ae-838318454c53
-  mirror_of: autodesk/integrations/autodesk-integration-edges.yml
-  apps:
-  - Unity Reflect
-  listing_count: 1
-  detected: '2026-10-19'
-  detected_by: mirror-platform-listings.py
-  category: ACCBD5K/BIM360/BM36DP
 - partner_name: Fivetran
   partner: fivetran
   partner_match: aggregator
@@ -633,6 +617,42 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-agent-skills.py
   first_seen: '2026-10-20'
+- partner_name: Autodesk (own)
+  partner: autodesk
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.autodesk.com/apps/b5f2036a-4745-4801-a4ae-838318454c53
+  mirror_of: autodesk/integrations/autodesk-integration-edges.yml
+  apps:
+  - Unity Reflect
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: ACCBD5K/BIM360/BM36DP
+- partner_name: Google Play Developer (Google Play SDK Index)
+  partner: google-play
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: Google Play SDK Index
+  evidence: https://play.google.com/sdks/details/com-unity3d-ads-unity-ads
+  mirror_of: google-play/integrations/google-play-integration-edges.yml
+  apps:
+  - Unity Ads
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: mobile SDK (ads)
+  publisher_verified:
+  - Registered in Google Play SDK Console
 source:
 - https://unity.com/partners/verified-solutions
 - https://assetstore.unity.com/sitemap.xml

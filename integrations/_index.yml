@@ -72,19 +72,6 @@
     detected: '2026-10-14'
   status: not-a-workflow
   arazzo: null
-- slug: unity-autodesk-own
-  label: Autodesk (own)
-  partner: autodesk
-  partner_name: Autodesk (own)
-  category: ACCBD5K/BIM360/BM36DP
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://marketplace.autodesk.com/apps/b5f2036a-4745-4801-a4ae-838318454c53
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: unity-fivetran
   label: Fivetran
   partner: fivetran
@@ -530,5 +517,31 @@
     - skills-ui-uitk
     detected_by: sweep-agent-skills.py
     detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: unity-autodesk-own
+  label: Autodesk (own)
+  partner: autodesk
+  partner_name: Autodesk (own)
+  category: ACCBD5K/BIM360/BM36DP
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.autodesk.com/apps/b5f2036a-4745-4801-a4ae-838318454c53
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: unity-google-play-developer-google-play-sdk-index
+  label: Google Play Developer (Google Play SDK Index)
+  partner: google-play
+  partner_name: Google Play Developer (Google Play SDK Index)
+  category: mobile SDK (ads)
+  type: marketplace
+  marketplace: Google Play SDK Index
+  channel: partner-built
+  evidence: https://play.google.com/sdks/details/com-unity3d-ads-unity-ads
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
